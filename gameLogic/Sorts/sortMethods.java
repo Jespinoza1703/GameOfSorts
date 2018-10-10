@@ -65,4 +65,23 @@ public class sortMethods {
         }
     }
 
+    public static void selectionSort (intList list)
+    {
+        int n = list.getLarge();
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n-1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int min_idx = list.getByIndex(i).getValue();
+            for (int j = i+1; j < n; j++)
+                if (list.getByIndex(j).getValue() < list.getByIndex(min_idx).getValue())
+                    min_idx = j;
+
+            // Swap the found minimum element with the first
+            // element
+            list.swap(i, min_idx, list);
+        }
+    }
+
 }
