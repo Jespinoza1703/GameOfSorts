@@ -73,7 +73,7 @@ public class sortMethods {
         for (int i = 0; i < n-1; i++)
         {
             // Find the minimum element in unsorted array
-            int min_idx = list.getByIndex(i).getValue();
+            int min_idx = i;
             for (int j = i+1; j < n; j++)
                 if (list.getByIndex(j).getValue() < list.getByIndex(min_idx).getValue())
                     min_idx = j;
@@ -84,4 +84,23 @@ public class sortMethods {
         }
     }
 
+    public static void insertionSort(intList list)
+    {
+        int n = list.getLarge();
+        for (int i=1; i<n; ++i)
+        {
+            int key = list.getByIndex(i).getValue();
+            int j = i-1;
+
+            /* Move elements of arr[0..i-1], that are
+               greater than key, to one position ahead
+               of their current position */
+            while (j>=0 && list.getByIndex(j).getValue() > key)
+            {
+                list.getByIndex(j+1).setValue(list.getByIndex(j).getValue());
+                j = j-1;
+            }
+            list.getByIndex(j+1).setValue(key);
+        }
+    }
 }
