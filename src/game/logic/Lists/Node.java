@@ -1,4 +1,4 @@
-package Lists;
+package game.logic.Lists;
 
 public class Node <T> {
     private T value = null;

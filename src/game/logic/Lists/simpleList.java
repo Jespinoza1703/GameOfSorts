@@ -1,4 +1,4 @@
-package Lists;
+package game.logic.Lists;
 
 public class simpleList<T> {
     private Node<T> first;

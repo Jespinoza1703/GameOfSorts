@@ -1,4 +1,4 @@
-package Lists;
+package game.logic.Lists;
 
 public class intList {
     private intNode first;

@@ -1,6 +1,6 @@
-package Sorts;
+package game.logic.Sorts;
 
-import Lists.intList;
+import game.logic.Lists.intList;
 
 public class sortMethods {
     public static void quickSort(intList list, int low, int high){
