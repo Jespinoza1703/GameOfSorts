@@ -1,8 +1,7 @@
-package Trees;
-
+package game.logic.trees;
 
 public class binaryTree {
-    private treeNode root;
+    private TreeNode root;
 
     public binaryTree(){
         this.root = null;   }
@@ -13,7 +12,7 @@ public class binaryTree {
     public boolean contains (int element){
         return this.contains(element, this.root);
     }
-    private boolean contains (int element, treeNode node){
+    private boolean contains (int element, TreeNode node){
         if (node == null){
             return false;
         } else {
@@ -28,7 +27,7 @@ public class binaryTree {
         }
     }
 
-    public treeNode findMin(){
+    public TreeNode findMin(){
         if (this.isEmpty()){
             return null;
         }
@@ -37,7 +36,7 @@ public class binaryTree {
         }
     }
 
-    private treeNode findMin (treeNode node){
+    private TreeNode findMin (TreeNode node){
         if (node == null){
             return null;
         }else if(node.left == null){
@@ -47,7 +46,7 @@ public class binaryTree {
         }
     }
 
-    public treeNode findMax(){
+    public TreeNode findMax(){
         if (this.isEmpty()){
             return null;
         }
@@ -55,7 +54,7 @@ public class binaryTree {
             return findMax(this.root);
         }
     }
-    private treeNode findMax(treeNode node){
+    private TreeNode findMax(TreeNode node){
         if (node == null){
             return null;
         }else if(node.right == null){
@@ -65,4 +64,27 @@ public class binaryTree {
         }
     }
 
+
+    private TreeNode addRecursive(TreeNode current, int value) {
+        if (current == null) {
+            return new TreeNode(value);
+        }
+        if (value < current.element) {
+            current.left = addRecursive(current.left, value);
+        } else if (value > current.element) {
+            current.right = addRecursive(current.right, value);
+        } else {
+            // value already exists
+            return current;
+        }
+        return current;
+    }
+    public void add (int value){
+        root = addRecursive(root, value);
+    }
+
+
+
+
 }
+
