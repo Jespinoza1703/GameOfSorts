@@ -111,7 +111,15 @@ public class binaryTree {
     public void addDragon (){
         dragon dragon = new dragon();
         int age = dragon.getAge();
-        addDragon(age, dragon);
+        if (!contains(age)) {
+            addDragon(age, dragon);
+        }else {
+            while (contains(age)){
+                age = (int)((Math.random())*1000);
+                dragon.setAge(age);
+            }
+            addDragon(age, dragon);
+        }
     }
 
     public TreeNode getRoot() {
