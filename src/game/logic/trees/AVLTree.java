@@ -1,5 +1,7 @@
 package game.logic.trees;
 
+import game.logic.entities.dragon;
+
 public class AVLTree {
     TreeNode root;
 
@@ -64,16 +66,16 @@ public class AVLTree {
         return height(N.left) - height(N.right);
     }
 
-    private TreeNode insert(TreeNode node, int key) {
+    private TreeNode insert(TreeNode node, int key, dragon dragon) {
 
         /* 1.  Perform the normal BST insertion */
         if (node == null)
             return (new TreeNode(key));
 
         if (key < node.element)
-            node.left = insert(node.left, key);
+            node.left = insert(node.left, key, dragon);
         else if (key > node.element)
-            node.right = insert(node.right, key);
+            node.right = insert(node.right, key, dragon);
         else // Duplicate keys not allowed
             return node;
 
@@ -123,12 +125,38 @@ public class AVLTree {
     }
 
     public void insert(int element){
-        root = insert(root, element);
+        dragon dragon = new dragon();
+        root = insert(root, element, dragon);
     }
+
+
 
 
     public TreeNode getRoot() {
         return root;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void insertDragon(int age, dragon dragon){
+        root = insert(root, age, dragon);
+    }
+
+    public void insertDragon(){
+        dragon dragon = new dragon();
+        int age = dragon.getAge();
+        insertDragon(age, dragon);
     }
 
 }
