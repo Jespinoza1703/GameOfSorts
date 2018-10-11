@@ -13,11 +13,10 @@ public class Interface {
         Interface.main = main;
     }
 
-    public static Interface getInstance(Object main){
+    public static void init(Object main){
         if(instance == null){
             instance = new Interface(main);
         }
-        return instance;
     }
 
     static void close(){

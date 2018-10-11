@@ -1,10 +1,11 @@
 package game.logic.Lists;
 
-public class simpleList<T> {
-    private Node<T> first;
+public class SimpleList<T> {
+
+    private Node first;
     private int large;
 
-    public simpleList(){
+    public SimpleList(){
         this.first = null;
         this.large = 0;
     }
@@ -23,7 +24,7 @@ public class simpleList<T> {
             while (temporal.getNext() != null){
                 temporal =  temporal.getNext();
             }
-            temporal.setNext(new Node(value));
+            temporal.setNext(new Node<>(value));
             this.large += 1;
         }
     }
@@ -57,7 +58,7 @@ public class simpleList<T> {
      * Obtiene el primer elemento de la lista
      * @return primer elemento de la lista
      */
-    public Node<T> getFirst() {
+    public Node getFirst() {
         return first;
     }
 
@@ -92,6 +93,15 @@ public class simpleList<T> {
             System.out.println(temporal.getValue());
             temporal = temporal.getNext();
         }
+    }
+
+    public void swap(int i, int j, SimpleList list){
+        Node node1 = list.getByIndex(i);
+        Node node2 = list.getByIndex(j);
+
+        int tmp = (int) node1.getValue();
+        node1.setValue(node2.getValue());
+        node2.setValue(tmp);
     }
 
     /**

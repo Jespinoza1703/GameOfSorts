@@ -26,18 +26,19 @@ public class Main extends Application {
         window.setHeight(sScene.getHeight());
         window.setTitle("GameOfSorts");
         window.getIcons().add(new Image("file:res/img/icon.png"));
+        Interface.init(this);
         switchScene();
         window.show();
         window.setOnCloseRequest(e-> close());
     }
 
-    private static void switchScene() throws IOException {
+    public static void switchScene() throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource(Interface.getScene()));
         Scene scene = new Scene(root);
         window.setScene(scene);
     }
 
-    private static void close() {
+    public static void close() {
         window.close();
         Platform.exit();
         System.exit(0);

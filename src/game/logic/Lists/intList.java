@@ -145,82 +145,13 @@ public class intList {
     }
 
 
-    public void swap (int i, int j, intList list){
-        if (i != j) {
-            if(i == 0 && j == list.getLarge() -1){
-                intNode n1 = getByIndex(i);
-                intNode n2 = getByIndex(j);
-                if (n1.getNext() != n2){
-                    intNode n1Next = n1.getNext();
-                    intNode n2Prev = list.getByIndex(j-1);
-                    n2Prev.setNext(n1);
-                    n2.setNext(n1Next);
-                    setFirst(n2);
-                    return;
+    public void swap(int i, int j, intList list){
+        intNode node1 = list.getByIndex(i);
+        intNode node2 = list.getByIndex(j);
 
-                }
-                list.setFirst(n2);
-                n2.setNext(n1);
-                n1.setNext(null);
-                return;
-            }
-
-            if (i == 0){
-                intNode n1 = getByIndex(i);
-                intNode n2 = getByIndex(j);
-                intNode n1Next = n1.getNext();
-                if (n1Next != n2) {
-                    intNode n2Prev = getByIndex(j-1);
-                    n2Prev.setNext(n1);
-                    n1.setNext(n2.getNext());
-                    n2.setNext(n1Next);
-                    list.setFirst(n2);
-                    return;
-                }
-                n1.setNext(n2.getNext());
-                n2.setNext(n1);
-                list.setFirst(n2);
-                return;
-            }
-            if (j == list.getLarge() -1){
-                intNode n1 = getByIndex(i);
-                intNode n2 = getByIndex(j);
-                intNode previous = list.getByIndex(i - 1);
-                if (n1.getNext() != n2){
-                    intNode n1Next = n1.getNext();
-                    intNode n2Prev = getByIndex(j-1);
-                    previous.setNext(n2);
-                    n2.setNext(n1Next);
-                    n2Prev.setNext(n1);
-                    n1.setNext(null);
-                    return;
-                }
-                previous.setNext(n2);
-                n2.setNext(n1);
-                n1.setNext(null);
-                return;
-            } else {
-                intNode n1Prev = getByIndex(i - 1);
-                intNode n1 = getByIndex(i);
-                intNode n2 = getByIndex(j);
-                intNode n2Next = getByIndex(j).getNext();
-                if (n1.getNext() !=  n2){
-                    intNode n1Next = n1.getNext();
-                    intNode n2Prev = getByIndex(j-1);
-                    n1Prev.setNext(n2);
-                    n2.setNext(n1Next);
-                    n2Prev.setNext(n1);
-                    n1.setNext(n2Next);
-                    return;
-                }
-
-
-                n1Prev.setNext(n2);
-                n2.setNext(n1);
-                n1.setNext(n2Next);
-                return;
-            }
-        }
+        int tmp = node1.getValue();
+        node1.setValue(node2.getValue());
+        node2.setValue(tmp);
     }
 
     public void addUnique(int value){
