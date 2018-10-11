@@ -1,6 +1,5 @@
 package Trees;
 
-import javax.swing.tree.TreeNode;
 
 public class binaryTree {
     private treeNode root;
