@@ -4,19 +4,20 @@ import game.logic.entities.dragon;
 
 public class TreeNode {
 
-    int element;
+    int element, height;
     TreeNode left;
     TreeNode right;
     dragon  dragon;
 
     public TreeNode(int element) {
-        this(element, null, null);
+        this(element, null, null, 1);
     }
 
-    public TreeNode(int element, TreeNode left, TreeNode right) {
+    public TreeNode(int element, TreeNode left, TreeNode right, int height) {
         this.element = element;
         this.left = left;
         this.right = right;
+        this.height = height;
     }
     public TreeNode(int element, dragon dragon){
         this.element = element;
