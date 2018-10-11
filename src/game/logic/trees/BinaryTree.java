@@ -1,20 +1,21 @@
-package Trees;
+package game.logic.trees;
 
-import javax.swing.tree.TreeNode;
+public class BinaryTree {
 
-public class binaryTree {
-    private treeNode root;
+    private TreeNode root = null;
 
-    public binaryTree(){
-        this.root = null;   }
+    public BinaryTree(){
+
+    }
 
     public boolean isEmpty(){
-        return this.root == null;   }
+        return root == null;   }
 
     public boolean contains (int element){
-        return this.contains(element, this.root);
+        return contains(element, root);
     }
-    private boolean contains (int element, treeNode node){
+
+    private boolean contains (int element, TreeNode node){
         if (node == null){
             return false;
         } else {
@@ -29,16 +30,16 @@ public class binaryTree {
         }
     }
 
-    public treeNode findMin(){
+    public TreeNode findMin(){
         if (this.isEmpty()){
             return null;
         }
         else{
-            return findMin(this.root);
+            return findMin(root);
         }
     }
 
-    private treeNode findMin (treeNode node){
+    private TreeNode findMin (TreeNode node){
         if (node == null){
             return null;
         }else if(node.left == null){
@@ -48,18 +49,18 @@ public class binaryTree {
         }
     }
 
-    public treeNode findMax(){
+    public TreeNode findMax(){
         if (this.isEmpty()){
             return null;
         }
         else{
-            return findMax(this.root);
+            return findMax(root);
         }
     }
-    private treeNode findMax(treeNode node){
+    private TreeNode findMax(TreeNode node){
         if (node == null){
             return null;
-        }else if(node.right == null){
+        }else if(node == null){
             return node;
         }else{
             return findMin(node.right);
