@@ -145,9 +145,14 @@ public class intList {
     }
 
 
-    public void swap(int i, int j, intList list){
-        intNode node1 = list.getByIndex(i);
-        intNode node2 = list.getByIndex(j);
+    /**
+     * Swaps the values of two nodes
+     * @param i first node index
+     * @param j second node index
+     */
+    public void swap(int i, int j){
+        intNode node1 = this.getByIndex(i);
+        intNode node2 = this.getByIndex(j);
 
         int tmp = node1.getValue();
         node1.setValue(node2.getValue());
