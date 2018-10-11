@@ -1,8 +1,8 @@
-package Sorts;
+package game.logic.sorts;
 
-import Lists.intList;
+import game.logic.lists.intList;
 
-public class sortMethods {
+public class SortMethods {
     public static void quickSort(intList list, int low, int high){
 
         //check for empty or null array
@@ -34,7 +34,7 @@ public class sortMethods {
             //After swapping move the iterator on both lists
             if (i <= j)
             {
-                list.swap (i, j, list);
+                list.swap (i, j);
                 i++;
                 j--;
             }
@@ -56,7 +56,7 @@ public class sortMethods {
                 int y = list.getByIndex(j).getValue();
                 if(x > y){
                     //swap elements
-                    list.swap(j-1, j, list);
+                    list.swap(j-1, j);
                     int a = list.getByIndex(j-1).getValue();
                     int b = list.getByIndex(j).getValue();
                 }
@@ -80,7 +80,7 @@ public class sortMethods {
 
             // Swap the found minimum element with the first
             // element
-            list.swap(i, min_idx, list);
+            list.swap(i, min_idx);
         }
     }
 

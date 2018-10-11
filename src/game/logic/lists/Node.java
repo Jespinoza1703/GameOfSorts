@@ -1,20 +1,15 @@
-package Lists;
+package game.logic.lists;
 
 public class Node <T> {
+
     private T value = null;
     private Node next = null;
-
-
 
     public Node(T value){
         this.value = value;
     }
 
-    // @Overload
-    public Node(){
-    }
-
-
+    /** Setters and Getters **/
 
     public Node getNext() {
         return next;
@@ -26,5 +21,9 @@ public class Node <T> {
 
     public T getValue() {
         return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
     }
 }
