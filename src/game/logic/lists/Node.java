@@ -1,4 +1,4 @@
-package game.logic.Lists;
+package game.logic.lists;
 
 public class Node <T> {
 

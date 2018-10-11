@@ -1,8 +1,8 @@
-package game.logic.Sorts;
+package game.logic.sorts;
 
-import game.logic.Lists.intList;
+import game.logic.lists.intList;
 
-public class sortMethods {
+public class SortMethods {
     public static void quickSort(intList list, int low, int high){
 
         //check for empty or null array
@@ -34,7 +34,7 @@ public class sortMethods {
             //After swapping move the iterator on both lists
             if (i <= j)
             {
-                list.swap (i, j, list);
+                list.swap (i, j);
                 i++;
                 j--;
             }
@@ -56,7 +56,7 @@ public class sortMethods {
                 int y = list.getByIndex(j).getValue();
                 if(x > y){
                     //swap elements
-                    list.swap(j-1, j, list);
+                    list.swap(j-1, j);
                     int a = list.getByIndex(j-1).getValue();
                     int b = list.getByIndex(j).getValue();
                 }
@@ -65,4 +65,42 @@ public class sortMethods {
         }
     }
 
+    public static void selectionSort (intList list)
+    {
+        int n = list.getLarge();
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n-1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i+1; j < n; j++)
+                if (list.getByIndex(j).getValue() < list.getByIndex(min_idx).getValue())
+                    min_idx = j;
+
+            // Swap the found minimum element with the first
+            // element
+            list.swap(i, min_idx);
+        }
+    }
+
+    public static void insertionSort(intList list)
+    {
+        int n = list.getLarge();
+        for (int i=1; i<n; ++i)
+        {
+            int key = list.getByIndex(i).getValue();
+            int j = i-1;
+
+            /* Move elements of arr[0..i-1], that are
+               greater than key, to one position ahead
+               of their current position */
+            while (j>=0 && list.getByIndex(j).getValue() > key)
+            {
+                list.getByIndex(j+1).setValue(list.getByIndex(j).getValue());
+                j = j-1;
+            }
+            list.getByIndex(j+1).setValue(key);
+        }
+    }
 }

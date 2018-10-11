@@ -1,10 +1,11 @@
-package game.logic.Lists;
+package game.logic.lists;
 
-public class intList {
-    private intNode first;
+public class SimpleList<T> {
+
+    private Node first;
     private int large;
 
-    public intList(){
+    public SimpleList(){
         this.first = null;
         this.large = 0;
     }
@@ -13,17 +14,17 @@ public class intList {
      * Agrega el elemento al final de la lista
      * @param value elemento a agregar
      */
-    public void addAtEnd(int value){
+    public void addAtEnd(T value){
         if(this.isEmpty()){
-            this.first = new intNode(value);
+            this.first = new Node<>(value);
             this.large += 1;
         }
         else{
-            intNode temporal = this.first;
+            Node temporal = this.first;
             while (temporal.getNext() != null){
                 temporal =  temporal.getNext();
             }
-            temporal.setNext(new intNode(value));
+            temporal.setNext(new Node<>(value));
             this.large += 1;
         }
     }
@@ -32,13 +33,13 @@ public class intList {
      * Agrega elemento al inicio de la lista
      * @param value elemento a agregar
      */
-    public void addAtBeginning (int value){
+    public void addAtBeginning (T value){
         if(this.isEmpty()){
-            this.first = new intNode(value);
+            this.first = new Node<>(value);
             this.large += 1;
         }
         else{
-            intNode tmp = new intNode(value);
+            Node tmp = new Node<>(value);
             tmp.setNext(this.first);
             this.first = tmp;
         }
@@ -49,7 +50,7 @@ public class intList {
      * @return boolean
      */
     public boolean isEmpty(){
-        intNode next = this.getFirst();
+        Node next = this.getFirst();
         return next == null;
     }
 
@@ -57,7 +58,7 @@ public class intList {
      * Obtiene el primer elemento de la lista
      * @return primer elemento de la lista
      */
-    public intNode getFirst() {
+    public Node getFirst() {
         return first;
     }
 
@@ -87,11 +88,25 @@ public class intList {
      * Imprime los elementos de la lista
      */
     public void showList(){
-        intNode temporal = this.first;
+        Node temporal = this.first;
         while (temporal != null){
             System.out.println(temporal.getValue());
             temporal = temporal.getNext();
         }
+    }
+
+    /**
+     * Swaps the values of two nodes
+     * @param i first node index
+     * @param j second node index
+     */
+    public void swap(int i, int j){
+        Node node1 = this.getByIndex(i);
+        Node node2 = this.getByIndex(j);
+
+        var tmp = node1.getValue();
+        node1.setValue(node2.getValue());
+        node2.setValue(tmp);
     }
 
     /**
@@ -101,7 +116,7 @@ public class intList {
     public void delete(int index){
         if (index < this.getLarge()){
             int i = 0;
-            intNode temporal = this.first;
+            Node temporal = this.first;
             if (index == 0){
                 this.first = this.getByIndex(1);
             }
@@ -129,67 +144,13 @@ public class intList {
      * @param i posición de elemento a obtener
      * @return un elemento de la lista
      */
-    public intNode getByIndex(int i){
+    public Node<T> getByIndex(int i){
         int j = 0;
-        intNode temp = this.getFirst();
-        while (j != i ){
+        Node temp = this.getFirst();
+        while (j != i){
             temp = temp.getNext();
             j++;
         }
         return temp;
-    }
-
-
-    public void setFirst(intNode first) {
-        this.first = first;
-    }
-
-
-    /**
-     * Swaps the values of two nodes
-     * @param i first node index
-     * @param j second node index
-     */
-    public void swap(int i, int j){
-        intNode node1 = this.getByIndex(i);
-        intNode node2 = this.getByIndex(j);
-
-        int tmp = node1.getValue();
-        node1.setValue(node2.getValue());
-        node2.setValue(tmp);
-    }
-
-    public void addUnique(int value){
-        if (!isRepeated(value, this)) {
-            if(this.isEmpty()){
-                this.first = new intNode(value);
-                this.large += 1;
-            }
-            else{
-                intNode temporal = this.first;
-                while (temporal.getNext() != null){
-                    temporal =  temporal.getNext();
-                }
-                temporal.setNext(new intNode(value));
-                this.large += 1;
-            }
-        }else{
-            System.out.print("is repeated");
-        }
-
-    }
-
-    private boolean isRepeated(int value, intList list){
-        int i = 0;
-        int j = list.getLarge();
-        boolean result = false;
-        while (i < j){
-            if(value == list.getByIndex(i).getValue()){
-                result = true;
-                break;
-            }
-            i++;
-        }
-        return result;
     }
 }
