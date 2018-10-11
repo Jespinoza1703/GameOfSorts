@@ -1,5 +1,7 @@
 package game.logic.entities;
 
+import java.util.Random;
+
 public class nameGenerator {
 
     public static String names[] = {"Fabian", "Jose", "Jessica", "Tomas", "Beto", "Chabela", "Che", "Adolf", "Belisario",
@@ -20,5 +22,11 @@ public class nameGenerator {
     "Kentucky", "Junior", "Joker", "Baby", "Hazard", "Pogba", "Grey", "McQueen", "Bambino", "Delevinge", "Dadario", "Maradona", "Disney",
     "Pig", "Vader", "Moda", "Increible", "Balvin", "Colindres", "Campbell", "Navas", "Guardiola", "Jordan", "Cordero", "Prime", "Bora bora",
     "Rodriguez", "Lonnis", "Vega", "Esponja", "Estrella", "Khalifa", "Balotelli", "Guevara", "De los Angeles"};
+
+    public static String generateName(){
+        String name = names[new Random().nextInt(names.length)];
+        String lastName = lastNames [new Random().nextInt(lastNames.length)];
+        return name + " " + lastName;
+    }
 
 }

@@ -12,7 +12,12 @@ public class dragon {
     //falta la clase
 
 
+    public dragon (){
+        setName(nameGenerator.generateName());
+        setReloadSpeed((int)((Math.random())*100));
+        setAge((int)((Math.random())*1000));
 
+    }
 
 
 
