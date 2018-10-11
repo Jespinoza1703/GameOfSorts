@@ -1,4 +1,4 @@
-package game.graphics.controllers;
+package graphics.controllers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -7,7 +7,7 @@ public class Interface {
 
     private static Interface instance;
     private static Object main;
-    private static String scene = "game/graphics/layouts/menu.fxml";
+    private static String scene = "graphics/layouts/menu.fxml";
 
     private Interface(Object main){
         Interface.main = main;

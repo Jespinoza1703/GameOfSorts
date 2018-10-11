@@ -1,4 +1,4 @@
-package game.graphics.controllers;
+package graphics.controllers;
 
 import java.io.IOException;
 

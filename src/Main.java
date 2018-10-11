@@ -1,5 +1,5 @@
-import game.graphics.controllers.Interface;
-import game.graphics.controllers.sScene;
+import graphics.controllers.Interface;
+import graphics.controllers.sScene;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
