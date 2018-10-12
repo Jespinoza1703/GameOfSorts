@@ -49,3 +49,6 @@
     -fx-background-color: -fx-primary-text;
     -fx-text-fill: -fx-secundary;
 }
+.button-20{
+    -fx-font-size: 20;
+}

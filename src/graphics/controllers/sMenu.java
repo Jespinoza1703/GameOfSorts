@@ -1,5 +1,7 @@
 package graphics.controllers;
 
+import javafx.fxml.FXML;
+
 import java.io.IOException;
 
 public class sMenu extends sScene{
@@ -12,5 +14,10 @@ public class sMenu extends sScene{
     @Override
     void pressed_return() throws IOException {
         Interface.close();
+    }
+
+    @FXML
+    void pressed_dev_test(){
+        Interface.switchScene("graphics/layouts/dev_test.fxml");
     }
 }
