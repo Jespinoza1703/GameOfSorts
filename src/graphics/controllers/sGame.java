@@ -1,10 +1,14 @@
 package graphics.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class sMenu extends sScene{
+public class sGame extends sScene{
+
+    @FXML
+    public AnchorPane gamePane;
 
     @Override
     protected void initialize() throws IOException {
@@ -13,11 +17,6 @@ public class sMenu extends sScene{
 
     @Override
     void pressed_return() throws IOException {
-        Interface.close();
-    }
-
-    @FXML
-    void pressed_play() {
-        Interface.switchScene("graphics/layouts/game.fxml");
+        Interface.switchScene("graphics/layouts/menu.fxml");
     }
 }

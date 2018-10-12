@@ -31,8 +31,8 @@ public class Interface {
     static void switchScene(String scene_dir){
         Interface.scene = scene_dir;
         try {
-            Method setScene = main.getClass().getMethod("setScene");
-            setScene.invoke(main, (Object[]) null);
+            Method switchScene = main.getClass().getMethod("switchScene");
+            switchScene.invoke(main, (Object[]) null);
 
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
