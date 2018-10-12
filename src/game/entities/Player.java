@@ -1,4 +1,4 @@
-package game.characters;
+package game.entities;
 
 public class Player {
 

@@ -1,8 +1,8 @@
-package game.logic.entities;
+package game.entities;
 
 import java.util.Random;
 
-public class nameGenerator {
+public class NameGenerator {
 
     public static String names[] = {"Fabian", "Jose", "Jessica", "Tomas", "Beto", "Chabela", "Che", "Adolf", "Belisario",
     "Lionel", "Cristiano", "Queta", "Queto", "Chabelo", "Shirley", "Quincho", "Anastasia", "Zeus", "Loki", "Tencha", "Rodolfo",
