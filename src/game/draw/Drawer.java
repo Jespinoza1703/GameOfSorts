@@ -4,7 +4,7 @@ import game.logic.lists.SimpleList;
 import javafx.scene.layout.Pane;
 
 /**
- * Singleton class that manages the objects to be draw in the gamePane
+ * Singleton class that manages the objects to be drawn in the gamePane
  * @author José Acuña
  */
 public class Drawer <T>{
