@@ -21,6 +21,10 @@ public class Player {
         return instance;
     }
 
+    public void generatePlayer(){
+
+    }
+
     private void event(){
 
     }
