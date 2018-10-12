@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -20,6 +21,17 @@
          <top>
             <Label styleClass="bold-label-100" text="Game of Sorts" BorderPane.alignment="CENTER" />
          </top>
+         <bottom>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="58.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#pressed_dev_test" styleClass="button-20" text="DevTest">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

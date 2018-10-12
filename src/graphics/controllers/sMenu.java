@@ -17,7 +17,7 @@ public class sMenu extends sScene{
     }
 
     @FXML
-    void pressed_play() {
-        Interface.switchScene("graphics/layouts/game.fxml");
+    void pressed_dev_test(){
+        Interface.switchScene("graphics/layouts/dev_test.fxml");
     }
 }

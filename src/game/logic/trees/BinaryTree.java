@@ -1,18 +1,21 @@
 package game.logic.trees;
 
+import game.entities.Dragon;
+
 public class BinaryTree {
 
-    private TreeNode root = null;
+    private TreeNode root;
 
     public BinaryTree(){
-
+        this.root = null;
     }
 
     public boolean isEmpty(){
-        return root == null;   }
+        return this.root == null;
+    }
 
     public boolean contains (int element){
-        return contains(element, root);
+        return this.contains(element, this.root);
     }
 
     private boolean contains (int element, TreeNode node){
@@ -35,7 +38,7 @@ public class BinaryTree {
             return null;
         }
         else{
-            return findMin(root);
+            return findMin(this.root);
         }
     }
 
@@ -54,17 +57,77 @@ public class BinaryTree {
             return null;
         }
         else{
-            return findMax(root);
+            return findMax(this.root);
         }
     }
     private TreeNode findMax(TreeNode node){
         if (node == null){
             return null;
-        }else if(node == null){
+        }else if(node.right == null){
             return node;
         }else{
             return findMin(node.right);
         }
     }
 
+
+    private TreeNode addRecursive(TreeNode current, int value) {
+        if (current == null) {
+            return new TreeNode(value);
+        }
+        if (value < current.element) {
+            current.left = addRecursive(current.left, value);
+        } else if (value > current.element) {
+            current.right = addRecursive(current.right, value);
+        } else {
+            // value already exists
+            return current;
+        }
+        return current;
+    }
+
+    private TreeNode addRecursiveDragon(TreeNode current, int value, Dragon dragon) {
+        if (current == null) {
+            return new TreeNode(value, dragon);
+        }
+        if (value < current.element) {
+            current.left = addRecursiveDragon(current.left, value, dragon);
+        } else if (value > current.element) {
+            current.right = addRecursiveDragon(current.right, value, dragon);
+        } else {
+            // value already exists
+            return current;
+        }
+        return current;
+    }
+
+
+
+    public void add (int value){
+        root = addRecursive(root, value);
+    }
+
+    private void addDragon (int value, Dragon dragon){
+        root = addRecursiveDragon(root, value, dragon);
+    }
+
+
+    public void addDragon (){
+        Dragon dragon = new Dragon();
+        int age = dragon.getAge();
+        if (!contains(age)) {
+            addDragon(age, dragon);
+        }else {
+            while (contains(age)){
+                age = (int)((Math.random())*1000);
+                dragon.setAge(age);
+            }
+            addDragon(age, dragon);
+        }
+    }
+
+    public TreeNode getRoot() {
+        return root;
+    }
 }
+

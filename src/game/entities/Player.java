@@ -1,4 +1,4 @@
-package game.characters;
+package game.entities;
 
 public class Player {
 
@@ -19,6 +19,10 @@ public class Player {
             instance = new Player();
         }
         return instance;
+    }
+
+    public void generatePlayer(){
+
     }
 
     private void event(){
