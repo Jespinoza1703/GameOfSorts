@@ -1,19 +1,23 @@
 package game.logic.trees;
 
-import game.logic.entities.dragon;
+import game.entities.Dragon;
 
-public class binaryTree {
+public class BinaryTree {
+
     private TreeNode root;
 
-    public binaryTree(){
-        this.root = null;   }
+    public BinaryTree(){
+        this.root = null;
+    }
 
     public boolean isEmpty(){
-        return this.root == null;   }
+        return this.root == null;
+    }
 
     public boolean contains (int element){
         return this.contains(element, this.root);
     }
+
     private boolean contains (int element, TreeNode node){
         if (node == null){
             return false;
@@ -82,7 +86,7 @@ public class binaryTree {
         return current;
     }
 
-    private TreeNode addRecursiveDragon(TreeNode current, int value, dragon dragon) {
+    private TreeNode addRecursiveDragon(TreeNode current, int value, Dragon dragon) {
         if (current == null) {
             return new TreeNode(value, dragon);
         }
@@ -103,13 +107,13 @@ public class binaryTree {
         root = addRecursive(root, value);
     }
 
-    private void addDragon (int value, dragon dragon){
+    private void addDragon (int value, Dragon dragon){
         root = addRecursiveDragon(root, value, dragon);
     }
 
 
     public void addDragon (){
-        dragon dragon = new dragon();
+        Dragon dragon = new Dragon();
         int age = dragon.getAge();
         if (!contains(age)) {
             addDragon(age, dragon);

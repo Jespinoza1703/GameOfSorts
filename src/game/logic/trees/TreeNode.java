@@ -1,13 +1,13 @@
 package game.logic.trees;
 
-import game.logic.entities.dragon;
+import game.entities.Dragon;
 
 public class TreeNode {
 
     int element, height;
     TreeNode left;
     TreeNode right;
-    dragon  dragon;
+    Dragon  dragon;
 
     public TreeNode(int element) {
         this(element, null, null, 1);
@@ -19,7 +19,7 @@ public class TreeNode {
         this.right = right;
         this.height = height;
     }
-    public TreeNode(int element, dragon dragon){
+    public TreeNode(int element, Dragon dragon){
         this.element = element;
         this.dragon = dragon;
         this.left = null;
@@ -51,11 +51,11 @@ public class TreeNode {
         this.right = right;
     }
 
-    public game.logic.entities.dragon getDragon() {
+    public Dragon getDragon() {
         return dragon;
     }
 
-    public void setDragon(game.logic.entities.dragon dragon) {
+    public void setDragon(Dragon dragon) {
         this.dragon = dragon;
     }
 }

@@ -1,13 +1,14 @@
 package game.logic.trees;
 
-import game.logic.entities.dragon;
+import game.entities.Dragon;
 
 public class AVLTree {
+
     TreeNode root;
 
     public AVLTree(){
-    }
 
+    }
 
     // A utility function to get the height of the tree
     int height(TreeNode N) {
@@ -66,7 +67,7 @@ public class AVLTree {
         return height(N.left) - height(N.right);
     }
 
-    private TreeNode insert(TreeNode node, int key, dragon dragon) {
+    private TreeNode insert(TreeNode node, int key, Dragon dragon) {
 
         /* 1.  Perform the normal BST insertion */
         if (node == null)
@@ -125,7 +126,7 @@ public class AVLTree {
     }
 
     public void insert(int element){
-        dragon dragon = new dragon();
+        Dragon dragon = new Dragon();
         root = insert(root, element, dragon);
     }
 
@@ -149,12 +150,12 @@ public class AVLTree {
 
 
 
-    private void insertDragon(int age, dragon dragon){
+    private void insertDragon(int age, Dragon dragon){
         root = insert(root, age, dragon);
     }
 
     public void insertDragon(){
-        dragon dragon = new dragon();
+        Dragon dragon = new Dragon();
         int age = dragon.getAge();
         insertDragon(age, dragon);
     }
