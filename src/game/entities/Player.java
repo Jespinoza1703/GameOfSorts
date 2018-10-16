@@ -12,8 +12,8 @@ public class Player extends Entity {
     private int lives = 3;
     private int xSpeed = 0;
     private int ySpeed = 0;
-    private int xMaxSpeed = 30;
-    private int yMaxSpeed = 20;
+    private int xMaxSpeed = 10;
+    private int yMaxSpeed = 10;
     private int xAcc = 2;
     private int yAcc = 3;
     private int xPoss = 200;

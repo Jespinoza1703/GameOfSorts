@@ -1,6 +1,8 @@
 package graphics.controllers;
 
 import game.GameController;
+import game.draw.Drawer;
+import game.entities.Player;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -13,7 +15,8 @@ public class sDevTest extends sScene{
 
     @Override
     protected void initialize() throws IOException {
-        GameController.getInstance().start(gamePane);
+        GameController.getInstance();
+        Drawer.init(gamePane);
     }
 
     @Override
