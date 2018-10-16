@@ -6,6 +6,8 @@ public class Player {
     private int lives = 3;
     private int ySpeed = 20;
     private int xSpeed = 30;
+    private int xposs = 200;
+    private int yposs = 200;
     private int fire_rate = 90;
     private int damage = 1;
     private String state = "Moving"; // Moving / Dead / Dashing
