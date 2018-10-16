@@ -1,6 +1,8 @@
 package game.entities;
 
-public class Dragon {
+import util.NameGenerator;
+
+public class Dragon extends Drawable{
 
     private String name;
     private Dragon parent;
@@ -36,6 +38,11 @@ public class Dragon {
     }
 
     private void pressed(){
+
+    }
+
+    @Override
+    public void draw() {
 
     }
 
