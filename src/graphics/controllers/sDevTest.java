@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class sDevTest extends  sScene{
+public class sDevTest extends sScene{
 
     @FXML
     Pane gamePane;

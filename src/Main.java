@@ -1,3 +1,4 @@
+import game.inputs.KeyReader;
 import graphics.controllers.Interface;
 import graphics.controllers.sScene;
 import javafx.application.Application;
@@ -35,6 +36,7 @@ public class Main extends Application {
     public static void switchScene() throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource(Interface.getScene()));
         Scene scene = new Scene(root);
+        KeyReader.getInstance().setScene(scene);
         window.setScene(scene);
     }
 
