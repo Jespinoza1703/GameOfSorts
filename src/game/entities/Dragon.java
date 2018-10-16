@@ -2,7 +2,7 @@ package game.entities;
 
 import util.NameGenerator;
 
-public class Dragon extends Drawable{
+public class Dragon extends Entity {
 
     private String name;
     private Dragon parent;
@@ -24,7 +24,13 @@ public class Dragon extends Drawable{
         this.rank = rank;
     }
 
-    private void update(){
+    @Override
+    public void update(){
+
+    }
+
+    @Override
+    public void draw() {
 
     }
 
@@ -41,11 +47,6 @@ public class Dragon extends Drawable{
     }
 
     private void pressed(){
-
-    }
-
-    @Override
-    public void draw() {
 
     }
 

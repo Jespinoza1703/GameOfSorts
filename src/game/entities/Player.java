@@ -1,10 +1,11 @@
 package game.entities;
 
+import game.GameController;
 import game.draw.Drawer;
 import game.inputs.KeyReader;
 import util.Math;
 
-public class Player extends Drawable{
+public class Player extends Entity {
 
     private static Player instance;
     private KeyReader key = KeyReader.getInstance();
@@ -34,10 +35,17 @@ public class Player extends Drawable{
 
     public void generatePlayer(){
         Drawer.getInstance().addDraw(this);
+        GameController.getInstance().addEntity(this);
     }
 
-    private void update(){
+    @Override
+    public void update(){
         move();
+    }
+
+    @Override
+    public void draw() {
+
     }
 
     private void hit(){
@@ -58,10 +66,5 @@ public class Player extends Drawable{
         ySpeed = Math.clamp(ySpeed += yAcc * move, -yMaxSpeed, yMaxSpeed);
         xPoss += xSpeed;
         yPoss += ySpeed;
-    }
-
-    @Override
-    public void draw() {
-
     }
 }

@@ -1,7 +1,9 @@
 package game;
 
 import game.draw.Drawer;
+import game.entities.Entity;
 import game.entities.Player;
+import game.logic.lists.SimpleList;
 import javafx.scene.layout.Pane;
 import web.service.wave.WaveGenerator;
 
@@ -9,10 +11,11 @@ import web.service.wave.WaveGenerator;
  * Singleton class that manages the Game cycle
  * @author José Acuña
  */
-public class GameController extends Thread{
+public class GameController <T> extends Thread{
 
     private static GameController instance;
     private Thread thread;
+    private SimpleList<Entity> entities;
     private boolean paused;
     private boolean running;
     private int wave;
@@ -83,7 +86,9 @@ public class GameController extends Thread{
     }
 
     private void update(){
-
+        for (int i = 0; i < entities.getLarge(); i++){
+            entities.getByIndex(i).getValue().update();
+        }
     }
 
     private void draw(){
@@ -94,6 +99,10 @@ public class GameController extends Thread{
         thread.stop();
     }
 
+    public void addEntity(Entity entity){
+        entities.addAtEnd(entity);
+    }
+
     public boolean isWaveClear(){
         return wave == 0;
     }
@@ -102,7 +111,7 @@ public class GameController extends Thread{
         return paused;
     }
 
-    private boolean isGameRunning(){
+    public boolean isGameRunning(){
         return running;
     }
 }
