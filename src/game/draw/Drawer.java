@@ -1,5 +1,6 @@
 package game.draw;
 
+import game.entities.Entity;
 import game.logic.lists.SimpleList;
 import javafx.scene.layout.Pane;
 

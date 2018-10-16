@@ -10,6 +10,9 @@ public class Dragon extends Entity {
     private int fire_rate;  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
+    private int xPoss;
+    private int xSpeed;
+
 
     public Dragon () {
 
@@ -26,7 +29,7 @@ public class Dragon extends Entity {
 
     @Override
     public void update(){
-
+        xPoss -= xSpeed;
     }
 
     @Override
@@ -47,10 +50,6 @@ public class Dragon extends Entity {
     }
 
     private void pressed(){
-
-    }
-
-    private void move() {
 
     }
 
