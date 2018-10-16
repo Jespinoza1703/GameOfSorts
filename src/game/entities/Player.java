@@ -1,11 +1,20 @@
 package game.entities;
 
+import game.draw.Drawer;
+import game.inputs.KeyReader;
+import util.Math;
+
 public class Player extends Drawable{
 
     private static Player instance;
+    private KeyReader key = KeyReader.getInstance();
     private int lives = 3;
-    private int ySpeed = 20;
-    private int xSpeed = 30;
+    private int xSpeed = 0;
+    private int ySpeed = 0;
+    private int xMaxSpeed = 30;
+    private int yMaxSpeed = 20;
+    private int xAcc = 2;
+    private int yAcc = 3;
     private int xPoss = 200;
     private int yPoss = 200;
     private int fire_rate = 90;
@@ -24,11 +33,11 @@ public class Player extends Drawable{
     }
 
     public void generatePlayer(){
-
+        Drawer.getInstance().addDraw(this);
     }
 
-    private void event(){
-
+    private void update(){
+        move();
     }
 
     private void hit(){
@@ -41,6 +50,14 @@ public class Player extends Drawable{
 
     private void shoot(){
 
+    }
+
+    private void move(){
+        var move = key.right - key.left;
+        xSpeed = Math.clamp(xSpeed += xAcc * move, -xMaxSpeed, xMaxSpeed);
+        ySpeed = Math.clamp(ySpeed += yAcc * move, -yMaxSpeed, yMaxSpeed);
+        xPoss += xSpeed;
+        yPoss += ySpeed;
     }
 
     @Override

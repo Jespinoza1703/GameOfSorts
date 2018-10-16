@@ -21,8 +21,11 @@ public class Dragon extends Drawable{
         this.age = age;
         this.parent = parent;
         this.lives = lives;
-
         this.rank = rank;
+    }
+
+    private void update(){
+
     }
 
     private void hit(){
@@ -43,6 +46,10 @@ public class Dragon extends Drawable{
 
     @Override
     public void draw() {
+
+    }
+
+    private void move() {
 
     }
 
