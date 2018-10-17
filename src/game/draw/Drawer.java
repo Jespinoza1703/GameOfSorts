@@ -3,10 +3,7 @@ package game.draw;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
 import javafx.animation.AnimationTimer;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -16,9 +13,9 @@ import javafx.scene.shape.Rectangle;
 public class Drawer {
 
     private static Drawer instance;
-    private SimpleList<Entity> draws = new SimpleList<>();
-    private Pane drawPane;
-    private AnimationTimer drawer;
+    private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
+    private Pane drawPane;  // Place to draw the entities
+    private AnimationTimer drawer;  //Access to JavaFx Thread
 
     private Drawer(Pane pane){
         drawPane = pane;
@@ -32,6 +29,8 @@ public class Drawer {
         if (instance == null){
             instance = new Drawer(pane);
         }
+
+        // Access to the JavaFx Thread
         instance.drawer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -42,7 +41,7 @@ public class Drawer {
     }
 
     /**
-     * This method draws constantly in the drawPane the objects that are in the draws:SimpleList
+     * This method adds in the drawPane the objects that are in the draws:SimpleList after cleaning it
      */
     private void draw(){
         drawPane.getChildren().clear();

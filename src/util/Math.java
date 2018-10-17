@@ -1,5 +1,9 @@
 package util;
 
+/**
+ * Class for logic operations
+ * @author José Acuña
+ */
 public class Math {
 
     /**
@@ -7,7 +11,7 @@ public class Math {
      * @param num num to compare with the limit
      * @param min minimum number to return
      * @param max maximum number to return
-     * @return an integer
+     * @return an integer inside the domain
      */
     public static int clamp(int num, int min, int max){
         if(num > max){

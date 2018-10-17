@@ -8,7 +8,7 @@ import javafx.scene.Scene;
  */
 public class KeyReader {
 
-    private Scene scene;
+    private Scene scene;  // Scene where the keyboard is activated
     private static KeyReader instance;
     public int right;
     public int left;
@@ -62,6 +62,10 @@ public class KeyReader {
         });
     }
 
+    /**
+     * Sets a Scene as focused so the key inputs can be readed
+     * @param scene is the Scene to focus
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
         keyPressed();

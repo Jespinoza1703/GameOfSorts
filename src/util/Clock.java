@@ -1,16 +1,13 @@
 package util;
 
-import java.time.Instant;
-import java.time.ZoneId;
-
 /**
  * Singleton class to manage time relating's
+ * @author José Acuña
  */
 public class Clock {
 
     private static Clock instance;
-    private java.time.Clock clock = java.time.Clock.systemUTC();;
-    private long lastTime;
+    private java.time.Clock clock = java.time.Clock.systemUTC();
 
     public static Clock getInstance() {
         if (instance == null){
@@ -20,9 +17,13 @@ public class Clock {
     }
 
     private Clock() {
-        lastTime = clock.millis();
+
     }
 
+    /**
+     * Creates a delay before next action takes place
+     * @param FPS speed of the delay given in FPS/second
+     */
     public void ticks(int FPS) {
         try {
             int millis = 1000 / 60;

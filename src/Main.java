@@ -33,6 +33,10 @@ public class Main extends Application {
         window.setOnCloseRequest(e-> close());
     }
 
+    /**
+     * Invokable method to set new Scenes in the window
+     * @throws IOException in case the FXML readable is invalid
+     */
     public static void switchScene() throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource(Interface.getScene()));
         Scene scene = new Scene(root);
@@ -40,6 +44,9 @@ public class Main extends Application {
         window.setScene(scene);
     }
 
+    /**
+     * Invokable method to kill all the threads
+     */
     public static void close() {
         window.close();
         Platform.exit();
