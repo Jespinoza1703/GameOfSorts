@@ -1,6 +1,9 @@
 package game.entities;
 
-public class Dragon {
+import javafx.scene.shape.Rectangle;
+import util.NameGenerator;
+
+public class Dragon extends Entity {
 
     private String name;
     private Dragon parent;
@@ -8,6 +11,9 @@ public class Dragon {
     private int fire_rate;  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
+    private int xPoss;
+    private int xSpeed;
+
 
     public Dragon () {
 
@@ -19,8 +25,17 @@ public class Dragon {
         this.age = age;
         this.parent = parent;
         this.lives = lives;
-
         this.rank = rank;
+    }
+
+    @Override
+    public void update(){
+        xPoss -= xSpeed;
+    }
+
+    @Override
+    public Rectangle draw() {
+        return null;
     }
 
     private void hit(){

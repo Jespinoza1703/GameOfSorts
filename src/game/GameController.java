@@ -1,8 +1,9 @@
 package game;
 
-import game.draw.Drawer;
+import game.entities.Entity;
 import game.entities.Player;
-import javafx.scene.layout.Pane;
+import game.logic.lists.SimpleList;
+import util.Clock;
 import web.service.wave.WaveGenerator;
 
 /**
@@ -12,7 +13,10 @@ import web.service.wave.WaveGenerator;
 public class GameController extends Thread{
 
     private static GameController instance;
+    private Clock clock = Clock.getInstance();
     private Thread thread;
+    private SimpleList<Entity> entities = new SimpleList<>();
+    private Player player;
     private boolean paused;
     private boolean running;
     private int wave;
@@ -27,25 +31,22 @@ public class GameController extends Thread{
     public static GameController getInstance(){
         if (instance == null){
             instance = new GameController("game");
+            instance.player = new Player();
             instance.thread = instance;
+            instance.thread.start();
         }
         return instance;
-    }
-
-    public void start(Pane pane){
-        Drawer.init(pane);
-        Player.getInstance().generatePlayer();
-        thread.resume();
-
     }
 
     public void abort(){
         running = false;
     }
 
+    @Override
     public void run(){
         getWave();
         while (running){
+            clock.ticks(60);
 
             if(isWaveClear()){
                 getWave();
@@ -59,10 +60,6 @@ public class GameController extends Thread{
 
             update();
             draw();
-
-            if(!isGameRunning()){
-                running = false;
-            }
         }
         end();
     }
@@ -83,15 +80,22 @@ public class GameController extends Thread{
     }
 
     private void update(){
-
+        for (int i = 0; i < entities.getLarge(); i++){
+            entities.getByIndex(i).getValue().update();
+        }
     }
 
     private void draw(){
-        Drawer.getInstance().draw();
+
     }
 
     private void end(){
+        instance = null;
         thread.stop();
+    }
+
+    public void addEntity(Entity entity){
+        entities.addAtEnd(entity);
     }
 
     public boolean isWaveClear(){
@@ -102,7 +106,7 @@ public class GameController extends Thread{
         return paused;
     }
 
-    private boolean isGameRunning(){
+    public boolean isGameRunning(){
         return running;
     }
 }
