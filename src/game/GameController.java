@@ -4,6 +4,7 @@ import game.draw.Drawer;
 import game.entities.Dragon;
 import game.entities.Player;
 import game.logic.lists.SimpleList;
+import util.Clock;
 import web.service.wave.WaveGenerator;
 
 /**
@@ -13,6 +14,7 @@ import web.service.wave.WaveGenerator;
 public class GameController extends Thread{
 
     private static GameController instance;
+    private Clock clock = Clock.getInstance();
     private Thread thread;
     private Player player;
     private SimpleList<Dragon> dragons = new SimpleList<>();
@@ -45,6 +47,7 @@ public class GameController extends Thread{
     public void run(){
         getWave();
         while (running){
+            clock.ticks(60);
 
             if(isWaveClear()){
                 getWave();
@@ -99,6 +102,7 @@ public class GameController extends Thread{
     public void setPlayer(Player player){
         this.player = player;
     }
+
     public void addEntity(Dragon dragon){
         dragons.addAtEnd(dragon);
     }
