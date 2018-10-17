@@ -62,13 +62,13 @@ public class AVLTreesTest {
     void delete_Root_12_Elements(){
         AVLTree tree = new AVLTree();
         int i = 1;
-        while (i <= 12){
+        while (i <= 7){
             tree.insert(i);
             i++;
         }
         TreeNode tmp = tree.getRoot();
-        tree.deleteNode(tmp, 8);
-        assertEquals(9, tree.getRoot().getElement());
+        tree.deleteNode(tmp, 4);
+        assertEquals(5, tmp.getElement());
     }
 
 

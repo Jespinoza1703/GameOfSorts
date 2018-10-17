@@ -71,7 +71,12 @@ public class AVLTree {
 
         /* 1.  Perform the normal BST insertion */
         if (node == null)
-            return (new TreeNode(key));
+            if (dragon != null) {
+                return (new TreeNode(key, dragon));
+            }else{
+                return (new TreeNode(key));
+            }
+
 
         if (key < node.element)
             node.left = insert(node.left, key, dragon);
@@ -126,11 +131,13 @@ public class AVLTree {
     }
 
     public void insert(int element){
-        Dragon dragon = new Dragon();
-        root = insert(root, element, dragon);
+        root = insert(root, element, null);
     }
 
 
+    public void insert (Dragon dragon){
+        root = insert(root, dragon.getAge(), dragon);
+    }
 
 
     public TreeNode getRoot() {

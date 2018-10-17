@@ -17,8 +17,8 @@ public class Dragon extends Entity {
     private String rank;  // Commander / Captain / Infantry
     private int xPoss;
     private int xSpeed;
-    private static SimpleList dragonsList; //Contains the alive dragons list
-    private static AVLTree dragonOrganization;
+    private static SimpleList dragonsList = new SimpleList(); //Contains the alive dragons list
+    private static AVLTree dragonOrganization = new AVLTree();
 
 
     public Dragon () {
@@ -26,6 +26,9 @@ public class Dragon extends Entity {
         this.name = (NameGenerator.generateName());
         this.fire_rate = ((int)((Math.random())*100));
         this.age = ((int)((Math.random())*1000));
+
+        dragonsList.addDragon(this);
+        updateOrganization();
 
 
     }
@@ -57,8 +60,13 @@ public class Dragon extends Entity {
 
     }
 
-    private void dies(){
-
+    public void dies(){
+        int i = 0;
+        while (dragonsList.getByIndex(i).getDragon() != this && dragonsList.getByIndex(i).getNext() != null){
+            i++;
+        }
+        dragonsList.delete(i);
+        updateOrganization();
     }
 
     private void pressed(){
@@ -67,12 +75,12 @@ public class Dragon extends Entity {
 
     private void updateOrganization(){
         Node temp = dragonsList.getFirst();
-        while (temp.getNext() != null){
-            dragonOrganization.insert(temp.getDragon().getAge());
+        while (temp != null){
+            dragonOrganization.insert(temp.getDragon());
             temp = temp.getNext();
         }
     }
-    private void updateOrganization(Dragon dragon){
+    /*private void updateOrganization(Dragon dragon){
         dragonsList.addDragon(dragon);
         Node temp = dragonsList.getFirst();
         while (temp.getNext() != null){
@@ -81,6 +89,7 @@ public class Dragon extends Entity {
         }
     }
 
+    */
 
     /** Getters andSetters **/
 
@@ -130,5 +139,37 @@ public class Dragon extends Entity {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public int getxPoss() {
+        return xPoss;
+    }
+
+    public void setxPoss(int xPoss) {
+        this.xPoss = xPoss;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public static SimpleList getDragonsList() {
+        return dragonsList;
+    }
+
+    public static void setDragonsList(SimpleList dragonsList) {
+        Dragon.dragonsList = dragonsList;
+    }
+
+    public static AVLTree getDragonOrganization() {
+        return dragonOrganization;
+    }
+
+    public static void setDragonOrganization(AVLTree dragonOrganization) {
+        Dragon.dragonOrganization = dragonOrganization;
     }
 }
