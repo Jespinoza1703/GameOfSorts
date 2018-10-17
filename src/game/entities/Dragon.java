@@ -1,5 +1,9 @@
 package game.entities;
 
+import game.logic.lists.Node;
+import game.logic.lists.SimpleList;
+import game.logic.trees.AVLTree;
+import game.logic.trees.TreeNode;
 import javafx.scene.shape.Rectangle;
 import util.NameGenerator;
 
@@ -13,9 +17,16 @@ public class Dragon extends Entity {
     private String rank;  // Commander / Captain / Infantry
     private int xPoss;
     private int xSpeed;
+    private static SimpleList dragonsList; //Contains the alive dragons list
+    private static AVLTree dragonOrganization;
 
 
     public Dragon () {
+
+        this.name = (NameGenerator.generateName());
+        this.fire_rate = ((int)((Math.random())*100));
+        this.age = ((int)((Math.random())*1000));
+
 
     }
 
@@ -53,6 +64,23 @@ public class Dragon extends Entity {
     private void pressed(){
 
     }
+
+    private void updateOrganization(){
+        Node temp = dragonsList.getFirst();
+        while (temp.getNext() != null){
+            dragonOrganization.insert(temp.getDragon().getAge());
+            temp = temp.getNext();
+        }
+    }
+    private void updateOrganization(Dragon dragon){
+        dragonsList.addDragon(dragon);
+        Node temp = dragonsList.getFirst();
+        while (temp.getNext() != null){
+            dragonOrganization.insert(temp.getDragon().getAge());
+            temp = temp.getNext();
+        }
+    }
+
 
     /** Getters andSetters **/
 
