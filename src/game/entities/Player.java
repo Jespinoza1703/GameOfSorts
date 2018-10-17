@@ -3,7 +3,6 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.inputs.KeyReader;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import util.Math;
 
@@ -15,8 +14,8 @@ public class Player extends Entity {
     private int ySpeed = 0;
     private int xMaxSpeed = 10;
     private int yMaxSpeed = 10;
-    private int xAcc = 2;
-    private int yAcc = 3;
+    private int xAcc = 1;
+    private int yAcc = 2;
     private int xPoss = 200;
     private int yPoss = 200;
     private int fire_rate = 90;
@@ -62,6 +61,15 @@ public class Player extends Entity {
     private void move(){
         var xMove = key.right - key.left;
         var yMove = key.up - key.down;
+
+        if (xMove == 0){
+            xSpeed =  Math.approach(xSpeed, 0, 0.1);
+        }
+
+        if (yMove == 0){
+            ySpeed =  Math.approach(ySpeed, 0, 0.1);
+        }
+
         xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
         ySpeed = Math.clamp(ySpeed -= yAcc * yMove, -yMaxSpeed, yMaxSpeed);
         xPoss += xSpeed;
