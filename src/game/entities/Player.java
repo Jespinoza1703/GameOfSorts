@@ -9,7 +9,6 @@ import util.Math;
 
 public class Player extends Entity {
 
-    private static Player instance;
     private KeyReader key = KeyReader.getInstance();
     private int lives = 3;
     private int xSpeed = 0;
@@ -25,18 +24,7 @@ public class Player extends Entity {
     private String state = "Moving"; // Moving / Dead / Dashing
     private Rectangle sprite;
 
-    private Player(){
-
-    }
-
-    public static Player getInstance(){
-        if (instance == null){
-            instance = new Player();
-        }
-        return instance;
-    }
-
-    public void generatePlayer(){
+    public Player(){
         Drawer.getInstance().addDraw(this);
         GameController.getInstance().addEntity(this);
     }
@@ -53,7 +41,10 @@ public class Player extends Entity {
     }
 
     private void hit(){
-
+        lives--;
+        if(lives <= 0){
+            dead();
+        }
     }
 
     private void heal(){
@@ -61,6 +52,10 @@ public class Player extends Entity {
     }
 
     private void shoot(){
+
+    }
+
+    private void dead(){
 
     }
 

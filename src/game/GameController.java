@@ -1,6 +1,5 @@
 package game;
 
-import game.draw.Drawer;
 import game.entities.Entity;
 import game.entities.Player;
 import game.logic.lists.SimpleList;
@@ -17,6 +16,7 @@ public class GameController extends Thread{
     private Clock clock = Clock.getInstance();
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
+    private Player player;
     private boolean paused;
     private boolean running;
     private int wave;
@@ -31,7 +31,7 @@ public class GameController extends Thread{
     public static GameController getInstance(){
         if (instance == null){
             instance = new GameController("game");
-            Player.getInstance().generatePlayer();
+            instance.player = new Player();
             instance.thread = instance;
             instance.thread.start();
         }
@@ -60,10 +60,6 @@ public class GameController extends Thread{
 
             update();
             draw();
-
-            if(!isGameRunning()){
-                running = false;
-            }
         }
         end();
     }
@@ -90,10 +86,11 @@ public class GameController extends Thread{
     }
 
     private void draw(){
-        //Drawer.getInstance().draw();
+
     }
 
     private void end(){
+        instance = null;
         thread.stop();
     }
 

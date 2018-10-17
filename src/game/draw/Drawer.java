@@ -18,6 +18,7 @@ public class Drawer {
     private static Drawer instance;
     private SimpleList<Entity> draws = new SimpleList<>();
     private Pane drawPane;
+    private AnimationTimer drawer;
 
     private Drawer(Pane pane){
         drawPane = pane;
@@ -26,17 +27,18 @@ public class Drawer {
     public static Drawer getInstance(){
         return instance;
     }
+
     public static void init(Pane pane){
         if (instance == null){
             instance = new Drawer(pane);
         }
-        AnimationTimer drawer = new AnimationTimer() {
+        instance.drawer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 instance.draw();
             }
         };
-        drawer.start();
+        instance.drawer.start();
     }
 
     /**
@@ -52,5 +54,10 @@ public class Drawer {
 
     public void addDraw(Entity draw){
         draws.addAtEnd(draw);
+    }
+
+    public void abort(){
+        drawer.stop();
+        instance = null;
     }
 }

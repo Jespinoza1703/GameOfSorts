@@ -21,6 +21,7 @@ public class sDevTest extends sScene{
     @Override
     void pressed_return() throws IOException {
         GameController.getInstance().abort();
+        Drawer.getInstance().abort();
         Interface.switchScene("graphics/layouts/menu.fxml");
     }
 }
