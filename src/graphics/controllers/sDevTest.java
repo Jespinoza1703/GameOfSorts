@@ -15,8 +15,8 @@ public class sDevTest extends sScene{
 
     @Override
     protected void initialize() throws IOException {
-        GameController.getInstance();
         Drawer.init(gamePane);
+        GameController.getInstance();
     }
 
     @Override

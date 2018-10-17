@@ -34,14 +34,13 @@ public class Player extends Entity {
     }
 
     public void generatePlayer(){
-        //Drawer.getInstance().addDraw(this);
-        GameController.getInstance().setPlayer(this);
+        Drawer.getInstance().addDraw(this);
+        GameController.getInstance().addEntity(this);
     }
 
     @Override
     public void update(){
         move();
-        System.out.println(xPoss);
     }
 
     @Override

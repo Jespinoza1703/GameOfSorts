@@ -1,7 +1,7 @@
 package game;
 
 import game.draw.Drawer;
-import game.entities.Dragon;
+import game.entities.Entity;
 import game.entities.Player;
 import game.logic.lists.SimpleList;
 import util.Clock;
@@ -16,8 +16,7 @@ public class GameController extends Thread{
     private static GameController instance;
     private Clock clock = Clock.getInstance();
     private Thread thread;
-    private Player player;
-    private SimpleList<Dragon> dragons = new SimpleList<>();
+    private SimpleList<Entity> entities = new SimpleList<>();
     private boolean paused;
     private boolean running;
     private int wave;
@@ -85,9 +84,8 @@ public class GameController extends Thread{
     }
 
     private void update(){
-        player.update();
-        for (int i = 0; i < dragons.getLarge(); i++){
-            dragons.getByIndex(i).getValue().update();
+        for (int i = 0; i < entities.getLarge(); i++){
+            entities.getByIndex(i).getValue().update();
         }
     }
 
@@ -99,12 +97,8 @@ public class GameController extends Thread{
         thread.stop();
     }
 
-    public void setPlayer(Player player){
-        this.player = player;
-    }
-
-    public void addEntity(Dragon dragon){
-        dragons.addAtEnd(dragon);
+    public void addEntity(Entity entity){
+        entities.addAtEnd(entity);
     }
 
     public boolean isWaveClear(){

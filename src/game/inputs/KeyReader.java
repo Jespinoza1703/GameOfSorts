@@ -2,6 +2,10 @@ package game.inputs;
 
 import javafx.scene.Scene;
 
+/**
+ * Class that gets the events of certain keys of the keyboard
+ * @author José Acuña
+ */
 public class KeyReader {
 
     private Scene scene;
@@ -25,6 +29,9 @@ public class KeyReader {
         return instance;
     }
 
+    /**
+     * Method that change the state of key variables to 1 when pressed
+     */
     private void keyPressed() {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -39,6 +46,9 @@ public class KeyReader {
     }
 
 
+    /**
+     * Method that change the state of key variables to 0 when released
+     */
     private void keyReleased() {
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()) {

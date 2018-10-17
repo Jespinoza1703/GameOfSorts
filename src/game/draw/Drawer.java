@@ -8,10 +8,10 @@ import javafx.scene.layout.Pane;
  * Singleton class that manages the objects to be drawn in the gamePane
  * @author José Acuña
  */
-public class Drawer <T>{
+public class Drawer {
 
     private static Drawer instance;
-    private SimpleList<T> draws;
+    private SimpleList<Entity> draws = new SimpleList<>();
     private Pane drawPane;
 
     private Drawer(Pane pane){
@@ -32,7 +32,7 @@ public class Drawer <T>{
 
     }
 
-    public void addDraw(T draw){
+    public void addDraw(Entity draw){
         draws.addAtEnd(draw);
     }
 }
