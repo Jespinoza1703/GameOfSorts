@@ -44,7 +44,6 @@ public class Player extends Entity {
     @Override
     public void update(){
         move();
-        System.out.println(xPoss);
     }
 
     @Override

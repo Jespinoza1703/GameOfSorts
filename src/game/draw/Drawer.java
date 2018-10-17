@@ -17,7 +17,6 @@ public class Drawer {
 
     private static Drawer instance;
     private SimpleList<Entity> draws = new SimpleList<>();
-    private SimpleList<Entity> last_draws = draws;
     private Pane drawPane;
 
     private Drawer(Pane pane){
@@ -40,16 +39,15 @@ public class Drawer {
         drawer.start();
     }
 
+    /**
+     * This method draws constantly in the drawPane the objects that are in the draws:SimpleList
+     */
     private void draw(){
-        for (int i = 0; i < last_draws.getLarge(); i++){
-            Rectangle sprite = last_draws.getByIndex(i).getValue().draw();
-            drawPane.getChildren().removeAll(sprite);
-        }
+        drawPane.getChildren().clear();
         for (int i = 0; i < draws.getLarge(); i++){
             Rectangle sprite = draws.getByIndex(i).getValue().draw();
             drawPane.getChildren().addAll(sprite);
         }
-        last_draws = draws;
     }
 
     public void addDraw(Entity draw){
