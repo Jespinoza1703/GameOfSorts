@@ -3,6 +3,8 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.inputs.KeyReader;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import util.Math;
 
 public class Player extends Entity {
@@ -21,6 +23,7 @@ public class Player extends Entity {
     private int fire_rate = 90;
     private int damage = 1;
     private String state = "Moving"; // Moving / Dead / Dashing
+    private Rectangle sprite;
 
     private Player(){
 
@@ -41,11 +44,13 @@ public class Player extends Entity {
     @Override
     public void update(){
         move();
+        System.out.println(xPoss);
     }
 
     @Override
-    public void draw() {
-
+    public Rectangle draw() {
+        sprite = new Rectangle(xPoss, yPoss, 20, 20);
+        return sprite;
     }
 
     private void hit(){
@@ -61,9 +66,10 @@ public class Player extends Entity {
     }
 
     private void move(){
-        var move = key.right - key.left;
-        xSpeed = Math.clamp(xSpeed += xAcc * move, -xMaxSpeed, xMaxSpeed);
-        ySpeed = Math.clamp(ySpeed += yAcc * move, -yMaxSpeed, yMaxSpeed);
+        var xMove = key.right - key.left;
+        var yMove = key.up - key.down;
+        xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
+        ySpeed = Math.clamp(ySpeed -= yAcc * yMove, -yMaxSpeed, yMaxSpeed);
         xPoss += xSpeed;
         yPoss += ySpeed;
     }

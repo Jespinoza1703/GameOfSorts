@@ -1,5 +1,6 @@
 package game.entities;
 
+import javafx.scene.shape.Rectangle;
 import util.NameGenerator;
 
 public class Dragon extends Entity {
@@ -33,8 +34,8 @@ public class Dragon extends Entity {
     }
 
     @Override
-    public void draw() {
-
+    public Rectangle draw() {
+        return null;
     }
 
     private void hit(){

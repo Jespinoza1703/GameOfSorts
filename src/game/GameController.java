@@ -90,7 +90,7 @@ public class GameController extends Thread{
     }
 
     private void draw(){
-        Drawer.getInstance().draw();
+        //Drawer.getInstance().draw();
     }
 
     private void end(){
