@@ -76,7 +76,7 @@ public class Dragon extends Entity {
         dragonsList.addDragon(dragon);
         Node temp = dragonsList.getFirst();
         while (temp.getNext() != null){
-            dragonOrganization.insert(temp.getDragon().getAge());
+            dragonOrganization.insertDragon(temp.getDragon().getAge(), temp.getDragon());
             temp = temp.getNext();
         }
     }

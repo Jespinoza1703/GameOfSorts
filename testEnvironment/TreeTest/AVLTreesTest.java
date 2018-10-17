@@ -58,6 +58,19 @@ public class AVLTreesTest {
         assertEquals(12, tmp.getElement());
     }
 
+    @Test
+    void delete_Root_12_Elements(){
+        AVLTree tree = new AVLTree();
+        int i = 1;
+        while (i <= 12){
+            tree.insert(i);
+            i++;
+        }
+        TreeNode tmp = tree.getRoot();
+        tree.deleteNode(tmp, 8);
+        assertEquals(9, tree.getRoot().getElement());
+    }
+
 
 
 
