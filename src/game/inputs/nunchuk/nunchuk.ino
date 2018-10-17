@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "nunchuk.h"
+#include "game.inputs.nunchuk.h"
 
 void setup() {
 
