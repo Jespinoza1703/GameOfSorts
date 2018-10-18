@@ -3,6 +3,7 @@ package game.entities;
 import game.logic.lists.Node;
 import game.logic.lists.SimpleList;
 import game.logic.trees.AVLTree;
+import game.logic.trees.BinaryTree;
 import game.logic.trees.TreeNode;
 import javafx.scene.shape.Rectangle;
 import util.NameGenerator;
@@ -19,6 +20,9 @@ public class Dragon extends Entity {
     private int xSpeed;
     private static SimpleList dragonsList = new SimpleList(); //Contains the alive dragons list
     private static AVLTree dragonOrganization = new AVLTree();
+    private static BinaryTree BinaryDragon;
+    private static SimpleList OrganizationList;
+
 
 
     public Dragon () {
@@ -28,7 +32,7 @@ public class Dragon extends Entity {
         this.age = ((int)((Math.random())*1000));
 
         dragonsList.addDragon(this);
-        updateOrganization();
+        this.updateOrganization();
 
 
     }
@@ -74,22 +78,21 @@ public class Dragon extends Entity {
     }
 
     private void updateOrganization(){
-        Node temp = dragonsList.getFirst();
-        while (temp != null){
-            dragonOrganization.insert(temp.getDragon());
-            temp = temp.getNext();
-        }
-    }
-    /*private void updateOrganization(Dragon dragon){
-        dragonsList.addDragon(dragon);
-        Node temp = dragonsList.getFirst();
-        while (temp.getNext() != null){
-            dragonOrganization.insertDragon(temp.getDragon().getAge(), temp.getDragon());
-            temp = temp.getNext();
-        }
+        OrganizationList.clearOut();
+        this.updateTreesOrganization();
+        OrganizationList.addAtEnd(BinaryDragon);
+        OrganizationList.addAtEnd(dragonOrganization);
+
     }
 
-    */
+    private void updateTreesOrganization(){
+        Node tmp = dragonsList.getFirst();
+        while (tmp != null){
+            dragonOrganization.insertDragon(this.age, this);
+            BinaryDragon.addDragon(this.age, this);
+            tmp = tmp.getNext();
+        }
+    }
 
     /** Getters andSetters **/
 
@@ -171,5 +174,21 @@ public class Dragon extends Entity {
 
     public static void setDragonOrganization(AVLTree dragonOrganization) {
         Dragon.dragonOrganization = dragonOrganization;
+    }
+
+    public static BinaryTree getBinaryDragon() {
+        return BinaryDragon;
+    }
+
+    public static void setBinaryDragon(BinaryTree binaryDragon) {
+        BinaryDragon = binaryDragon;
+    }
+
+    public static SimpleList getOrganizationList() {
+        return OrganizationList;
+    }
+
+    public static void setOrganizationList(SimpleList organizationList) {
+        OrganizationList = organizationList;
     }
 }
