@@ -2,6 +2,7 @@ package game.entities;
 
 import game.logic.lists.Node;
 import game.logic.lists.SimpleList;
+import game.logic.sorts.SortMethods;
 import game.logic.trees.AVLTree;
 import game.logic.trees.BinaryTree;
 import game.logic.trees.TreeNode;
@@ -20,8 +21,9 @@ public class Dragon extends Entity {
     private int xSpeed;
     private static SimpleList dragonsList = new SimpleList(); //Contains the alive dragons list
     private static AVLTree dragonOrganization = new AVLTree();
-    private static BinaryTree BinaryDragon;
-    private static SimpleList OrganizationList;
+    private static BinaryTree BinaryDragon = new BinaryTree();
+    private static SimpleList ListedByFireRate = new SimpleList();
+    private static SimpleList OrganizationList = new SimpleList();
 
 
 
@@ -78,10 +80,15 @@ public class Dragon extends Entity {
     }
 
     private void updateOrganization(){
-        OrganizationList.clearOut();
+        if (OrganizationList.getFirst() != null) {
+            OrganizationList.clearOut();
+        }
         this.updateTreesOrganization();
         OrganizationList.addAtEnd(BinaryDragon);
         OrganizationList.addAtEnd(dragonOrganization);
+        SortMethods.insertionSort(ListedByFireRate);
+        OrganizationList.addAtEnd(ListedByFireRate);
+
 
     }
 
@@ -90,6 +97,7 @@ public class Dragon extends Entity {
         while (tmp != null){
             dragonOrganization.insertDragon(this.age, this);
             BinaryDragon.addDragon(this.age, this);
+            ListedByFireRate.addAtEnd(this);
             tmp = tmp.getNext();
         }
     }
