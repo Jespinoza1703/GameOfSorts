@@ -1,5 +1,4 @@
 package game.logic.trees;
-
 import game.entities.Dragon;
 
 public class AVLTree {
