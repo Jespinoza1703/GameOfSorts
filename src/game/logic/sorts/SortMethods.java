@@ -1,5 +1,6 @@
 package game.logic.sorts;
 
+import game.logic.lists.SimpleList;
 import game.logic.lists.intList;
 
 public class SortMethods {
@@ -84,23 +85,23 @@ public class SortMethods {
         }
     }
 
-    public static void insertionSort(intList list)
+    public static void insertionSort(SimpleList list)
     {
         int n = list.getLarge();
         for (int i=1; i<n; ++i)
         {
-            int key = list.getByIndex(i).getValue();
+            int key = list.getByIndex(i).getDragon().getFire_rate();
             int j = i-1;
 
             /* Move elements of arr[0..i-1], that are
                greater than key, to one position ahead
                of their current position */
-            while (j>=0 && list.getByIndex(j).getValue() > key)
+            while (j>=0 && list.getByIndex(j).getDragon().getFire_rate() > key)
             {
                 list.getByIndex(j+1).setValue(list.getByIndex(j).getValue());
                 j = j-1;
             }
-            list.getByIndex(j+1).setValue(key);
+            list.getByIndex(j+1).setValue(list.getByIndex(i).getDragon());
         }
     }
 }

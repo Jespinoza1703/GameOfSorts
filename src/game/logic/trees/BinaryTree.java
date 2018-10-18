@@ -107,7 +107,7 @@ public class BinaryTree {
         root = addRecursive(root, value);
     }
 
-    private void addDragon (int value, Dragon dragon){
+    public void addDragon (int value, Dragon dragon){
         root = addRecursiveDragon(root, value, dragon);
     }
 
