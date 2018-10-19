@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "game.inputs.nunchuk.h"
+#include "Nunchuk.h"
 
 void setup() {
 
@@ -13,6 +13,7 @@ void loop() {
 
     if (nunchuk_read()) {
         // Work with nunchuk_data
+        Serial.println(nunchuk_buttonZ());
         nunchuk_print();
     }
     delay(10);
