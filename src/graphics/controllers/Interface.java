@@ -3,11 +3,15 @@ package graphics.controllers;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Class that invokes the methods in the Main class
+ * Communicates the scenes controllers with Main
+ */
 public class Interface {
 
     private static Interface instance;
-    private static Object main;
-    private static String scene = "graphics/layouts/menu.fxml";
+    private static Object main;  // Object to invoke
+    private static String scene = "graphics/layouts/menu.fxml";  // Default Scene
 
     private Interface(Object main){
         Interface.main = main;

@@ -1,8 +1,9 @@
 package game.entities;
 
+import javafx.scene.shape.Rectangle;
 import util.NameGenerator;
 
-public class Dragon extends Drawable{
+public class Dragon extends Entity {
 
     private String name;
     private Dragon parent;
@@ -10,6 +11,9 @@ public class Dragon extends Drawable{
     private int fire_rate;  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
+    private int xPoss;
+    private int xSpeed;
+
 
     public Dragon () {
 
@@ -21,8 +25,17 @@ public class Dragon extends Drawable{
         this.age = age;
         this.parent = parent;
         this.lives = lives;
-
         this.rank = rank;
+    }
+
+    @Override
+    public void update(){
+        xPoss -= xSpeed;
+    }
+
+    @Override
+    public Rectangle draw() {
+        return null;
     }
 
     private void hit(){
@@ -38,11 +51,6 @@ public class Dragon extends Drawable{
     }
 
     private void pressed(){
-
-    }
-
-    @Override
-    public void draw() {
 
     }
 

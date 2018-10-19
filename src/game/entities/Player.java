@@ -1,38 +1,49 @@
 package game.entities;
 
-public class Player extends Drawable{
+import game.GameController;
+import game.draw.Drawer;
+import game.inputs.KeyReader;
+import javafx.scene.shape.Rectangle;
+import util.Math;
 
-    private static Player instance;
+public class Player extends Entity {
+
+    private KeyReader key = KeyReader.getInstance();
     private int lives = 3;
-    private int ySpeed = 20;
-    private int xSpeed = 30;
+    private int xSpeed = 0;
+    private int ySpeed = 0;
+    private int xMaxSpeed = 10;
+    private int yMaxSpeed = 10;
+    private int xAcc = 1;
+    private int yAcc = 2;
     private int xPoss = 200;
     private int yPoss = 200;
     private int fire_rate = 90;
     private int damage = 1;
     private String state = "Moving"; // Moving / Dead / Dashing
+    private Rectangle sprite;
 
-    private Player(){
-
+    public Player(){
+        Drawer.getInstance().addDraw(this);
+        GameController.getInstance().addEntity(this);
     }
 
-    public static Player getInstance(){
-        if (instance == null){
-            instance = new Player();
-        }
-        return instance;
+    @Override
+    public void update(){
+        move();
     }
 
-    public void generatePlayer(){
-
-    }
-
-    private void event(){
-
+    @Override
+    public Rectangle draw() {
+        sprite = new Rectangle(xPoss, yPoss, 20, 20);
+        return sprite;
     }
 
     private void hit(){
-
+        lives--;
+        if(lives <= 0){
+            dead();
+        }
     }
 
     private void heal(){
@@ -43,8 +54,25 @@ public class Player extends Drawable{
 
     }
 
-    @Override
-    public void draw() {
+    private void dead(){
 
+    }
+
+    private void move(){
+        var xMove = key.right - key.left;
+        var yMove = key.up - key.down;
+
+        if (xMove == 0){
+            xSpeed =  Math.approach(xSpeed, 0, 0.1);
+        }
+
+        if (yMove == 0){
+            ySpeed =  Math.approach(ySpeed, 0, 0.1);
+        }
+
+        xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
+        ySpeed = Math.clamp(ySpeed -= yAcc * yMove, -yMaxSpeed, yMaxSpeed);
+        xPoss += xSpeed;
+        yPoss += ySpeed;
     }
 }
