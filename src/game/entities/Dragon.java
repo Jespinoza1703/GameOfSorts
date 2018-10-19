@@ -22,8 +22,8 @@ public class Dragon extends Entity {
     private static SimpleList dragonsList = new SimpleList(); //Contains the alive dragons list
     private static AVLTree dragonOrganization = new AVLTree();
     private static BinaryTree BinaryDragon = new BinaryTree();
-    private static SimpleList ListedByFireRate = new SimpleList();
-    private static SimpleList OrganizationList = new SimpleList();
+    private static SimpleList DragonListSorted = new SimpleList();
+
 
 
 
@@ -79,28 +79,29 @@ public class Dragon extends Entity {
 
     }
 
+
+
     private void updateOrganization(){
-        if (OrganizationList.getFirst() != null) {
-            OrganizationList.clearOut();
-        }
-        this.updateTreesOrganization();
-        OrganizationList.addAtEnd(BinaryDragon);
-        OrganizationList.addAtEnd(dragonOrganization);
-        SortMethods.insertionSort(ListedByFireRate);
-        OrganizationList.addAtEnd(ListedByFireRate);
-
-
-    }
-
-    private void updateTreesOrganization(){
         Node tmp = dragonsList.getFirst();
+        dragonOrganization.clearOut();
+        BinaryDragon.clearOut();
+        DragonListSorted.clearOut();
         while (tmp != null){
             dragonOrganization.insertDragon(this.age, this);
             BinaryDragon.addDragon(this.age, this);
-            ListedByFireRate.addAtEnd(this);
+            DragonListSorted.addAtEnd(this);
             tmp = tmp.getNext();
         }
     }
+
+    private static void sortListByAge(){
+        SortMethods.selectionSort(DragonListSorted);
+    }
+
+    private static void sortListByFireRate(){
+        SortMethods.insertionSort(DragonListSorted);
+    }
+
 
     /** Getters andSetters **/
 
@@ -192,11 +193,11 @@ public class Dragon extends Entity {
         BinaryDragon = binaryDragon;
     }
 
-    public static SimpleList getOrganizationList() {
-        return OrganizationList;
+    public static SimpleList getDragonListSorted() {
+        return DragonListSorted;
     }
 
-    public static void setOrganizationList(SimpleList organizationList) {
-        OrganizationList = organizationList;
+    public static void setDragonListSorted(SimpleList dragonListSorted) {
+        DragonListSorted = dragonListSorted;
     }
 }

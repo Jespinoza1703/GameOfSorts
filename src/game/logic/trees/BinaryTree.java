@@ -129,5 +129,9 @@ public class BinaryTree {
     public TreeNode getRoot() {
         return root;
     }
+
+    public void clearOut(){
+        this.root = null;
+    }
 }
 

@@ -286,6 +286,9 @@ public class AVLTree {
     }
 
 
+    public void clearOut(){
+        this.root = null;
+    }
 
 
 

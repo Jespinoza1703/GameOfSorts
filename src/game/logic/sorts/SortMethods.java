@@ -1,5 +1,6 @@
 package game.logic.sorts;
 
+import game.entities.Dragon;
 import game.logic.lists.SimpleList;
 import game.logic.lists.intList;
 
@@ -66,7 +67,7 @@ public class SortMethods {
         }
     }
 
-    public static void selectionSort (intList list)
+    public static void selectionSort (SimpleList list)
     {
         int n = list.getLarge();
 
@@ -76,12 +77,12 @@ public class SortMethods {
             // Find the minimum element in unsorted array
             int min_idx = i;
             for (int j = i+1; j < n; j++)
-                if (list.getByIndex(j).getValue() < list.getByIndex(min_idx).getValue())
+                if (list.getByIndex(j).getDragon().getAge() < list.getByIndex(min_idx).getDragon().getAge())
                     min_idx = j;
 
             // Swap the found minimum element with the first
             // element
-            list.swap(i, min_idx);
+            list.swapDragon(i, min_idx);
         }
     }
 

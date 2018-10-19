@@ -170,4 +170,10 @@ public class SimpleList<T> {
             this.large += 1;
         }
     }
+
+    public void swapDragon (int i, int j){
+        Dragon temp = this.getByIndex(i).getDragon();
+        this.getByIndex(i).setDragon(this.getByIndex(j).getDragon());
+        this.getByIndex(j).setDragon(temp);
+    }
 }
