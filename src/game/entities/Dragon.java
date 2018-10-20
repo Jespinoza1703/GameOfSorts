@@ -29,12 +29,21 @@ public class Dragon extends Entity {
 
     public Dragon () {
 
+        int lives = ((int)((Math.random())*100));
+
         this.name = (NameGenerator.generateName());
         this.fire_rate = ((int)((Math.random())*100));
         this.age = ((int)((Math.random())*1000));
 
+        if (lives <= 33){
+            this.setLives(1);
+        }else if(lives <= 66){
+            this.setLives(2);
+        }else if(lives < 100){
+            this.setLives(3);
+        }
         dragonsList.addDragon(this);
-        this.updateOrganization();
+
 
 
     }
@@ -72,7 +81,6 @@ public class Dragon extends Entity {
             i++;
         }
         dragonsList.delete(i);
-        updateOrganization();
     }
 
     private void pressed(){
@@ -81,27 +89,29 @@ public class Dragon extends Entity {
 
 
 
-    private void updateOrganization(){
-        Node tmp = dragonsList.getFirst();
-        dragonOrganization.clearOut();
-        BinaryDragon.clearOut();
+
+
+    private static SimpleList getSortedListByAge(){
+        updateSortedList();
+        SortMethods.selectionSort(DragonListSorted);
+        return DragonListSorted;
+
+    }
+
+    private static SimpleList sortListByFireRate(){
+        updateSortedList();
+        SortMethods.insertionSort(DragonListSorted);
+        return DragonListSorted;
+    }
+
+    private static void updateSortedList(){
+        Node temp = dragonsList.getFirst();
         DragonListSorted.clearOut();
-        while (tmp != null){
-            dragonOrganization.insertDragon(this.age, this);
-            BinaryDragon.addDragon(this.age, this);
-            DragonListSorted.addAtEnd(this);
-            tmp = tmp.getNext();
+        while (temp != null){
+            DragonListSorted.addAtEnd(temp.getDragon());
+            temp =  temp.getNext();
         }
     }
-
-    private static void sortListByAge(){
-        SortMethods.selectionSort(DragonListSorted);
-    }
-
-    private static void sortListByFireRate(){
-        SortMethods.insertionSort(DragonListSorted);
-    }
-
 
     /** Getters andSetters **/
 
