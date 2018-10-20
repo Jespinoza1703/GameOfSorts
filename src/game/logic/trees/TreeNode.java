@@ -22,6 +22,7 @@ public class TreeNode {
     public TreeNode(int element, Dragon dragon){
         this.element = element;
         this.dragon = dragon;
+        this.dragon.setAge(element);
         this.left = null;
         this.right = null;
     }
@@ -39,17 +40,12 @@ public class TreeNode {
         return left;
     }
 
-    public void setLeft(TreeNode left) {
-        this.left = left;
-    }
 
     public TreeNode getRight() {
         return right;
     }
 
-    public void setRight(TreeNode right) {
-        this.right = right;
-    }
+
 
     public Dragon getDragon() {
         return dragon;

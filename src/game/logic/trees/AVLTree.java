@@ -122,7 +122,7 @@ public class AVLTree {
     // A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
-    private void preOrder(TreeNode node) {
+    public void preOrder(TreeNode node) {
         if (node != null) {
             System.out.print(node.element + " ");
             preOrder(node.left);
