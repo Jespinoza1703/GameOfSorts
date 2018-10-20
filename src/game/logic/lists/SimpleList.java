@@ -78,6 +78,7 @@ public class SimpleList<T> {
      * Limpia la lista por completo
      */
     public void clearOut(){
+        this.large = 0;
         this.first = null;
     }
 

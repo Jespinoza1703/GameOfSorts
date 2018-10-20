@@ -1,5 +1,6 @@
 package ListsTest;
 
+import game.entities.Dragon;
 import game.logic.lists.Node;
 import game.logic.lists.SimpleList;
 import org.junit.jupiter.api.Test;
@@ -101,6 +102,11 @@ public class simpleListTest {
         Node result = list.getByIndex(2);
         assertNull(result);
     }
+    @Test
+    void testDeleteOutOfIndex(){
+        SimpleList list = new SimpleList();
+        list.delete(1);
+    }
 
     @Test
    void testDeleteOther(){
@@ -113,6 +119,52 @@ public class simpleListTest {
        assertEquals(1, result);
    }
 
+   @Test
+    void testAddDragon(){
+        SimpleList list = new SimpleList();
+        Dragon dragon = new Dragon();
+        list.addDragon(dragon);
+        Dragon result = list.getFirst().getDragon();
+        assertSame(dragon, result);
+   }
+
+   @Test
+    void testSwapDragons(){
+       SimpleList list = new SimpleList();
+       Dragon dragon = new Dragon();
+       Dragon dragon1 = new Dragon();
+       list.addDragon(dragon);
+       list.addDragon(dragon1);
+       list.swapDragon(0, 1);
+       Dragon result = list.getFirst().getDragon();
+       assertSame(dragon1, result);
+
+   }
+
+   @Test
+    void testClearOutFirst(){
+       SimpleList list = new SimpleList();
+       int i = 0;
+       while (i < 11){
+           list.addAtEnd(i);
+           i++;
+       }
+       list.clearOut();
+       Node result = list.getFirst();
+       assertNull(result);
+   }
+    @Test
+    void testClearOutLarge(){
+        SimpleList list = new SimpleList();
+        int i = 0;
+        while (i < 11){
+            list.addAtEnd(i);
+            i++;
+        }
+        list.clearOut();
+        int result = list.getLarge();
+        assertEquals(0, result);
+    }
 
 
 
