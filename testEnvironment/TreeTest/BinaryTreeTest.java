@@ -127,6 +127,20 @@ public class BinaryTreeTest {
 
     }
 
+    @Test
+    void findMaxWithEntryTree(){
+        BinaryTree tree = new BinaryTree();
+        TreeNode result = tree.findMax();
+        assertNull(result);
+    }
+
+    @Test
+    void findMinWithEntryTree(){
+        BinaryTree tree = new BinaryTree();
+        TreeNode result = tree.findMin();
+        assertNull(result);
+    }
+
 
 
 
