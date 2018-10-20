@@ -83,12 +83,15 @@ public class BinaryTree {
     }
 
     private TreeNode addRecursiveDragon(TreeNode current, int value, Dragon dragon) {
+
         if (current == null) {
             return new TreeNode(value, dragon);
         }
         if (value < current.element) {
+            current.getDragon().setRank("Captain");
             current.left = addRecursiveDragon(current.left, value, dragon);
         } else if (value > current.element) {
+            current.getDragon().setRank("Captain");
             current.right = addRecursiveDragon(current.right, value, dragon);
         } else {
             // value already exists
@@ -105,6 +108,7 @@ public class BinaryTree {
 
     public void addDragon (int value, Dragon dragon){
         root = addRecursiveDragon(root, value, dragon);
+        root.getDragon().setRank("Commander");
     }
 
 

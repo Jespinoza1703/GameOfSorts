@@ -141,8 +141,42 @@ public class BinaryTreeTest {
         assertNull(result);
     }
 
-
-
+    @Test
+    void testDragonRankInRoot(){
+        Dragon dragon = new Dragon();
+        Dragon dragon1 = new Dragon();
+        Dragon dragon2 = new Dragon();
+        BinaryTree tree = new BinaryTree();
+        tree.addDragon(5, dragon);
+        tree.addDragon(7, dragon1);
+        tree.addDragon(3, dragon2);
+        String result = tree.getRoot().getDragon().getRank();
+        assertEquals("Commander", result);
+    }
+    @Test
+    void testDragonRankInInfantry(){
+        Dragon dragon = new Dragon();
+        Dragon dragon1 = new Dragon();
+        Dragon dragon2 = new Dragon();
+        BinaryTree tree = new BinaryTree();
+        tree.addDragon(5, dragon);
+        tree.addDragon(7, dragon1);
+        tree.addDragon(3, dragon2);
+        String result = tree.findMin().getDragon().getRank();
+        assertEquals("Infantry", result);
+    }
+    @Test
+    void testDragonRankInCaptains(){
+        Dragon dragon = new Dragon();
+        Dragon dragon1 = new Dragon();
+        Dragon dragon2 = new Dragon();
+        BinaryTree tree = new BinaryTree();
+        tree.addDragon(5, dragon);
+        tree.addDragon(7, dragon1);
+        tree.addDragon(9, dragon2);
+        String result = tree.getRoot().getRight().getDragon().getRank();
+        assertEquals("Captain", result);
+    }
 
 
 

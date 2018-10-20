@@ -25,7 +25,9 @@ public class TreeNode {
         this.dragon.setAge(element);
         this.left = null;
         this.right = null;
+        dragon.setRank("Infantry");
     }
+
 
 
     public int getElement() {
