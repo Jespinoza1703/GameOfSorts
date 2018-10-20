@@ -44,6 +44,7 @@ public class SimpleList<T> {
             Node tmp = new Node<>(value);
             tmp.setNext(this.first);
             this.first = tmp;
+            this.large += 1;
         }
     }
 
@@ -64,12 +65,6 @@ public class SimpleList<T> {
         return first;
     }
 
-    /**
-     * Imprime el largo de la lista
-     */
-    public void showLarge() {
-        System.out.println(this.getLarge());
-    }
 
     /**
      * Obtiene el largo de la lista
@@ -86,16 +81,7 @@ public class SimpleList<T> {
         this.first = null;
     }
 
-    /**
-     * Imprime los elementos de la lista
-     */
-    public void showList(){
-        Node temporal = this.first;
-        while (temporal != null){
-            System.out.println(temporal.getValue());
-            temporal = temporal.getNext();
-        }
-    }
+
 
     /**
      * Swaps the values of two nodes
@@ -123,10 +109,10 @@ public class SimpleList<T> {
                 this.first = this.getByIndex(1);
             }
             else {
-                while (temporal.getNext() != null) {
+                while (temporal != null) {
 
                     if (i == index) {
-                        temporal.setNext(temporal.getNext().getNext());
+                        this.getByIndex(i-1).setNext(temporal.getNext());
                         this.large -= 1;
                         break;
                     } else {

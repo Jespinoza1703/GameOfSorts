@@ -4,8 +4,9 @@ import game.entities.Dragon;
 import game.logic.trees.BinaryTree;
 import game.logic.trees.TreeNode;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
-import game.logic.trees.BinaryTree.*;
+
 
 public class BinaryTreeTest {
 
