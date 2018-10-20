@@ -4,7 +4,6 @@ import game.entities.Entity;
 import game.entities.Player;
 import game.logic.lists.SimpleList;
 import util.Clock;
-import web.service.wave.WaveGenerator;
 
 /**
  * Singleton class that manages the Game cycle
@@ -65,7 +64,7 @@ public class GameController extends Thread{
     }
 
     private void getWave(){
-        WaveGenerator.generateWave();
+        //WaveService.generateWave();
     }
 
     private void event(){
