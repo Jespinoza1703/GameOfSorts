@@ -96,9 +96,9 @@ public class Dragon extends Entity {
         SortMethods.selectionSort(DragonListSorted);
         return DragonListSorted;
 
-    }
+}
 
-    private static SimpleList sortListByFireRate(){
+    private static SimpleList getSortListByFireRate(){
         updateSortedList();
         SortMethods.insertionSort(DragonListSorted);
         return DragonListSorted;

@@ -2,6 +2,12 @@ package util;
 
 import java.util.Random;
 
+/**
+ *Class that generates random names for each dragon.
+ *  @author Fabian Ramirez
+ */
+
+
 public class NameGenerator {
 
     public static String names[] = {"Fabian", "Jose", "Jessica", "Tomas", "Beto", "Chabela", "Che", "Adolf", "Belisario",
