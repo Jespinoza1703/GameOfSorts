@@ -67,7 +67,7 @@ public class Player extends Entity {
 
     private void shoot(){
         var yDirection = key.arrow_down - key.arrow_up;
-        FireBall fireBall = new FireBall(xPoss, yPoss, 30, 30,1, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 40, 45,1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
     }
 

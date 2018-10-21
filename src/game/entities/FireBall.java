@@ -31,7 +31,7 @@ public class FireBall extends Entity {
     }
     @Override
     public Sprite draw() {
-        sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, "file:res/img/icon.png");
+        sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, "file:res/img/entities/fireball/Fireball1");
         return sprite;
     }
 
