@@ -80,6 +80,10 @@ public class Dragon extends Entity {
         return sprite;
     }
 
+    /**
+     * Loads images for dragon
+     * @return Sprite
+     */
     private Sprite loadImages(){
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement2"));
