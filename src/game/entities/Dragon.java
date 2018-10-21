@@ -5,8 +5,9 @@ import game.logic.lists.SimpleList;
 import game.logic.sorts.SortMethods;
 import game.logic.trees.AVLTree;
 import game.logic.trees.BinaryTree;
-import game.logic.trees.TreeNode;
 import javafx.scene.shape.Rectangle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.NameGenerator;
 
 public class Dragon extends Entity {
@@ -24,23 +25,30 @@ public class Dragon extends Entity {
     private static BinaryTree BinaryDragon = new BinaryTree();
     private static SimpleList DragonListSorted = new SimpleList();
 
+    private static Logger logger = LoggerFactory.getLogger("Dragon");
+
 
 
 
     public Dragon () {
 
+        logger.debug("Created new Dragon");
         int lives = ((int)((Math.random())*100));
-
         this.name = (NameGenerator.generateName());
+        logger.debug(this + " Name: " + this.name);
         this.fire_rate = ((int)((Math.random())*100));
+        logger.debug(this + " Fire Rate: " + this.fire_rate);
         this.age = ((int)((Math.random())*1000));
-
+        logger.debug(this + " Age: " + this.age);
         if (lives <= 33){
             this.setLives(1);
+            logger.debug(this + " Lives: " + this.lives);
         }else if(lives <= 66){
             this.setLives(2);
+            logger.debug(this + " Lives: " + this.lives);
         }else if(lives < 100){
             this.setLives(3);
+            logger.debug(this + " Lives: " + this.lives);
         }
         dragonsList.addDragon(this);
 
@@ -49,6 +57,7 @@ public class Dragon extends Entity {
     }
 
     public Dragon(Dragon parent, int lives, int age, String rank) {
+        logger.debug("Created new Dragon");
         this.name = (NameGenerator.generateName());
         this.fire_rate = ((int)((Math.random())*100));
         this.age = age;
@@ -68,14 +77,16 @@ public class Dragon extends Entity {
     }
 
     private void hit(){
+        logger.debug(this + " has been hit it ");
 
     }
 
     private void shoot(){
-
+        logger.debug(this + " has shoot");
     }
 
     public void dies(){
+        logger.debug(this + " has been eliminated");
         int i = 0;
         while (dragonsList.getByIndex(i).getDragon() != this && dragonsList.getByIndex(i).getNext() != null){
             i++;
@@ -84,7 +95,7 @@ public class Dragon extends Entity {
     }
 
     private void pressed(){
-
+        logger.debug(this + "has been clicked");
     }
 
 
@@ -92,6 +103,7 @@ public class Dragon extends Entity {
 
 
     private static SimpleList getSortedListByAge(){
+        logger.debug("Change Dragons organization to Sorted by Age");
         updateSortedList();
         SortMethods.selectionSort(DragonListSorted);
         return DragonListSorted;
@@ -99,12 +111,14 @@ public class Dragon extends Entity {
 }
 
     private static SimpleList getSortListByFireRate(){
+        logger.debug("Change Dragons organization to Sorted by Fire Rate");
         updateSortedList();
         SortMethods.insertionSort(DragonListSorted);
         return DragonListSorted;
     }
 
     private static void updateSortedList(){
+        logger.debug("Update Simple List of dragons that will be sorted");
         Node temp = dragonsList.getFirst();
         DragonListSorted.clearOut();
         while (temp != null){

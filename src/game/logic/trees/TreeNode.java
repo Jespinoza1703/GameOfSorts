@@ -38,33 +38,35 @@ public class TreeNode {
 
 
     public int getElement() {
-        logger.debug("Element of " + this + "get it");
+        logger.debug("Element of " + this + " get it");
         return element;
     }
 
     public void setElement(int element) {
-        logger.debug("Element of " + this + "set it");
+        logger.debug("Element of " + this + " set it");
         this.element = element;
     }
 
     public TreeNode getLeft() {
-        logger.debug("Left element of " + this + "get it");
+        logger.debug("Left element of " + this + " get it");
         return left;
     }
 
 
     public TreeNode getRight() {
-        logger.debug("Right element of " + this + "get it");
+        logger.debug("Right element of " + this + " get it");
         return right;
     }
 
 
 
     public Dragon getDragon() {
+        logger.debug("Get it Dragon of " + this);
         return dragon;
     }
 
     public void setDragon(Dragon dragon) {
+        logger.debug("Set dragon of " + this + " as " + dragon);
         this.dragon = dragon;
     }
 }
