@@ -2,15 +2,16 @@ package game.entities;
 
 import game.GameController;
 import game.draw.Drawer;
-import game.inputs.KeyReader;
-import javafx.scene.shape.Rectangle;
+import game.draw.Sprite;
+import game.event.handler.inputs.Collisions;
+import game.event.handler.inputs.KeyReader;
 
 public class FireBall extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
-    private Rectangle sprite;
-    private double xPoss;
-    private double yPoss;
+    private Sprite sprite;
+    private int xPoss;
+    private int yPoss;
     private int yDir;
     private int xSpeed = 5;
     private int ySpeed = 5;
@@ -24,19 +25,33 @@ public class FireBall extends Entity {
         GameController.getInstance().addEntity(this);
     }
     @Override
-    public Rectangle draw() {
-        sprite = new Rectangle(xPoss, yPoss, 5, 5);
+    public Sprite draw() {
+        sprite = new Sprite(xPoss, yPoss,"file:res/img/icon.png");
         return sprite;
     }
 
     @Override
     public void update() {
+
         moveFire();
+    }
+
+    @Override
+    public void destroy() {
+
     }
 
     public void moveFire(){
         xPoss += xSpeed;
         yPoss += ySpeed * yDir;
 
+    }
+
+    public double getxPoss() {
+        return xPoss;
+    }
+
+    public double getyPoss() {
+        return yPoss;
     }
 }

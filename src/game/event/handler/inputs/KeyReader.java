@@ -1,4 +1,4 @@
-package game.inputs;
+package game.event.handler.inputs;
 
 import javafx.scene.Scene;
 

@@ -3,6 +3,7 @@ package game.draw;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
 import javafx.animation.AnimationTimer;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -46,7 +47,7 @@ public class Drawer {
     private void draw(){
         drawPane.getChildren().clear();
         for (int i = 0; i < draws.getLarge(); i++){
-            Rectangle sprite = draws.getByIndex(i).getValue().draw();
+            ImageView sprite = draws.getByIndex(i).getValue().draw().getSprite();
             drawPane.getChildren().addAll(sprite);
         }
     }

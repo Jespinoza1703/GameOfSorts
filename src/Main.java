@@ -1,4 +1,4 @@
-import game.inputs.KeyReader;
+import game.event.handler.inputs.KeyReader;
 import graphics.controllers.Interface;
 import graphics.controllers.sScene;
 import javafx.application.Application;

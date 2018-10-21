@@ -1,6 +1,12 @@
 package game.entities;
 
+import game.GameController;
+import game.draw.Drawer;
+import game.draw.Sprite;
+import game.event.handler.inputs.Collisions;
+import game.event.handler.inputs.KeyReader;
 import javafx.scene.shape.Rectangle;
+import util.Clock;
 import util.NameGenerator;
 
 public class Dragon extends Entity {
@@ -12,10 +18,23 @@ public class Dragon extends Entity {
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private int xPoss;
-    private int xSpeed;
+    private int yPoss;
+    private double xSpeed = 1;
+    private long lastTime = 0;
+    private KeyReader key;
+    private Clock clock = Clock.getInstance();
+    private Sprite sprite;
 
 
-    public Dragon () {
+    public Dragon (int xPoss, int yPoss) {
+        Drawer.getInstance().addDraw(this);
+        GameController.getInstance().addEntity(this);
+        //Collisions.getInstance().addDragon(this);
+        this.xPoss = xPoss;
+        this.yPoss = yPoss;
+    }
+
+    public Dragon(){
 
     }
 
@@ -30,12 +49,23 @@ public class Dragon extends Entity {
 
     @Override
     public void update(){
-        xPoss -= xSpeed;
+        move();
+
+        if (canShoot()){
+            shoot();
+        }
+    }
+
+
+    @Override
+    public void destroy() {
+
     }
 
     @Override
-    public Rectangle draw() {
-        return null;
+    public Sprite draw() {
+        sprite = new Sprite(xPoss, yPoss,"file:res/img/icon.png");
+        return sprite;
     }
 
     private void hit(){
@@ -43,7 +73,8 @@ public class Dragon extends Entity {
     }
 
     private void shoot(){
-
+        FireBall fireBall = new FireBall(xPoss, yPoss, 0);
+        Collisions.getInstance().addDragonBullets(fireBall);
     }
 
     private void dies(){
@@ -51,6 +82,22 @@ public class Dragon extends Entity {
     }
 
     private void pressed(){
+
+    }
+
+    private void move(){
+        xPoss -= xSpeed;
+        xSpeed -= 0.001;
+    }
+
+    private Boolean canShoot(){
+        Boolean result = false;
+        long time = clock.getTime();
+        if (time - lastTime > fire_rate){
+            result = true;
+            lastTime = time;
+        }
+        return result;
 
     }
 
@@ -102,5 +149,21 @@ public class Dragon extends Entity {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public int getxPoss() {
+        return xPoss;
+    }
+
+    public void setxPoss(int xPoss) {
+        this.xPoss = xPoss;
+    }
+
+    public int getyPoss() {
+        return yPoss;
+    }
+
+    public void setyPoss(int yPoss) {
+        this.yPoss = yPoss;
     }
 }

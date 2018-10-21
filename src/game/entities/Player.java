@@ -2,7 +2,9 @@ package game.entities;
 
 import game.GameController;
 import game.draw.Drawer;
-import game.inputs.KeyReader;
+import game.draw.Sprite;
+import game.event.handler.inputs.Collisions;
+import game.event.handler.inputs.KeyReader;
 import javafx.scene.shape.Rectangle;
 import util.Clock;
 import util.Math;
@@ -24,7 +26,7 @@ public class Player extends Entity {
     private int damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
-    private Rectangle sprite;
+    private Sprite sprite;
 
     public Player(){
         Drawer.getInstance().addDraw(this);
@@ -41,8 +43,13 @@ public class Player extends Entity {
     }
 
     @Override
-    public Rectangle draw() {
-        sprite = new Rectangle(xPoss, yPoss, 20, 20);
+    public void destroy() {
+
+    }
+
+    @Override
+    public Sprite draw() {
+        sprite = new Sprite(xPoss, yPoss, "file:res/img/entities/griffin/Griffin.png");
         return sprite;
     }
 
@@ -59,7 +66,8 @@ public class Player extends Entity {
 
     private void shoot(){
         var yDirection = key.arrow_down - key.arrow_up;
-        new FireBall(xPoss, yPoss, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, yDirection);
+        Collisions.getInstance().addPlayerBullets(fireBall);
     }
 
     private void dead(){
