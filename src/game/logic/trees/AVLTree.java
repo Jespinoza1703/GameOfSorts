@@ -11,7 +11,7 @@ public class AVLTree {
     }
 
     // A utility function to get the height of the tree
-    int height(TreeNode N) {
+    double height(TreeNode N) {
         if (N == null)
             return 0;
 
@@ -19,7 +19,7 @@ public class AVLTree {
     }
 
     // A utility function to get maximum of two integers
-    int max(int a, int b) {
+    double max(double a, double b) {
         return (a > b) ? a : b;
     }
 
@@ -60,14 +60,14 @@ public class AVLTree {
     }
 
     // Get Balance factor of node N
-    private int getBalance(TreeNode N) {
+    private double getBalance(TreeNode N) {
         if (N == null)
             return 0;
 
         return height(N.left) - height(N.right);
     }
 
-    private TreeNode insert(TreeNode node, int key, Dragon dragon) {
+    private TreeNode insert(TreeNode node, double key, Dragon dragon) {
 
         /* 1.  Perform the normal BST insertion */
         if (node == null)
@@ -87,7 +87,7 @@ public class AVLTree {
         /* 3. Get the balance factor of this ancestor
               node to check whether this node became
               unbalanced */
-        int balance = getBalance(node);
+        double balance = getBalance(node);
 
         // If this node becomes unbalanced, then there
         // are 4 cases Left Left Case
@@ -125,7 +125,7 @@ public class AVLTree {
         }
     }
 
-    public void insert(int element){
+    public void insert(double element){
         Dragon dragon = new Dragon();
         root = insert(root, element, dragon);
     }
@@ -150,13 +150,13 @@ public class AVLTree {
 
 
 
-    private void insertDragon(int age, Dragon dragon){
+    private void insertDragon(double age, Dragon dragon){
         root = insert(root, age, dragon);
     }
 
     public void insertDragon(){
         Dragon dragon = new Dragon();
-        int age = dragon.getAge();
+        double age = dragon.getAge();
         insertDragon(age, dragon);
     }
 

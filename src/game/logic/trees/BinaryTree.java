@@ -14,11 +14,11 @@ public class BinaryTree {
         return this.root == null;
     }
 
-    public boolean contains (int element){
+    public boolean contains (double element){
         return this.contains(element, this.root);
     }
 
-    private boolean contains (int element, TreeNode node){
+    private boolean contains (double element, TreeNode node){
         if (node == null){
             return false;
         } else {
@@ -71,7 +71,7 @@ public class BinaryTree {
     }
 
 
-    private TreeNode addRecursive(TreeNode current, int value) {
+    private TreeNode addRecursive(TreeNode current, double value) {
         if (current == null) {
             return new TreeNode(value);
         }
@@ -86,7 +86,7 @@ public class BinaryTree {
         return current;
     }
 
-    private TreeNode addRecursiveDragon(TreeNode current, int value, Dragon dragon) {
+    private TreeNode addRecursiveDragon(TreeNode current, double value, Dragon dragon) {
         if (current == null) {
             return new TreeNode(value, dragon);
         }
@@ -103,23 +103,23 @@ public class BinaryTree {
 
 
 
-    public void add (int value){
+    public void add (double value){
         root = addRecursive(root, value);
     }
 
-    private void addDragon (int value, Dragon dragon){
+    private void addDragon (double value, Dragon dragon){
         root = addRecursiveDragon(root, value, dragon);
     }
 
 
     public void addDragon (){
         Dragon dragon = new Dragon();
-        int age = dragon.getAge();
+        double age = dragon.getAge();
         if (!contains(age)) {
             addDragon(age, dragon);
         }else {
             while (contains(age)){
-                age = (int)((Math.random())*1000);
+                age = (double)((Math.random())*1000);
                 dragon.setAge(age);
             }
             addDragon(age, dragon);

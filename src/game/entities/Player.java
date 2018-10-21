@@ -5,7 +5,6 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
-import javafx.scene.shape.Rectangle;
 import util.Clock;
 import util.Math;
 
@@ -13,23 +12,25 @@ public class Player extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
     private Clock clock = Clock.getInstance();
-    private int lives = 3;
-    private int xSpeed = 0;
-    private int ySpeed = 0;
-    private int xMaxSpeed = 10;
-    private int yMaxSpeed = 10;
-    private int xAcc = 1;
-    private int yAcc = 2;
-    private int xPoss = 200;
-    private int yPoss = 200;
-    private int fire_rate = 500;
-    private int damage = 1;
+    private double lives = 3;
+    private double xSpeed = 0;
+    private double ySpeed = 0;
+    private double xMaxSpeed = 8;
+    private double yMaxSpeed = 8;
+    private double xAcc = 1;
+    private double yAcc = 2;
+    private double xPoss = 200;
+    private double yPoss = 200;
+    private double playerWidth = 120;
+    private double playerHeight = 80;
+    private double fire_rate = 500;
+    private double damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
     private Sprite sprite;
 
     public Player(){
-        Drawer.getInstance().addDraw(this);
+        Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
     }
 
@@ -49,7 +50,7 @@ public class Player extends Entity {
 
     @Override
     public Sprite draw() {
-        sprite = new Sprite(xPoss, yPoss, "file:res/img/entities/griffin/Griffin.png");
+        sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, "file:res/img/entities/griffin/Griffin.png");
         return sprite;
     }
 
@@ -66,7 +67,7 @@ public class Player extends Entity {
 
     private void shoot(){
         var yDirection = key.arrow_down - key.arrow_up;
-        FireBall fireBall = new FireBall(xPoss, yPoss, 1, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 30, 30,1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
     }
 
@@ -103,19 +104,19 @@ public class Player extends Entity {
 
     }
 
-    public int getxPoss() {
+    public double getxPoss() {
         return xPoss;
     }
 
-    public void setxPoss(int xPoss) {
+    public void setxPoss(double xPoss) {
         this.xPoss = xPoss;
     }
 
-    public int getyPoss() {
+    public double getyPoss() {
         return yPoss;
     }
 
-    public void setyPoss(int yPoss) {
+    public void setyPoss(double yPoss) {
         this.yPoss = yPoss;
     }
 }

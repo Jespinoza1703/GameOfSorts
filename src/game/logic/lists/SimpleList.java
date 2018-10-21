@@ -42,6 +42,7 @@ public class SimpleList<T> {
             Node tmp = new Node<>(value);
             tmp.setNext(this.first);
             this.first = tmp;
+            this.large += 1;
         }
     }
 

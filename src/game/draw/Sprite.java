@@ -4,36 +4,58 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Sprite {
-    private int width;
-    private int heigth;
-    private int xPoss;
-    private int yPoss;
+    private double width;
+    private double height;
+    private double xPoss;
+    private double yPoss;
     private ImageView sprite;
 
 
-    public Sprite(int xPoss, int yPoss, String url) {
-        this.xPoss = xPoss;
-        this.yPoss = yPoss;
+    public Sprite(double xPoss, double yPoss, double width, double height, String url) {
         Image img = new Image(url);
         ImageView imgView = new ImageView(img);
-        imgView.setX(xPoss);
-        imgView.setY(yPoss);
-        width = (int) imgView.getFitWidth();
-        heigth = (int) imgView.getFitHeight();
+        imgView.setFitWidth(width);
+        imgView.setFitHeight(height);
+        imgView.setX(xPoss - width / 2);
+        imgView.setY(yPoss - height / 2);
+        this.xPoss = imgView.getX();
+        this.yPoss = imgView.getY();
+        this.width = imgView.getFitWidth();
+        this.height = imgView.getFitHeight();
         sprite = imgView;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public int getHeigth(){
-        return heigth;
+    public void setWidth(double width) {
+        this.width = width;
     }
 
-    public int getxPoss(){ return xPoss; }
+    public double getHeight() {
+        return height;
+    }
 
-    public int getyPoss(){return yPoss; }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getxPoss() {
+        return xPoss;
+    }
+
+    public void setxPoss(double xPoss) {
+        this.xPoss = xPoss;
+    }
+
+    public double getyPoss() {
+        return yPoss;
+    }
+
+    public void setyPoss(double yPoss) {
+        this.yPoss = yPoss;
+    }
 
     public ImageView getSprite() { return sprite; }
 }

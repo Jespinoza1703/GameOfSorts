@@ -52,10 +52,13 @@ public class Drawer {
         }
     }
 
-    public void addDraw(Entity draw){
+    public void addDrawAtEnd(Entity draw){
         draws.addAtEnd(draw);
     }
 
+    public void addDrawAtBegining(Entity draw){
+        draws.addAtBeginning(draw);
+    }
     public void abort(){
         drawer.stop();
         instance = null;

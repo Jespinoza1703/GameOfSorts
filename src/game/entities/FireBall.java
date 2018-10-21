@@ -3,32 +3,35 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
-import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
 
 public class FireBall extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
     private Sprite sprite;
-    private int xPoss;
-    private int yPoss;
-    private int xDir;
-    private int yDir;
-    private int xSpeed = 5;
-    private int ySpeed = 5;
+    private double xPoss;
+    private double yPoss;
+    private double xDir;
+    private double yDir;
+    private double xSpeed = 15;
+    private double ySpeed = 15;
+    private double fireWidth;
+    private double fireHeight;
 
-    public FireBall(int xPoss, int yPoss, int xDir, int yDir){
+    public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, double xDir, double yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
+        this.fireWidth = fireWidth;
+        this.fireHeight = fireHeight;
         this.xDir = xDir;
         this.yDir = yDir;
 
-        Drawer.getInstance().addDraw(this);
+        Drawer.getInstance().addDrawAtBegining(this);
         GameController.getInstance().addEntity(this);
     }
     @Override
     public Sprite draw() {
-        sprite = new Sprite(xPoss, yPoss,"file:res/img/icon.png");
+        sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, "file:res/img/icon.png");
         return sprite;
     }
 
