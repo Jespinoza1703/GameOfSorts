@@ -77,7 +77,7 @@ public class Dragon extends Entity {
     }
 
     private void hit(){
-        logger.debug(this + " has been hit it ");
+        logger.info(this + " has been hit it ");
 
     }
 
@@ -86,7 +86,7 @@ public class Dragon extends Entity {
     }
 
     public void dies(){
-        logger.debug(this + " has been eliminated");
+        logger.info(this + " has been eliminated");
         int i = 0;
         while (dragonsList.getByIndex(i).getDragon() != this && dragonsList.getByIndex(i).getNext() != null){
             i++;

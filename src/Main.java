@@ -16,9 +16,9 @@ import java.io.IOException;
 public class Main extends Application {
 
     private static Stage window;
+    private static Logger logger = LoggerFactory.getLogger("Main");
 
     public static void main(String[] args) {
-        Logger logger = LoggerFactory.getLogger("Main");
         logger.debug("App launch");
         launch(args);
     }
@@ -27,6 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
         window.setResizable(false);
+        logger.debug("Window not resizable set it");
         window.setWidth(sScene.getWidth());
         window.setHeight(sScene.getHeight());
         window.setTitle("GameOfSorts");
@@ -42,6 +43,7 @@ public class Main extends Application {
      * @throws IOException in case the FXML readable is invalid
      */
     public static void switchScene() throws IOException {
+        logger.debug("Scene has been swathed");
         Parent root = FXMLLoader.load(Main.class.getResource(Interface.getScene()));
         Scene scene = new Scene(root);
         KeyReader.getInstance().setScene(scene);
@@ -52,6 +54,7 @@ public class Main extends Application {
      * Invokable method to kill all the threads
      */
     public static void close() {
+        logger.debug("All threads has been killed");
         window.close();
         Platform.exit();
         System.exit(0);
