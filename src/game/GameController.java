@@ -49,7 +49,7 @@ public class GameController extends Thread{
     public void run(){
         getWave();
         while (running){
-            clock.ticks(60);
+            clock.ticks(30);
 
             if(isWaveClear()){
                 getWave();

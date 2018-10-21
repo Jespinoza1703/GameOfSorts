@@ -64,7 +64,7 @@ public class Dragon extends Entity {
 
     @Override
     public Sprite draw() {
-        sprite = new Sprite(xPoss, yPoss,"file:res/img/icon.png");
+        sprite = new Sprite(xPoss, yPoss,"file:res/img/entities/dragon/Dragon1");
         return sprite;
     }
 
@@ -87,7 +87,6 @@ public class Dragon extends Entity {
 
     private void move(){
         xPoss -= xSpeed;
-        xSpeed -= 0.001;
     }
 
     private Boolean canShoot(){
