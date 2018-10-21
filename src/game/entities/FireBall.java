@@ -12,13 +12,15 @@ public class FireBall extends Entity {
     private Sprite sprite;
     private int xPoss;
     private int yPoss;
+    private int xDir;
     private int yDir;
     private int xSpeed = 5;
     private int ySpeed = 5;
 
-    public FireBall(int xPoss, int yPoss, int yDir){
+    public FireBall(int xPoss, int yPoss, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
+        this.xDir = xDir;
         this.yDir = yDir;
 
         Drawer.getInstance().addDraw(this);
@@ -42,7 +44,7 @@ public class FireBall extends Entity {
     }
 
     public void moveFire(){
-        xPoss += xSpeed;
+        xPoss += xSpeed * xDir;
         yPoss += ySpeed * yDir;
 
     }

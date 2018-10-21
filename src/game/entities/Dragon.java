@@ -14,7 +14,7 @@ public class Dragon extends Entity {
     private String name;
     private Dragon parent;
     private int lives; // [1, 3]
-    private int fire_rate;  // [10, 100]
+    private int fire_rate = ((int)((Math.random())*15000));  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private int xPoss;
@@ -29,7 +29,7 @@ public class Dragon extends Entity {
     public Dragon (int xPoss, int yPoss) {
         Drawer.getInstance().addDraw(this);
         GameController.getInstance().addEntity(this);
-        //Collisions.getInstance().addDragon(this);
+        Collisions.getInstance().addDragon(this);
         this.xPoss = xPoss;
         this.yPoss = yPoss;
     }
@@ -73,7 +73,7 @@ public class Dragon extends Entity {
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
