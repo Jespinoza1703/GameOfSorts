@@ -24,6 +24,13 @@ public class Sprite {
         this.height = imgView.getFitHeight();
         sprite = imgView;
     }
+    public void move(double xPoss, double yPoss){
+        sprite.setX(xPoss - width / 2);
+        sprite.setY(yPoss - height / 2);
+        this.xPoss = sprite.getX();
+        this.yPoss = sprite.getY();
+
+    }
 
     public double getWidth() {
         return width;

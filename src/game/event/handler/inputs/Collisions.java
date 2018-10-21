@@ -1,12 +1,12 @@
 package game.event.handler.inputs;
 
+import game.draw.Sprite;
 import game.entities.Entity;
 import game.entities.Player;
 import game.logic.lists.SimpleList;
 
 public class Collisions {
     private static Collisions instance;
-    Player player;
     private SimpleList<Entity> dragons = new SimpleList<>();
     private SimpleList<Entity> playerBullets = new SimpleList<>();
     private SimpleList<Entity> dragonBullets = new SimpleList<>();
@@ -19,14 +19,23 @@ public class Collisions {
     }
     /**
      * Handles collisions of entity vs group
-     * @param sprite instance of entity
+     * @param entity instance of entity
      * @param group list of entities
      * @param destroy destroys an instance in the group
      * @return boolean
      */
-    public Boolean collide(Entity sprite, SimpleList<Entity> group, boolean destroy){
+    public Boolean collide(Entity entity, SimpleList<Entity> group, boolean destroy){
         Boolean collide = false;
-        int i = 0;
+        Sprite sprite = entity.getSprite();
+        double x = sprite.getxPoss();
+        double y =sprite.getyPoss();
+        for (int i = 0; i < group.getLarge(); i++){
+            Sprite groupPoss = group.getByIndex(i).getValue().getSprite();
+            if(x + sprite.getWidth() > groupPoss.getxPoss() && y == groupPoss.getyPoss()){
+                collide = true;
+                System.out.println("col");
+            }
+        }
         return collide;
     }
 
@@ -57,10 +66,6 @@ public class Collisions {
 
     public SimpleList getDragons() {
         return dragons;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public SimpleList getPlayerBullets() {

@@ -10,4 +10,8 @@ public abstract class Entity {
     public abstract void update();
 
     public abstract void destroy();
+
+    public Sprite getSprite() {
+        return sprite;
+    }
 }

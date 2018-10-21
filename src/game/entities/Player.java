@@ -8,28 +8,30 @@ import game.event.handler.inputs.KeyReader;
 import util.Clock;
 import util.Math;
 
+import java.util.ArrayList;
+
 public class Player extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
     private Clock clock = Clock.getInstance();
     private double lives = 3;
-    private double xSpeed = 0;
-    private double ySpeed = 0;
-    private double xMaxSpeed = 8;
-    private double yMaxSpeed = 8;
-    private double xAcc = 1;
-    private double yAcc = 2;
-    private double xPoss = 200;
-    private double yPoss = 200;
-    private double playerWidth = 120;
-    private double playerHeight = 80;
+    private double xSpeed = 0, ySpeed = 0;
+    private double xMaxSpeed = 8, yMaxSpeed = 8;
+    private double xAcc = 1, yAcc = 2;
+    private double xPoss = 200, yPoss = 200;
+    private double playerWidth = 120, playerHeight = 80;
     private double fire_rate = 500;
     private double damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
     private Sprite sprite;
+    private ArrayList<Sprite> movementAnimations = new ArrayList<>();
+    private double animationTimer = 200;
+    private double lastAnimationTime = 0;
+    private int currentSprite = 0;
 
     public Player(){
+        sprite = loadImages();
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
     }
@@ -50,8 +52,25 @@ public class Player extends Entity {
 
     @Override
     public Sprite draw() {
-        sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, "file:res/img/entities/griffin/Griffin.png");
+        long time = clock.getTime();
+        if (time - lastAnimationTime > animationTimer){
+            sprite = movementAnimations.get(currentSprite);
+            lastAnimationTime = time;
+            currentSprite = (currentSprite + 1) % movementAnimations.size();
+        }
+        sprite.move(xPoss, yPoss);
         return sprite;
+    }
+
+    private Sprite loadImages(){
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/Griffin.png"));
+        //movementAnimations.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+        //        "file:res/img/entities/dragon/Grifo"));
+        //movementAnimations.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+        //        "file:res/img/entities/dragon/Grifo"));
+        return movementAnimations.get(0);
+
     }
 
     private void hit(){

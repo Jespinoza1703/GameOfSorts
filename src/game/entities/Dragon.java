@@ -8,6 +8,8 @@ import game.event.handler.inputs.KeyReader;
 import util.Clock;
 import util.NameGenerator;
 
+import java.util.ArrayList;
+
 public class Dragon extends Entity {
 
     private String name;
@@ -16,23 +18,26 @@ public class Dragon extends Entity {
     private double fire_rate = (((Math.random())*15000));  // [10, 100]
     private double age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
-    private double xPoss;
-    private double yPoss;
-    private double dragonWidth = 80;
-    private double dragonHeight = 65;
+    private double xPoss, yPoss;
+    private double dragonWidth = 80, dragonHeight = 65;
     private double xSpeed = 1;
     private long lastTime = 0;
     private KeyReader key;
     private Clock clock = Clock.getInstance();
     private Sprite sprite;
+    private ArrayList<Sprite> movementAnimations = new ArrayList<>();
+    private double animationTimer = 200;
+    private double lastAnimationTime = 0;
+    private int currentSprite = 0;
 
 
     public Dragon (double xPoss, double yPoss) {
+        this.xPoss = xPoss;
+        this.yPoss = yPoss;
+        sprite = loadImages();
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
-        this.xPoss = xPoss;
-        this.yPoss = yPoss;
     }
 
     public Dragon(){
@@ -65,10 +70,26 @@ public class Dragon extends Entity {
 
     @Override
     public Sprite draw() {
-        sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, "file:res/img/entities/dragon/Dragon1");
+        long time = clock.getTime();
+        if (time - lastAnimationTime > animationTimer){
+            sprite = movementAnimations.get(currentSprite);
+            lastAnimationTime = time;
+            currentSprite = (currentSprite + 1) % movementAnimations.size();
+        }
+        sprite.move(xPoss, yPoss);
         return sprite;
     }
 
+    private Sprite loadImages(){
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+                "file:res/img/entities/dragon/dMovement2"));
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+                "file:res/img/entities/dragon/dMovement1"));
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+                "file:res/img/entities/dragon/dMovement3"));
+        return movementAnimations.get(0);
+
+    }
     private void hit(){
 
     }
@@ -88,6 +109,7 @@ public class Dragon extends Entity {
 
     private void move(){
         xPoss -= xSpeed;
+
     }
 
     private Boolean canShoot(){
