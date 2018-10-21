@@ -1,6 +1,8 @@
 package game.logic.trees;
 
 import game.entities.Dragon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TreeNode {
 
@@ -8,9 +10,12 @@ public class TreeNode {
     TreeNode left;
     TreeNode right;
     Dragon  dragon;
+    Logger logger = LoggerFactory.getLogger("TreeNode");
+
 
     public TreeNode(int element) {
         this(element, null, null, 1);
+        logger.debug("Create New TreeNode");
     }
 
     public TreeNode(int element, TreeNode left, TreeNode right, int height) {
@@ -18,6 +23,7 @@ public class TreeNode {
         this.left = left;
         this.right = right;
         this.height = height;
+        logger.debug("Create New TreeNode");
     }
     public TreeNode(int element, Dragon dragon){
         this.element = element;
@@ -26,24 +32,29 @@ public class TreeNode {
         this.left = null;
         this.right = null;
         dragon.setRank("Infantry");
+        logger.debug("Create New TreeNode");
     }
 
 
 
     public int getElement() {
+        logger.debug("Element of " + this + "get it");
         return element;
     }
 
     public void setElement(int element) {
+        logger.debug("Element of " + this + "set it");
         this.element = element;
     }
 
     public TreeNode getLeft() {
+        logger.debug("Left element of " + this + "get it");
         return left;
     }
 
 
     public TreeNode getRight() {
+        logger.debug("Right element of " + this + "get it");
         return right;
     }
 
