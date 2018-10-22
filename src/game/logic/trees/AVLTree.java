@@ -15,7 +15,7 @@ public class AVLTree {
         if (N == null)
             return 0;
 
-        return N.height;
+        return (int) N.height;
     }
 
     // A utility function to get maximum of two integers

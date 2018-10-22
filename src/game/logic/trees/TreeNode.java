@@ -27,7 +27,7 @@ public class TreeNode {
     }
 
 
-    public double getElement() {
+    public int getElement() {
         return element;
     }
 
