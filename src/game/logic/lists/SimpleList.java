@@ -1,5 +1,7 @@
 package game.logic.lists;
 
+import game.entities.Dragon;
+
 public class SimpleList<T> {
 
     private Node first;
@@ -165,5 +167,20 @@ public class SimpleList<T> {
             j++;
         }
         return temp;
+    }
+
+    public void addDragon (Dragon dragon){
+        if(this.isEmpty()){
+            this.first = new Node(dragon);
+            this.large += 1;
+        }
+        else{
+            Node temporal = this.first;
+            while (temporal.getNext() != null){
+                temporal =  temporal.getNext();
+            }
+            temporal.setNext(new Node(dragon));
+            this.large += 1;
+        }
     }
 }
