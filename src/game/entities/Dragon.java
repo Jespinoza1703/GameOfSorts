@@ -16,7 +16,7 @@ public class Dragon extends Entity {
     private Dragon parent;
     private double lives = 3; // [1, 3]
     private double fire_rate = (((Math.random())*15000));  // [10, 100]
-    private double age;  // [1, 1000]
+    private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
@@ -48,7 +48,7 @@ public class Dragon extends Entity {
 
     }
 
-    public Dragon(Dragon parent, double lives, double age, String rank) {
+    public Dragon(Dragon parent, int lives, int age, String rank) {
         this.name = (NameGenerator.generateName());
         this.fire_rate = (((Math.random())*100));
         this.age = age;
@@ -191,11 +191,11 @@ public class Dragon extends Entity {
         this.fire_rate = fire_rate;
     }
 
-    public double getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(double age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

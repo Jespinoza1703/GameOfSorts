@@ -6,7 +6,6 @@ import game.entities.Player;
 import game.event.handler.inputs.Collisions;
 import game.logic.lists.SimpleList;
 import util.Clock;
-import web.service.wave.WaveGenerator;
 
 /**
  * Singleton class that manages the Game cycle
@@ -68,7 +67,6 @@ public class GameController extends Thread{
     }
 
     private void getWave(){
-        WaveGenerator.generateWave();
         Dragon dragon = new Dragon(1000, 350);
         wave = 1;
     }
@@ -116,12 +114,8 @@ public class GameController extends Thread{
     private void verifyCollisions(){
         Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
         Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
-        collision.collide(collision.getDragons(), collision.getPlayerBullets(), true, true);
-        collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
-
-        if(collision_player_with_dragon || collision_player_with_dragonBullet){
-            player.hit();
-        }
+        Boolean collision_dragon_with_playerBullet = collision.collide(collision.getDragons(), collision.getPlayerBullets(), false, true);
+        Boolean collision_playerBullet_with_dragonBullet = collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
     }
 
     public boolean isPaused(){
