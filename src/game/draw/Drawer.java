@@ -59,6 +59,11 @@ public class Drawer {
     public void addDrawAtBegining(Entity draw){
         draws.addAtBeginning(draw);
     }
+
+    public void deleteEntity(Entity draw){
+        draws.delete(draws.searchIndex(draw));
+    }
+
     public void abort(){
         drawer.stop();
         instance = null;

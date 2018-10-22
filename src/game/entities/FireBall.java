@@ -3,6 +3,7 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
+import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
 import util.Clock;
 
@@ -29,10 +30,7 @@ public class FireBall extends Entity {
         this.fireHeight = fireHeight;
         this.xDir = xDir;
         this.yDir = yDir;
-
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1"));
-        sprite = animations.get(0);
+        sprite = loadImages();
         Drawer.getInstance().addDrawAtBegining(this);
         GameController.getInstance().addEntity(this);
     }
@@ -50,24 +48,25 @@ public class FireBall extends Entity {
 
     private Sprite loadImages(){
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/dMovement2"));
+                "file:res/img/entities/fireball/Fireball1"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/dMovement1"));
+                "file:res/img/entities/fireball/Fireball1"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/dMovement3"));
+                "file:res/img/entities/fireball/Fireball"));
         return animations.get(0);
 
     }
 
     @Override
     public void update() {
-
         moveFire();
     }
 
     @Override
     public void destroy() {
-
+        Drawer.getInstance().deleteEntity(this);
+        GameController.getInstance().deleteEntity(this);
+        Collisions.getInstance().deleteBullets(this);
     }
 
     @Override

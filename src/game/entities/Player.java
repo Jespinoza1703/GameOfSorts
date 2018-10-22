@@ -46,7 +46,8 @@ public class Player extends Entity {
 
     @Override
     public void destroy() {
-
+        Drawer.getInstance().deleteEntity(this);
+        GameController.getInstance().deleteEntity(this);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class Player extends Entity {
     private void hit(){
         lives--;
         if(lives <= 0){
-            dead();
+            state = "Dead";
         }
     }
 
@@ -103,11 +104,11 @@ public class Player extends Entity {
         var yMove = key.up - key.down;
 
         if (xMove == 0){
-            xSpeed =  Math.approach(xSpeed, 0, 0.1);
+            xSpeed =  Math.approach(xSpeed, 0, 1);
         }
 
         if (yMove == 0){
-            ySpeed =  Math.approach(ySpeed, 0, 0.1);
+            ySpeed =  Math.approach(ySpeed, 0, 1);
         }
 
         xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);

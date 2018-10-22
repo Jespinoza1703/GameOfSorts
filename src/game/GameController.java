@@ -96,6 +96,10 @@ public class GameController extends Thread{
 
     }
 
+    public void deleteEntity(Entity draw){
+        entities.delete(entities.searchIndex(draw));
+    }
+
     private void end(){
         instance = null;
         thread.stop();
@@ -114,7 +118,10 @@ public class GameController extends Thread{
         Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
         Boolean collision_dragon_with_playerBullet = collision.collide(collision.getDragons(), collision.getPlayerBullets(), false, true);
         Boolean collision_playerBullet_with_dragonBullet = collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
-
+        System.out.println("Player vs Dragon " + collision_player_with_dragon);
+        System.out.println("Player vs Dragonbullets " + collision_player_with_dragonBullet);
+        System.out.println("Dragon vs Playerbullets " + collision_dragon_with_playerBullet);
+        System.out.println("Playerbullets vs Dragonbullets " + collision_playerBullet_with_dragonBullet);
     }
 
     public boolean isPaused(){

@@ -64,6 +64,9 @@ public class Dragon extends Entity {
 
     @Override
     public void destroy() {
+        Drawer.getInstance().deleteEntity(this);
+        GameController.getInstance().deleteEntity(this);
+        Collisions.getInstance().deleteDragon(this);
     }
 
     @Override

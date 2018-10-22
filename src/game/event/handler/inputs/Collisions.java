@@ -27,9 +27,12 @@ public class Collisions {
         Boolean collide = false;
         Sprite sprite = entity.getSprite();
         for (int i = 0; i < group.getLarge(); i++){
-            Sprite groupPoss = group.getByIndex(i).getValue().getSprite();
-            if(sprite.getSprite().getBoundsInParent().intersects(groupPoss.getSprite().getBoundsInParent())){
+            Sprite groupSprite = group.getByIndex(i).getValue().getSprite();
+            if(sprite.getSprite().getBoundsInParent().intersects(groupSprite.getSprite().getBoundsInParent())){
                 collide = true;
+                if (destroy){
+                    group.getByIndex(i).getValue().destroy();
+                }
                 break;
             }
         }
@@ -40,10 +43,10 @@ public class Collisions {
      * @param group1 instance of
      * @param group2
      * @param destroyG1
-     * @param destroy1G2
+     * @param destroyG2
      * @return
      */
-    public Boolean collide(SimpleList<Entity> group1, SimpleList<Entity> group2, boolean destroyG1, boolean destroy1G2) {
+    public Boolean collide(SimpleList<Entity> group1, SimpleList<Entity> group2, boolean destroyG1, boolean destroyG2) {
         Boolean collide = false;
         for (int i = 0; i < group1.getLarge(); i++) {
             Sprite group1Poss = group1.getByIndex(i).getValue().getSprite();
@@ -51,11 +54,16 @@ public class Collisions {
                 Sprite group2Poss = group2.getByIndex(j).getValue().getSprite();
                 if (group1Poss.getSprite().getBoundsInParent().intersects(group2Poss.getSprite().getBoundsInParent())) {
                     collide = true;
+                    if (destroyG1){
+                        group1.getByIndex(i).getValue().destroy();
+                    }
+                    if (destroyG2){
+                        group2.getByIndex(j).getValue().destroy();
+                    }
                     break;
                 }
             }
         }
-        System.out.println(collide);
         return collide;
     }
 
@@ -71,6 +79,18 @@ public class Collisions {
         dragonBullets.addAtEnd(bullet);
     }
 
+    public void deleteDragon(Entity draw){
+        dragons.delete(dragons.searchIndex(draw));
+    }
+
+    public void deleteBullets(Entity draw){
+        if(playerBullets.searchIndex(draw) != -1){
+            playerBullets.delete(playerBullets.searchIndex(draw));
+        }
+        else if (dragonBullets.searchIndex(draw) != -1) {
+            dragonBullets.delete(dragonBullets.searchIndex(draw));
+        }
+    }
 
     public SimpleList getDragons() {
         return dragons;
