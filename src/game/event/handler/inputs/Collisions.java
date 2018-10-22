@@ -2,7 +2,6 @@ package game.event.handler.inputs;
 
 import game.draw.Sprite;
 import game.entities.Entity;
-import game.entities.Player;
 import game.logic.lists.SimpleList;
 
 public class Collisions {
@@ -27,13 +26,11 @@ public class Collisions {
     public Boolean collide(Entity entity, SimpleList<Entity> group, boolean destroy){
         Boolean collide = false;
         Sprite sprite = entity.getSprite();
-        double x = sprite.getxPoss();
-        double y =sprite.getyPoss();
         for (int i = 0; i < group.getLarge(); i++){
             Sprite groupPoss = group.getByIndex(i).getValue().getSprite();
-            if(x + sprite.getWidth() > groupPoss.getxPoss() && y == groupPoss.getyPoss()){
+            if(sprite.getSprite().getBoundsInParent().intersects(groupPoss.getSprite().getBoundsInParent())){
                 collide = true;
-                System.out.println("col");
+                break;
             }
         }
         return collide;
@@ -46,8 +43,19 @@ public class Collisions {
      * @param destroy1G2
      * @return
      */
-    public Boolean collide(SimpleList<Entity> group1, SimpleList<Entity> group2, boolean destroyG1, boolean destroy1G2){
+    public Boolean collide(SimpleList<Entity> group1, SimpleList<Entity> group2, boolean destroyG1, boolean destroy1G2) {
         Boolean collide = false;
+        for (int i = 0; i < group1.getLarge(); i++) {
+            Sprite group1Poss = group1.getByIndex(i).getValue().getSprite();
+            for (int j = 0; j < group2.getLarge(); j++) {
+                Sprite group2Poss = group2.getByIndex(j).getValue().getSprite();
+                if (group1Poss.getSprite().getBoundsInParent().intersects(group2Poss.getSprite().getBoundsInParent())) {
+                    collide = true;
+                    break;
+                }
+            }
+        }
+        System.out.println(collide);
         return collide;
     }
 

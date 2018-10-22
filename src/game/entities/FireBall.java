@@ -15,7 +15,7 @@ public class FireBall extends Entity {
     private Sprite sprite;
     private double xPoss, yPoss;
     private double xDir, yDir;
-    private double xSpeed = 15, ySpeed = 15;
+    private double xSpeed = 3, ySpeed = 3;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
     private double animationTimer = 200;
@@ -68,6 +68,11 @@ public class FireBall extends Entity {
     @Override
     public void destroy() {
 
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public void moveFire(){

@@ -24,14 +24,13 @@ public class Player extends Entity {
     private double damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
-    private Sprite sprite;
     private ArrayList<Sprite> movementAnimations = new ArrayList<>();
+    private Sprite sprite = loadImages();
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
     public Player(){
-        sprite = loadImages();
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
     }
@@ -48,6 +47,11 @@ public class Player extends Entity {
     @Override
     public void destroy() {
 
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return sprite;
     }
 
     @Override

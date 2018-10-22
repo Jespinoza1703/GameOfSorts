@@ -62,10 +62,13 @@ public class Dragon extends Entity {
         }
     }
 
-
     @Override
     public void destroy() {
+    }
 
+    @Override
+    public Sprite getSprite() {
+        return sprite;
     }
 
     @Override
@@ -99,7 +102,7 @@ public class Dragon extends Entity {
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 15, 15,-1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 35, 35,-1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 

@@ -49,7 +49,7 @@ public class GameController extends Thread{
     public void run(){
         getWave();
         while (running){
-            clock.ticks(30);
+            clock.ticks(60);
 
             if(isWaveClear()){
                 getWave();
@@ -88,7 +88,7 @@ public class GameController extends Thread{
         for (int i = 0; i < entities.getLarge(); i++){
             entities.getByIndex(i).getValue().update();
         }
-        //verifyCollisions();
+        verifyCollisions();
 
     }
 
