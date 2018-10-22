@@ -32,4 +32,8 @@ public class Clock {
             e.printStackTrace();
         }
     }
+
+    public long getTime(){
+        return clock.millis();
+    }
 }

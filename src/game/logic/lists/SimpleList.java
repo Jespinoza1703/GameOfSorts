@@ -42,6 +42,7 @@ public class SimpleList<T> {
             Node tmp = new Node<>(value);
             tmp.setNext(this.first);
             this.first = tmp;
+            this.large += 1;
         }
     }
 
@@ -109,16 +110,28 @@ public class SimpleList<T> {
         node2.setValue(tmp);
     }
 
+    public int searchIndex(T object){
+        int result = -1;
+        for(int i = 0; i < large; i++){
+            if(this.getByIndex(i).getValue().equals(object)){
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+
     /**
      * Elimina un elemento en la posición que se le indique
      * @param index posición de elemento a eliminar
      */
     public void delete(int index){
-        if (index < this.getLarge()){
+        if (index < this.getLarge() && index != -1){
             int i = 0;
             Node temporal = this.first;
             if (index == 0){
                 this.first = this.getByIndex(1);
+                large-= 1;
             }
             else {
                 while (temporal.getNext() != null) {
