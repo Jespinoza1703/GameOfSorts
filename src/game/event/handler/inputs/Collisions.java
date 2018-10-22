@@ -31,7 +31,7 @@ public class Collisions {
             if(sprite.getSprite().getBoundsInParent().intersects(groupSprite.getSprite().getBoundsInParent())){
                 collide = true;
                 if (destroy){
-                    group.getByIndex(i).getValue().destroy();
+                    group.getByIndex(i).getValue().hit();
                 }
                 break;
             }
@@ -40,11 +40,11 @@ public class Collisions {
     }
 
     /** Handles collisions of entities vs bullets and bullets vs bullets
-     * @param group1 instance of
-     * @param group2
-     * @param destroyG1
-     * @param destroyG2
-     * @return
+     * @param group1 list of entities
+     * @param group2 list of entities
+     * @param destroyG1 destroys an instance in group1
+     * @param destroyG2 destroyes an instance  in group2
+     * @return boolean
      */
     public Boolean collide(SimpleList<Entity> group1, SimpleList<Entity> group2, boolean destroyG1, boolean destroyG2) {
         Boolean collide = false;
@@ -55,10 +55,10 @@ public class Collisions {
                 if (group1Poss.getSprite().getBoundsInParent().intersects(group2Poss.getSprite().getBoundsInParent())) {
                     collide = true;
                     if (destroyG1){
-                        group1.getByIndex(i).getValue().destroy();
+                        group1.getByIndex(i).getValue().hit();
                     }
                     if (destroyG2){
-                        group2.getByIndex(j).getValue().destroy();
+                        group2.getByIndex(j).getValue().hit();
                     }
                     break;
                 }

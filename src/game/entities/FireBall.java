@@ -19,6 +19,7 @@ public class FireBall extends Entity {
     private double xSpeed = 3, ySpeed = 3;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
+    private ArrayList<Sprite> deathAnimations = new ArrayList<>();
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
@@ -34,6 +35,7 @@ public class FireBall extends Entity {
         Drawer.getInstance().addDrawAtBegining(this);
         GameController.getInstance().addEntity(this);
     }
+
     @Override
     public Sprite draw() {
         long time = clock.getTime();
@@ -43,18 +45,33 @@ public class FireBall extends Entity {
             currentSprite = (currentSprite + 1) % animations.size();
         }
         sprite.move(xPoss, yPoss);
+        sprite.getSprite().setScaleX(-xDir);
         return sprite;
     }
 
     private Sprite loadImages(){
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1"));
+                "file:res/img/entities/fireball/Fireball1.png"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1"));
+                "file:res/img/entities/fireball/Fireball2.png"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball"));
+                "file:res/img/entities/fireball/Fireball3.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
+                "file:res/img/entities/fireball/Fireball4.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
+                "file:res/img/entities/fireball/Fireball5.png"));
+        deathAnimations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
+                "file:res/img/entities/dragon/fDeath1"));
         return animations.get(0);
 
+    }
+
+    @Override
+    public void hit(){
+        dies();
+    }
+    private void dies(){
+        //destroy();
     }
 
     @Override

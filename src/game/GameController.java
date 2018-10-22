@@ -116,12 +116,12 @@ public class GameController extends Thread{
     private void verifyCollisions(){
         Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
         Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
-        Boolean collision_dragon_with_playerBullet = collision.collide(collision.getDragons(), collision.getPlayerBullets(), false, true);
-        Boolean collision_playerBullet_with_dragonBullet = collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
-        System.out.println("Player vs Dragon " + collision_player_with_dragon);
-        System.out.println("Player vs Dragonbullets " + collision_player_with_dragonBullet);
-        System.out.println("Dragon vs Playerbullets " + collision_dragon_with_playerBullet);
-        System.out.println("Playerbullets vs Dragonbullets " + collision_playerBullet_with_dragonBullet);
+        collision.collide(collision.getDragons(), collision.getPlayerBullets(), true, true);
+        collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
+
+        if(collision_player_with_dragon || collision_player_with_dragonBullet){
+            player.hit();
+        }
     }
 
     public boolean isPaused(){

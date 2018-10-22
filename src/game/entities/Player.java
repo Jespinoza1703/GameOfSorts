@@ -24,7 +24,10 @@ public class Player extends Entity {
     private double damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
-    private ArrayList<Sprite> movementAnimations = new ArrayList<>();
+    private ArrayList<Sprite> movementAnimation = new ArrayList<>();
+    private ArrayList<Sprite> deathAnimation = new ArrayList<>();
+    private ArrayList<Sprite> dashAnimation = new ArrayList<>();
+    private ArrayList<Sprite> currentAnimation = new ArrayList<>();
     private Sprite sprite = loadImages();
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
@@ -41,6 +44,13 @@ public class Player extends Entity {
 
         if (key.shoot == 1 && canShoot()){
             shoot();
+        }
+        if (state.equals("Moving")){
+            currentAnimation = movementAnimation;
+        } else if(state.equals("Dead")){
+            currentAnimation = deathAnimation;
+        } else if (state.equals("Dashing")){
+            currentAnimation = dashAnimation;
         }
     }
 
@@ -59,29 +69,30 @@ public class Player extends Entity {
     public Sprite draw() {
         long time = clock.getTime();
         if (time - lastAnimationTime > animationTimer){
-            sprite = movementAnimations.get(currentSprite);
+            sprite = movementAnimation.get(currentSprite);
             lastAnimationTime = time;
-            currentSprite = (currentSprite + 1) % movementAnimations.size();
+            currentSprite = (currentSprite + 1) % movementAnimation.size();
         }
         sprite.move(xPoss, yPoss);
         return sprite;
     }
 
     private Sprite loadImages(){
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
                 "file:res/img/entities/griffin/Griffin.png"));
-        //movementAnimations.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+        //movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
         //        "file:res/img/entities/dragon/Grifo"));
-        //movementAnimations.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+        //movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
         //        "file:res/img/entities/dragon/Grifo"));
-        return movementAnimations.get(0);
+        return movementAnimation.get(0);
 
     }
 
-    private void hit(){
+    @Override
+    public void hit(){
         lives--;
         if(lives <= 0){
-            state = "Dead";
+            dies();
         }
     }
 
@@ -91,12 +102,12 @@ public class Player extends Entity {
 
     private void shoot(){
         var yDirection = key.arrow_down - key.arrow_up;
-        FireBall fireBall = new FireBall(xPoss, yPoss, 40, 45,1, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 50, 17,1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
     }
 
-    private void dead(){
-
+    private void dies(){
+        //destroy();
     }
 
     private void move(){

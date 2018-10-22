@@ -14,7 +14,7 @@ public class Dragon extends Entity {
 
     private String name;
     private Dragon parent;
-    private double lives; // [1, 3]
+    private double lives = 3; // [1, 3]
     private double fire_rate = (((Math.random())*15000));  // [10, 100]
     private double age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
@@ -25,10 +25,14 @@ public class Dragon extends Entity {
     private KeyReader key;
     private Clock clock = Clock.getInstance();
     private Sprite sprite;
-    private ArrayList<Sprite> movementAnimations = new ArrayList<>();
+    private ArrayList<Sprite> movementAnimation = new ArrayList<>();
+    private ArrayList<Sprite> deathAnimation = new ArrayList<>();
+    private ArrayList<Sprite> currentAnimation = movementAnimation;
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private String state = "Moving"; // Moving / Dead
+    private double currentPoss;
 
 
     public Dragon (double xPoss, double yPoss) {
@@ -60,6 +64,11 @@ public class Dragon extends Entity {
         if (canShoot()){
             shoot();
         }
+        if (state.equals("Moving")){
+            currentAnimation = movementAnimation;
+        } else if (state.equals("Dead")){
+            currentAnimation = deathAnimation;
+        }
     }
 
     @Override
@@ -76,11 +85,15 @@ public class Dragon extends Entity {
 
     @Override
     public Sprite draw() {
+        int arrayLen = currentAnimation.size();
         long time = clock.getTime();
         if (time - lastAnimationTime > animationTimer){
-            sprite = movementAnimations.get(currentSprite);
+            sprite = currentAnimation.get(currentSprite);
             lastAnimationTime = time;
-            currentSprite = (currentSprite + 1) % movementAnimations.size();
+            currentSprite = (currentSprite + 1) % currentAnimation.size();
+        }
+        if (currentSprite == arrayLen && state.equals("Dead")){
+            destroy();
         }
         sprite.move(xPoss, yPoss);
         return sprite;
@@ -91,26 +104,36 @@ public class Dragon extends Entity {
      * @return Sprite
      */
     private Sprite loadImages(){
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement2"));
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement1"));
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement3"));
-        return movementAnimations.get(0);
-
+        deathAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+                "file:res/img/entities/dragon/dDeath1"));
+        deathAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+                "file:res/img/entities/dragon/dDeath2"));
+        deathAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
+                "file:res/img/entities/dragon/dDeath3"));
+        return movementAnimation.get(0);
     }
-    private void hit(){
 
+    @Override
+    public void hit(){
+        lives--;
+        if(lives <= 0){
+            dies();
+        }
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 35, 35,-1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11,-1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
     private void dies(){
-
+        state = "Dead";
     }
 
     private void pressed(){
@@ -118,8 +141,9 @@ public class Dragon extends Entity {
     }
 
     private void move(){
+        state = "Moving";
         xPoss -= xSpeed;
-
+        currentPoss = xPoss;
     }
 
     private Boolean canShoot(){
@@ -133,7 +157,7 @@ public class Dragon extends Entity {
 
     }
 
-    /** Getters andSetters **/
+    /** Getters and Setters **/
 
     public String getName() {
         return name;
