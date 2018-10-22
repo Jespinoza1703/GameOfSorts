@@ -65,12 +65,6 @@ public class SimpleList<T> {
         return first;
     }
 
-    /**
-     * Imprime el largo de la lista
-     */
-    public void showLarge() {
-        System.out.println(this.getLarge());
-    }
 
     /**
      * Obtiene el largo de la lista
@@ -84,19 +78,11 @@ public class SimpleList<T> {
      * Limpia la lista por completo
      */
     public void clearOut(){
+        this.large = 0;
         this.first = null;
     }
 
-    /**
-     * Imprime los elementos de la lista
-     */
-    public void showList(){
-        Node temporal = this.first;
-        while (temporal != null){
-            System.out.println(temporal.getValue());
-            temporal = temporal.getNext();
-        }
-    }
+
 
     /**
      * Swaps the values of two nodes
@@ -136,10 +122,10 @@ public class SimpleList<T> {
                 large-= 1;
             }
             else {
-                while (temporal.getNext() != null) {
+                while (temporal != null) {
 
                     if (i == index) {
-                        temporal.setNext(temporal.getNext().getNext());
+                        this.getByIndex(i-1).setNext(temporal.getNext());
                         this.large -= 1;
                         break;
                     } else {
@@ -182,5 +168,11 @@ public class SimpleList<T> {
             temporal.setNext(new Node(dragon));
             this.large += 1;
         }
+    }
+
+    public void swapDragon (int i, int j){
+        Dragon temp = this.getByIndex(i).getDragon();
+        this.getByIndex(i).setDragon(this.getByIndex(j).getDragon());
+        this.getByIndex(j).setDragon(temp);
     }
 }
