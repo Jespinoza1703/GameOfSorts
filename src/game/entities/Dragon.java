@@ -6,16 +6,15 @@ import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
 import util.Clock;
-import util.NameGenerator;
 
 import java.util.ArrayList;
 
 public class Dragon extends Entity {
 
     private String name;
-    private Dragon parent;
-    private double lives; // [1, 3]
-    private double fire_rate = (((Math.random())*15000));  // [10, 100]
+    private int parentAge;
+    private int lives; // [1, 3]
+    private int fire_rate = (int) (Math.random()*15000);  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
@@ -44,12 +43,9 @@ public class Dragon extends Entity {
 
     }
 
-    public Dragon(Dragon parent, int lives, int age, String rank) {
-        this.name = (NameGenerator.generateName());
-        this.fire_rate = (((Math.random())*100));
+    public Dragon(int parentAge, int age, String rank) {
+        this.parentAge = parentAge;
         this.age = age;
-        this.parent = parent;
-        this.lives = lives;
         this.rank = rank;
     }
 
@@ -100,7 +96,7 @@ public class Dragon extends Entity {
         return movementAnimations.get(0);
 
     }
-    private void hit(){
+    public void hit(){
 
     }
 
@@ -143,27 +139,27 @@ public class Dragon extends Entity {
         this.name = name;
     }
 
-    public Dragon getParent() {
-        return parent;
+    public int getParentAge() {
+        return parentAge;
     }
 
-    public void setParent(Dragon parent) {
-        this.parent = parent;
+    public void setParentAge(int parentAge) {
+        this.parentAge = parentAge;
     }
 
-    public double getLives() {
+    public int getLives() {
         return lives;
     }
 
-    public void setLives(double lives) {
+    public void setLives(int lives) {
         this.lives = lives;
     }
 
-    public double getFire_rate() {
+    public int getFire_rate() {
         return fire_rate;
     }
 
-    public void setFire_rate(double fire_rate) {
+    public void setFire_rate(int fire_rate) {
         this.fire_rate = fire_rate;
     }
 

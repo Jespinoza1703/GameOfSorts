@@ -114,8 +114,11 @@ public class GameController extends Thread{
     private void verifyCollisions(){
         Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
         Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
-        Boolean collision_dragon_with_playerBullet = collision.collide(collision.getDragons(), collision.getPlayerBullets(), false, true);
-        Boolean collision_playerBullet_with_dragonBullet = collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
+        collision.collide(collision.getDragons(), collision.getPlayerBullets(), true, true);
+        collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
+        if(collision_player_with_dragon || collision_player_with_dragonBullet){
+            player.hit();
+        }
     }
 
     public boolean isPaused(){

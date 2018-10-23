@@ -15,15 +15,16 @@ public class FireBall extends Entity {
     private Clock clock = Clock.getInstance();
     private Sprite sprite;
     private double xPoss, yPoss;
-    private double xDir, yDir;
-    private double xSpeed = 3, ySpeed = 3;
+    private int xDir, yDir;
+    private int xSpeed = 3, ySpeed = 3;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
-    private double animationTimer = 200;
+    private ArrayList<Sprite> deathAnimations = new ArrayList<>();
+    private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
-    public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, double xDir, double yDir){
+    public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
@@ -34,6 +35,7 @@ public class FireBall extends Entity {
         Drawer.getInstance().addDrawAtBegining(this);
         GameController.getInstance().addEntity(this);
     }
+
     @Override
     public Sprite draw() {
         long time = clock.getTime();
@@ -43,18 +45,36 @@ public class FireBall extends Entity {
             currentSprite = (currentSprite + 1) % animations.size();
         }
         sprite.move(xPoss, yPoss);
+        sprite.getSprite().setScaleX(-xDir);
         return sprite;
     }
 
     private Sprite loadImages(){
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1"));
+                "file:res/img/entities/fireball/Fireball1.png"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1"));
+                "file:res/img/entities/fireball/Fireball2.png"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball"));
+                "file:res/img/entities/fireball/Fireball3.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
+                "file:res/img/entities/fireball/Fireball4.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
+                "file:res/img/entities/fireball/Fireball5.png"));
+        deathAnimations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
+                "file:res/img/entities/dragon/fDeath1"));
         return animations.get(0);
 
+    }
+
+    @Override
+    public void hit(){
+
+        dies();
+    }
+
+    private void dies(){
+        new BulletExplosion(xPoss, yPoss, fireHeight*2, fireHeight*2);
+        destroy();
     }
 
     @Override
@@ -86,5 +106,49 @@ public class FireBall extends Entity {
 
     public double getyPoss() {
         return yPoss;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public void setxPoss(double xPoss) {
+        this.xPoss = xPoss;
+    }
+
+    public void setyPoss(double yPoss) {
+        this.yPoss = yPoss;
+    }
+
+    public int getxDir() {
+        return xDir;
+    }
+
+    public void setxDir(int xDir) {
+        this.xDir = xDir;
+    }
+
+    public int getyDir() {
+        return yDir;
+    }
+
+    public void setyDir(int yDir) {
+        this.yDir = yDir;
+    }
+
+    public double getFireWidth() {
+        return fireWidth;
+    }
+
+    public void setFireWidth(double fireWidth) {
+        this.fireWidth = fireWidth;
+    }
+
+    public double getFireHeight() {
+        return fireHeight;
+    }
+
+    public void setFireHeight(double fireHeight) {
+        this.fireHeight = fireHeight;
     }
 }

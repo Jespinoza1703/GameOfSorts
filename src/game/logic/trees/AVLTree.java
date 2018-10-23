@@ -1,16 +1,14 @@
 package game.logic.trees;
 
+
 import game.entities.Dragon;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AVLTree {
 
     TreeNode root;
-    private static Logger logger = LoggerFactory.getLogger("AVLTree");
 
     public AVLTree(){
-        logger.debug("Created new AVL Tree");
+
     }
 
     // A utility function to get the height of the tree
@@ -29,7 +27,6 @@ public class AVLTree {
     // A utility function to right rotate subtree rooted with y
     // See the diagram given above.
     private TreeNode rightRotate(TreeNode y) {
-        logger.debug(y + "has been rotated to right");
         TreeNode x = y.left;
         TreeNode T2 = x.right;
 
@@ -48,7 +45,6 @@ public class AVLTree {
     // A utility function to left rotate subtree rooted with x
     // See the diagram given above.
     private TreeNode leftRotate(TreeNode x) {
-        logger.debug(x + "has been rotated to right");
         TreeNode y = x.right;
         TreeNode T2 = y.left;
 
@@ -73,7 +69,7 @@ public class AVLTree {
     }
 
     private TreeNode insert(TreeNode node, int key, Dragon dragon) {
-        logger.debug("Add Node " + node + " to " + this);
+
         /* 1.  Perform the normal BST insertion */
         if (node == null)
             if (dragon != null) {
@@ -127,7 +123,7 @@ public class AVLTree {
     // A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
-    public void preOrder(TreeNode node) {
+    private void preOrder(TreeNode node) {
         if (node != null) {
             System.out.print(node.element + " ");
             preOrder(node.left);
@@ -139,18 +135,13 @@ public class AVLTree {
         root = insert(root, element, null);
     }
 
-
     public void insert (Dragon dragon){
-        logger.debug("Added dragon " + dragon + "to AVLTree " + this);
         root = insert(root, dragon.getAge(), dragon);
     }
 
-
     public TreeNode getRoot() {
-        logger.debug("Return root of " + toString());
         return root;
     }
-
 
     private void insertDragonAux(int age, Dragon dragon){
         root = insert(root, age, dragon);
@@ -166,8 +157,7 @@ public class AVLTree {
         insertDragonAux(age, dragon);
     }
 
-    public TreeNode minValueNode(TreeNode node)
-    {
+    public TreeNode minValueNode(TreeNode node) {
         TreeNode current = node;
 
         /* loop down to find the leftmost leaf */
@@ -177,8 +167,7 @@ public class AVLTree {
         return current;
     }
 
-    public TreeNode maxValueNode(TreeNode node)
-    {
+    public TreeNode maxValueNode(TreeNode node) {
         TreeNode current = node;
 
         /* loop down to find the rightmost leaf */
@@ -188,9 +177,7 @@ public class AVLTree {
         return current;
     }
 
-    public TreeNode deleteNode(TreeNode root, int key)
-    {
-        logger.debug("Deleted node with " + key + "value");
+    public TreeNode deleteNode(TreeNode root, int key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
             return root;
@@ -281,12 +268,7 @@ public class AVLTree {
         return root;
     }
 
-
-    public void clearOut(){
-        logger.info(this + "has been cleared");
-        this.root = null;
+    public void setRoot(TreeNode root) {
+        this.root = root;
     }
-
-
-
 }

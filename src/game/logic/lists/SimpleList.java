@@ -119,7 +119,7 @@ public class SimpleList<T> {
             Node temporal = this.first;
             if (index == 0){
                 this.first = this.getByIndex(1);
-                large-= 1;
+                this.large -= 1;
             }
             else {
                 while (temporal != null) {
