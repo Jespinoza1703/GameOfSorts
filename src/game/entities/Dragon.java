@@ -9,12 +9,12 @@ import util.Clock;
 
 import java.util.ArrayList;
 
-public class Dragon extends Entity {
+public class Dragon extends Entity{
 
     private String name;
     private int parentAge;
     private int lives; // [1, 3]
-    private int fire_rate = (int) (Math.random()*15000);  // [10, 100]
+    private int fire_rate = (int) (Math.random() * 15000);  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
@@ -28,9 +28,10 @@ public class Dragon extends Entity {
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private Boolean playerCollision = false;
 
 
-    public Dragon (double xPoss, double yPoss) {
+    public Dragon(double xPoss, double yPoss) {
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         sprite = loadImages();
@@ -39,7 +40,7 @@ public class Dragon extends Entity {
         Collisions.getInstance().addDragon(this);
     }
 
-    public Dragon(){
+    public Dragon() {
 
     }
 
@@ -50,10 +51,10 @@ public class Dragon extends Entity {
     }
 
     @Override
-    public void update(){
+    public void update() {
         move();
 
-        if (canShoot()){
+        if (canShoot()) {
             shoot();
         }
     }
@@ -73,7 +74,7 @@ public class Dragon extends Entity {
     @Override
     public Sprite draw() {
         long time = clock.getTime();
-        if (time - lastAnimationTime > animationTimer){
+        if (time - lastAnimationTime > animationTimer) {
             sprite = movementAnimations.get(currentSprite);
             lastAnimationTime = time;
             currentSprite = (currentSprite + 1) % movementAnimations.size();
@@ -84,9 +85,10 @@ public class Dragon extends Entity {
 
     /**
      * Loads images for dragon
+     *
      * @return Sprite
      */
-    private Sprite loadImages(){
+    private Sprite loadImages() {
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement2"));
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
@@ -94,88 +96,92 @@ public class Dragon extends Entity {
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement3"));
         return movementAnimations.get(0);
-
     }
-    public void hit(){
 
+    @Override
+    public void hit(){
+        lives--;
+        if (lives <= 0) {
+            dies();
+        }
+    }
+
+    @Override
+    public void setLives(int lives){
+        this.lives = lives;
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 35, 11,-1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
     private void dies(){
+        new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
+        destroy();
+    }
+
+    private void pressed() {
 
     }
 
-    private void pressed(){
-
-    }
-
-    private void move(){
+    private void move() {
         xPoss -= xSpeed;
-
     }
 
-    private Boolean canShoot(){
+    private Boolean canShoot() {
         Boolean result = false;
         long time = clock.getTime();
-        if (time - lastTime > fire_rate){
+        if (time - lastTime > fire_rate) {
             result = true;
             lastTime = time;
         }
         return result;
-
     }
 
-    /** Getters andSetters **/
+    /** Getters and Setters **/
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name){
         this.name = name;
     }
 
-    public int getParentAge() {
+    public int getParentAge () {
         return parentAge;
     }
 
-    public void setParentAge(int parentAge) {
+    public void setParentAge ( int parentAge){
         this.parentAge = parentAge;
     }
 
-    public int getLives() {
+    public int getLives () {
         return lives;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
-
-    public int getFire_rate() {
+    public int getFire_rate () {
         return fire_rate;
     }
 
-    public void setFire_rate(int fire_rate) {
+    public void setFire_rate ( int fire_rate){
         this.fire_rate = fire_rate;
     }
 
-    public int getAge() {
+    public int getAge () {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge ( int age){
         this.age = age;
     }
 
-    public String getRank() {
+    public String getRank () {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank (String rank){
         this.rank = rank;
     }
 
@@ -183,15 +189,15 @@ public class Dragon extends Entity {
         return xPoss;
     }
 
-    public void setxPoss(double xPoss) {
+    public void setxPoss ( double xPoss){
         this.xPoss = xPoss;
     }
 
-    public double getyPoss() {
+    public double getyPoss () {
         return yPoss;
     }
 
-    public void setyPoss(double yPoss) {
+    public void setyPoss ( double yPoss){
         this.yPoss = yPoss;
     }
 }
