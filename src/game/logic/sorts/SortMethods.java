@@ -1,6 +1,5 @@
 package game.logic.sorts;
 
-import game.entities.Dragon;
 import game.logic.lists.SimpleList;
 import game.logic.lists.intList;
 
@@ -91,7 +90,7 @@ public class SortMethods {
         int n = list.getLarge();
         for (int i=1; i<n; ++i)
         {
-            int key = list.getByIndex(i).getDragon().getFire_rate();
+            int key = (int) list.getByIndex(i).getDragon().getFire_rate();
             int j = i-1;
 
             /* Move elements of arr[0..i-1], that are

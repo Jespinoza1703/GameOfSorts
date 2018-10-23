@@ -14,14 +14,14 @@ public class Player extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
     private Clock clock = Clock.getInstance();
-    private double lives = 3;
-    private double xSpeed = 0, ySpeed = 0;
-    private double xMaxSpeed = 8, yMaxSpeed = 8;
-    private double xAcc = 1, yAcc = 2;
+    private int lives = 3;
+    private int xSpeed = 0, ySpeed = 0;
+    private int xMaxSpeed = 8, yMaxSpeed = 8;
+    private int xAcc = 1, yAcc = 2;
     private double xPoss = 200, yPoss = 200;
-    private double playerWidth = 120, playerHeight = 80;
-    private double fire_rate = 500;
-    private double damage = 1;
+    private int playerWidth = 150, playerHeight = 200;
+    private int fire_rate = 500;
+    private int damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
     private ArrayList<Sprite> movementAnimation = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Player extends Entity {
     private ArrayList<Sprite> dashAnimation = new ArrayList<>();
     private ArrayList<Sprite> currentAnimation = new ArrayList<>();
     private Sprite sprite = loadImages();
-    private double animationTimer = 200;
+    private int animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
@@ -79,11 +79,21 @@ public class Player extends Entity {
 
     private Sprite loadImages(){
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/Griffin.png"));
-        //movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-        //        "file:res/img/entities/dragon/Grifo"));
-        //movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-        //        "file:res/img/entities/dragon/Grifo"));
+                "file:res/img/entities/griffin/griffin1"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin2"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin3"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin4"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin5"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin6"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin7"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
+                "file:res/img/entities/griffin/griffin8"));
         return movementAnimation.get(0);
 
     }
@@ -107,7 +117,8 @@ public class Player extends Entity {
     }
 
     private void dies(){
-        //destroy();
+        new BulletExplosion(xPoss, yPoss, playerWidth, playerHeight);
+        destroy();
     }
 
     private void move(){

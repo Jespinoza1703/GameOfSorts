@@ -14,25 +14,22 @@ public class Dragon extends Entity {
 
     private String name;
     private Dragon parent;
-    private double lives = 3; // [1, 3]
+    private int lives = 3; // [1, 3]
     private double fire_rate = (((Math.random())*15000));  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
-    private double dragonWidth = 80, dragonHeight = 65;
-    private double xSpeed = 1;
+    private int dragonWidth = 80, dragonHeight = 65;
+    private int xSpeed = 1;
     private long lastTime = 0;
     private KeyReader key;
     private Clock clock = Clock.getInstance();
     private Sprite sprite;
     private ArrayList<Sprite> movementAnimation = new ArrayList<>();
-    private ArrayList<Sprite> deathAnimation = new ArrayList<>();
-    private ArrayList<Sprite> currentAnimation = movementAnimation;
-    private double animationTimer = 200;
-    private double lastAnimationTime = 0;
+    private int animationTimer = 200;
+    private long lastAnimationTime = 0;
     private int currentSprite = 0;
     private String state = "Moving"; // Moving / Dead
-    private double currentPoss;
 
 
     public Dragon (double xPoss, double yPoss) {
@@ -64,11 +61,6 @@ public class Dragon extends Entity {
         if (canShoot()){
             shoot();
         }
-        if (state.equals("Moving")){
-            currentAnimation = movementAnimation;
-        } else if (state.equals("Dead")){
-            currentAnimation = deathAnimation;
-        }
     }
 
     @Override
@@ -85,15 +77,11 @@ public class Dragon extends Entity {
 
     @Override
     public Sprite draw() {
-        int arrayLen = currentAnimation.size();
         long time = clock.getTime();
         if (time - lastAnimationTime > animationTimer){
-            sprite = currentAnimation.get(currentSprite);
+            sprite = movementAnimation.get(currentSprite);
             lastAnimationTime = time;
-            currentSprite = (currentSprite + 1) % currentAnimation.size();
-        }
-        if (currentSprite == arrayLen && state.equals("Dead")){
-            destroy();
+            currentSprite = (currentSprite + 1) % movementAnimation.size();
         }
         sprite.move(xPoss, yPoss);
         return sprite;
@@ -110,12 +98,6 @@ public class Dragon extends Entity {
                 "file:res/img/entities/dragon/dMovement1"));
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragon/dMovement3"));
-        deathAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dDeath1"));
-        deathAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dDeath2"));
-        deathAnimation.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dDeath3"));
         return movementAnimation.get(0);
     }
 
@@ -133,7 +115,8 @@ public class Dragon extends Entity {
     }
 
     private void dies(){
-        state = "Dead";
+        new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
+        destroy();
     }
 
     private void pressed(){
@@ -141,9 +124,7 @@ public class Dragon extends Entity {
     }
 
     private void move(){
-        state = "Moving";
         xPoss -= xSpeed;
-        currentPoss = xPoss;
     }
 
     private Boolean canShoot(){
@@ -154,7 +135,6 @@ public class Dragon extends Entity {
             lastTime = time;
         }
         return result;
-
     }
 
     /** Getters and Setters **/
@@ -175,11 +155,11 @@ public class Dragon extends Entity {
         this.parent = parent;
     }
 
-    public double getLives() {
+    public int getLives() {
         return lives;
     }
 
-    public void setLives(double lives) {
+    public void setLives(int lives) {
         this.lives = lives;
     }
 
@@ -219,7 +199,7 @@ public class Dragon extends Entity {
         return yPoss;
     }
 
-    public void setyPoss(double yPoss) {
+    public void setyPoss(int yPoss) {
         this.yPoss = yPoss;
     }
 }
