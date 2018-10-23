@@ -24,7 +24,7 @@ public class Dragon extends Entity {
     private KeyReader key;
     private Clock clock = Clock.getInstance();
     private Sprite sprite;
-    private ArrayList<Sprite> movementAnimations = new ArrayList<>();
+    private ArrayList<Sprite> movementAnimation = new ArrayList<>();
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
@@ -178,6 +178,10 @@ public class Dragon extends Entity {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public double getxPoss() {
