@@ -1,10 +1,11 @@
 package game;
 
+import game.entities.Dragon;
 import game.entities.Entity;
 import game.entities.Player;
+import game.event.handler.inputs.Collisions;
 import game.logic.lists.SimpleList;
 import util.Clock;
-import web.service.wave.WaveGenerator;
 
 /**
  * Singleton class that manages the Game cycle
@@ -13,6 +14,7 @@ import web.service.wave.WaveGenerator;
 public class GameController extends Thread{
 
     private static GameController instance;
+    private Collisions collision = Collisions.getInstance();
     private Clock clock = Clock.getInstance();
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
@@ -65,7 +67,8 @@ public class GameController extends Thread{
     }
 
     private void getWave(){
-        WaveGenerator.generateWave();
+        Dragon dragon = new Dragon(1000, 350);
+        wave = 1;
     }
 
     private void event(){
@@ -83,10 +86,16 @@ public class GameController extends Thread{
         for (int i = 0; i < entities.getLarge(); i++){
             entities.getByIndex(i).getValue().update();
         }
+        verifyCollisions();
+
     }
 
     private void draw(){
 
+    }
+
+    public void deleteEntity(Entity draw){
+        entities.delete(entities.searchIndex(draw));
     }
 
     private void end(){
@@ -100,6 +109,13 @@ public class GameController extends Thread{
 
     public boolean isWaveClear(){
         return wave == 0;
+    }
+
+    private void verifyCollisions(){
+        Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
+        Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
+        Boolean collision_dragon_with_playerBullet = collision.collide(collision.getDragons(), collision.getPlayerBullets(), false, true);
+        Boolean collision_playerBullet_with_dragonBullet = collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
     }
 
     public boolean isPaused(){

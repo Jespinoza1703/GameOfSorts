@@ -1,4 +1,4 @@
-package game.inputs;
+package game.event.handler.inputs;
 
 import javafx.scene.Scene;
 
@@ -14,6 +14,11 @@ public class KeyReader {
     public int left;
     public int up;
     public int down;
+    public int arrow_right;
+    public int arrow_left;
+    public int arrow_up;
+    public int arrow_down;
+    public int shoot;
     public int space;
     public int shift;
 
@@ -39,6 +44,10 @@ public class KeyReader {
                 case A: left = 1; break;
                 case W: up = 1; break;
                 case S: down = 1; break;
+                case L: arrow_right = 1; break;
+                case I: arrow_up = 1; break;
+                case K: arrow_down = 1; break;
+                case E: shoot = 1; break;
                 case SPACE: space = 1; break;
                 case SHIFT: shift = 1; break;
             }
@@ -56,6 +65,10 @@ public class KeyReader {
                 case A: left = 0; break;
                 case W: up = 0; break;
                 case S: down = 0; break;
+                case L: arrow_right = 0; break;
+                case I: arrow_up = 0; break;
+                case K: arrow_down = 0; break;
+                case E: shoot = 0; break;
                 case SPACE: space = 0; break;
                 case SHIFT: shift = 0; break;
             }

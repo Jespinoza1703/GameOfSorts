@@ -1,10 +1,14 @@
 package game.entities;
 
-import javafx.scene.shape.Rectangle;
+import game.draw.Sprite;
 
 public abstract class Entity {
 
-    public abstract Rectangle draw();
+    public abstract Sprite draw();
 
     public abstract void update();
+
+    public abstract void destroy();
+
+    public abstract Sprite getSprite();
 }
