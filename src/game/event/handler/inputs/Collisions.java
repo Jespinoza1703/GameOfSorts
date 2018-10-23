@@ -1,6 +1,7 @@
 package game.event.handler.inputs;
 
 import game.draw.Sprite;
+import game.entities.Dragon;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
 
@@ -31,7 +32,11 @@ public class Collisions {
             if(sprite.getSprite().getBoundsInParent().intersects(groupSprite.getSprite().getBoundsInParent())){
                 collide = true;
                 if (destroy){
-                    group.getByIndex(i).getValue().hit();
+                    Entity entity1 = group.getByIndex(i).getValue();
+                    if (entity1.getClass() == Dragon.class){
+                        entity1.setLives(0);
+                    }
+                    entity1.hit();
                 }
                 break;
             }
