@@ -1,13 +1,7 @@
 package TreeTest;
 
-import game.entities.Dragon;
-import game.logic.trees.AVLTree;
-import game.logic.trees.TreeNode;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class AVLTreesTest {
+    /*
     @Test
     void AVLA_add_Balance_7_Elements() {
         AVLTree tree = new AVLTree();
@@ -186,6 +180,6 @@ public class AVLTreesTest {
     }
 
 
-
+*/
 
 }
