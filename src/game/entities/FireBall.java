@@ -16,7 +16,7 @@ public class FireBall extends Entity {
     private Sprite sprite;
     private double xPoss, yPoss;
     private int xDir, yDir;
-    private int xSpeed = 3, ySpeed = 3;
+    private int xSpeed = 10, ySpeed = 10;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
     private ArrayList<Sprite> deathAnimations = new ArrayList<>();
