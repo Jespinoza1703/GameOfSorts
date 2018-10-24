@@ -14,7 +14,7 @@ public class Dragon extends Entity {
     private String name;
     private int parentAge;
     private int lives; // [1, 3]
-    private int fire_rate;  // [10, 100]
+    private int fire_rate = (int) (Math.random()*15000);  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
