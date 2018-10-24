@@ -1,5 +1,6 @@
 package game.logic.trees;
 
+
 import game.entities.Dragon;
 
 public class AVLTree {
@@ -134,28 +135,13 @@ public class AVLTree {
         root = insert(root, element, null);
     }
 
-
     public void insert (Dragon dragon){
         root = insert(root, dragon.getAge(), dragon);
     }
 
-
     public TreeNode getRoot() {
         return root;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void insertDragonAux(int age, Dragon dragon){
         root = insert(root, age, dragon);
@@ -171,8 +157,7 @@ public class AVLTree {
         insertDragonAux(age, dragon);
     }
 
-    public TreeNode minValueNode(TreeNode node)
-    {
+    public TreeNode minValueNode(TreeNode node) {
         TreeNode current = node;
 
         /* loop down to find the leftmost leaf */
@@ -182,8 +167,7 @@ public class AVLTree {
         return current;
     }
 
-    public TreeNode maxValueNode(TreeNode node)
-    {
+    public TreeNode maxValueNode(TreeNode node) {
         TreeNode current = node;
 
         /* loop down to find the rightmost leaf */
@@ -193,8 +177,7 @@ public class AVLTree {
         return current;
     }
 
-    public TreeNode deleteNode(TreeNode root, int key)
-    {
+    public TreeNode deleteNode(TreeNode root, int key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
             return root;
@@ -285,8 +268,7 @@ public class AVLTree {
         return root;
     }
 
-
-
-
-
+    public void setRoot(TreeNode root) {
+        this.root = root;
+    }
 }

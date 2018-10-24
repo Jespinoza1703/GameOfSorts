@@ -1,10 +1,14 @@
 package util;
 
+import java.util.Random;
+
 /**
  * Class for logic operations
  * @author José Acuña
  */
 public class Math {
+
+    public static Random random = new Random();
 
     /**
      * Method that returns the num without passing a given limit
