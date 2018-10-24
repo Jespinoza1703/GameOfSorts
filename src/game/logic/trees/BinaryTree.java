@@ -1,5 +1,6 @@
 package game.logic.trees;
 
+
 import game.entities.Dragon;
 
 public class BinaryTree {
@@ -7,18 +8,14 @@ public class BinaryTree {
     private TreeNode root;
 
     public BinaryTree(){
-        this.root = null;
+
     }
 
-    public boolean isEmpty(){
-        return this.root == null;
-    }
-
-    public boolean contains (int element){
+    public boolean contains (double element){
         return this.contains(element, this.root);
     }
 
-    private boolean contains (int element, TreeNode node){
+    private boolean contains (double element, TreeNode node){
         if (node == null){
             return false;
         } else {
@@ -34,7 +31,7 @@ public class BinaryTree {
     }
 
     public TreeNode findMin(){
-        if (this.isEmpty()){
+        if (root == null){
             return null;
         }
         else{
@@ -43,7 +40,9 @@ public class BinaryTree {
     }
 
     private TreeNode findMin (TreeNode node){
-        if(node.left == null){
+        if (node == null){
+            return null;
+        }else if(node.left == null){
             return node;
         }else{
             return findMin(node.left);
@@ -51,25 +50,27 @@ public class BinaryTree {
     }
 
     public TreeNode findMax(){
-        if (this.isEmpty()){
+        if (root == null){
             return null;
         }
         else{
             return findMax(this.root);
         }
     }
+
     private TreeNode findMax(TreeNode node){
-        if(node.right == null){
+        if (node == null){
+            return null;
+        }else if(node.right == null){
             return node;
         }else{
             return findMin(node.right);
         }
     }
 
-
-    private TreeNode addRecursive(TreeNode current, int value) {
+    private TreeNode addRecursive(TreeNode current, double value) {
         if (current == null) {
-            return new TreeNode(value);
+            return new TreeNode((int) value);
         }
         if (value < current.element) {
             current.left = addRecursive(current.left, value);
@@ -82,16 +83,13 @@ public class BinaryTree {
         return current;
     }
 
-    private TreeNode addRecursiveDragon(TreeNode current, int value, Dragon dragon) {
-
+    private TreeNode addRecursiveDragon(TreeNode current, double value, Dragon dragon) {
         if (current == null) {
-            return new TreeNode(value, dragon);
+            return new TreeNode((int) value, dragon);
         }
         if (value < current.element) {
-            current.getDragon().setRank("Captain");
             current.left = addRecursiveDragon(current.left, value, dragon);
         } else if (value > current.element) {
-            current.getDragon().setRank("Captain");
             current.right = addRecursiveDragon(current.right, value, dragon);
         } else {
             // value already exists
@@ -100,38 +98,24 @@ public class BinaryTree {
         return current;
     }
 
-
-
-    public void add (int value){
+    public void add (double value){
         root = addRecursive(root, value);
     }
 
-    public void addDragon (int value, Dragon dragon){
+    private void addDragon (double value, Dragon dragon){
         root = addRecursiveDragon(root, value, dragon);
-        root.getDragon().setRank("Commander");
     }
 
-
-    public void addDragon (){
-        Dragon dragon = new Dragon();
-        int age = dragon.getAge();
-        if (!contains(age)) {
-            addDragon(age, dragon);
-        }else {
-            while (contains(age)){
-                age = (int)((Math.random())*1000);
-                dragon.setAge(age);
-            }
-            addDragon(age, dragon);
-        }
+    public void addDragon (Dragon dragon){
+        addDragon(dragon.getAge(), dragon);
     }
 
     public TreeNode getRoot() {
         return root;
     }
 
-    public void clearOut(){
-        this.root = null;
+    public void setRoot(TreeNode root) {
+        this.root = root;
     }
 }
 

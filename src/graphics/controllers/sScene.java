@@ -11,7 +11,7 @@ import java.io.IOException;
 public abstract class sScene {
 
     private static int width = 1280;
-    private static int height = 960;
+    private static int height = 760;
 
     @FXML
     protected abstract void initialize() throws IOException;
