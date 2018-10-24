@@ -185,7 +185,7 @@ public class Dragon extends Entity{
         this.rank = rank;
     }
 
-    public double getxPoss () {
+    public double getxPoss() {
         return xPoss;
     }
 

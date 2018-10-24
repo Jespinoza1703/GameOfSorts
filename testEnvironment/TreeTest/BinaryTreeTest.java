@@ -1,15 +1,7 @@
 package TreeTest;
 
-import game.entities.Dragon;
-import game.logic.trees.BinaryTree;
-import game.logic.trees.TreeNode;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-
 public class BinaryTreeTest {
-
+/*
     @Test
     void isEmptyWhenIsEmpty(){
         BinaryTree tree = new BinaryTree();
@@ -179,7 +171,7 @@ public class BinaryTreeTest {
     }
 
 
-
+*/
 
 
 
