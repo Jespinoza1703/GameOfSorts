@@ -4,22 +4,23 @@ import game.entities.Dragon;
 
 public class TreeNode {
 
-    int element, height;
+    double element, height;
+    Dragon dragon;
     TreeNode left;
     TreeNode right;
-    Dragon  dragon;
 
-    public TreeNode(int element) {
+
+    public TreeNode(double element) {
         this(element, null, null, 1);
     }
 
-    public TreeNode(int element, TreeNode left, TreeNode right, int height) {
+    public TreeNode(double element, TreeNode left, TreeNode right, double height) {
         this.element = element;
         this.left = left;
         this.right = right;
         this.height = height;
     }
-    public TreeNode(int element, Dragon dragon){
+    public TreeNode(double element, Dragon dragon){
         this.element = element;
         this.dragon = dragon;
         this.left = null;
@@ -28,10 +29,10 @@ public class TreeNode {
 
 
     public int getElement() {
-        return element;
+        return (int) element;
     }
 
-    public void setElement(int element) {
+    public void setElement(double element) {
         this.element = element;
     }
 

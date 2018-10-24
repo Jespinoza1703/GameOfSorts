@@ -4,16 +4,23 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
+/**
+ * Class parent of the Scenes
+ * Default structure that the scene controllers must follow
+ */
 public abstract class sScene {
 
     private static int width = 1280;
-    private static int height = 960;
+    private static int height = 760;
 
     @FXML
     protected abstract void initialize() throws IOException;
 
     @FXML
     abstract void pressed_return() throws IOException;
+
+
+    /** Getters and Setters **/
 
     public static int getWidth() {
         return width;

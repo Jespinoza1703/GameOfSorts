@@ -1,5 +1,7 @@
 package game.logic.lists;
 
+import game.entities.Dragon;
+
 public class SimpleList<T> {
 
     private Node first;
@@ -42,6 +44,7 @@ public class SimpleList<T> {
             Node tmp = new Node<>(value);
             tmp.setNext(this.first);
             this.first = tmp;
+            this.large += 1;
         }
     }
 
@@ -62,12 +65,6 @@ public class SimpleList<T> {
         return first;
     }
 
-    /**
-     * Imprime el largo de la lista
-     */
-    public void showLarge() {
-        System.out.println(this.getLarge());
-    }
 
     /**
      * Obtiene el largo de la lista
@@ -81,19 +78,11 @@ public class SimpleList<T> {
      * Limpia la lista por completo
      */
     public void clearOut(){
+        this.large = 0;
         this.first = null;
     }
 
-    /**
-     * Imprime los elementos de la lista
-     */
-    public void showList(){
-        Node temporal = this.first;
-        while (temporal != null){
-            System.out.println(temporal.getValue());
-            temporal = temporal.getNext();
-        }
-    }
+
 
     /**
      * Swaps the values of two nodes
@@ -109,22 +98,34 @@ public class SimpleList<T> {
         node2.setValue(tmp);
     }
 
+    public int searchIndex(T object){
+        int result = -1;
+        for(int i = 0; i < large; i++){
+            if(this.getByIndex(i).getValue().equals(object)){
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+
     /**
      * Elimina un elemento en la posición que se le indique
      * @param index posición de elemento a eliminar
      */
     public void delete(int index){
-        if (index < this.getLarge()){
+        if (index < this.getLarge() && index != -1){
             int i = 0;
             Node temporal = this.first;
             if (index == 0){
                 this.first = this.getByIndex(1);
+                this.large -= 1;
             }
             else {
-                while (temporal.getNext() != null) {
+                while (temporal != null) {
 
                     if (i == index) {
-                        temporal.setNext(temporal.getNext().getNext());
+                        this.getByIndex(i-1).setNext(temporal.getNext());
                         this.large -= 1;
                         break;
                     } else {
@@ -152,5 +153,26 @@ public class SimpleList<T> {
             j++;
         }
         return temp;
+    }
+
+    public void addDragon (Dragon dragon){
+        if(this.isEmpty()){
+            this.first = new Node(dragon);
+            this.large += 1;
+        }
+        else{
+            Node temporal = this.first;
+            while (temporal.getNext() != null){
+                temporal =  temporal.getNext();
+            }
+            temporal.setNext(new Node(dragon));
+            this.large += 1;
+        }
+    }
+
+    public void swapDragon (int i, int j){
+        Dragon temp = this.getByIndex(i).getDragon();
+        this.getByIndex(i).setDragon(this.getByIndex(j).getDragon());
+        this.getByIndex(j).setDragon(temp);
     }
 }

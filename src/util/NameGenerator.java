@@ -1,6 +1,12 @@
-package game.entities;
+package util;
 
 import java.util.Random;
+
+/**
+ *Class that generates random names for each dragon.
+ *  @author Fabian Ramirez
+ */
+
 
 public class NameGenerator {
 
