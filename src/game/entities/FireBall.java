@@ -103,6 +103,12 @@ public class FireBall extends Entity {
         xPoss += xSpeed * xDir;
         yPoss += ySpeed * yDir;
 
+        var width = Drawer.width;
+        var height = Drawer.height;
+        if (yPoss < 0) destroy();
+        if (yPoss > height) destroy();
+        if (xPoss < 0) destroy();
+        if (xPoss > width) destroy();
     }
 
     public double getxPoss() {
