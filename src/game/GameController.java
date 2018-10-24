@@ -1,5 +1,7 @@
 package game;
 
+import client.Wave;
+import client.WaveGenerator;
 import game.entities.Dragon;
 import game.entities.Entity;
 import game.entities.Player;
@@ -18,16 +20,15 @@ public class GameController extends Thread{
     private Clock clock = Clock.getInstance();
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
+    private Wave wave = new Wave();
     private Player player;
     private boolean paused;
     private boolean running;
-    private int wave;
 
     private GameController(String msg){
         super(msg);
         paused = false;
         running = true;
-        wave = 0;
     }
 
     public static GameController getInstance(){
@@ -67,8 +68,8 @@ public class GameController extends Thread{
     }
 
     private void getWave(){
-        Dragon dragon = new Dragon(1000, 350);
-        wave = 1;
+        wave = new Wave(0, 80);
+        WaveGenerator.listWave(wave);
     }
 
     private void event(){
@@ -108,7 +109,7 @@ public class GameController extends Thread{
     }
 
     public boolean isWaveClear(){
-        return wave == 0;
+        return wave.getSize() == 0;
     }
 
     private void verifyCollisions(){
