@@ -19,6 +19,7 @@ public class BulletExplosion extends Entity {
     private double animationTimer = 50;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    public int lives = 0;
 
     public BulletExplosion(double xPoss, double yPoss, double width, double height) {
         this.xPoss = xPoss;
@@ -62,6 +63,10 @@ public class BulletExplosion extends Entity {
 
     @Override
     public void hit() {
+    }
+
+    @Override
+    public void setLives(int lives) {
 
     }
 

@@ -28,6 +28,7 @@ public class Dragon extends Entity {
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private Boolean playerCollision = false;
 
 
     public Dragon (double xPoss, double yPoss) {
@@ -95,18 +96,27 @@ public class Dragon extends Entity {
                 "file:res/img/entities/dragon/dMovement3"));
         return movementAnimations.get(0);
 
-    }
+    @Override
     public void hit(){
+        lives--;
+        if(lives <= 0){
+            dies();
+        }
+    }
 
+    @Override
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 35, 35,-1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11,-1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
     private void dies(){
-
+        new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
+        destroy();
     }
 
     private void pressed(){
@@ -115,7 +125,6 @@ public class Dragon extends Entity {
 
     private void move(){
         xPoss -= xSpeed;
-
     }
 
     private Boolean canShoot(){
@@ -126,10 +135,9 @@ public class Dragon extends Entity {
             lastTime = time;
         }
         return result;
-
     }
 
-    /** Getters andSetters **/
+    /** Getters and Setters **/
 
     public String getName() {
         return name;
