@@ -16,7 +16,7 @@ public class Player extends Entity {
     private Clock clock = Clock.getInstance();
     private int lives = 6;
     private int xSpeed = 0, ySpeed = 0;
-    private int xMaxSpeed = 8, yMaxSpeed = 8;
+    private int xMaxSpeed = 7, yMaxSpeed = 7;
     private int xAcc = 1, yAcc = 2;
     private double xPoss = 200, yPoss = 200;
     private int playerWidth = 150, playerHeight = 200;
@@ -29,7 +29,7 @@ public class Player extends Entity {
     private ArrayList<Sprite> dashAnimation = new ArrayList<>();
     private ArrayList<Sprite> currentAnimation = new ArrayList<>();
     private Sprite sprite = loadImages();
-    private int animationTimer = 200;
+    private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
@@ -126,11 +126,11 @@ public class Player extends Entity {
         // Adds gravity
         if(yMove < 0){
             yAcc = 3;
-            yMaxSpeed = 10;
+            yMaxSpeed = 9;
         }
         if(yMove > 0){
             yAcc = 2;
-            yMaxSpeed = 7;
+            yMaxSpeed = 6;
         }
 
         // Adds air friction
@@ -185,7 +185,7 @@ public class Player extends Entity {
         this.yPoss = yPoss;
     }
 
-    public int getxSpeed() {
+    public int getSpeed() {
         return xSpeed;
     }
 

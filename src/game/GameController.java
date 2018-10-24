@@ -23,7 +23,7 @@ public class GameController extends Thread{
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
-    private Player player;
+    public static Player player;
     private boolean paused;
     private boolean running;
 
@@ -36,7 +36,7 @@ public class GameController extends Thread{
     public static GameController getInstance(){
         if (instance == null){
             instance = new GameController("game");
-            instance.player = new Player();
+            player = new Player();
             instance.thread = instance;
             instance.thread.start();
         }
@@ -71,7 +71,6 @@ public class GameController extends Thread{
     }
 
     private void loadBackGround() {
-        Background.player = player;
         new Background(1, 0, Drawer.width, 1000,"file:res/img/background/sMountain.png", 1);
         new Background(2, 0,Drawer.width, 680,"file:res/img/background/sTrees.png", 2);
     }

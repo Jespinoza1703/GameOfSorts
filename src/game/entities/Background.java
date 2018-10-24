@@ -6,7 +6,6 @@ import game.draw.Sprite;
 
 public class Background extends Entity {
 
-    public static Player player;
     private int level; // [1, 3]
     private double speed;
     private double xPoss;
@@ -38,8 +37,7 @@ public class Background extends Entity {
 
     @Override
     public void update() {
-        xPoss -= Math.max(speed, player.getxSpeed());
-        //xPoss -= speed;
+        xPoss -= Math.max(speed, GameController.player.getSpeed()+speed);
         checkBoundaries();
     }
 
@@ -71,7 +69,7 @@ public class Background extends Entity {
     private void checkBoundaries(){
         var spriteHW = sprite.getWidth() / 2;
         if (xPoss < 2000 && boundaries){
-            var poss = xPoss + (spriteHW * 2);
+            var poss = xPoss + 2 + (spriteHW * 2);
             new Background(speed, poss, width, height, url , level);
             boundaries = false;
         }

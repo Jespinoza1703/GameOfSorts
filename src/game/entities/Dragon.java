@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Dragon extends Entity{
 
-    private String name = NameGenerator.generateName();;
+    private String name = NameGenerator.generateName();
     private int parentAge;
     private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
     private int fire_rate = Math.getRandomNumberInRange(10000, 100000);  // [10, 100]
@@ -142,6 +142,7 @@ public class Dragon extends Entity{
     }
 
     private void move() {
+        xPoss -= java.lang.Math.max(xSpeed, GameController.player.getSpeed()+xSpeed);
         xPoss -= xSpeed;
     }
 
