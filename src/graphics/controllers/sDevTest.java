@@ -1,5 +1,7 @@
 package graphics.controllers;
 
+import client.Wave;
+import client.WaveGenerator;
 import game.GameController;
 import game.draw.Drawer;
 import javafx.fxml.FXML;
@@ -14,8 +16,11 @@ public class sDevTest extends sScene{
 
     @Override
     protected void initialize() throws IOException {
+        Wave wave = new Wave(0, 64);
         Drawer.init(gamePane);
-        GameController.getInstance();
+        GameController.getInstance().setWave(wave);
+        WaveGenerator.listWave(wave);
+
     }
 
     @Override

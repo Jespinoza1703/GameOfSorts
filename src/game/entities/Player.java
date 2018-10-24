@@ -20,7 +20,7 @@ public class Player extends Entity {
     private int xAcc = 1, yAcc = 2;
     private double xPoss = 200, yPoss = 200;
     private int playerWidth = 150, playerHeight = 200;
-    private int fire_rate = 500;
+    private int fire_rate = 300;
     private int damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing

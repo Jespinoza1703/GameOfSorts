@@ -68,8 +68,7 @@ public class GameController extends Thread{
     }
 
     private void getWave(){
-        wave = new Wave(0, 80);
-        WaveGenerator.listWave(wave);
+
     }
 
     private void event(){
@@ -108,10 +107,6 @@ public class GameController extends Thread{
         entities.addAtEnd(entity);
     }
 
-    public boolean isWaveClear(){
-        return wave.getSize() == 0;
-    }
-
     private void verifyCollisions(){
         Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
         Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
@@ -120,6 +115,14 @@ public class GameController extends Thread{
         if(collision_player_with_dragon || collision_player_with_dragonBullet){
             player.hit();
         }
+    }
+
+    public void setWave(Wave wave) {
+        this.wave = wave;
+    }
+
+    public boolean isWaveClear(){
+        return wave.getSize() == 0;
     }
 
     public boolean isPaused(){

@@ -7,20 +7,21 @@ import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
 import util.Clock;
 import util.Math;
+import util.NameGenerator;
 
 import java.util.ArrayList;
 
 public class Dragon extends Entity{
 
-    private String name;
+    private String name = NameGenerator.generateName();;
     private int parentAge;
-    private int lives; // [1, 3]
+    private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
     private int fire_rate = Math.getRandomNumberInRange(10000, 100000);  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
-    private double xSpeed = 1;
+    private double xSpeed = 0.5;
     private long lastTime = 0;
     private KeyReader key;
     private Clock clock = Clock.getInstance();
