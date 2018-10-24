@@ -19,7 +19,7 @@ public class sDevTest extends sScene{
         Wave wave = new Wave(0, 64);
         Drawer.init(gamePane);
         GameController.getInstance().setWave(wave);
-        WaveGenerator.listWave(wave);
+        //WaveGenerator.listWave(wave);
 
     }
 

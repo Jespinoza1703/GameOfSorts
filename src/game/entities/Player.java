@@ -184,4 +184,12 @@ public class Player extends Entity {
     public void setyPoss(double yPoss) {
         this.yPoss = yPoss;
     }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
 }
