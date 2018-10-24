@@ -13,6 +13,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class Drawer {
 
+    public static double width;
+    public static double height;
     private static Drawer instance;
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
     private Pane drawPane;  // Place to draw the entities
@@ -35,6 +37,8 @@ public class Drawer {
         instance.drawer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                width = pane.getWidth();
+                height = pane.getHeight();
                 instance.draw();
             }
         };

@@ -130,18 +130,39 @@ public class Player extends Entity {
         var xMove = key.right - key.left;
         var yMove = key.up - key.down;
 
+        // Adds gravity
+        if(yMove < 0){
+            yAcc = 3;
+            yMaxSpeed = 10;
+        }
+        if(yMove > 0){
+            yAcc = 2;
+            yMaxSpeed = 7;
+        }
+
+        // Adds air friction
         if (xMove == 0){
             xSpeed =  Math.approach(xSpeed, 0, 1);
         }
-
         if (yMove == 0){
             ySpeed =  Math.approach(ySpeed, 0, 1);
         }
 
+        // Calculates current position
         xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
         ySpeed = Math.clamp(ySpeed -= yAcc * yMove, -yMaxSpeed, yMaxSpeed);
         xPoss += xSpeed;
         yPoss += ySpeed;
+
+        // Calculates boundaries
+        var height = Drawer.height;
+        var width = Drawer.width;
+        var spriteHH = sprite.getHeight() / 2;
+        var spriteHW = sprite.getWidth() / 2;
+        if (yPoss - spriteHH < 0) yPoss = 0 + spriteHH;
+        if (yPoss + spriteHH > height) yPoss = height - spriteHH;
+        if (xPoss - spriteHW < 0) xPoss = 0 + spriteHW;
+        if (xPoss + spriteHW > width) xPoss = width - spriteHW;
     }
 
     private Boolean canShoot(){
