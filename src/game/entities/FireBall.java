@@ -28,7 +28,7 @@ public class FireBall extends Entity {
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
-        this.fireHeight = fireWidth / 2;
+        this.fireHeight = fireWidth * 0.4;
         this.xDir = xDir;
         this.yDir = yDir;
         sprite = loadImages();
