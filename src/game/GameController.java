@@ -2,6 +2,7 @@ package game;
 
 import client.Wave;
 import client.WaveGenerator;
+import game.draw.Drawer;
 import game.entities.Background;
 import game.entities.Dragon;
 import game.entities.Entity;
@@ -70,7 +71,8 @@ public class GameController extends Thread{
     }
 
     private void loadBackGround() {
-        new Background(1, "file:res/img/background/sMountain.png");
+        //new Background(2, "file:res/img/background/sTrees.png");
+        new Background(1, 0, Drawer.width, 1000,"file:res/img/background/sMountain.png");
     }
 
     private void getWave(){

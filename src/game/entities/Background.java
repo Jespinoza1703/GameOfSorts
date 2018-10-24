@@ -7,14 +7,19 @@ import game.draw.Sprite;
 public class Background extends Entity {
 
     private double speed;
-    private double xPoss = Drawer.width;
+    private double xPoss;
     private double yPoss = Drawer.height / 2;
+    private double width;
+    private double height;
     private String url;
     private Sprite sprite;
-    private boolean bounderies = true;
+    private boolean boundaries = true;
 
-    public Background(double speed, String url){
+    public Background(double speed, double xPoss, double width, double height, String url){
         this.speed = speed;
+        this.xPoss = xPoss;
+        this.width = width;
+        this.height = height;
         this.url = url;
         this.sprite = loadImages(url);
         Drawer.getInstance().addDrawAtBegining(this);
@@ -55,16 +60,16 @@ public class Background extends Entity {
     }
 
     private Sprite loadImages(String url){
-        Sprite sprite = new Sprite(xPoss, yPoss, Drawer.width, Drawer.height, url);
+        Sprite sprite = new Sprite(xPoss, yPoss, Drawer.width, 1000, url);
         return sprite;
     }
 
     private void checkBoundaries(){
-        var width = Drawer.width;
         var spriteHW = sprite.getWidth() / 2;
-        if (xPoss + spriteHW < width && bounderies){
-            new Background(speed, url);
-            bounderies = false;
+        if (xPoss < 2000 && boundaries){
+            var poss = xPoss + (spriteHW * 2);
+            new Background(speed, poss, width, height, url);
+            boundaries = false;
         }
         if (xPoss + spriteHW < 0) destroy();
     }
