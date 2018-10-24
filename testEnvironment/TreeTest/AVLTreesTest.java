@@ -1,5 +1,6 @@
 package TreeTest;
 
+import game.entities.Dragon;
 import game.logic.trees.AVLTree;
 import game.logic.trees.TreeNode;
 import org.junit.jupiter.api.Test;
@@ -71,6 +72,118 @@ public class AVLTreesTest {
         assertEquals(5, tmp.getElement());
     }
 
+    @Test
+    void PreOrderMethod(){
+        AVLTree tree = new AVLTree();
+        int i = 1;
+        while (i <= 7){
+            tree.insert(i);
+            i++;
+        }
+        TreeNode node = tree.getRoot();
+        tree.preOrder(node);
+    }
+
+    @Test
+    void TestDragonToTree(){
+        Dragon dragon = new Dragon();
+        AVLTree tree = new AVLTree();
+        tree.insert(dragon);
+        assertEquals(dragon, tree.getRoot().getDragon());
+    }
+    @Test
+    void insertAnyDragonTest(){
+        AVLTree tree = new AVLTree();
+        tree.insertDragon();
+    }
+
+    @Test
+    void insertDragonWithAnAge(){
+        Dragon dragon = new Dragon();
+        AVLTree tree = new AVLTree();
+        tree.insertDragon(100, dragon);
+        assertSame(dragon, tree.getRoot().getDragon());
+    }
+
+    @Test
+    void insertDragonWithAnAgeTestAge(){
+        Dragon dragon = new Dragon();
+        AVLTree tree = new AVLTree();
+        tree.insertDragon(100, dragon);
+        int result = tree.getRoot().getDragon().getAge();
+        assertEquals(100, result);
+    }
+
+
+    @Test
+    void testSetDragon(){
+        Dragon dragon = new Dragon();
+        AVLTree tree = new AVLTree();
+        tree.insert(1000);
+        tree.getRoot().setDragon(dragon);
+        assertSame(dragon, tree.getRoot().getDragon());
+    }
+
+    @Test
+    void testMaxValue(){
+        AVLTree tree = new AVLTree();
+        int i = 1;
+        while (i <= 7){
+            tree.insert(i);
+            i++;
+        }
+        int result  = tree.maxValueNode(tree.getRoot()).getElement();
+        assertEquals(7, result);
+    }
+
+    @Test
+    void testClearOut(){
+        AVLTree tree = new AVLTree();
+        int i = 1;
+        while (i <= 7){
+            tree.insert(i);
+            i++;
+        }
+        tree.clearOut();
+        TreeNode result = tree.getRoot();
+        assertNull(result);
+    }
+
+    @Test
+    void insertRandomNumber(){
+        AVLTree tree = new AVLTree();
+        int i = 1;
+        while (i <= 20){
+            int j = ((int)((Math.random())*100));
+            tree.insert(j);
+            i++;
+        }
+    }
+
+    @Test
+    void deleteRandomPosition(){
+        AVLTree tree = new AVLTree();
+        tree.insert(35);
+        int i = 1;
+        while (i <= 20){
+            int j = ((int)((Math.random())*100));
+            tree.insert(j);
+            i++;
+        }
+        tree.deleteNode(tree.getRoot(), 35);
+    }
+    @Test
+    void deleteAnotherRandomPosition(){
+        AVLTree tree = new AVLTree();
+        tree.insert(2);
+        int i = 1;
+        while (i <= 20){
+            int j = ((int)((Math.random())*100));
+            tree.insert(j);
+            i++;
+        }
+        tree.deleteNode(tree.getRoot(), 2);
+    }
 
 
 

@@ -11,4 +11,6 @@ public abstract class Entity {
     public abstract void destroy();
 
     public abstract Sprite getSprite();
+
+    public abstract void hit();
 }

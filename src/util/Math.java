@@ -18,7 +18,7 @@ public class Math {
      * @param max maximum number to return
      * @return an integer inside the domain
      */
-    public static double clamp(double num, double min, double max) {
+    public static int clamp(int num, int min, int max) {
         if (num > max) {
             return max;
         }
@@ -36,7 +36,7 @@ public class Math {
      * @param amount how much to approach
      * @return integer of the maximum approach it could do
      */
-    public static double approach(double num, double result, double amount) {
+    public static int approach(int num, int result, int amount) {
         if(num < result) {
             num += amount;
             if (num > result)
