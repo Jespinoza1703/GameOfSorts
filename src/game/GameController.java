@@ -71,6 +71,7 @@ public class GameController extends Thread{
     }
 
     private void loadBackGround() {
+        Background.player = player;
         new Background(1, 0, Drawer.width, 1000,"file:res/img/background/sMountain.png", 1);
         new Background(2, 0,Drawer.width, 680,"file:res/img/background/sTrees.png", 2);
     }

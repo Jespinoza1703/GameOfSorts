@@ -6,6 +6,7 @@ import game.draw.Sprite;
 
 public class Background extends Entity {
 
+    public static Player player;
     private int level; // [1, 3]
     private double speed;
     private double xPoss;
@@ -37,8 +38,8 @@ public class Background extends Entity {
 
     @Override
     public void update() {
-        //xPoss += Math.max(speed, player.getxSpeed());
-        xPoss -= speed;
+        xPoss -= Math.max(speed, player.getxSpeed());
+        //xPoss -= speed;
         checkBoundaries();
     }
 
