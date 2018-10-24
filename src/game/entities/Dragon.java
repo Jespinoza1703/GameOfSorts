@@ -112,7 +112,7 @@ public class Dragon extends Entity{
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11, -1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 

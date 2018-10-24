@@ -14,7 +14,7 @@ public class Player extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
     private Clock clock = Clock.getInstance();
-    private int lives = 3;
+    private int lives = 6;
     private int xSpeed = 0, ySpeed = 0;
     private int xMaxSpeed = 8, yMaxSpeed = 8;
     private int xAcc = 1, yAcc = 2;
@@ -44,13 +44,6 @@ public class Player extends Entity {
 
         if (key.shoot == 1 && canShoot()){
             shoot();
-        }
-        if (state.equals("Moving")){
-            currentAnimation = movementAnimation;
-        } else if(state.equals("Dead")){
-            currentAnimation = deathAnimation;
-        } else if (state.equals("Dashing")){
-            currentAnimation = dashAnimation;
         }
     }
 
@@ -117,7 +110,7 @@ public class Player extends Entity {
 
     private void shoot(){
         var yDirection = key.arrow_down - key.arrow_up;
-        FireBall fireBall = new FireBall(xPoss, yPoss, 50, 17,1, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2,1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
     }
 

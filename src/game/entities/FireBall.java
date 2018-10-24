@@ -16,7 +16,7 @@ public class FireBall extends Entity {
     private Sprite sprite;
     private double xPoss, yPoss;
     private int xDir, yDir;
-    private int xSpeed = 3, ySpeed = 3;
+    private int xSpeed = 10, ySpeed = 10;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
     private ArrayList<Sprite> deathAnimations = new ArrayList<>();
@@ -24,11 +24,11 @@ public class FireBall extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
-    public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
+    public FireBall(double xPoss, double yPoss, double fireWidth, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
-        this.fireHeight = fireHeight;
+        this.fireHeight = fireWidth / 2;
         this.xDir = xDir;
         this.yDir = yDir;
         sprite = loadImages();
