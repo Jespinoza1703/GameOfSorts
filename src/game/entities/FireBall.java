@@ -32,7 +32,7 @@ public class FireBall extends Entity {
         this.xDir = xDir;
         this.yDir = yDir;
         sprite = loadImages();
-        Drawer.getInstance().addDrawAtBegining(this);
+        Drawer.getInstance().addDrawAtBeginning(this);
         GameController.getInstance().addEntity(this);
     }
 

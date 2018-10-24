@@ -1,5 +1,6 @@
 package game.draw;
 
+import game.entities.Background;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
 import javafx.animation.AnimationTimer;
@@ -17,6 +18,9 @@ public class Drawer {
     public static double height = 960;
     private static Drawer instance;
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
+    private SimpleList<Background> bg1 = new SimpleList<>();
+    private SimpleList<Background> bg2 = new SimpleList<>();
+    private SimpleList<Background> bg3 = new SimpleList<>();
     private Pane drawPane;  // Place to draw the entities
     private AnimationTimer drawer;  //Access to JavaFx Thread
 
@@ -50,8 +54,24 @@ public class Drawer {
      */
     private void draw(){
         drawPane.getChildren().clear();
+        drawBG();
         for (int i = 0; i < draws.getLarge(); i++){
             ImageView sprite = draws.getByIndex(i).getValue().draw().getSprite();
+            drawPane.getChildren().addAll(sprite);
+        }
+    }
+
+    private void drawBG() {
+        for (int i = 0; i < bg1.getLarge(); i++){
+            ImageView sprite = bg1.getByIndex(i).getValue().draw().getSprite();
+            drawPane.getChildren().addAll(sprite);
+        }
+        for (int i = 0; i < bg2.getLarge(); i++){
+            ImageView sprite = bg2.getByIndex(i).getValue().draw().getSprite();
+            drawPane.getChildren().addAll(sprite);
+        }
+        for (int i = 0; i < bg3.getLarge(); i++){
+            ImageView sprite = bg3.getByIndex(i).getValue().draw().getSprite();
             drawPane.getChildren().addAll(sprite);
         }
     }
@@ -60,12 +80,18 @@ public class Drawer {
         draws.addAtEnd(draw);
     }
 
-    public void addDrawAtBegining(Entity draw){
+    public void addDrawAtBeginning(Entity draw){
         draws.addAtBeginning(draw);
     }
 
     public void deleteEntity(Entity draw){
         draws.delete(draws.searchIndex(draw));
+    }
+
+    public void addBackGround(Background bg, int level){
+        if (level == 1) bg1.addAtEnd(bg);
+        if (level == 2) bg2.addAtEnd(bg);
+        if (level == 3) bg3.addAtEnd(bg);
     }
 
     public void abort(){
