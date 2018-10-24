@@ -29,7 +29,7 @@ public class Dragon extends Entity {
     private int animationTimer = 200;
     private long lastAnimationTime = 0;
     private int currentSprite = 0;
-    private String state = "Moving"; // Moving / Dead
+    private Boolean playerCollision = false;
 
 
     public Dragon (double xPoss, double yPoss) {
@@ -109,6 +109,11 @@ public class Dragon extends Entity {
         }
     }
 
+    @Override
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
     private void shoot(){
         FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11,-1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
@@ -153,14 +158,6 @@ public class Dragon extends Entity {
 
     public void setParent(Dragon parent) {
         this.parent = parent;
-    }
-
-    public int getLives() {
-        return lives;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
     }
 
     public double getFire_rate() {

@@ -106,6 +106,11 @@ public class Player extends Entity {
         }
     }
 
+    @Override
+    public void setLives(int lives) {
+
+    }
+
     private void heal(){
 
     }

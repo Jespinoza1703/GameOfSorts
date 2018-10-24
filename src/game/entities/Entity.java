@@ -13,4 +13,6 @@ public abstract class Entity {
     public abstract Sprite getSprite();
 
     public abstract void hit();
+
+    public abstract void setLives(int lives);
 }

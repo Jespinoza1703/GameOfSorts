@@ -72,6 +72,11 @@ public class FireBall extends Entity {
         dies();
     }
 
+    @Override
+    public void setLives(int lives) {
+
+    }
+
     private void dies(){
         new BulletExplosion(xPoss, yPoss, fireHeight*2, fireHeight*2);
         destroy();
