@@ -96,7 +96,7 @@ public class Dragon extends Entity {
         return movementAnimations.get(0);
 
     }
-    private void hit(){
+    public void hit(){
 
     }
 
