@@ -1,5 +1,8 @@
 package util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Random;
 
 /**
@@ -9,6 +12,7 @@ import java.util.Random;
 
 
 public class NameGenerator {
+    private static Logger logger = LoggerFactory.getLogger("NameGenerator");
 
     public static String names[] = {"Fabian", "Jose", "Jessica", "Tomas", "Beto", "Chabela", "Che", "Adolf", "Belisario",
     "Lionel", "Cristiano", "Queta", "Queto", "Chabelo", "Shirley", "Quincho", "Anastasia", "Zeus", "Loki", "Tencha", "Rodolfo",
@@ -29,9 +33,15 @@ public class NameGenerator {
     "Pig", "Vader", "Moda", "Increible", "Balvin", "Colindres", "Campbell", "Navas", "Guardiola", "Jordan", "Cordero", "Prime", "Bora bora",
     "Rodriguez", "Lonnis", "Vega", "Esponja", "Estrella", "Khalifa", "Balotelli", "Guevara", "De los Angeles"};
 
+
+    /**
+     * Choose randomly a Name and a LastName to created an unique Name
+     * @return Random Name
+     */
     public static String generateName(){
         String name = names[new Random().nextInt(names.length)];
         String lastName = lastNames [new Random().nextInt(lastNames.length)];
+        logger.debug(name + lastName + "Created Randomly");
         return name + " " + lastName;
     }
 
