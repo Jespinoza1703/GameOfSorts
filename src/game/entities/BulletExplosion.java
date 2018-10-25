@@ -3,6 +3,8 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.Clock;
 
 import java.util.ArrayList;
@@ -20,8 +22,11 @@ public class BulletExplosion extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
     public int lives = 0;
+    private static Logger logger = LoggerFactory.getLogger("BulletExplosion");
+
 
     public BulletExplosion(double xPoss, double yPoss, double width, double height) {
+        logger.debug("New bullet Explosion");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.width = width;
@@ -52,6 +57,7 @@ public class BulletExplosion extends Entity {
 
     @Override
     public void destroy() {
+        logger.debug(this + "has been destroy");
         Drawer.getInstance().deleteEntity(this);
         GameController.getInstance().deleteEntity(this);
     }

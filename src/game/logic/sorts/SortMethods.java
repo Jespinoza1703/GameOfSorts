@@ -131,9 +131,9 @@ public class SortMethods {
 
     /**
      *Swap the positions of two nodes
-     * @param list
-     * @param i
-     * @param j
+     * @param list List to modify
+     * @param i Position of Node 1
+     * @param j Position of Node 2
      */
 
     private static void swap(List<Dragon> list, int i, int j){

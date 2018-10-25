@@ -2,20 +2,23 @@ package game.logic.trees;
 
 
 import game.entities.Dragon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AVLTree {
 
 
 
     TreeNode root;
+    private static Logger logger = LoggerFactory.getLogger("AVLTree");
 
     public AVLTree(){
-
+        logger.debug("Created New AVL Tree");
     }
 
     /**
      * A utility function to get the height of the tree
-     * @param N
+     * @param N Node to analise
      * @return height of N node
      */
     int height(TreeNode N) {
@@ -27,8 +30,8 @@ public class AVLTree {
 
     /**
      *  A utility function to get maximum of two integers
-     * @param a
-     * @param b
+     * @param a Value 1
+     * @param b Value 2
      * @return Max value
      */
     int max(int a, int b) {
@@ -41,6 +44,7 @@ public class AVLTree {
      * @return TreeNode Rotated
      */
     private TreeNode rightRotate(TreeNode y) {
+        logger.debug("Rotated " + y + " to right");
         TreeNode x = y.left;
         TreeNode T2 = x.right;
 
@@ -63,6 +67,7 @@ public class AVLTree {
      * @return TreeNode rotated
      */
     private TreeNode leftRotate(TreeNode x) {
+        logger.debug("Rotated " + x + " to right");
         TreeNode y = x.right;
         TreeNode T2 = y.left;
 
@@ -88,9 +93,9 @@ public class AVLTree {
 
     /**
      * Insert Tree Node with the Dragon inside
-     * @param node
-     * @param key
-     * @param dragon
+     * @param node Used recursively
+     * @param key Value to add
+     * @param dragon Dragon
      * @return TreeNode to add
      */
     private TreeNode insert(TreeNode node, int key, Dragon dragon) {
@@ -159,7 +164,7 @@ public class AVLTree {
 
     /**
      * Insert only one Element
-     * @param element
+     * @param element Value of the element to be added
      */
     public void insert(int element){
         root = insert(root, element, null);
@@ -167,7 +172,7 @@ public class AVLTree {
 
     /**
      * Insert Only one dragon
-     * @param dragon
+     * @param dragon Value of the dragon to be added
      */
     public void insert (Dragon dragon){
         root = insert(root, dragon.getAge(), dragon);
@@ -183,8 +188,8 @@ public class AVLTree {
 
     /**
      * Private method that insert a Dragon to the AVL Tree
-     * @param age
-     * @param dragon
+     * @param age Age of the dragon
+     * @param dragon Dragon
      */
     private void insertDragonAux(int age, Dragon dragon){
         root = insert(root, age, dragon);
@@ -202,7 +207,7 @@ public class AVLTree {
 
     /**
      * Find the minimum value in the tree
-     * @param node
+     * @param node Start the search from this Node
      * @return TreeNode with minimum value
      */
     public TreeNode minValueNode(TreeNode node) {
@@ -232,8 +237,8 @@ public class AVLTree {
 
     /**
      * Deletes the TreeNode with the element selected
-     * @param root
-     * @param key
+     * @param root Tree Root
+     * @param key Element that will be eliminated
      * @return TreeNode to be eliminated
      */
     public TreeNode deleteNode(TreeNode root, int key) {
@@ -329,9 +334,10 @@ public class AVLTree {
 
     /**
      * Set the Tree Root
-     * @param root
+     * @param root New Tree Root
      */
     public void setRoot(TreeNode root) {
+        logger.debug("Set " + root + " as " +this + " root");
         this.root = root;
     }
 }

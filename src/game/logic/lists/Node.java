@@ -14,7 +14,7 @@ public class Node <T> {
 
     /***
      * Constructor with int as parameter
-     * @param value
+     * @param value Value of the Node that will be add
      */
     public Node(T value){
         logger.debug("Created New Node");
@@ -23,7 +23,7 @@ public class Node <T> {
 
     /**
      * Constructor with a dragon as parameter
-     * @param dragon
+     * @param dragon Dragon that will be added
      */
     public Node(Dragon dragon){
         logger.debug("Created new Node with a Dragon");
