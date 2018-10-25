@@ -5,13 +5,19 @@ import game.entities.Dragon;
 
 public class AVLTree {
 
+
+
     TreeNode root;
 
     public AVLTree(){
 
     }
 
-    // A utility function to get the height of the tree
+    /**
+     * A utility function to get the height of the tree
+     * @param N
+     * @return height of N node
+     */
     int height(TreeNode N) {
         if (N == null)
             return 0;
@@ -19,13 +25,21 @@ public class AVLTree {
         return (int) N.height;
     }
 
-    // A utility function to get maximum of two integers
+    /**
+     *  A utility function to get maximum of two integers
+     * @param a
+     * @param b
+     * @return Max value
+     */
     int max(int a, int b) {
         return (a > b) ? a : b;
     }
 
-    // A utility function to right rotate subtree rooted with y
-    // See the diagram given above.
+    /**
+     * A utility function to right rotate subtree rooted with y
+     * @param y
+     * @return TreeNode Rotated
+     */
     private TreeNode rightRotate(TreeNode y) {
         TreeNode x = y.left;
         TreeNode T2 = x.right;
@@ -42,8 +56,12 @@ public class AVLTree {
         return x;
     }
 
-    // A utility function to left rotate subtree rooted with x
-    // See the diagram given above.
+
+    /**
+     * A utility function to left rotate subtree rooted with x
+     * @param x
+     * @return TreeNode rotated
+     */
     private TreeNode leftRotate(TreeNode x) {
         TreeNode y = x.right;
         TreeNode T2 = y.left;
@@ -68,6 +86,13 @@ public class AVLTree {
         return height(N.left) - height(N.right);
     }
 
+    /**
+     * Insert Tree Node with the Dragon inside
+     * @param node
+     * @param key
+     * @param dragon
+     * @return TreeNode to add
+     */
     private TreeNode insert(TreeNode node, int key, Dragon dragon) {
 
         /* 1.  Perform the normal BST insertion */
@@ -120,7 +145,7 @@ public class AVLTree {
         return node;
     }
 
-    // A utility function to print preorder traversal
+    /* A utility function to print preorder traversal
     // of the tree.
     // The function also prints height of every node
     private void preOrder(TreeNode node) {
@@ -130,19 +155,37 @@ public class AVLTree {
             preOrder(node.right);
         }
     }
+*/
 
+    /**
+     * Insert only one Element
+     * @param element
+     */
     public void insert(int element){
         root = insert(root, element, null);
     }
 
+    /**
+     * Insert Only one dragon
+     * @param dragon
+     */
     public void insert (Dragon dragon){
         root = insert(root, dragon.getAge(), dragon);
     }
 
+    /**
+     * gets the Root
+     * @return AVL Tree Root
+     */
     public TreeNode getRoot() {
         return root;
     }
 
+    /**
+     * Private method that insert a Dragon to the AVL Tree
+     * @param age
+     * @param dragon
+     */
     private void insertDragonAux(int age, Dragon dragon){
         root = insert(root, age, dragon);
     }
@@ -157,6 +200,11 @@ public class AVLTree {
         insertDragonAux(age, dragon);
     }
 
+    /**
+     * Find the minimum value in the tree
+     * @param node
+     * @return TreeNode with minimum value
+     */
     public TreeNode minValueNode(TreeNode node) {
         TreeNode current = node;
 
@@ -167,6 +215,11 @@ public class AVLTree {
         return current;
     }
 
+    /**
+     * Find the maximum value in the tree
+     * @param node
+     * @return TreeNode with maximum value
+     */
     public TreeNode maxValueNode(TreeNode node) {
         TreeNode current = node;
 
@@ -177,6 +230,12 @@ public class AVLTree {
         return current;
     }
 
+    /**
+     * Deletes the TreeNode with the element selected
+     * @param root
+     * @param key
+     * @return TreeNode to be eliminated
+     */
     public TreeNode deleteNode(TreeNode root, int key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
@@ -268,6 +327,10 @@ public class AVLTree {
         return root;
     }
 
+    /**
+     * Set the Tree Root
+     * @param root
+     */
     public void setRoot(TreeNode root) {
         this.root = root;
     }

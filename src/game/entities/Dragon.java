@@ -5,6 +5,8 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.Clock;
 
 import java.util.ArrayList;
@@ -29,9 +31,16 @@ public class Dragon extends Entity{
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
     private Boolean playerCollision = false;
+    private static Logger logger = LoggerFactory.getLogger("Dragon");
 
 
+    /**
+     * Constructor with grafic coordinates
+     * @param xPoss
+     * @param yPoss
+     */
     public Dragon(double xPoss, double yPoss) {
+        logger.debug("Created new dragon");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         sprite = loadImages();
@@ -40,16 +49,25 @@ public class Dragon extends Entity{
         Collisions.getInstance().addDragon(this);
     }
 
+    /**
+     * Basic constructor
+     */
     public Dragon() {
 
+        logger.debug("Created new dragon");
     }
 
+
     public Dragon(int parentAge, int age, String rank) {
+        logger.debug("Created new dragon");
         this.parentAge = parentAge;
         this.age = age;
         this.rank = rank;
     }
 
+    /**
+     * Update the dragon position
+     */
     @Override
     public void update() {
         move();
@@ -59,8 +77,13 @@ public class Dragon extends Entity{
         }
     }
 
+
+    /**
+     * Destroys the dragon in the GUI
+     */
     @Override
     public void destroy() {
+        logger.debug(this + "has been destroyed");
         Drawer.getInstance().deleteEntity(this);
         GameController.getInstance().deleteEntity(this);
         Collisions.getInstance().deleteDragon(this);
@@ -71,6 +94,10 @@ public class Dragon extends Entity{
         return sprite;
     }
 
+    /**
+     * Draw the figure Dragon in the GUI
+     * @return Dragon to draw
+     */
     @Override
     public Sprite draw() {
         long time = clock.getTime();
@@ -98,8 +125,12 @@ public class Dragon extends Entity{
         return movementAnimations.get(0);
     }
 
+    /**
+     * Update dragon when received a shoot
+     */
     @Override
     public void hit(){
+        logger.debug(this + "has been hit");
         lives--;
         if (lives <= 0) {
             dies();
@@ -111,20 +142,33 @@ public class Dragon extends Entity{
         this.lives = lives;
     }
 
+    /**
+     * Makes the dragon shoot
+     */
     private void shoot(){
+        logger.debug(this + "Has fired");
         FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
+    /**
+     * Kills the Dragon
+     */
     private void dies(){
         new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
         destroy();
     }
 
+    /**
+     * Show the information of the dragon
+     */
     private void pressed() {
 
     }
 
+    /**
+     * Move the dragon, updating the coordinates
+     */
     private void move() {
         xPoss -= xSpeed;
     }

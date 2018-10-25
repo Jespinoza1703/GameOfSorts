@@ -24,6 +24,15 @@ public class FireBall extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
+    /**
+     * Constructor
+     * @param xPoss
+     * @param yPoss
+     * @param fireWidth
+     * @param fireHeight
+     * @param xDir
+     * @param yDir
+     */
     public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
@@ -36,6 +45,10 @@ public class FireBall extends Entity {
         GameController.getInstance().addEntity(this);
     }
 
+    /**
+     * Draws the fireball
+     * @return
+     */
     @Override
     public Sprite draw() {
         long time = clock.getTime();
@@ -49,6 +62,10 @@ public class FireBall extends Entity {
         return sprite;
     }
 
+    /**
+     * Simulate the movement of the fireball
+     * @return
+     */
     private Sprite loadImages(){
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
                 "file:res/img/entities/fireball/Fireball1.png"));
@@ -67,6 +84,9 @@ public class FireBall extends Entity {
     }
 
     @Override
+    /**
+     *Detects coalitions
+     */
     public void hit(){
 
         dies();
@@ -77,16 +97,25 @@ public class FireBall extends Entity {
 
     }
 
+    /**
+     * Kill the fireball
+     */
     private void dies(){
         new BulletExplosion(xPoss, yPoss, fireHeight*2, fireHeight*2);
         destroy();
     }
 
+    /**
+     * Update the state of the fireball Image
+     */
     @Override
     public void update() {
         moveFire();
     }
 
+    /**
+     * Destroys the fireball
+     */
     @Override
     public void destroy() {
         Drawer.getInstance().deleteEntity(this);
@@ -99,11 +128,16 @@ public class FireBall extends Entity {
         return sprite;
     }
 
+    /**
+     * Update the position of the fireball
+     */
     public void moveFire(){
         xPoss += xSpeed * xDir;
         yPoss += ySpeed * yDir;
 
     }
+
+    /**Getters and Setters**/
 
     public double getxPoss() {
         return xPoss;

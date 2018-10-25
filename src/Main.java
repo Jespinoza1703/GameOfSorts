@@ -18,11 +18,20 @@ public class Main extends Application {
     private static Stage window;
     private static Logger logger = LoggerFactory.getLogger("Main");
 
+    /**
+     * Launch the app
+     * @param args
+     */
     public static void main(String[] args) {
         logger.debug("App launch");
         launch(args);
     }
 
+    /**
+     * Start the stages
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
