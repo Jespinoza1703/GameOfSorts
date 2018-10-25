@@ -177,9 +177,9 @@ public class AVLTreesTest {
             i++;
         }
         tree.deleteNode(tree.getRoot(), 2);
-    }
+    }*/
 
 
-*/
+
 
 }
