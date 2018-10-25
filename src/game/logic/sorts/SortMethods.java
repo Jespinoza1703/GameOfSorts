@@ -122,6 +122,13 @@ public class SortMethods {
         }
     }
 
+    /**
+     *Swap the positions of two nodes
+     * @param list
+     * @param i
+     * @param j
+     */
+
     private static void swap(List<Dragon> list, int i, int j){
         Dragon tmp = list.get(i);
         list.set(i, list.get(j));

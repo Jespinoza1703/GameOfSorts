@@ -5,6 +5,8 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.Clock;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class FireBall extends Entity {
     private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private static Logger logger = LoggerFactory.getLogger("FireBall");
 
     /**
      * Constructor
@@ -34,6 +37,7 @@ public class FireBall extends Entity {
      * @param yDir
      */
     public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
+        logger.debug("Created New FireBall");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
@@ -51,6 +55,7 @@ public class FireBall extends Entity {
      */
     @Override
     public Sprite draw() {
+        logger.debug("Draw" + this);
         long time = clock.getTime();
         if (time - lastAnimationTime > animationTimer){
             sprite = animations.get(currentSprite);
@@ -88,7 +93,7 @@ public class FireBall extends Entity {
      *Detects coalitions
      */
     public void hit(){
-
+        logger.debug(this + " has been hit");
         dies();
     }
 
@@ -101,6 +106,7 @@ public class FireBall extends Entity {
      * Kill the fireball
      */
     private void dies(){
+        logger.debug(this + " has been killed");
         new BulletExplosion(xPoss, yPoss, fireHeight*2, fireHeight*2);
         destroy();
     }
@@ -118,6 +124,7 @@ public class FireBall extends Entity {
      */
     @Override
     public void destroy() {
+        logger.debug(this+ " has been Destroyed");
         Drawer.getInstance().deleteEntity(this);
         GameController.getInstance().deleteEntity(this);
         Collisions.getInstance().deleteBullets(this);
