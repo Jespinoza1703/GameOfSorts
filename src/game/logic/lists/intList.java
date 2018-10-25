@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 public class intList {
     private intNode first;
     private int large;
-    private static Logger logger = LoggerFactory.getLogger("FireBall");
+    private static Logger logger = LoggerFactory.getLogger("IntList");
 
     public intList(){
         this.first = null;

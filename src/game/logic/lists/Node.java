@@ -1,18 +1,23 @@
 package game.logic.lists;
 
 import game.entities.Dragon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Node <T> {
 
     private Dragon dragon;
     private T value = null;
     private Node next = null;
+    private static Logger logger = LoggerFactory.getLogger("IntList");
+
 
     /***
      * Constructor with int as parameter
      * @param value
      */
     public Node(T value){
+        logger.debug("Created New Node");
         this.value = value;
     }
 
@@ -21,6 +26,7 @@ public class Node <T> {
      * @param dragon
      */
     public Node(Dragon dragon){
+        logger.debug("Created new Node with a Dragon");
         this.setDragon(dragon);
     }
 
