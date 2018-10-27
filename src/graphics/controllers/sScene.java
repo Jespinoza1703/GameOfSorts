@@ -10,6 +10,14 @@ import java.io.IOException;
  */
 public abstract class sScene {
 
+    /**
+     * 800x600
+     * 1024x768
+     * 1280x960
+     * 1400x1050
+     * 1680x1050
+     * 1920x1080
+     */
     private static int width = 1280;
     private static int height = 760;
 

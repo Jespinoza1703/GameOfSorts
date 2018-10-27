@@ -1,14 +1,14 @@
 package graphics.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class sGame extends sScene{
 
     @FXML
-    public AnchorPane gamePane;
+    public Pane gamePane;
 
     @Override
     protected void initialize() throws IOException {

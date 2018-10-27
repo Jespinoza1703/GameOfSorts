@@ -16,7 +16,7 @@ public class FireBall extends Entity {
     private Sprite sprite;
     private double xPoss, yPoss;
     private int xDir, yDir;
-    private int xSpeed = 10, ySpeed = 10;
+    private int xSpeed = 15, ySpeed = 8;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
     private ArrayList<Sprite> deathAnimations = new ArrayList<>();
@@ -24,15 +24,15 @@ public class FireBall extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
-    public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
+    public FireBall(double xPoss, double yPoss, double fireWidth, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
-        this.fireHeight = fireHeight;
+        this.fireHeight = fireWidth * 0.4;
         this.xDir = xDir;
         this.yDir = yDir;
         sprite = loadImages();
-        Drawer.getInstance().addDrawAtBegining(this);
+        Drawer.getInstance().addDrawAtBeginning(this);
         GameController.getInstance().addEntity(this);
     }
 
@@ -103,6 +103,12 @@ public class FireBall extends Entity {
         xPoss += xSpeed * xDir;
         yPoss += ySpeed * yDir;
 
+        var width = Drawer.width;
+        var height = Drawer.height;
+        if (yPoss < 0) destroy();
+        if (yPoss > height) destroy();
+        if (xPoss < 0) destroy();
+        if (xPoss > width) destroy();
     }
 
     public double getxPoss() {

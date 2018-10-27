@@ -14,13 +14,13 @@ public class Player extends Entity {
 
     private KeyReader key = KeyReader.getInstance();
     private Clock clock = Clock.getInstance();
-    private int lives = 3;
+    private int lives = 6;
     private int xSpeed = 0, ySpeed = 0;
-    private int xMaxSpeed = 8, yMaxSpeed = 8;
+    private int xMaxSpeed = 7, yMaxSpeed = 7;
     private int xAcc = 1, yAcc = 2;
     private double xPoss = 200, yPoss = 200;
     private int playerWidth = 150, playerHeight = 200;
-    private int fire_rate = 500;
+    private int fire_rate = 300;
     private int damage = 1;
     private long lastTime = 0;
     private String state = "Moving"; // Moving / Dead / Dashing
@@ -29,7 +29,7 @@ public class Player extends Entity {
     private ArrayList<Sprite> dashAnimation = new ArrayList<>();
     private ArrayList<Sprite> currentAnimation = new ArrayList<>();
     private Sprite sprite = loadImages();
-    private int animationTimer = 200;
+    private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
@@ -44,13 +44,6 @@ public class Player extends Entity {
 
         if (key.shoot == 1 && canShoot()){
             shoot();
-        }
-        if (state.equals("Moving")){
-            currentAnimation = movementAnimation;
-        } else if(state.equals("Dead")){
-            currentAnimation = deathAnimation;
-        } else if (state.equals("Dashing")){
-            currentAnimation = dashAnimation;
         }
     }
 
@@ -117,7 +110,7 @@ public class Player extends Entity {
 
     private void shoot(){
         var yDirection = key.arrow_down - key.arrow_up;
-        FireBall fireBall = new FireBall(xPoss, yPoss, 50, 17,1, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2,1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
     }
 
@@ -130,18 +123,39 @@ public class Player extends Entity {
         var xMove = key.right - key.left;
         var yMove = key.up - key.down;
 
+        // Adds gravity
+        if(yMove < 0){
+            yAcc = 3;
+            yMaxSpeed = 9;
+        }
+        if(yMove > 0){
+            yAcc = 2;
+            yMaxSpeed = 6;
+        }
+
+        // Adds air friction
         if (xMove == 0){
             xSpeed =  Math.approach(xSpeed, 0, 1);
         }
-
         if (yMove == 0){
             ySpeed =  Math.approach(ySpeed, 0, 1);
         }
 
+        // Calculates current position
         xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
         ySpeed = Math.clamp(ySpeed -= yAcc * yMove, -yMaxSpeed, yMaxSpeed);
         xPoss += xSpeed;
         yPoss += ySpeed;
+
+        // Calculates boundaries
+        var height = Drawer.height;
+        var width = Drawer.width;
+        var spriteHH = sprite.getHeight() / 2;
+        var spriteHW = sprite.getWidth() / 2;
+        if (yPoss - spriteHH < 0) yPoss = 0 + spriteHH;
+        if (yPoss + spriteHH > height) yPoss = height - spriteHH;
+        if (xPoss - spriteHW < 0) xPoss = 0 + spriteHW;
+        if (xPoss + spriteHW > width) xPoss = width - spriteHW;
     }
 
     private Boolean canShoot(){
@@ -169,5 +183,13 @@ public class Player extends Entity {
 
     public void setyPoss(double yPoss) {
         this.yPoss = yPoss;
+    }
+
+    public int getSpeed() {
+        return xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
     }
 }

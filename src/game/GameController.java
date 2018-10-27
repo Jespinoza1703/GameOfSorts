@@ -1,5 +1,9 @@
 package game;
 
+import client.Wave;
+import client.WaveGenerator;
+import game.draw.Drawer;
+import game.entities.Background;
 import game.entities.Dragon;
 import game.entities.Entity;
 import game.entities.Player;
@@ -18,22 +22,21 @@ public class GameController extends Thread{
     private Clock clock = Clock.getInstance();
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
-    private Player player;
+    private Wave wave = new Wave();
+    public static Player player;
     private boolean paused;
     private boolean running;
-    private int wave;
 
     private GameController(String msg){
         super(msg);
         paused = false;
         running = true;
-        wave = 0;
     }
 
     public static GameController getInstance(){
         if (instance == null){
             instance = new GameController("game");
-            instance.player = new Player();
+            player = new Player();
             instance.thread = instance;
             instance.thread.start();
         }
@@ -46,6 +49,7 @@ public class GameController extends Thread{
 
     @Override
     public void run(){
+        loadBackGround();
         getWave();
         while (running){
             clock.ticks(60);
@@ -66,9 +70,13 @@ public class GameController extends Thread{
         end();
     }
 
+    private void loadBackGround() {
+        new Background(1, 0, Drawer.width, 1000,"file:res/img/background/sMountain.png", 1);
+        new Background(2, 0,Drawer.width, 680,"file:res/img/background/sTrees.png", 2);
+    }
+
     private void getWave(){
-        Dragon dragon = new Dragon(1000, 350);
-        wave = 1;
+
     }
 
     private void event(){
@@ -107,10 +115,6 @@ public class GameController extends Thread{
         entities.addAtEnd(entity);
     }
 
-    public boolean isWaveClear(){
-        return wave == 0;
-    }
-
     private void verifyCollisions(){
         Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
         Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
@@ -119,6 +123,14 @@ public class GameController extends Thread{
         if(collision_player_with_dragon || collision_player_with_dragonBullet){
             player.hit();
         }
+    }
+
+    public void setWave(Wave wave) {
+        this.wave = wave;
+    }
+
+    public boolean isWaveClear(){
+        return wave.getSize() == 0;
     }
 
     public boolean isPaused(){

@@ -6,20 +6,22 @@ import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
 import util.Clock;
+import util.Math;
+import util.NameGenerator;
 
 import java.util.ArrayList;
 
 public class Dragon extends Entity{
 
-    private String name;
+    private String name = NameGenerator.generateName();
     private int parentAge;
-    private int lives; // [1, 3]
-    private int fire_rate = (int) (Math.random() * 15000);  // [10, 100]
+    private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
+    private int fire_rate = Math.getRandomNumberInRange(10000, 100000);  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
-    private double xSpeed = 1;
+    private double xSpeed = 0.5;
     private long lastTime = 0;
     private KeyReader key;
     private Clock clock = Clock.getInstance();
@@ -30,6 +32,9 @@ public class Dragon extends Entity{
     private int currentSprite = 0;
     private Boolean playerCollision = false;
 
+    public Dragon() {
+
+    }
 
     public Dragon(double xPoss, double yPoss) {
         this.xPoss = xPoss;
@@ -40,14 +45,25 @@ public class Dragon extends Entity{
         Collisions.getInstance().addDragon(this);
     }
 
-    public Dragon() {
-
-    }
-
     public Dragon(int parentAge, int age, String rank) {
         this.parentAge = parentAge;
         this.age = age;
         this.rank = rank;
+    }
+
+    public Dragon(double xPoss, double yPoss, int parentAge, int age, String rank, String name, int lives, int fire_rate) {
+        this.xPoss = xPoss;
+        this.yPoss = yPoss;
+        this.parentAge = parentAge;
+        this.age = age;
+        this.rank = rank;
+        this.name = name;
+        this.lives = lives;
+        this.fire_rate = fire_rate;
+        sprite = loadImages();
+        Drawer.getInstance().addDrawAtEnd(this);
+        GameController.getInstance().addEntity(this);
+        Collisions.getInstance().addDragon(this);
     }
 
     @Override
@@ -112,7 +128,7 @@ public class Dragon extends Entity{
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11, -1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
@@ -126,6 +142,7 @@ public class Dragon extends Entity{
     }
 
     private void move() {
+        xPoss -= java.lang.Math.max(xSpeed, GameController.player.getSpeed()+xSpeed);
         xPoss -= xSpeed;
     }
 
