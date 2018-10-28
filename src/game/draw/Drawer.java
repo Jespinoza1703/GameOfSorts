@@ -8,6 +8,10 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import util.Clock;
 
 /**
@@ -16,10 +20,11 @@ import util.Clock;
  */
 public class Drawer {
 
+    private static Logger logger = LoggerFactory.getLogger(Drawer.class);
+    private static final Marker SYS = MarkerFactory.getMarker("SYS");
     public static double width = sScene.getWidth();
     public static double height = sScene.getHeight();
     private static Drawer instance;
-    private static Clock clock = Clock.getInstance();
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
     private SimpleList<Background> bg1 = new SimpleList<>();
     private SimpleList<Background> bg2 = new SimpleList<>();
@@ -48,6 +53,7 @@ public class Drawer {
             }
         };
         instance.drawer.start();
+        logger.info(SYS, "Drawer thread start as: " + instance.drawer.toString());
     }
 
     /**
@@ -97,6 +103,7 @@ public class Drawer {
     }
 
     public void abort(){
+        logger.info(SYS, "Drawer thread stop: " + drawer.toString());
         drawer.stop();
         instance = null;
     }

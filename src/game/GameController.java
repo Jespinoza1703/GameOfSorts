@@ -1,13 +1,11 @@
 package game;
 
 import client.Wave;
-import client.WaveGenerator;
 import game.draw.Drawer;
 import game.entities.Background;
-import game.entities.Dragon;
 import game.entities.Entity;
 import game.entities.Player;
-import game.event.handler.inputs.Collisions;
+import game.event.handler.Collisions;
 import game.logic.lists.SimpleList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,7 +118,7 @@ public class GameController extends Thread{
     }
 
     private void end(){
-        logger.info(SYS, "Game thread stop");
+        logger.info(SYS, "Game thread stop: " + thread.getName());
         instance = null;
         thread.stop();
     }

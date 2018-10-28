@@ -4,7 +4,7 @@ import client.Wave;
 import client.WaveGenerator;
 import game.GameController;
 import game.draw.Drawer;
-import game.event.handler.inputs.Collisions;
+import game.event.handler.Collisions;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 

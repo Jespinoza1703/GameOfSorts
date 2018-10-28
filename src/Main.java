@@ -19,8 +19,8 @@ public class Main extends Application {
 
     private static Stage window;
     private static Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final Marker GUI = MarkerFactory.getMarker("GUI");
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
+    private static final Marker GUI = MarkerFactory.getMarker("GUI");
 
     public static void main(String[] args) {
         logger.info(SYS, "Running JavaFx Application");
