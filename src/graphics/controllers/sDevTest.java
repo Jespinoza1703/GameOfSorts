@@ -4,6 +4,7 @@ import client.Wave;
 import client.WaveGenerator;
 import game.GameController;
 import game.draw.Drawer;
+import game.event.handler.inputs.Collisions;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -27,6 +28,7 @@ public class sDevTest extends sScene{
     void pressed_return() throws IOException {
         GameController.getInstance().abort();
         Drawer.getInstance().abort();
+        Collisions.getInstance().abort();
         Interface.switchScene("graphics/layouts/menu.fxml");
     }
 }

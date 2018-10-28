@@ -94,7 +94,7 @@ public class GameController extends Thread{
         for (int i = 0; i < entities.getLarge(); i++){
             entities.getByIndex(i).getValue().update();
         }
-        if (player.isAlive()) verifyCollisions();
+        verifyCollisions();
 
     }
 
@@ -116,13 +116,16 @@ public class GameController extends Thread{
     }
 
     private void verifyCollisions(){
-        Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
-        Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
+        if (player.isAlive()){
+            Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
+            Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
+            if(collision_player_with_dragon || collision_player_with_dragonBullet){
+                player.hit();
+            }
+        }
         collision.collide(collision.getDragons(), collision.getPlayerBullets(), true, true);
         collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);
-        if(collision_player_with_dragon || collision_player_with_dragonBullet){
-            player.hit();
-        }
+
     }
 
     public void setWave(Wave wave) {

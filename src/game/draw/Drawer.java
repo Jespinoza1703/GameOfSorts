@@ -8,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import util.Clock;
 
 /**
  * Singleton class that manages the objects to be drawn in the gamePane
@@ -18,6 +19,7 @@ public class Drawer {
     public static double width = sScene.getWidth();
     public static double height = sScene.getHeight();
     private static Drawer instance;
+    private static Clock clock = Clock.getInstance();
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
     private SimpleList<Background> bg1 = new SimpleList<>();
     private SimpleList<Background> bg2 = new SimpleList<>();
@@ -42,8 +44,6 @@ public class Drawer {
         instance.drawer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                //width = pane.getWidth();
-                //height = pane.getHeight();
                 instance.draw();
             }
         };
@@ -58,7 +58,8 @@ public class Drawer {
         drawBG();
         for (int i = 0; i < draws.getLarge(); i++){
             ImageView sprite = draws.getByIndex(i).getValue().draw().getSprite();
-            drawPane.getChildren().addAll(sprite);
+            boolean contains = drawPane.getChildren().contains(sprite);
+            if (!contains) drawPane.getChildren().addAll(sprite);
         }
     }
 

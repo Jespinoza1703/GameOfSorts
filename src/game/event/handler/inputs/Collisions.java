@@ -72,6 +72,10 @@ public class Collisions {
         return collide;
     }
 
+    public void abort(){
+        instance = null;
+    }
+
     public void addDragon(Entity dragon){
         dragons.addAtEnd(dragon);
     }
