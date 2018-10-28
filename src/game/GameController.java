@@ -9,6 +9,10 @@ import game.entities.Entity;
 import game.entities.Player;
 import game.event.handler.inputs.Collisions;
 import game.logic.lists.SimpleList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import util.Clock;
 
 /**
@@ -17,6 +21,10 @@ import util.Clock;
  */
 public class GameController extends Thread{
 
+    private static Logger logger = LoggerFactory.getLogger(GameController.class);
+    private static final Marker SYS = MarkerFactory.getMarker("SYS");
+    private static final Marker SPRITES = MarkerFactory.getMarker("SPRITES");
+    private static final Marker WS = MarkerFactory.getMarker("WS");
     private static GameController instance;
     private Collisions collision = Collisions.getInstance();
     private Clock clock = Clock.getInstance();
@@ -39,12 +47,14 @@ public class GameController extends Thread{
             player = new Player();
             instance.thread = instance;
             instance.thread.start();
+            logger.info(SYS, "Game thread started as: " + instance.thread.getName());
         }
         return instance;
     }
 
     public void abort(){
         running = false;
+        logger.info(SYS, "Game aborted");
     }
 
     @Override
@@ -71,12 +81,13 @@ public class GameController extends Thread{
     }
 
     private void loadBackGround() {
+        logger.info(SPRITES, "Loading parallax backgrounds...");
         new Background(1, 0, Drawer.height, Drawer.width, Drawer.height,"file:res/img/backgrounds/parallax1/layer-1-sky.png", 1);
         new Background(2, 0, Drawer.height, Drawer.width, Drawer.height / 1.2,"file:res/img/backgrounds/parallax1/layer-2-mountain.png", 2);
         }
 
     private void getWave(){
-
+        logger.info(WS, "Game ask for wave");
     }
 
     private void event(){
@@ -84,6 +95,7 @@ public class GameController extends Thread{
     }
 
     private void pause(){
+        logger.info(SYS, "Game Paused");
         while (isPaused()){
             event();
             draw();
@@ -102,16 +114,19 @@ public class GameController extends Thread{
 
     }
 
-    public void deleteEntity(Entity draw){
-        entities.delete(entities.searchIndex(draw));
+    public void deleteEntity(Entity entity){
+        logger.info(SPRITES, "Removing from the game: " + entity.toString());
+        entities.delete(entities.searchIndex(entity));
     }
 
     private void end(){
+        logger.info(SYS, "Game thread stop");
         instance = null;
         thread.stop();
     }
 
     public void addEntity(Entity entity){
+        logger.info(SPRITES, "Adding to the game: " + entity.toString());
         entities.addAtEnd(entity);
     }
 
