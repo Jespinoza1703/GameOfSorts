@@ -105,12 +105,15 @@ public class Dragon extends Entity{
      * @return Sprite
      */
     private Sprite loadImages() {
+        String[] colors = {"blue", "green", "purple", "red", "yellow"};
+        int i = Math.getRandomNumberInRange(0, colors.length - 1);
+        String color = colors[i];
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dMovement2"));
+                "file:res/img/entities/dragons/" + color + "/fly2.png"));
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dMovement1"));
+                "file:res/img/entities/dragons/" + color + "/fly1.png"));
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dMovement3"));
+                "file:res/img/entities/dragons/" + color + "/fly3.png"));
         return movementAnimations.get(0);
     }
 
