@@ -3,6 +3,7 @@ package game.draw;
 import game.entities.Background;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
+import graphics.controllers.sScene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -14,8 +15,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class Drawer {
 
-    public static double width = 1280;
-    public static double height = 960;
+    public static double width = sScene.getWidth();
+    public static double height = sScene.getHeight();
     private static Drawer instance;
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
     private SimpleList<Background> bg1 = new SimpleList<>();

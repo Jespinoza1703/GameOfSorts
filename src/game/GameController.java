@@ -71,9 +71,9 @@ public class GameController extends Thread{
     }
 
     private void loadBackGround() {
-        new Background(1, 0, Drawer.width, 1000,"file:res/img/background/sMountain.png", 1);
-        new Background(2, 0,Drawer.width, 680,"file:res/img/background/sTrees.png", 2);
-    }
+        new Background(1, 0, Drawer.height, Drawer.width, Drawer.height,"file:res/img/backgrounds/parallax1/layer-1-sky.png", 1);
+        new Background(2, 0, Drawer.height, Drawer.width, Drawer.height / 1.2,"file:res/img/backgrounds/parallax1/layer-2-mountain.png", 2);
+        }
 
     private void getWave(){
 
