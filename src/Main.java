@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private static Stage window;
-    private static Logger logger = LoggerFactory.getLogger("Main");
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
         logger.debug("App launch");

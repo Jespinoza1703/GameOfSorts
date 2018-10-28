@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jfoenix/jfoenix-9.0.5.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/jfoenix/jfoenix-9.0.5-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES />
   </library>
 </component>
