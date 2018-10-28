@@ -192,4 +192,8 @@ public class Player extends Entity {
     public int getySpeed() {
         return ySpeed;
     }
+
+    public boolean isAlive(){
+        return lives > 0;
+    }
 }

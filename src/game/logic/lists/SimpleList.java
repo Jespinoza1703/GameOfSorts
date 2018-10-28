@@ -101,7 +101,7 @@ public class SimpleList<T> {
     public int searchIndex(T object){
         int result = -1;
         for(int i = 0; i < large; i++){
-            if(this.getByIndex(i).getValue().equals(object)){
+            if(this.getByIndex(i).getValue() == object){
                 result = i;
                 break;
             }
@@ -114,7 +114,11 @@ public class SimpleList<T> {
      * @param index posición de elemento a eliminar
      */
     public void delete(int index){
-        if (index < this.getLarge() && index != -1){
+        if (index < this.getLarge()){
+            if(index == -1){
+                System.out.println("Object not found");
+                return;
+            }
             int i = 0;
             Node temporal = this.first;
             if (index == 0){

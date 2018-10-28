@@ -94,7 +94,7 @@ public class GameController extends Thread{
         for (int i = 0; i < entities.getLarge(); i++){
             entities.getByIndex(i).getValue().update();
         }
-        verifyCollisions();
+        if (player.isAlive()) verifyCollisions();
 
     }
 

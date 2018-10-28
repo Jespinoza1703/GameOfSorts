@@ -53,7 +53,7 @@ public class Drawer {
     /**
      * This method adds in the drawPane the objects that are in the draws:SimpleList after cleaning it
      */
-    private void draw(){
+    private synchronized void draw(){
         drawPane.getChildren().clear();
         drawBG();
         for (int i = 0; i < draws.getLarge(); i++){
