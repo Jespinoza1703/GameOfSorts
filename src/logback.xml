@@ -26,15 +26,11 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}  %highlight(%marker) - %msg%n
+            </pattern>
         </encoder>
     </appender>
-
-    <!-- En esto uno debe colocar los logger y puede limitarles el nivel de informacion a cada
-    clase creada que requiera de logback-->
-    <logger name="com.tec.GoS" level="ALL">
-        <appender-ref ref="FILE-AUDIT" />
-    </logger>
 
     <root level="ALL">
         <appender-ref ref="STDOUT" />

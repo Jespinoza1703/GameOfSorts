@@ -6,9 +6,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.sGame">
+<AnchorPane id="sGame" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/Leaf.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.sGame">
    <children>
-      <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#pressed_return" />
       <Pane fx:id="gamePane" layoutX="147.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #BBF9F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#pressed_return" />
    </children>
 </AnchorPane>
