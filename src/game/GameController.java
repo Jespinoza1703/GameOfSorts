@@ -139,7 +139,7 @@ public class GameController extends Thread{
     }
 
     public void deleteEntity(Entity entity){
-        logger.info(SPRITES, "Removing from the game: " + entity.toString());
+        //logger.info(SPRITES, "Removing from the game: " + entity.toString());
         entities.delete(entities.searchIndex(entity));
     }
 
@@ -150,7 +150,7 @@ public class GameController extends Thread{
     }
 
     public void addEntity(Entity entity){
-        logger.info(SPRITES, "Adding to the game: " + entity.toString());
+        //logger.info(SPRITES, "Adding to the game: " + entity.toString());
         entities.addAtEnd(entity);
     }
 

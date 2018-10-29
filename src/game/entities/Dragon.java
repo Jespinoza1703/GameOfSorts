@@ -13,24 +13,22 @@ import java.util.ArrayList;
 
 public class Dragon extends Entity{
 
+    private Clock clock = Clock.getInstance();
     private String name = NameGenerator.generateName();
     private int parentAge;
     private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
-    private int fire_rate = Math.getRandomNumberInRange(10000, 100000);  // [10, 100]
+    private int fire_rate = Math.getRandomNumberInRange(7000, 50000);  // [7, 50]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
     private double xSpeed = 0.2;
-    private long lastTime = 0;
-    private KeyReader key;
-    private Clock clock = Clock.getInstance();
+    private long lastTime = clock.getTime();
     private Sprite sprite;
     private ArrayList<Sprite> movementAnimations = new ArrayList<>();
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
-    private Boolean playerCollision = false;
 
     public Dragon() {
 
@@ -131,7 +129,7 @@ public class Dragon extends Entity{
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2, -1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/1.5, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
