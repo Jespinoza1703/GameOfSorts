@@ -60,8 +60,6 @@ public class FireBall extends Entity {
                 "file:res/img/entities/fireball/Fireball4.png"));
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
                 "file:res/img/entities/fireball/Fireball5.png"));
-        deathAnimations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/dragon/fDeath1"));
         return animations.get(0);
 
     }

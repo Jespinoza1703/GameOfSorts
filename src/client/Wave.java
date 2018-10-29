@@ -18,23 +18,23 @@ public class Wave {
     private AVLTree dragonsAVLTree = new AVLTree();
     private String currentWave = "list";
 
-    public Wave(){
+    public Wave() {
 
     }
 
-    public Wave( long id, int size){
+    public Wave(long id, int size) {
         this.id = id;
         this.size = size;
         generateDragonList();
     }
 
-    public Wave( long id, int size, List<Dragon> dragonsList){
+    public Wave(long id, int size, List<Dragon> dragonsList) {
         this.id = id;
         this.size = size;
         this.dragonsList = dragonsList;
     }
 
-    public void dragonDies(Dragon dragon){
+    public void dragonDies(Dragon dragon) {
         if (currentWave.equals("list")) {
             dragonsList.remove(dragon);
             size--;
@@ -47,19 +47,19 @@ public class Wave {
         }
     }
 
-    private void generateDragonList(){
+    private void generateDragonList() {
         Dragon parent = new Dragon(-1, size, "Commander");
         dragonsList.add(parent);
-        for (int i = 1; i < size; i++){
+        for (int i = 1; i < size; i++) {
             parent = new Dragon(parent.getAge(), size - i, defineRank());
             dragonsList.add(parent);
         }
         SortMethods.unSort(dragonsList);
     }
 
-    private String defineRank(){
+    private String defineRank() {
         int i = (int) (Math.random() * 10);
-        if (i % 2 == 0){
+        if (i % 2 == 0) {
             return "Captain";
         }
         return "Infantry";
