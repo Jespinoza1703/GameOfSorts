@@ -5,9 +5,6 @@
     -fx-secundary-text : #ecfffd;
     -fx-shadow-text : #FFFFFF;
 }
-.root{
-    -fx-background-color: -fx-primary;
-}
 .glyph-icon {
     -fx-fill: -fx-primary-text;
 }
