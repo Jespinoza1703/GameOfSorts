@@ -4,6 +4,8 @@ import game.GameController;
 import game.draw.Drawer;
 import game.event.handler.Collisions;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -15,6 +17,10 @@ public class sGame extends sScene{
     public Pane gamePane;
     @FXML
     public VBox pause_menu;
+    @FXML
+    public HBox lifeBox;
+    @FXML
+    public Label waveCount;
 
     @Override
     protected void initialize() throws IOException {

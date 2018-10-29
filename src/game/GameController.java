@@ -26,6 +26,7 @@ public class GameController extends Thread{
     private static final Marker SPRITES = MarkerFactory.getMarker("SPRITES");
     private static final Marker WS = MarkerFactory.getMarker("WS");
     private static GameController instance;
+    private sGame game_pane = Drawer.getInstance().getGamePane();
     private Collisions collision = Collisions.getInstance();
     private Clock clock = Clock.getInstance();
     private KeyReader key = KeyReader.getInstance();
@@ -34,6 +35,7 @@ public class GameController extends Thread{
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
+    private int waveCount = 0;
     public static Player player;
     private boolean paused;
     private boolean running;
@@ -112,7 +114,6 @@ public class GameController extends Thread{
 
     private void pause(){
         logger.info(SYS, "Game Paused");
-        sGame game_pane = Drawer.getInstance().getGamePane();
         game_pane.pause_menu.setVisible(true);
         game_pane.gamePane.setOpacity(0.4);
         while (isPaused()){
@@ -133,7 +134,7 @@ public class GameController extends Thread{
     }
 
     private void draw(){
-
+        game_pane.waveCount.setText(String.valueOf(waveCount));
     }
 
     public void deleteEntity(Entity entity){
