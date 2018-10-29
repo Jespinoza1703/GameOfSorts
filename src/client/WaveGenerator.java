@@ -7,11 +7,21 @@ import java.util.List;
 
 public class WaveGenerator {
 
-    public static Wave getNewWave(int size){
-        return new Wave(0, size);
+    private static String[] waveSortMethod = {"selection", "insertion", "quick", "binary-tree", "avl-tree"};
+
+    public static Wave getNewWave(int size) {
+        Wave wave = new Wave(0, size);
+        listWave(wave);
+        return wave;
     }
 
-    public static void listWave(Wave wave){
+    public static Wave getWaveSorted(Wave wave, int type) {
+        int i = (type - 1) % waveSortMethod.length;
+        String sort = waveSortMethod[i];
+        return wave;
+    }
+
+    private static void listWave(Wave wave) {
         List<Dragon> dragons = wave.getDragonsList();
         int waveSize = wave.getSize();
         int columns = 8;
@@ -23,8 +33,8 @@ public class WaveGenerator {
         double xPoss = Drawer.width;
 
         int n = 0;
-        for (int i = 0; i < columns; i++){
-            for (int j = 0; j < rows; j++){
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
                 double x = (i + 1) * xOffset;
                 double y = (j + 1) * yOffset;
                 x += xPoss;
@@ -34,7 +44,7 @@ public class WaveGenerator {
         }
     }
 
-    private static void generateDragon(double x, double y, Dragon dragon){
+    private static void generateDragon(double x, double y, Dragon dragon) {
         int parentAge = dragon.getParentAge();
         int age = dragon.getAge();
         String rank = dragon.getRank();
