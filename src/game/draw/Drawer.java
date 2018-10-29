@@ -119,7 +119,7 @@ public class Drawer {
     }
 
     public void abort(){
-        logger.info(SYS, "Drawer thread stop: " + drawer.toString());
+        logger.info(SYS, "Drawer aborted");
         drawer.stop();
         instance = null;
     }

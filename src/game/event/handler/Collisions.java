@@ -13,6 +13,7 @@ public class Collisions {
 
     private static Logger logger = LoggerFactory.getLogger(Collisions.class);
     private static final Marker COLLISION = MarkerFactory.getMarker("COLLISION");
+    private static final Marker SYS = MarkerFactory.getMarker("SYS");
     private static Collisions instance;
     private SimpleList<Entity> dragons = new SimpleList<>();
     private SimpleList<Entity> playerBullets = new SimpleList<>();
@@ -84,6 +85,7 @@ public class Collisions {
     }
 
     public void abort(){
+        logger.info(SYS, "Collisions aborted");
         instance = null;
     }
 

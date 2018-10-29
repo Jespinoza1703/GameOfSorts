@@ -61,6 +61,7 @@ public class GameController extends Thread{
     public void abort(){
         running = false;
         logger.info(SYS, "Game aborted");
+        end();
     }
 
     @Override
