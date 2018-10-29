@@ -50,16 +50,17 @@ public class FireBall extends Entity {
     }
 
     private Sprite loadImages(){
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball2.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball3.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball4.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball5.png"));
+        String[] colors = {"blue", "green", "purple", "red", "yellow"};
+        // int i = Math.getRandomNumberInRange(0, colors.length - 1);
+        String color = colors[3];
+        if(xDir > 0) color = colors[4];
+
+        String root = "file:res/img/entities/fireballs/" + color;
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/1.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/2.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/3.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/4.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/5.png"));
         return animations.get(0);
 
     }

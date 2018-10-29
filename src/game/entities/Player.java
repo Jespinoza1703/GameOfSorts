@@ -72,22 +72,15 @@ public class Player extends Entity {
     }
 
     private Sprite loadImages() {
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin1"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin2"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin3"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin4"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin5"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin6"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin7"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
-                "file:res/img/entities/griffin/griffin8"));
+        String root = "file:res/img/entities/griffin/";
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin1"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin2"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin3"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin4"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin5"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin6"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin7"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight, root + "griffin8"));
         return movementAnimation.get(0);
 
     }

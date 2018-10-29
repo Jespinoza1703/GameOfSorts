@@ -75,20 +75,14 @@ public class BulletExplosion extends Entity {
      * @return Sprite
      */
     private Sprite loadImages(){
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion1"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion2"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion3"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion4"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion5"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion6"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion7"));
+        String root = "file:res/img/entities/explosion/";
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion1"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion2"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion3"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion4"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion5"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion6"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion7"));
         return movementAnimation.get(0);
     }
 }

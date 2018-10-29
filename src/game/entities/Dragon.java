@@ -117,22 +117,23 @@ public class Dragon extends Entity {
         String[] colors = {"blue", "green", "purple", "red", "yellow"};
         // int i = Math.getRandomNumberInRange(0, colors.length - 1);
         String color = colors[3];
-        if (rank.equals("Commander")){
+
+        if (rank.equals("Commander")) {
             color = colors[4];
             dragonWidth = 150;
             dragonHeight = 120;
         }
-        if (rank.equals("Captain")){
+
+        if (rank.equals("Captain")) {
             color = colors[1];
             dragonWidth = 100;
             dragonHeight = 85;
         }
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragons/" + color + "/fly2.png"));
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragons/" + color + "/fly1.png"));
-        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragons/" + color + "/fly3.png"));
+
+        String root = "file:res/img/entities/dragons/" + color;
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly2.png"));
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly1.png"));
+        movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly3.png"));
         return movementAnimations.get(0);
     }
 
