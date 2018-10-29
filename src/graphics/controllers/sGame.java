@@ -28,9 +28,7 @@ public class sGame extends sScene{
     protected void initialize() throws IOException {
         Drawer.init(gamePane);
         Drawer.getInstance().setGamePane(this);
-        Wave wave = new Wave(0, 64);
-        GameController.getInstance().setWave(wave);
-        WaveGenerator.listWave(wave);
+        GameController.getInstance();
     }
 
     @Override
