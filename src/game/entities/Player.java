@@ -34,16 +34,16 @@ public class Player extends Entity {
     private int currentSprite = 0;
     private int hitTimer = 0;
 
-    public Player(){
+    public Player() {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
     }
 
     @Override
-    public void update(){
+    public void update() {
         move();
         hitAnimation();
-        if (key.shoot == 1 && canShoot()){
+        if (key.shoot == 1 && canShoot()) {
             shoot();
         }
     }
@@ -62,7 +62,7 @@ public class Player extends Entity {
     @Override
     public Sprite draw() {
         long time = clock.getTime();
-        if (time - lastAnimationTime > animationTimer){
+        if (time - lastAnimationTime > animationTimer) {
             sprite = movementAnimation.get(currentSprite);
             lastAnimationTime = time;
             currentSprite = (currentSprite + 1) % movementAnimation.size();
@@ -71,7 +71,7 @@ public class Player extends Entity {
         return sprite;
     }
 
-    private Sprite loadImages(){
+    private Sprite loadImages() {
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
                 "file:res/img/entities/griffin/griffin1"));
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
@@ -93,16 +93,16 @@ public class Player extends Entity {
     }
 
     @Override
-    public void hit(){
+    public void hit() {
         lives--;
         hitTimer = 30;
-        if(lives <= 0){
+        if (lives <= 0) {
             dies();
         }
     }
 
     private void hitAnimation() {
-        if (hitTimer > 0){
+        if (hitTimer > 0) {
             hitTimer--;
             sprite.getSprite().setEffect(sprite.effect);
         }
@@ -111,44 +111,44 @@ public class Player extends Entity {
 
     @Override
     public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    private void heal() {
 
     }
 
-    private void heal(){
-
-    }
-
-    private void shoot(){
+    private void shoot() {
         var yDirection = key.arrow_down - key.arrow_up;
-        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2,1, yDirection);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth() / 2, 1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
     }
 
-    private void dies(){
+    private void dies() {
         new BulletExplosion(xPoss, yPoss, playerWidth, playerHeight);
         destroy();
     }
 
-    private void move(){
+    private void move() {
         var xMove = key.right - key.left;
         var yMove = key.up - key.down;
 
         // Adds gravity
-        if(yMove < 0){
+        if (yMove < 0) {
             yAcc = 3;
             yMaxSpeed = 9;
         }
-        if(yMove > 0){
+        if (yMove > 0) {
             yAcc = 2;
             yMaxSpeed = 6;
         }
 
         // Adds air friction
-        if (xMove == 0){
-            xSpeed =  Math.approach(xSpeed, 0, 1);
+        if (xMove == 0) {
+            xSpeed = Math.approach(xSpeed, 0, 1);
         }
-        if (yMove == 0){
-            ySpeed =  Math.approach(ySpeed, 0, 1);
+        if (yMove == 0) {
+            ySpeed = Math.approach(ySpeed, 0, 1);
         }
 
         // Calculates current position
@@ -168,10 +168,10 @@ public class Player extends Entity {
         if (xPoss + spriteHW > width) xPoss = width - spriteHW;
     }
 
-    private Boolean canShoot(){
+    private Boolean canShoot() {
         Boolean result = false;
         long time = clock.getTime();
-        if (time - lastTime > fire_rate){
+        if (time - lastTime > fire_rate) {
             result = true;
             lastTime = time;
         }
@@ -203,7 +203,7 @@ public class Player extends Entity {
         return ySpeed;
     }
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return lives > 0;
     }
 

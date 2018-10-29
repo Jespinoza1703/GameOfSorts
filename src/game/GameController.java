@@ -40,7 +40,7 @@ public class GameController extends Thread {
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
-    private int waveCount = 0;
+    private int waveCount = -1;
     private int waveSize = 32;
     private boolean paused;
     private boolean running;
@@ -100,6 +100,8 @@ public class GameController extends Thread {
     private void getWave() {
         logger.info(WS, "Game ask for first wave: " + waveCount);
         wave = WaveGenerator.getNewWave(waveSize);
+        waveCount++;
+        waveSize += 8;
     }
 
     private void getWaveSorted() {

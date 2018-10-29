@@ -157,6 +157,19 @@ public class Dragon extends Entity{
     private void move() {
         xPoss -= java.lang.Math.max(xSpeed, GameController.player.getSpeed()+xSpeed);
         xPoss -= xSpeed;
+
+        // Calculates boundaries
+        var height = Drawer.height;
+        var spriteHH = sprite.getHeight() / 2;
+        var spriteHW = sprite.getWidth() / 2;
+        if (yPoss - spriteHH < 0) yPoss = 0 + spriteHH;
+        if (yPoss + spriteHH > height) yPoss = height - spriteHH;
+        // Gets to the end of the screen
+        if (xPoss - spriteHW < 0) {
+            xPoss = 0 + spriteHW;
+            if(GameController.player.isAlive()) GameController.player.hit();
+            dies();
+        }
     }
 
     private Boolean canShoot() {
