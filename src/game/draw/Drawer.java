@@ -3,6 +3,7 @@ package game.draw;
 import game.entities.Background;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
+import graphics.controllers.sGame;
 import graphics.controllers.sScene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
@@ -25,6 +26,7 @@ public class Drawer {
     public static double width = sScene.getWidth();
     public static double height = sScene.getHeight();
     private static Drawer instance;
+    private sGame gamePane;
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
     private SimpleList<Background> bg1 = new SimpleList<>();
     private SimpleList<Background> bg2 = new SimpleList<>();
@@ -106,5 +108,21 @@ public class Drawer {
         logger.info(SYS, "Drawer thread stop: " + drawer.toString());
         drawer.stop();
         instance = null;
+    }
+
+    public sGame getGamePane() {
+        return gamePane;
+    }
+
+    public void setGamePane(sGame gamePane) {
+        this.gamePane = gamePane;
+    }
+
+    public Pane getDrawPane() {
+        return drawPane;
+    }
+
+    public void setDrawPane(Pane drawPane) {
+        this.drawPane = drawPane;
     }
 }

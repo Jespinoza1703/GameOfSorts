@@ -3,6 +3,7 @@
     -fx-secundary : #88c399;
     -fx-primary-text : #383838;
     -fx-secundary-text : #ecfffd;
+    -fx-shadow-text : #FFFFFF;
 }
 .root{
     -fx-background-color: -fx-primary;
@@ -15,6 +16,12 @@
 .label{
     -fx-text-fill: -fx-primary-text;
     -fx-font-size: 50;
+}
+.alpha-label{
+    -fx-text-fill: -fx-shadow-text;
+}
+.alpha-label:hover{
+    -fx-text-fill: -fx-primary-text;
 }
 .bold-label-150{
     -fx-font-weight: bold;

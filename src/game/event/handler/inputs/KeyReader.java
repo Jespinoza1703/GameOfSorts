@@ -27,6 +27,8 @@ public class KeyReader {
     public int shoot;
     public int space;
     public int shift;
+    public int esc;
+    public int pause;
 
 
     private KeyReader(){
@@ -56,6 +58,8 @@ public class KeyReader {
                 case E: shoot = 1; break;
                 case SPACE: space = 1; break;
                 case SHIFT: shift = 1; break;
+                case ESCAPE: esc = 1; break;
+                case P: pause = 1; break;
             }
             logger.info(KEY, "Pressed: " + event.getCode().toString());
         });
@@ -78,6 +82,8 @@ public class KeyReader {
                 case E: shoot = 0; break;
                 case SPACE: space = 0; break;
                 case SHIFT: shift = 0; break;
+                case ESCAPE: esc = 0; break;
+                case P: pause = 0; break;
             }
             logger.info(KEY, "Released: " + event.getCode().toString());
         });

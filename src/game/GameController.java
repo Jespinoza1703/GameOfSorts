@@ -6,7 +6,9 @@ import game.entities.Background;
 import game.entities.Entity;
 import game.entities.Player;
 import game.event.handler.Collisions;
+import game.event.handler.inputs.KeyReader;
 import game.logic.lists.SimpleList;
+import graphics.controllers.sGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -26,6 +28,9 @@ public class GameController extends Thread{
     private static GameController instance;
     private Collisions collision = Collisions.getInstance();
     private Clock clock = Clock.getInstance();
+    private KeyReader key = KeyReader.getInstance();
+    private long key_delay = 1000;
+    private long key_last_time = 0;
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
@@ -89,15 +94,34 @@ public class GameController extends Thread{
     }
 
     private void event(){
+        long time = clock.getTime();
 
+        // Checks the keys delay
+        if (time - key_last_time > key_delay){
+            key_last_time = time;
+
+            // Checks for key events
+            if (!paused && (key.esc == 1 || key.pause == 1)){
+                paused = true;
+            }
+            else if (paused && (key.esc == 1 || key.pause == 1)){
+                paused = false;
+            }
+        }
     }
 
     private void pause(){
         logger.info(SYS, "Game Paused");
+        sGame game_pane = Drawer.getInstance().getGamePane();
+        game_pane.pause_menu.setVisible(true);
+        game_pane.gamePane.setOpacity(0.4);
         while (isPaused()){
             event();
             draw();
         }
+        game_pane.pause_menu.setVisible(false);
+        game_pane.gamePane.setOpacity(1);
+        logger.info(SYS, "Game Resumed");
     }
 
     private void update(){
@@ -143,6 +167,10 @@ public class GameController extends Thread{
 
     public void setWave(Wave wave) {
         this.wave = wave;
+    }
+
+    public void setPaused(boolean pause){
+        paused = pause;
     }
 
     public boolean isWaveClear(){
