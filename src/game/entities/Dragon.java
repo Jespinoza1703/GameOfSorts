@@ -21,7 +21,7 @@ public class Dragon extends Entity{
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
-    private double xSpeed = 0.5;
+    private double xSpeed = 0.2;
     private long lastTime = 0;
     private KeyReader key;
     private Clock clock = Clock.getInstance();

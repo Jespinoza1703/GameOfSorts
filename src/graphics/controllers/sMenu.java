@@ -13,7 +13,7 @@ public class sMenu extends sScene{
 
     @Override
     protected void initialize() throws IOException {
-        Image img = new Image("file:res/img/backgrounds/bg2.jpg");
+        Image img = new Image("file:res/img/backgrounds/bg/bg4.jpg");
         BackgroundSize size = new BackgroundSize(sScene.getWidth(), sScene.getHeight(), false, false, false, false);
         BackgroundImage bgIMG = new BackgroundImage(img, null, null, BackgroundPosition.CENTER, size);
         Background bg = new Background(bgIMG);
