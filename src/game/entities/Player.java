@@ -32,6 +32,7 @@ public class Player extends Entity {
     private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private int hitTimer = 0;
 
     public Player(){
         Drawer.getInstance().addDrawAtEnd(this);
@@ -41,7 +42,7 @@ public class Player extends Entity {
     @Override
     public void update(){
         move();
-
+        hitAnimation();
         if (key.shoot == 1 && canShoot()){
             shoot();
         }
@@ -94,9 +95,18 @@ public class Player extends Entity {
     @Override
     public void hit(){
         lives--;
+        hitTimer = 30;
         if(lives <= 0){
             dies();
         }
+    }
+
+    private void hitAnimation() {
+        if (hitTimer > 0){
+            hitTimer--;
+            sprite.getSprite().setEffect(sprite.effect);
+        }
+        if (hitTimer == 0) sprite.getSprite().setEffect(null);
     }
 
     @Override

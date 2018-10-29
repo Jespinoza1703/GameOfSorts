@@ -5,6 +5,8 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
 import game.event.handler.inputs.KeyReader;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import util.Clock;
 import util.Math;
 import util.NameGenerator;
@@ -28,6 +30,7 @@ public class Dragon extends Entity{
     private ArrayList<Sprite> movementAnimations = new ArrayList<>();
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
+    private int hitTimer = 0;
     private int currentSprite = 0;
 
     public Dragon() {
@@ -67,10 +70,18 @@ public class Dragon extends Entity{
     @Override
     public void update() {
         move();
-
+        hitAnimation();
         if (canShoot()) {
             shoot();
         }
+    }
+
+    private void hitAnimation() {
+        if (hitTimer > 0){
+            hitTimer--;
+            sprite.getSprite().setEffect(sprite.effect);
+        }
+        if (hitTimer == 0) sprite.getSprite().setEffect(null);
     }
 
     @Override
@@ -118,6 +129,7 @@ public class Dragon extends Entity{
     @Override
     public void hit(){
         lives--;
+        hitTimer = 40;
         if (lives <= 0) {
             dies();
         }
