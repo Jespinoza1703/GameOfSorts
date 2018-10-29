@@ -1,5 +1,7 @@
 package graphics.controllers;
 
+import client.Wave;
+import client.WaveGenerator;
 import game.GameController;
 import game.draw.Drawer;
 import game.event.handler.Collisions;
@@ -26,7 +28,9 @@ public class sGame extends sScene{
     protected void initialize() throws IOException {
         Drawer.init(gamePane);
         Drawer.getInstance().setGamePane(this);
-        GameController.getInstance();
+        Wave wave = new Wave(0, 64);
+        GameController.getInstance().setWave(wave);
+        WaveGenerator.listWave(wave);
     }
 
     @Override

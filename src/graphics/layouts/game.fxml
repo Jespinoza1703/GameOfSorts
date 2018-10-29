@@ -11,7 +11,7 @@
 <AnchorPane id="sGame" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/Leaf.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.sGame">
    <children>
       <Pane fx:id="gamePane" layoutX="147.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #BBF9F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <GridPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane alignment="TOP_CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="77.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="323.0" />

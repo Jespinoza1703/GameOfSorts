@@ -2,6 +2,7 @@ package game;
 
 import client.Wave;
 import game.draw.Drawer;
+import game.draw.Sprite;
 import game.entities.Background;
 import game.entities.Entity;
 import game.entities.Player;

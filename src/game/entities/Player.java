@@ -196,4 +196,8 @@ public class Player extends Entity {
     public boolean isAlive(){
         return lives > 0;
     }
+
+    public int getLives() {
+        return lives;
+    }
 }
