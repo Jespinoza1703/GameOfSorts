@@ -3,7 +3,7 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
-import game.event.handler.inputs.Collisions;
+import game.event.handler.Collisions;
 import game.event.handler.inputs.KeyReader;
 import util.Clock;
 import util.Math;
@@ -191,5 +191,9 @@ public class Player extends Entity {
 
     public int getySpeed() {
         return ySpeed;
+    }
+
+    public boolean isAlive(){
+        return lives > 0;
     }
 }

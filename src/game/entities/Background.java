@@ -16,7 +16,7 @@ public class Background extends Entity {
     private Sprite sprite;
     private boolean boundaries = true;
 
-    public Background(double speed, double xPoss, double width, double height, String url , int level){
+    public Background(double speed, double xPoss, double yPoss, double width, double height, String url , int level){
         this.level = level;
         this.speed = speed;
         this.xPoss = xPoss;
@@ -24,7 +24,7 @@ public class Background extends Entity {
         this.height = height;
         this.url = url;
         this.sprite = loadImages(url);
-        yPoss = Drawer.height - sprite.getHeight() / 2;
+        this.yPoss = yPoss - sprite.getHeight() / 2;
         Drawer.getInstance().addBackGround(this, level);
         GameController.getInstance().addEntity(this);
     }
@@ -69,8 +69,9 @@ public class Background extends Entity {
     private void checkBoundaries(){
         var spriteHW = sprite.getWidth() / 2;
         if (xPoss < 2000 && boundaries){
-            var poss = xPoss + 2 + (spriteHW * 2);
-            new Background(speed, poss, width, height, url , level);
+            var xPoss = this.xPoss + 2 + (spriteHW * 2);
+            var yPoss = this.yPoss + sprite.getHeight() / 2;
+            new Background(speed, xPoss-10, yPoss,width, height, url , level);
             boundaries = false;
         }
         if (xPoss + spriteHW < 0) destroy();

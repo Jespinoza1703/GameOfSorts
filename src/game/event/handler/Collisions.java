@@ -1,11 +1,18 @@
-package game.event.handler.inputs;
+package game.event.handler;
 
 import game.draw.Sprite;
 import game.entities.Dragon;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 public class Collisions {
+
+    private static Logger logger = LoggerFactory.getLogger(Collisions.class);
+    private static final Marker COLLISION = MarkerFactory.getMarker("COLLISION");
     private static Collisions instance;
     private SimpleList<Entity> dragons = new SimpleList<>();
     private SimpleList<Entity> playerBullets = new SimpleList<>();
@@ -28,15 +35,16 @@ public class Collisions {
         Boolean collide = false;
         Sprite sprite = entity.getSprite();
         for (int i = 0; i < group.getLarge(); i++){
-            Sprite groupSprite = group.getByIndex(i).getValue().getSprite();
+            Entity groupEntity = group.getByIndex(i).getValue();
+            Sprite groupSprite = groupEntity.getSprite();
             if(sprite.getSprite().getBoundsInParent().intersects(groupSprite.getSprite().getBoundsInParent())){
                 collide = true;
+                logger.info(COLLISION, entity.toString() + " collide with " + groupEntity.toString());
                 if (destroy){
-                    Entity entity1 = group.getByIndex(i).getValue();
-                    if (entity1.getClass() == Dragon.class){
-                        entity1.setLives(0);
+                    if (groupEntity.getClass() == Dragon.class){
+                        groupEntity.setLives(0);
                     }
-                    entity1.hit();
+                    groupEntity.hit();
                 }
                 break;
             }
@@ -54,22 +62,29 @@ public class Collisions {
     public Boolean collide(SimpleList<Entity> group1, SimpleList<Entity> group2, boolean destroyG1, boolean destroyG2) {
         Boolean collide = false;
         for (int i = 0; i < group1.getLarge(); i++) {
-            Sprite group1Poss = group1.getByIndex(i).getValue().getSprite();
+            Entity group1Entity = group1.getByIndex(i).getValue();
             for (int j = 0; j < group2.getLarge(); j++) {
-                Sprite group2Poss = group2.getByIndex(j).getValue().getSprite();
-                if (group1Poss.getSprite().getBoundsInParent().intersects(group2Poss.getSprite().getBoundsInParent())) {
+                Entity group2Entity = group2.getByIndex(j).getValue();
+                Sprite sprite1 = group1Entity.getSprite();
+                Sprite sprite2 = group2Entity.getSprite();
+                if (sprite1.getSprite().getBoundsInParent().intersects(sprite2.getSprite().getBoundsInParent())) {
                     collide = true;
+                    logger.info(COLLISION, group1Entity.toString() + " collide with " + group2Entity.toString());
                     if (destroyG1){
-                        group1.getByIndex(i).getValue().hit();
+                        group1Entity.hit();
                     }
                     if (destroyG2){
-                        group2.getByIndex(j).getValue().hit();
+                        group2Entity.hit();
                     }
                     break;
                 }
             }
         }
         return collide;
+    }
+
+    public void abort(){
+        instance = null;
     }
 
     public void addDragon(Entity dragon){

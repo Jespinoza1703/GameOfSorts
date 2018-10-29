@@ -3,10 +3,17 @@ package game.draw;
 import game.entities.Background;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
+import graphics.controllers.sGame;
+import graphics.controllers.sScene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+import util.Clock;
 
 /**
  * Singleton class that manages the objects to be drawn in the gamePane
@@ -14,9 +21,12 @@ import javafx.scene.shape.Rectangle;
  */
 public class Drawer {
 
-    public static double width = 1280;
-    public static double height = 960;
+    private static Logger logger = LoggerFactory.getLogger(Drawer.class);
+    private static final Marker SYS = MarkerFactory.getMarker("SYS");
+    public static double width = sScene.getWidth();
+    public static double height = sScene.getHeight();
     private static Drawer instance;
+    private sGame gamePane;
     private SimpleList<Entity> draws = new SimpleList<>();  // List of Entities to draw
     private SimpleList<Background> bg1 = new SimpleList<>();
     private SimpleList<Background> bg2 = new SimpleList<>();
@@ -41,23 +51,23 @@ public class Drawer {
         instance.drawer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                //width = pane.getWidth();
-                //height = pane.getHeight();
                 instance.draw();
             }
         };
         instance.drawer.start();
+        logger.info(SYS, "Drawer thread start as: " + instance.drawer.toString());
     }
 
     /**
      * This method adds in the drawPane the objects that are in the draws:SimpleList after cleaning it
      */
-    private void draw(){
+    private synchronized void draw(){
         drawPane.getChildren().clear();
         drawBG();
         for (int i = 0; i < draws.getLarge(); i++){
             ImageView sprite = draws.getByIndex(i).getValue().draw().getSprite();
-            drawPane.getChildren().addAll(sprite);
+            boolean contains = drawPane.getChildren().contains(sprite);
+            if (!contains) drawPane.getChildren().addAll(sprite);
         }
     }
 
@@ -95,7 +105,24 @@ public class Drawer {
     }
 
     public void abort(){
+        logger.info(SYS, "Drawer thread stop: " + drawer.toString());
         drawer.stop();
         instance = null;
+    }
+
+    public sGame getGamePane() {
+        return gamePane;
+    }
+
+    public void setGamePane(sGame gamePane) {
+        this.gamePane = gamePane;
+    }
+
+    public Pane getDrawPane() {
+        return drawPane;
+    }
+
+    public void setDrawPane(Pane drawPane) {
+        this.drawPane = drawPane;
     }
 }

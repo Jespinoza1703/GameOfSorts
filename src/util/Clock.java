@@ -26,7 +26,7 @@ public class Clock {
      */
     public void ticks(int FPS) {
         try {
-            int millis = 1000 / 60;
+            int millis = 1000 / FPS;
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();

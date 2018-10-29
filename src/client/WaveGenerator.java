@@ -15,7 +15,7 @@ public class WaveGenerator {
         double width = Drawer.width / 2;
         double height = Drawer.height;
         double xOffset = width / columns;
-        double yOffset = height / rows;
+        double yOffset = height / (rows + 1);
         double xPoss = Drawer.width;
 
         int n = 0;
