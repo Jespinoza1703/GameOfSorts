@@ -19,13 +19,13 @@ public class Dragon extends Entity{
     private String name = NameGenerator.generateName();
     private int parentAge;
     private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
-    private int fire_rate = Math.getRandomNumberInRange(7000, 50000);  // [7, 50]
+    private int fire_rate = Math.getRandomNumberInRange(400, 2000);  // [200, 1000]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
     private double xSpeed = 0.2;
-    private long lastTime = clock.getTime();
+    private long lastTime = 0;
     private Sprite sprite;
     private ArrayList<Sprite> movementAnimations = new ArrayList<>();
     private double animationTimer = 200;
@@ -161,10 +161,10 @@ public class Dragon extends Entity{
 
     private Boolean canShoot() {
         Boolean result = false;
-        long time = clock.getTime();
-        if (time - lastTime > fire_rate) {
+        lastTime++;
+        if (lastTime > fire_rate) {
             result = true;
-            lastTime = time;
+            lastTime = 0;
         }
         return result;
     }

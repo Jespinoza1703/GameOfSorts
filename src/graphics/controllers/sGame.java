@@ -1,7 +1,5 @@
 package graphics.controllers;
 
-import client.Wave;
-import client.WaveGenerator;
 import game.GameController;
 import game.draw.Drawer;
 import game.event.handler.Collisions;
