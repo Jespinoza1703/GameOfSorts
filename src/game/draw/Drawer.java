@@ -98,6 +98,7 @@ public class Drawer {
             gamePane.lifeBox.getChildren().addAll(heart.getSprite());
         }
         if (hearts > life) gamePane.lifeBox.getChildren().remove(hearts-1);
+        gamePane.waveCount.setText(String.valueOf(GameController.getInstance().getWaveCount()));
     }
 
     public void addDrawAtEnd(Entity draw){

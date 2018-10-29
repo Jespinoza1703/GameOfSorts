@@ -36,8 +36,5 @@ public class sMenu extends sScene{
     @FXML
     void pressed_dev_test(){
         Interface.switchScene("graphics/layouts/game.fxml");
-        Wave wave = new Wave(0, 64);
-        GameController.getInstance().setWave(wave);
-        WaveGenerator.listWave(wave);
     }
 }

@@ -7,6 +7,10 @@ import java.util.List;
 
 public class WaveGenerator {
 
+    public static Wave getNewWave(int size){
+        return new Wave(0, size);
+    }
+
     public static void listWave(Wave wave){
         List<Dragon> dragons = wave.getDragonsList();
         int waveSize = wave.getSize();

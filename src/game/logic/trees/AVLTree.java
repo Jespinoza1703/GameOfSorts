@@ -177,7 +177,11 @@ public class AVLTree {
         return current;
     }
 
-    public TreeNode deleteNode(TreeNode root, int key) {
+    public TreeNode deleteNode(int key){
+        return deleteNode(root, key);
+    }
+
+    private TreeNode deleteNode(TreeNode root, int key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
             return root;

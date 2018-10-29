@@ -1,9 +1,11 @@
 package game;
 
 import client.Wave;
+import client.WaveGenerator;
 import game.draw.Drawer;
 import game.draw.Sprite;
 import game.entities.Background;
+import game.entities.Dragon;
 import game.entities.Entity;
 import game.entities.Player;
 import game.event.handler.Collisions;
@@ -22,6 +24,7 @@ import util.Clock;
  */
 public class GameController extends Thread{
 
+    public static Player player;
     private static Logger logger = LoggerFactory.getLogger(GameController.class);
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
     private static final Marker SPRITES = MarkerFactory.getMarker("SPRITES");
@@ -37,7 +40,7 @@ public class GameController extends Thread{
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
     private int waveCount = 0;
-    public static Player player;
+    private int waveSize = 32;
     private boolean paused;
     private boolean running;
 
@@ -94,7 +97,10 @@ public class GameController extends Thread{
         }
 
     private void getWave(){
-        logger.info(WS, "Game ask for wave");
+        logger.info(WS, "Game ask for wave: " + waveCount);
+        wave = WaveGenerator.getNewWave(waveSize);
+        WaveGenerator.listWave(wave);
+        waveCount++;
     }
 
     private void event(){
@@ -132,15 +138,22 @@ public class GameController extends Thread{
             entities.getByIndex(i).getValue().update();
         }
         verifyCollisions();
-
     }
 
     private void draw(){
-        game_pane.waveCount.setText(String.valueOf(waveCount));
+
     }
 
     public void deleteEntity(Entity entity){
         //logger.info(SPRITES, "Removing from the game: " + entity.toString());
+
+        // In case a Dragon dies
+        if(entity.getClass() == Dragon.class) {
+            wave.dragonDies((Dragon) entity);
+            logger.info(SPRITES, "WaveSize: " + String.valueOf(wave.getSize()));
+        }
+
+        // Deletes any entity passed throw
         entities.delete(entities.searchIndex(entity));
     }
 
@@ -170,6 +183,10 @@ public class GameController extends Thread{
 
     public void setWave(Wave wave) {
         this.wave = wave;
+    }
+
+    public int getWaveCount(){
+        return waveCount;
     }
 
     public void setPaused(boolean pause){
