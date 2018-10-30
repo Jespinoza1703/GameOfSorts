@@ -5,6 +5,7 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
+import graphics.sound.Sound;
 import util.Clock;
 import util.Math;
 
@@ -119,6 +120,7 @@ public class Player extends Entity {
         var yDirection = key.arrow_down - key.arrow_up;
         FireBall fireBall = new FireBall(xPoss, yPoss, 50, 17,1, yDirection);
         Collisions.getInstance().addPlayerBullets(fireBall);
+        Sound.play("res/sounds/shot.wav", 0);
     }
 
     private void dies(){
