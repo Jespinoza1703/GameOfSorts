@@ -5,6 +5,7 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
+import graphics.sound.Sound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.Clock;
@@ -132,9 +133,12 @@ public class Dragon extends Entity{
     public void hit(){
         logger.debug(this + "has been hit");
         lives--;
+
         if (lives <= 0) {
+            Sound.play("res/sounds/explosion.wav", 0);
             dies();
         }
+        Sound.play("res/sounds/hit.wav", 0);
     }
 
     @Override
@@ -152,7 +156,7 @@ public class Dragon extends Entity{
     }
 
     /**
-     * Kills the Dragon
+     * Kills the Dragonsas
      */
     private void dies(){
         new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);

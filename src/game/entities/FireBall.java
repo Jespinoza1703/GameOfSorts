@@ -5,6 +5,7 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.inputs.Collisions;
 import game.event.handler.inputs.KeyReader;
+import graphics.sound.Sound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.Clock;
@@ -47,6 +48,7 @@ public class FireBall extends Entity {
         sprite = loadImages();
         Drawer.getInstance().addDrawAtBegining(this);
         GameController.getInstance().addEntity(this);
+        Sound.play("res/sounds/shot.wav", 0);
     }
 
     /**
