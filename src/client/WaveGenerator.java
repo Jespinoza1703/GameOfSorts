@@ -39,4 +39,32 @@ public class WaveGenerator {
         int fire_rate = dragon.getFire_rate();
         new Dragon(x, y, parentAge, age, rank, name, lives, fire_rate);
     }
+
+    public static void treeWave(Wave wave) {
+        List<Dragon> dragons = wave.getDragonsList();
+        double width = Drawer.width - 10;
+        double height = (Drawer.height/2)-150;
+        double xOffset = width;
+        double yOffset = height;
+        double xPoss = Drawer.width;
+        treeWaveAux(wave, 0, width, height, 0, 0,50, height);
+    }
+
+    private static void treeWaveAux(Wave wave, int collocated, double x, double y, int exp, int total, int moveY, double beginning){
+        List<Dragon> dragons = wave.getDragonsList();
+        int moveX = -40;
+        int n = 0;
+        if (total > wave.getSize()){
+            return;
+        }else{
+            double j = beginning - moveY;
+            while (collocated < (int)Math.pow(2, exp)){
+                generateDragon(x, y, dragons.get(n));
+                y = y + 2* moveY;
+                collocated ++;
+            }
+            treeWaveAux(wave, 0, x + moveX, j, exp + 1, total + collocated, moveY, j);
+        }
+    }
+
 }
