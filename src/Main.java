@@ -1,6 +1,7 @@
 import game.event.handler.inputs.KeyReader;
 import graphics.controllers.Interface;
 import graphics.controllers.sScene;
+import graphics.sound.Sound;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +44,7 @@ public class Main extends Application {
         window.getIcons().add(new Image("file:res/img/icon.png"));
         Interface.init(this);
         switchScene();
+        Sound.play("res/sounds/ocarina.wav", 1);
         window.show();
         window.setOnCloseRequest(e-> close());
     }
