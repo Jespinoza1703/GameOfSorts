@@ -3,24 +3,26 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
-import game.event.handler.inputs.Collisions;
+import game.event.handler.Collisions;
 import game.event.handler.inputs.KeyReader;
 import util.Clock;
+import util.Math;
 import util.NameGenerator;
 
+import java.awt.*;
 import java.util.ArrayList;
 
-public class Dragon extends Entity {
+public class Dragon extends Entity{
 
-    private String name;
-    private Dragon parent;
-    private double lives; // [1, 3]
-    private double fire_rate = (((Math.random())*15000));  // [10, 100]
+    private String name = NameGenerator.generateName();
+    private int parentAge;
+    private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
+    private int fire_rate = Math.getRandomNumberInRange(10000, 100000);  // [10, 100]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
     private double dragonWidth = 80, dragonHeight = 65;
-    private double xSpeed = 1;
+    private double xSpeed = 0.5;
     private long lastTime = 0;
     private KeyReader key;
     private Clock clock = Clock.getInstance();
@@ -29,9 +31,13 @@ public class Dragon extends Entity {
     private double animationTimer = 200;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private Boolean playerCollision = false;
 
+    public Dragon() {
 
-    public Dragon (double xPoss, double yPoss) {
+    }
+
+    public Dragon(double xPoss, double yPoss) {
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         sprite = loadImages();
@@ -40,24 +46,35 @@ public class Dragon extends Entity {
         Collisions.getInstance().addDragon(this);
     }
 
-    public Dragon(){
-
-    }
-
-    public Dragon(Dragon parent, int lives, int age, String rank) {
-        this.name = (NameGenerator.generateName());
-        this.fire_rate = (((Math.random())*100));
+    public Dragon(int parentAge, int age, String rank) {
+        this.parentAge = parentAge;
         this.age = age;
-        this.parent = parent;
-        this.lives = lives;
         this.rank = rank;
     }
 
+    public Dragon(double xPoss, double yPoss, int parentAge, int age, String rank, String name, int lives, int fire_rate) {
+        this.xPoss = xPoss;
+        this.yPoss = yPoss;
+        this.parentAge = parentAge;
+        this.age = age;
+        this.rank = rank;
+        this.name = name;
+        this.lives = lives;
+        this.fire_rate = fire_rate;
+        sprite = loadImages();
+        Drawer.getInstance().addDrawAtEnd(this);
+        GameController.getInstance().addEntity(this);
+        Collisions.getInstance().addDragon(this);
+    }
+
     @Override
-    public void update(){
+    public void update() {
         move();
 
-        if (canShoot()){
+        //MouseInfo.getPointerInfo().getDevice().
+        double mouseX = MouseInfo.getPointerInfo().getLocation().getX();
+        System.out.println(mouseX);
+        if (canShoot()) {
             shoot();
         }
     }
@@ -77,7 +94,7 @@ public class Dragon extends Entity {
     @Override
     public Sprite draw() {
         long time = clock.getTime();
-        if (time - lastAnimationTime > animationTimer){
+        if (time - lastAnimationTime > animationTimer) {
             sprite = movementAnimations.get(currentSprite);
             lastAnimationTime = time;
             currentSprite = (currentSprite + 1) % movementAnimations.size();
@@ -88,114 +105,127 @@ public class Dragon extends Entity {
 
     /**
      * Loads images for dragon
+     *
      * @return Sprite
      */
-    private Sprite loadImages(){
+    private Sprite loadImages() {
+        String[] colors = {"blue", "green", "purple", "red", "yellow"};
+        int i = Math.getRandomNumberInRange(0, colors.length - 1);
+        String color = colors[i];
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dMovement2"));
+                "file:res/img/entities/dragons/" + color + "/fly2.png"));
+        movementAnimations.get(0).getSprite().setOnMouseClicked(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dMovement1"));
+                "file:res/img/entities/dragons/" + color + "/fly1.png"));
+        movementAnimations.get(1).getSprite().setOnMouseClicked(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
-                "file:res/img/entities/dragon/dMovement3"));
+                "file:res/img/entities/dragons/" + color + "/fly3.png"));
+        movementAnimations.get(2).getSprite().setOnMouseClicked(e -> pressed());
         return movementAnimations.get(0);
-
     }
-    private void hit(){
 
+    @Override
+    public void hit(){
+        lives--;
+        if (lives <= 0) {
+            dies();
+        }
+    }
+
+    @Override
+    public void setLives(int lives){
+        this.lives = lives;
     }
 
     private void shoot(){
-        FireBall fireBall = new FireBall(xPoss, yPoss, 35, 35,-1, 0);
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth()/2, -1, 0);
         Collisions.getInstance().addDragonBullets(fireBall);
     }
 
     private void dies(){
-
+        new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
+        destroy();
     }
 
-    private void pressed(){
+    private void pressed() {
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
     }
 
-    private void move(){
+    private void move() {
+        xPoss -= java.lang.Math.max(xSpeed, GameController.player.getSpeed()+xSpeed);
         xPoss -= xSpeed;
-
     }
 
-    private Boolean canShoot(){
+    private Boolean canShoot() {
         Boolean result = false;
         long time = clock.getTime();
-        if (time - lastTime > fire_rate){
+        if (time - lastTime > fire_rate) {
             result = true;
             lastTime = time;
         }
         return result;
-
     }
 
-    /** Getters andSetters **/
+    /** Getters and Setters **/
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name){
         this.name = name;
     }
 
-    public Dragon getParent() {
-        return parent;
+    public int getParentAge () {
+        return parentAge;
     }
 
-    public void setParent(Dragon parent) {
-        this.parent = parent;
+    public void setParentAge ( int parentAge){
+        this.parentAge = parentAge;
     }
 
-    public double getLives() {
+    public int getLives () {
         return lives;
     }
 
-    public void setLives(double lives) {
-        this.lives = lives;
-    }
-
-    public double getFire_rate() {
+    public int getFire_rate () {
         return fire_rate;
     }
 
-    public void setFire_rate(double fire_rate) {
+    public void setFire_rate ( int fire_rate){
         this.fire_rate = fire_rate;
     }
 
-    public int getAge() {
+    public int getAge () {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge ( int age){
         this.age = age;
     }
 
-    public String getRank() {
+    public String getRank () {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank (String rank){
         this.rank = rank;
     }
 
-    public double getxPoss() {
+    public double getxPoss () {
         return xPoss;
     }
 
-    public void setxPoss(double xPoss) {
+    public void setxPoss ( double xPoss){
         this.xPoss = xPoss;
     }
 
-    public double getyPoss() {
+    public double getyPoss () {
         return yPoss;
     }
 
-    public void setyPoss(double yPoss) {
+    public void setyPoss ( double yPoss){
         this.yPoss = yPoss;
     }
 }
