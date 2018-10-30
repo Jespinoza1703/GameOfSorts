@@ -18,7 +18,7 @@ public class sDevTest extends sScene{
     @Override
     protected void initialize() throws IOException {
         Drawer.init(gamePane);
-        Wave wave = new Wave(0, 64);
+        Wave wave = new Wave(0, 24);
         GameController.getInstance().setWave(wave);
         WaveGenerator.listWave(wave);
 

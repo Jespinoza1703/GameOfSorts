@@ -9,6 +9,7 @@ import util.Clock;
 import util.Math;
 import util.NameGenerator;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Dragon extends Entity{
@@ -70,6 +71,9 @@ public class Dragon extends Entity{
     public void update() {
         move();
 
+        //MouseInfo.getPointerInfo().getDevice().
+        double mouseX = MouseInfo.getPointerInfo().getLocation().getX();
+        System.out.println(mouseX);
         if (canShoot()) {
             shoot();
         }
@@ -110,10 +114,13 @@ public class Dragon extends Entity{
         String color = colors[i];
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragons/" + color + "/fly2.png"));
+        movementAnimations.get(0).getSprite().setOnMouseClicked(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragons/" + color + "/fly1.png"));
+        movementAnimations.get(1).getSprite().setOnMouseClicked(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight,
                 "file:res/img/entities/dragons/" + color + "/fly3.png"));
+        movementAnimations.get(2).getSprite().setOnMouseClicked(e -> pressed());
         return movementAnimations.get(0);
     }
 
@@ -142,6 +149,7 @@ public class Dragon extends Entity{
 
     private void pressed() {
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
     }
 
     private void move() {
