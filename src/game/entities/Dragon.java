@@ -241,6 +241,8 @@ public class Dragon extends Entity {
 
     public void setRank(String rank) {
         this.rank = rank;
+        movementAnimations = new ArrayList<>();
+        loadImages();
     }
 
     public double getxPoss() {

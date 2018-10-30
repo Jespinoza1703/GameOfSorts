@@ -16,7 +16,7 @@ public class Wave {
     private List<Dragon> dragonsList = new ArrayList<>();
     private BinaryTree dragonsBinaryTree = new BinaryTree();
     private AVLTree dragonsAVLTree = new AVLTree();
-    private String currentWave = "list";
+    public String formation = "list";
 
     public Wave() {
 
@@ -35,13 +35,13 @@ public class Wave {
     }
 
     public void dragonDies(Dragon dragon) {
-        if (currentWave.equals("list")) {
+        if (formation.equals("list")) {
             dragonsList.remove(dragon);
             size--;
-        } else if (currentWave.equals("avl")) {
+        } else if (formation.equals("avl-tree")) {
             dragonsAVLTree.deleteNode(dragon.getAge());
             size--;
-        } else if (currentWave.equals("binary")) {
+        } else if (formation.equals("binary-tree")) {
             //dragonsBinaryTree.delete(dragon.getAge());
             size--;
         }
