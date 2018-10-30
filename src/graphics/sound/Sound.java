@@ -62,4 +62,32 @@ public class Sound extends Thread{
             clip.loop(loops);
         }
     }
+
+    private Sound(){
+        try {
+            File file = new File("res/sounds/ocarina.wav");
+            if (file.exists()) {
+                AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+                // Esta vara carga el archivo como un clip de memoria
+                clip = AudioSystem.getClip();
+                clip.open(sound);
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                gainControl.setValue(-5.0f); // Reduce volume by 10 decibels.
+            }
+            else {
+                System.out.println("Sound: El archivo deseado no fue encontrado " + "res/sounds/ocarina.wav");
+            }
+        }
+        catch (MalformedURLException e) {
+            //e.printStackTrace();
+            System.out.println("Sound: URL corrupto: " + e);
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void startSong(){
+        audio = new Sound();
+        Sound.loops = 5;
+        audio.start();
+    }
 }

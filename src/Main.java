@@ -44,7 +44,8 @@ public class Main extends Application {
         window.getIcons().add(new Image("file:res/img/icon.png"));
         Interface.init(this);
         switchScene();
-        Sound.play("res/sounds/ocarina.wav", 1);
+        //Sound.play("res/sounds/ocarina.wav", 1);
+        Sound.startSong();
         window.show();
         window.setOnCloseRequest(e-> close());
     }
