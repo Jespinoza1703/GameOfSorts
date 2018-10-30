@@ -23,11 +23,16 @@ public class WaveGenerator {
     }
 
     public static Wave getWaveSorted(Wave wave, int type) {
-        int i = (type - 1) % waveSortMethod.length;
+        int i = type % waveSortMethod.length;
         String sort = waveSortMethod[i];
 
+        // Here the client ask for a sorted wave
+
+        // Reposition the Dragons in formation
         if (i < 3) sort = "list";
         wave.formation = sort;
+        listWave(wave);
+        logger.info("aAAAAAAAAAAA");
         return wave;
     }
 
@@ -72,7 +77,9 @@ public class WaveGenerator {
                 double x = (i + 1) * xOffset;
                 double y = (j + 1) * yOffset;
                 x += xPoss;
-                generateDragon(x, y, dragons.get(n));
+                Dragon dragon = dragons.get(n);
+                dragon.setxPoss(x);
+                dragon.setyPoss(y);
                 n++;
             }
         }

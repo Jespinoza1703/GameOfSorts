@@ -105,9 +105,8 @@ public class GameController extends Thread {
     }
 
     private void getWaveSorted() {
-        logger.info(WS, "Game ask for wave: " + waveCount);
-        wave = WaveGenerator.getWaveSorted(wave, waveCount);
-        waveCount++;
+        logger.info(WS, "Game ask for sorted wave: " + waveCount);
+        WaveGenerator.getWaveSorted(wave, waveCount);
     }
 
     private void event() {
@@ -156,6 +155,7 @@ public class GameController extends Thread {
         // In case a Dragon dies
         if (entity.getClass() == Dragon.class) {
             wave.dragonDies((Dragon) entity);
+            getWaveSorted();
             logger.info(SPRITES, "WaveSize: " + String.valueOf(wave.getSize()));
         }
 
