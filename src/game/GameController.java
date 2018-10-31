@@ -178,9 +178,11 @@ public class GameController extends Thread {
         if (player.isAlive()) {
             Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
             Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
+            Boolean collision_player_with_hearts = collision.collide(player, collision.getHearts(), true);
             if (collision_player_with_dragon || collision_player_with_dragonBullet) {
                 player.hit();
             }
+            if (collision_player_with_hearts) player.setLives(player.getLives() + 1);
         }
         collision.collide(collision.getDragons(), collision.getPlayerBullets(), true, true);
         collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);

@@ -45,6 +45,7 @@ public class Dragon extends Entity {
     private boolean animating = false;
     private double xNew;
     private double yNew;
+    private double dropChance = 30;
 
     /**
      * Basic constructor
@@ -218,6 +219,8 @@ public class Dragon extends Entity {
      */
     private void dies() {
         new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
+        double drop = java.lang.Math.random() * 100;
+        if (drop > dropChance) new Heart(xPoss, yPoss);
         destroy();
     }
 
