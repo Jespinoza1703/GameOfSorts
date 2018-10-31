@@ -45,7 +45,7 @@ public class WaveGenerator {
         if (i < 3) sort = "list";
         if (i > 2) sort = "tree";
 
-        // Determines based in "i" the formation of the wave
+        // Determines based in "sort" the formation of the wave
         listWave(wave);
         return wave;
     }
@@ -101,7 +101,6 @@ public class WaveGenerator {
                 double y = (j + 1) * yOffset;
                 Dragon dragon = dragons.get(n);
                 x += xPoss;
-
                 // Sets the position of the Dragon to animate
                 dragon.setPoss(x, y);
                 n++;

@@ -105,7 +105,7 @@ public class Dragon extends Entity {
         else {
             xPoss = (double) Math.approach((int)xPoss, (int)xNew, 10);
             yPoss = (double) Math.approach((int)yPoss, (int)yNew, 10);
-            if (xPoss == xNew && yPoss == yNew) animating = false;
+            if (xPoss == (int)xNew && yPoss == (int)yNew) animating = false;
         }
     }
 
@@ -205,6 +205,7 @@ public class Dragon extends Entity {
      */
     private void shoot() {
         FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth() / 1.5, -1, 0);
+        Collisions.getInstance().addDragonBullets(fireBall);
     }
 
     /**
