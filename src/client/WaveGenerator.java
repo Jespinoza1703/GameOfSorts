@@ -68,16 +68,16 @@ public class WaveGenerator {
         double height = Drawer.height;
         double xOffset = width / columns;
         double yOffset = height / (rows + 1);
-        double xPoss = Drawer.width;
+        double xPoss = getMinXPoss(dragons) - xOffset;
 
         int n = 0;
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 double x = (i + 1) * xOffset;
                 double y = (j + 1) * yOffset;
-                x += xPoss;
                 Dragon dragon = dragons.get(n);
-                //dragon.setxPoss(x);
+                x += xPoss;
+                dragon.setxPoss(x);
                 dragon.setyPoss(y);
                 n++;
             }
@@ -107,5 +107,15 @@ public class WaveGenerator {
         int lives = dragon.getLives();
         int fire_rate = dragon.getFire_rate();
         list.set(i, new Dragon(x, y, parentAge, age, rank, name, lives, fire_rate));
+    }
+
+    private static double getMinXPoss(List<Dragon> dragons){
+        double result = dragons.get(0).getxPoss();
+        for (Dragon dragon : dragons){
+            if (dragon.getxPoss() < result){
+                result = dragon.getxPoss();
+            }
+        }
+        return result;
     }
 }
