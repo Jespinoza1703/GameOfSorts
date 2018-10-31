@@ -16,7 +16,7 @@ public class Wave {
     private List<Dragon> dragonsList = new ArrayList<>();
     private BinaryTree dragonsBinaryTree = new BinaryTree();
     private AVLTree dragonsAVLTree = new AVLTree();
-    public String formation = "list";
+    public String formation = "unsorted";
 
     public Wave() {
 
@@ -35,17 +35,20 @@ public class Wave {
     }
 
     public void dragonDies(Dragon dragon) {
-        if (formation.equals("selection") || formation.equals("insertion") || formation.equals("quick")) {
-            dragonsList.remove(dragon);
-            size = dragonsList.size();
-        } else if (formation.equals("avl-tree")) {
-            dragonsAVLTree.deleteNode(dragon.getAge());
-            size = dragonsList.size();
-        } else if (formation.equals("binary-tree")) {
-            //dragonsBinaryTree.delete(dragon.getAge());
-            size = dragonsList.size();
+        switch (formation) {
+            case "avl-tree":
+                dragonsAVLTree.deleteNode(dragon.getAge());
+                size = dragonsList.size();
+                break;
+            case "binary-tree":
+                //dragonsBinaryTree.delete(dragon.getAge());
+                size = dragonsList.size();
+                break;
+            default:
+                dragonsList.remove(dragon);
+                size = dragonsList.size();
+                break;
         }
-        System.out.println(size);
     }
 
     private void generateDragonList() {
