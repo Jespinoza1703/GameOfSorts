@@ -41,7 +41,7 @@ public class GameController extends Thread {
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
     private int waveCount = -1;
-    private int waveSize = 32;
+    private int waveSize = 8;
     private boolean paused;
     private boolean running;
 
@@ -155,7 +155,7 @@ public class GameController extends Thread {
         // In case a Dragon dies
         if (entity.getClass() == Dragon.class) {
             wave.dragonDies((Dragon) entity);
-            getWaveSorted();
+            if (wave.getSize() > 0) getWaveSorted();
             logger.info(SPRITES, "WaveSize: " + String.valueOf(wave.getSize()));
         }
 

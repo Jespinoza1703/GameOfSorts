@@ -32,7 +32,6 @@ public class WaveGenerator {
         if (i < 3) sort = "list";
         wave.formation = sort;
         listWave(wave);
-        logger.info("aAAAAAAAAAAA");
         return wave;
     }
 
@@ -54,7 +53,7 @@ public class WaveGenerator {
                 double x = (i + 1) * xOffset;
                 double y = Math.getRandomNumberInRange(0, (int) yMax);
                 x += xPoss;
-                generateDragon(x, y, dragons.get(n));
+                generateDragon(x, y, dragons, n);
                 n++;
             }
         }
@@ -63,7 +62,7 @@ public class WaveGenerator {
     private static void listWave(Wave wave) {
         List<Dragon> dragons = wave.getDragonsList();
         int waveSize = wave.getSize();
-        int columns = 8;
+        int columns = (int) java.lang.Math.sqrt(waveSize);
         int rows = waveSize / columns;
         double width = Drawer.width / 2;
         double height = Drawer.height;
@@ -78,24 +77,35 @@ public class WaveGenerator {
                 double y = (j + 1) * yOffset;
                 x += xPoss;
                 Dragon dragon = dragons.get(n);
-                dragon.setxPoss(x);
+                //dragon.setxPoss(x);
                 dragon.setyPoss(y);
                 n++;
             }
         }
+        while(n < dragons.size()){
+            columns += 1;
+            for (int j = 0; j < rows; j++) {
+                double y = (j + 1) * yOffset;
+                Dragon dragon = dragons.get(n);
+                dragon.setyPoss(y);
+            }
+            n++;
+        }
+
     }
 
     private static void treeWave(Wave wave){
 
     }
 
-    private static void generateDragon(double x, double y, Dragon dragon) {
+    private static void generateDragon(double x, double y, List<Dragon> list, int i) {
+        Dragon dragon = list.get(i);
         int parentAge = dragon.getParentAge();
         int age = dragon.getAge();
         String rank = dragon.getRank();
         String name = dragon.getName();
         int lives = dragon.getLives();
         int fire_rate = dragon.getFire_rate();
-        new Dragon(x, y, parentAge, age, rank, name, lives, fire_rate);
+        list.set(i, new Dragon(x, y, parentAge, age, rank, name, lives, fire_rate));
     }
 }
