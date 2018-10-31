@@ -11,6 +11,22 @@ public class Math {
     public static Random random = new Random();
 
     /**
+     * Gets a random number between two limits
+     * @param min left limit
+     * @param max right limit
+     * @return a random integer
+     */
+    public static int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+
+    /**
      * Method that returns the num without passing a given limit
      *
      * @param num num to compare with the limit
@@ -30,7 +46,7 @@ public class Math {
     }
 
     /**
-     * Approach "a" towards "b" by "amount" and returns the result
+     * Approach "num" towards "result" by "amount" and returns the result
      * @param num integer to approach
      * @param result integer expected
      * @param amount how much to approach

@@ -16,36 +16,50 @@ public class Wave {
     private List<Dragon> dragonsList = new ArrayList<>();
     private BinaryTree dragonsBinaryTree = new BinaryTree();
     private AVLTree dragonsAVLTree = new AVLTree();
+    public String formation = "list";
 
-    public Wave(){
+    public Wave() {
 
     }
 
-    public Wave( long id, int size){
+    public Wave(long id, int size) {
         this.id = id;
         this.size = size;
         generateDragonList();
     }
 
-    public Wave( long id, int size, List<Dragon> dragonsList){
+    public Wave(long id, int size, List<Dragon> dragonsList) {
         this.id = id;
         this.size = size;
         this.dragonsList = dragonsList;
     }
 
-    private void generateDragonList(){
+    public void dragonDies(Dragon dragon) {
+        if (formation.equals("list")) {
+            dragonsList.remove(dragon);
+            size--;
+        } else if (formation.equals("avl-tree")) {
+            dragonsAVLTree.deleteNode(dragon.getAge());
+            size--;
+        } else if (formation.equals("binary-tree")) {
+            //dragonsBinaryTree.delete(dragon.getAge());
+            size--;
+        }
+    }
+
+    private void generateDragonList() {
         Dragon parent = new Dragon(-1, size, "Commander");
         dragonsList.add(parent);
-        for (int i = 1; i < size; i++){
+        for (int i = 1; i < size; i++) {
             parent = new Dragon(parent.getAge(), size - i, defineRank());
             dragonsList.add(parent);
         }
         SortMethods.unSort(dragonsList);
     }
 
-    private String defineRank(){
+    private String defineRank() {
         int i = (int) (Math.random() * 10);
-        if (i % 2 == 0){
+        if (i % 2 == 0) {
             return "Captain";
         }
         return "Infantry";

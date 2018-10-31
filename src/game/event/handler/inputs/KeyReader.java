@@ -1,6 +1,10 @@
 package game.event.handler.inputs;
 
 import javafx.scene.Scene;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 /**
  * Class that gets the events of certain keys of the keyboard
@@ -8,6 +12,8 @@ import javafx.scene.Scene;
  */
 public class KeyReader {
 
+    private static Logger logger = LoggerFactory.getLogger(KeyReader.class);
+    private static final Marker KEY = MarkerFactory.getMarker("KEY");
     private Scene scene;  // Scene where the keyboard is activated
     private static KeyReader instance;
     public int right;
@@ -21,6 +27,8 @@ public class KeyReader {
     public int shoot;
     public int space;
     public int shift;
+    public int esc;
+    public int pause;
 
 
     private KeyReader(){
@@ -50,7 +58,10 @@ public class KeyReader {
                 case E: shoot = 1; break;
                 case SPACE: space = 1; break;
                 case SHIFT: shift = 1; break;
+                case ESCAPE: esc = 1; break;
+                case P: pause = 1; break;
             }
+            //logger.info(KEY, "Pressed: " + event.getCode().toString());
         });
     }
 
@@ -71,7 +82,10 @@ public class KeyReader {
                 case E: shoot = 0; break;
                 case SPACE: space = 0; break;
                 case SHIFT: shift = 0; break;
+                case ESCAPE: esc = 0; break;
+                case P: pause = 0; break;
             }
+            //logger.info(KEY, "Released: " + event.getCode().toString());
         });
     }
 

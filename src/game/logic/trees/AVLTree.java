@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 public class AVLTree {
 
-
-
     TreeNode root;
     private static Logger logger = LoggerFactory.getLogger("AVLTree");
 
@@ -241,7 +239,11 @@ public class AVLTree {
      * @param key Element that will be eliminated
      * @return TreeNode to be eliminated
      */
-    public TreeNode deleteNode(TreeNode root, int key) {
+    public TreeNode deleteNode(int key){
+        return deleteNode(root, key);
+    }
+
+    private TreeNode deleteNode(TreeNode root, int key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
             return root;

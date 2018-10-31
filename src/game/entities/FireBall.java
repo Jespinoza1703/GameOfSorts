@@ -3,7 +3,7 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
-import game.event.handler.inputs.Collisions;
+import game.event.handler.Collisions;
 import game.event.handler.inputs.KeyReader;
 import graphics.sound.Sound;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public class FireBall extends Entity {
     private Sprite sprite;
     private double xPoss, yPoss;
     private int xDir, yDir;
-    private int xSpeed = 10, ySpeed = 10;
+    private int xSpeed = 15, ySpeed = 8;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
     private ArrayList<Sprite> deathAnimations = new ArrayList<>();
@@ -39,14 +39,15 @@ public class FireBall extends Entity {
      */
     public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
         logger.debug("Created New FireBall");
+    public FireBall(double xPoss, double yPoss, double fireWidth, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
-        this.fireHeight = fireHeight;
+        this.fireHeight = fireWidth * 0.4;
         this.xDir = xDir;
         this.yDir = yDir;
         sprite = loadImages();
-        Drawer.getInstance().addDrawAtBegining(this);
+        Drawer.getInstance().addDrawAtBeginning(this);
         GameController.getInstance().addEntity(this);
         Sound.play("res/sounds/shot.wav", 0);
     }
@@ -74,18 +75,17 @@ public class FireBall extends Entity {
      * @return
      */
     private Sprite loadImages(){
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball2.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball3.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball4.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball5.png"));
-        deathAnimations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/dragon/fDeath1"));
+        String[] colors = {"blue", "green", "purple", "red", "yellow"};
+        // int i = Math.getRandomNumberInRange(0, colors.length - 1);
+        String color = colors[3];
+        if(xDir > 0) color = colors[4];
+
+        String root = "file:res/img/entities/fireballs/" + color;
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/1.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/2.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/3.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/4.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/5.png"));
         return animations.get(0);
 
     }
@@ -108,7 +108,6 @@ public class FireBall extends Entity {
      * Kill the fireball
      */
     private void dies(){
-        logger.debug(this + " has been killed");
         new BulletExplosion(xPoss, yPoss, fireHeight*2, fireHeight*2);
         destroy();
     }
@@ -144,6 +143,12 @@ public class FireBall extends Entity {
         xPoss += xSpeed * xDir;
         yPoss += ySpeed * yDir;
 
+        var width = Drawer.width;
+        var height = Drawer.height;
+        if (yPoss < 0) destroy();
+        if (yPoss > height) destroy();
+        if (xPoss < 0) destroy();
+        if (xPoss > width) destroy();
     }
 
     /**Getters and Setters**/
