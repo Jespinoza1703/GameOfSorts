@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="junit-4.11">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/jUnit/junit-4.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jUnit/apiguardian-api-1.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jUnit/junit-jupiter-api-5.3.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jUnit/junit-platform-commons-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit/junit-4.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit/apiguardian-api-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit/junit-jupiter-api-5.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit/junit-platform-commons-1.3.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

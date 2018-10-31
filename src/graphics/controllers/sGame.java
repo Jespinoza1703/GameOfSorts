@@ -52,4 +52,8 @@ public class sGame extends sScene{
     void pressed_exit(){
         Interface.close();
     }
+
+
+
+
 }

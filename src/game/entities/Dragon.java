@@ -4,12 +4,7 @@ import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
-import game.event.handler.inputs.KeyReader;
 import graphics.sound.Sound;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -66,6 +61,7 @@ public class Dragon extends Entity {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
+        sprite.getSprite().setOnMousePressed(event -> pressed());
     }
 
     public Dragon(int parentAge, int age, String rank) {
@@ -88,6 +84,7 @@ public class Dragon extends Entity {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
+        sprite.getSprite().setOnMousePressed(event -> pressed());
     }
 
     /**
