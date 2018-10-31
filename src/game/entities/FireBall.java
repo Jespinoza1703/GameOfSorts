@@ -33,13 +33,11 @@ public class FireBall extends Entity {
      * @param xPoss
      * @param yPoss
      * @param fireWidth
-     * @param fireHeight
      * @param xDir
      * @param yDir
      */
-    public FireBall(double xPoss, double yPoss, double fireWidth, double fireHeight, int xDir, int yDir){
-        logger.debug("Created New FireBall");
     public FireBall(double xPoss, double yPoss, double fireWidth, int xDir, int yDir){
+        logger.debug("Created New FireBall");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;

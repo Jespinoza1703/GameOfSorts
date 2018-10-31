@@ -183,16 +183,15 @@ public class Dragon extends Entity {
      * Update dragon when received a shoot
      */
     @Override
-    public void hit(){
-        logger.debug(this + "has been hit");
     public void hit() {
+        logger.debug(this + "has been hit");
         lives--;
-
         hitTimer = 40;
         if (lives <= 0) {
             Sound.play("res/sounds/explosion.wav", 0);
             dies();
         }
+
         Sound.play("res/sounds/hit.wav", 0);
     }
 
@@ -201,22 +200,17 @@ public class Dragon extends Entity {
         this.lives = lives;
     }
 
-    private void shoot() {
-        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth() / 1.5, -1, 0);
     /**
      * Makes the dragon shoot
      */
-    private void shoot(){
-        logger.debug(this + "Has fired");
-        FireBall fireBall = new FireBall(xPoss, yPoss, 33, 11, -1, 0);
-        Collisions.getInstance().addDragonBullets(fireBall);
+    private void shoot() {
+        FireBall fireBall = new FireBall(xPoss, yPoss, sprite.getWidth() / 1.5, -1, 0);
     }
 
-    private void dies() {
     /**
      * Kills the Dragonsas
      */
-    private void dies(){
+    private void dies() {
         new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
         destroy();
     }
