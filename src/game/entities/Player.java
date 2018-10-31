@@ -135,6 +135,7 @@ public class Player extends Entity {
         dashTime--;
         ySpeed = -60 * yMove;
         yMaxSpeed = 60;
+        new PlayerDash(xPoss, yPoss, sprite);
 
         // Calculates current position
         xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
