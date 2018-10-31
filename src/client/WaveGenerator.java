@@ -37,7 +37,7 @@ public class WaveGenerator {
     public static Wave getWaveSorted(Wave wave, int type) {
         int i = type % waveSortMethod.length;
         String sort = waveSortMethod[i];
-        wave.formation = sort;
+        wave.setFormation(sort);
 
         // Here the client ask for a sorted wave
 

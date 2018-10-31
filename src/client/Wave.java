@@ -13,10 +13,10 @@ public class Wave {
 
     private long id;
     private int size;
+    private String formation = "unsorted";
     private List<Dragon> dragonsList = new ArrayList<>();
     private BinaryTree dragonsBinaryTree = new BinaryTree();
     private AVLTree dragonsAVLTree = new AVLTree();
-    public String formation = "unsorted";
 
     public Wave() {
 
@@ -83,6 +83,14 @@ public class Wave {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public String getFormation() {
+        return formation;
+    }
+
+    public void setFormation(String formation) {
+        this.formation = formation;
     }
 
     public List<Dragon> getDragonsList() {

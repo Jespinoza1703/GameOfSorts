@@ -45,7 +45,7 @@ public class Dragon extends Entity {
     private boolean animating = false;
     private double xNew;
     private double yNew;
-    private double dropChance = 30;
+    private double dropChance = 10;
 
     /**
      * Basic constructor
