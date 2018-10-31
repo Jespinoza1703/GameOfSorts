@@ -24,6 +24,7 @@ public class Dragon extends Entity {
 
     private static Logger logger = LoggerFactory.getLogger(Dragon.class);
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
+    private static final Marker EVENT = MarkerFactory.getMarker("EVENT");
     private Clock clock = Clock.getInstance();
     private String name = NameGenerator.generateName();
     private int parentAge;
@@ -103,6 +104,7 @@ public class Dragon extends Entity {
             }
         }
         else {
+            // Animates the formation
             xPoss = (double) Math.approach((int)xPoss, (int)xNew, 10);
             yPoss = (double) Math.approach((int)yPoss, (int)yNew, 10);
             if (xPoss == (int)xNew && yPoss == (int)yNew) animating = false;
@@ -174,8 +176,11 @@ public class Dragon extends Entity {
 
         String root = "file:res/img/entities/dragons/" + color;
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly2.png"));
+        sprite.getSprite().setOnMousePressed(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly1.png"));
+        sprite.getSprite().setOnMousePressed(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly3.png"));
+        sprite.getSprite().setOnMousePressed(e -> pressed());
         return movementAnimations.get(0);
     }
 
@@ -209,7 +214,7 @@ public class Dragon extends Entity {
     }
 
     /**
-     * Kills the Dragonsas
+     * Kills the Dragons
      */
     private void dies() {
         new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
@@ -220,7 +225,7 @@ public class Dragon extends Entity {
      * Show the information of the dragon
      */
     private void pressed() {
-
+        logger.info(EVENT, "Dragon pressed: " + this.toString());
     }
 
     /**
