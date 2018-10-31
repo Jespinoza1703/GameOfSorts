@@ -35,16 +35,17 @@ public class Wave {
     }
 
     public void dragonDies(Dragon dragon) {
-        if (formation.equals("list")) {
+        if (formation.equals("selection") || formation.equals("insertion") || formation.equals("quick")) {
             dragonsList.remove(dragon);
-            size--;
+            size = dragonsList.size();
         } else if (formation.equals("avl-tree")) {
             dragonsAVLTree.deleteNode(dragon.getAge());
-            size--;
+            size = dragonsList.size();
         } else if (formation.equals("binary-tree")) {
             //dragonsBinaryTree.delete(dragon.getAge());
-            size--;
+            size = dragonsList.size();
         }
+        System.out.println(size);
     }
 
     private void generateDragonList() {

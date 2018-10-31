@@ -43,7 +43,8 @@ public class WaveGenerator {
 
         // Reposition the Dragons in formation
         if (i < 3) sort = "list";
-        if (i > 2) sort = "tree";
+        if (i == 3) sort = "avl-tree";
+        if (i == 4) sort = "binary-tree";
 
         // Determines based in "sort" the formation of the wave
         listWave(wave);
