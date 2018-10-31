@@ -7,6 +7,10 @@ import game.event.handler.Collisions;
 import game.event.handler.inputs.KeyReader;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import util.Clock;
 import util.Math;
 import util.NameGenerator;
@@ -15,6 +19,8 @@ import java.util.ArrayList;
 
 public class Dragon extends Entity {
 
+    private static Logger logger = LoggerFactory.getLogger(Dragon.class);
+    private static final Marker SYS = MarkerFactory.getMarker("SYS");
     private Clock clock = Clock.getInstance();
     private String name = NameGenerator.generateName();
     private int parentAge;
@@ -32,6 +38,9 @@ public class Dragon extends Entity {
     private double lastAnimationTime = 0;
     private int hitTimer = 0;
     private int currentSprite = 0;
+    private boolean animating = false;
+    private double xNew;
+    private double yNew;
 
     public Dragon() {
 
@@ -69,10 +78,17 @@ public class Dragon extends Entity {
 
     @Override
     public void update() {
-        move();
-        hitAnimation();
-        if (canShoot()) {
-            shoot();
+        if (!animating) {
+            move();
+            hitAnimation();
+            if (canShoot()) {
+                shoot();
+            }
+        }
+        else {
+            xPoss = (double) Math.approach((int)xPoss, (int)xNew, 10);
+            yPoss = (double) Math.approach((int)yPoss, (int)yNew, 10);
+            if (xPoss == xNew && yPoss == yNew) animating = false;
         }
     }
 
@@ -259,5 +275,11 @@ public class Dragon extends Entity {
 
     public void setyPoss(double yPoss) {
         this.yPoss = yPoss;
+    }
+
+    public void setPoss(double xPoss, double yPoss){
+        animating = true;
+        xNew = xPoss;
+        yNew = yPoss;
     }
 }
