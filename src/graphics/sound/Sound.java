@@ -72,7 +72,7 @@ public class Sound extends Thread{
                 clip = AudioSystem.getClip();
                 clip.open(sound);
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(-5.0f); // Reduce volume by 10 decibels.
+                gainControl.setValue(-2.0f); // Reduce volume by 10 decibels.
             }
             else {
                 System.out.println("Sound: El archivo deseado no fue encontrado " + "res/sounds/ocarina.wav");
