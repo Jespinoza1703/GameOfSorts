@@ -20,4 +20,5 @@ public class NodeTest {
         int result = (int) node.getValue();
         assertEquals(420, result);
     }
+
 }
