@@ -68,12 +68,6 @@ public class intList {
         return first;
     }
 
-    /**
-     * Imprime el largo de la lista
-     */
-    public void showLarge() {
-        System.out.println(this.getLarge());
-    }
 
     /**
      * Obtiene el largo de la lista
@@ -87,6 +81,7 @@ public class intList {
      * Limpia la lista por completo
      */
     public void clearOut(){
+        this.large = 0;
         this.first = null;
     }
 
@@ -148,9 +143,6 @@ public class intList {
     }
 
 
-    public void setFirst(intNode first) {
-        this.first = first;
-    }
 
 
     /**
