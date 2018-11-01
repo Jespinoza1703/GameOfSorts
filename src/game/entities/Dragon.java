@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -247,9 +248,14 @@ public class Dragon extends Entity {
         controller.livesLb.setText(String.valueOf(this.getLives()));
         controller.rankLb.setText(this.getRank());
 
+        controller.actualSortLb.setText(GameController.getInstance().wave.formation);
+
 
         Stage secondStage = new Stage();
         secondStage.setScene(new Scene(content));
+        secondStage.setTitle("Dragon's information");
+        secondStage.setResizable(false);
+        secondStage.initStyle(StageStyle.TRANSPARENT);
 
 
 

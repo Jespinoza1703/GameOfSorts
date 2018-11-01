@@ -38,7 +38,7 @@ public class GameController extends Thread {
     private long key_last_time = 0;
     private Thread thread;
     private SimpleList<Entity> entities = new SimpleList<>();
-    private Wave wave = new Wave();
+    public Wave wave = new Wave();
     private int waveCount = -1;
     private int waveSize = 16;
     private boolean paused;

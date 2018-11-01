@@ -19,6 +19,7 @@ public class sDragonInfo extends sScene {
     public Label rankLb;
     public Label fireRateLb;
     public Label livesLb;
+    public Label actualSortLb;
 
 
     @Override
