@@ -4,7 +4,12 @@ import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
+import graphics.controllers.sDragonInfo;
 import graphics.sound.Sound;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -230,13 +235,25 @@ public class Dragon extends Entity {
      * Show the information of the dragon
      */
     private void pressed() throws IOException {
-        /*GameController.getInstance().pause();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("graphics/layouts/dragonInfo.fxml"));
-        Parent content = loader.load();
+        GameController.getInstance().setPaused(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("graphics/layouts/dragonInfo.fxml"));
+        Parent content = (Parent)fxmlLoader.load();
+        sDragonInfo controller = fxmlLoader.<sDragonInfo>getController();
+
+
+        controller.nameLb.setText(this.getName());
+        controller.ageLB.setText(String.valueOf(this.getAge()));
+        controller.fireRateLb.setText(String.valueOf(this.getFire_rate()));
+        controller.livesLb.setText(String.valueOf(this.getLives()));
+        controller.rankLb.setText(this.getRank());
+
+
         Stage secondStage = new Stage();
         secondStage.setScene(new Scene(content));
-        secondStage.show();*/
+
+
+
+        secondStage.show();
         }
     /**
      * Move the dragon, updating the coordinates
