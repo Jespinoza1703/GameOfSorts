@@ -127,7 +127,7 @@ public class WaveGenerator {
      * Makes an tree like formation
      * @param wave the wave to order
      */
-    private static void treeWave(Wave wave){
+    public static void treeWave(Wave wave){
 
     }
 
