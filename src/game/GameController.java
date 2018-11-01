@@ -3,7 +3,6 @@ package game;
 import client.Wave;
 import client.WaveGenerator;
 import game.draw.Drawer;
-import game.draw.Sprite;
 import game.entities.Background;
 import game.entities.Dragon;
 import game.entities.Entity;
@@ -125,7 +124,7 @@ public class GameController extends Thread {
         }
     }
 
-    private void pause() {
+    public void pause() {
         logger.info(SYS, "Game Paused");
         game_pane.pause_menu.setVisible(true);
         game_pane.gamePane.setOpacity(0.4);

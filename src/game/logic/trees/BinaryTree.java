@@ -64,7 +64,7 @@ public class BinaryTree {
         }else if(node.right == null){
             return node;
         }else{
-            return findMin(node.right);
+            return findMax(node.right);
         }
     }
 

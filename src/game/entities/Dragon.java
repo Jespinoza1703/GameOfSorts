@@ -5,6 +5,10 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
 import graphics.sound.Sound;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -13,6 +17,7 @@ import util.Clock;
 import util.Math;
 import util.NameGenerator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Dragon extends Entity {
@@ -61,7 +66,13 @@ public class Dragon extends Entity {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
-        sprite.getSprite().setOnMousePressed(event -> pressed());
+        sprite.getSprite().setOnMousePressed(event -> {
+            try {
+                pressed();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public Dragon(int parentAge, int age, String rank) {
@@ -84,7 +95,13 @@ public class Dragon extends Entity {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
-        sprite.getSprite().setOnMousePressed(event -> pressed());
+        sprite.getSprite().setOnMousePressed(event -> {
+            try {
+                pressed();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -216,10 +233,15 @@ public class Dragon extends Entity {
     /**
      * Show the information of the dragon
      */
-    private void pressed() {
+    private void pressed() throws IOException {
 
-    }
+        //GameController.getInstance().pause();
+        Parent root = FXMLLoader.load((getClass().getResource("graphics/layouts/me.fxml")));
 
+        Stage secondStage = new Stage();
+        secondStage.setScene(new Scene(root));
+        secondStage.show();
+        }
     /**
      * Move the dragon, updating the coordinates
      */

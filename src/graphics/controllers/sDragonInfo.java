@@ -1,13 +1,14 @@
 package graphics.controllers;
 
-import game.GameController;
-import game.draw.Drawer;
-import game.event.handler.Collisions;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
 public class sDragonInfo extends sScene {
+    @FXML
+    public Button returnBT;
+
     @Override
     protected void initialize() throws IOException {
 
@@ -16,13 +17,8 @@ public class sDragonInfo extends sScene {
     @Override
     void pressed_return() throws IOException {
 
+
     }
 
-    @FXML
-    void resume_Game()throws IOException{
-        GameController.getInstance().abort();
-        Drawer.getInstance().abort();
-        Collisions.getInstance().abort();
-        Interface.switchScene("graphics/layouts/game.fxml");
-    }
+
 }

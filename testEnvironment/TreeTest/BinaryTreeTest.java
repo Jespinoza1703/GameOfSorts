@@ -1,177 +1,75 @@
 package TreeTest;
 
+import game.entities.Dragon;
+import game.logic.trees.BinaryTree;
+import game.logic.trees.TreeNode;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class BinaryTreeTest {
-/*
-    @Test
-    void isEmptyWhenIsEmpty(){
-        BinaryTree tree = new BinaryTree();
-        boolean result = tree.isEmpty();
-        assertTrue(result);
-    }
 
     @Test
-    void isEmptyWhenIsNotEmpty(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(8);
-        boolean result = tree.isEmpty();
-        assertFalse(result);
-    }
+    void testAddDragon(){
+        Dragon d1 = new Dragon();
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.addDragon(d1);
 
-    @Test
-    void TestContainsWhenContainSTheNumber(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(8);
-        boolean result = tree.contains(8);
-        assertTrue(result);
-    }
-    @Test
-    void TestContainsWhenNotContainSTheNumber(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(8);
-        boolean result = tree.contains(5);
-        assertFalse(result);
-    }
-    @Test
-    void testFindMin(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(8);
-        tree.add(7);
-        tree.add(9);
-        tree.add(1);
-        tree.add(4);
-        int result = tree.findMin().getElement();
-        assertEquals(1, result);
-    }
+        Assertions.assertEquals(d1.getName(), binaryTree.getRoot().getDragon().getName());
 
-    @Test
-    void testFindMinWhenIsEmpty(){
-        BinaryTree tree = new BinaryTree();
-        TreeNode result = tree.findMin();
-        assertNull(result);
-    }
-    @Test
-    void testFindMinWhenIsTheRoot(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(1);
-        tree.add(2);
-        tree.add(3);
-        tree.add(4);
-        tree.add(5);
-        int result = tree.findMin().getElement();
-        assertEquals(1, result);
-    }
-
-    @Test
-    void testFindMax(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(8);
-        tree.add(7);
-        tree.add(9);
-        tree.add(1);
-        tree.add(4);
-        int result = tree.findMax().getElement();
-        assertEquals(9, result);
-    }
-
-    @Test
-    void testFindMaxWhenIsEmpty(){
-        BinaryTree tree = new BinaryTree();
-        TreeNode result = tree.findMax();
-        assertNull(result);
-    }
-
-    @Test
-    void testFindManWhenIsTheRoot(){
-        BinaryTree tree = new BinaryTree();
-        tree.add(5);
-        tree.add(4);
-        tree.add(3);
-        tree.add(2);
-        tree.add(1);
-        int result = tree.findMax().getElement();
-        assertEquals(5, result);
-    }
-
-    @Test
-    void ClearOut(){
-        BinaryTree tree = new BinaryTree();
-        int i = 0;
-        while (i<6){
-            tree.add(i);
-            i++;
-        }
-        tree.clearOut();
-        TreeNode result = tree.getRoot();
-        assertNull(result);
-    }
-
-    @Test
-    void addDragonTest(){
-        BinaryTree tree = new BinaryTree();
-        int i = 0;
-        while (i<6){
-            tree.addDragon();
-            i++;
-        }
-        Dragon dragon = tree.getRoot().getDragon();
-        boolean result = dragon.getClass() == Dragon.class;
-        assertTrue(result);
 
     }
 
     @Test
-    void findMaxWithEntryTree(){
-        BinaryTree tree = new BinaryTree();
-        TreeNode result = tree.findMax();
-        assertNull(result);
-    }
-
-    @Test
-    void findMinWithEntryTree(){
-        BinaryTree tree = new BinaryTree();
-        TreeNode result = tree.findMin();
-        assertNull(result);
-    }
-
-    @Test
-    void testDragonRankInRoot(){
-        Dragon dragon = new Dragon();
-        Dragon dragon1 = new Dragon();
-        Dragon dragon2 = new Dragon();
-        BinaryTree tree = new BinaryTree();
-        tree.addDragon(5, dragon);
-        tree.addDragon(7, dragon1);
-        tree.addDragon(3, dragon2);
-        String result = tree.getRoot().getDragon().getRank();
-        assertEquals("Commander", result);
+    void testContainTrue(){
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.add(2);
+        binaryTree.add(1);
+        binaryTree.add(7);
+        binaryTree.add(3);
+        binaryTree.add(5);
+        binaryTree.add(38);
+        assertTrue(binaryTree.contains(2));
+        assertTrue(binaryTree.contains(1));
+        assertTrue(binaryTree.contains(7));
+        assertTrue(binaryTree.contains(3));
+        assertTrue(binaryTree.contains(5));
+        assertTrue(binaryTree.contains(38));
     }
     @Test
-    void testDragonRankInInfantry(){
-        Dragon dragon = new Dragon();
-        Dragon dragon1 = new Dragon();
-        Dragon dragon2 = new Dragon();
-        BinaryTree tree = new BinaryTree();
-        tree.addDragon(5, dragon);
-        tree.addDragon(7, dragon1);
-        tree.addDragon(3, dragon2);
-        String result = tree.findMin().getDragon().getRank();
-        assertEquals("Infantry", result);
+    void testContainFalse(){
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.add(2);
+        Assertions.assertFalse(binaryTree.contains(5));
     }
     @Test
-    void testDragonRankInCaptains(){
-        Dragon dragon = new Dragon();
-        Dragon dragon1 = new Dragon();
-        Dragon dragon2 = new Dragon();
-        BinaryTree tree = new BinaryTree();
-        tree.addDragon(5, dragon);
-        tree.addDragon(7, dragon1);
-        tree.addDragon(9, dragon2);
-        String result = tree.getRoot().getRight().getDragon().getRank();
-        assertEquals("Captain", result);
+    void findMinMaxTest(){
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.add(2);
+        binaryTree.add(1);
+        binaryTree.add(7);
+        binaryTree.add(3);
+        binaryTree.add(5);
+        binaryTree.add(38);
+        binaryTree.add(38);
+        assertEquals(1, binaryTree.findMin().getElement());
+        assertEquals(38, binaryTree.findMax().getElement());
+    }
+    @Test
+    void findMinMaxWithNullTest(){
+        BinaryTree binaryTree = new BinaryTree();
+        assertNull(binaryTree.findMax());
+        assertNull(binaryTree.findMin());
+    }
+    @Test
+    void setRootTest(){
+        BinaryTree binaryTree = new BinaryTree();
+        TreeNode treeNode = new TreeNode(10);
+        binaryTree.setRoot(treeNode);
+        Assertions.assertSame(treeNode, binaryTree.getRoot());
     }
 
-
-*/
 
 
 
