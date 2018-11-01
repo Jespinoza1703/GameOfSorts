@@ -64,6 +64,7 @@ public class Dragon extends Entity {
         logger.debug("Created new dragon");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
+        this.rank = "Commander";
         sprite = loadImages();
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
