@@ -5,10 +5,6 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
 import graphics.sound.Sound;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -234,13 +230,13 @@ public class Dragon extends Entity {
      * Show the information of the dragon
      */
     private void pressed() throws IOException {
-
-        //GameController.getInstance().pause();
-        Parent root = FXMLLoader.load((getClass().getResource("graphics/layouts/me.fxml")));
-
+        /*GameController.getInstance().pause();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("graphics/layouts/dragonInfo.fxml"));
+        Parent content = loader.load();
         Stage secondStage = new Stage();
-        secondStage.setScene(new Scene(root));
-        secondStage.show();
+        secondStage.setScene(new Scene(content));
+        secondStage.show();*/
         }
     /**
      * Move the dragon, updating the coordinates
