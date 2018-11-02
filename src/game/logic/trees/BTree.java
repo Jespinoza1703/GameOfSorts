@@ -1,9 +1,9 @@
 package game.logic.trees;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Deque;
+import game.GameController;
+import game.entities.Dragon;
+
+import java.util.*;
 
 public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
 
@@ -12,7 +12,7 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
     private int maxKeySize = 2 * minKeySize; // 2
     private int maxChildrenSize = maxKeySize + 1; // 3
 
-    private Node<T> root = null;
+    public Node<T> root = null;
     private int size = 0;
 
     /**
@@ -23,8 +23,8 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean add(T value) {
+
+    public boolean add(T value, Dragon dragon) {
         if (root == null) {
             root = new Node<T>(null, maxKeySize, maxChildrenSize);
             root.addKey(value);
@@ -33,6 +33,7 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
             while (node != null) {
                 if (node.numberOfChildren() == 0) {
                     node.addKey(value);
+                    node.setDragon(dragon);
                     if (node.numberOfKeys() <= maxKeySize) {
                         // A-OK
                         break;
@@ -125,6 +126,11 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
 
             if (parent.numberOfKeys() > maxKeySize) split(parent);
         }
+    }
+
+    @Override
+    public boolean add(T value) {
+        return false;
     }
 
     /**
@@ -514,10 +520,21 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
     public String toString() {
         return TreePrinter.getString(this);
     }
-
+    public static BTree getBtree () {
+        List<Dragon> dragonList = GameController.getInstance().wave.getDragonsList();
+        BTree bTree = new BTree();
+        int i = 0;
+        int j = dragonList.size();
+        while (i < j) {
+            bTree.add(dragonList.get(i).getAge(), dragonList.get(i));
+            i++;
+        }
+        return bTree;
+    }
     // B Tree Node Class.
-    private static class Node<T extends Comparable<T>> {
+    public static class Node<T extends Comparable<T>> {
 
+        private Dragon dragon;
         private T[] keys = null;
         private int keysSize = 0;
         private Node<T>[] children = null;
@@ -539,7 +556,7 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
             this.childrenSize = 0;
         }
 
-        private T getKey(int index) {
+        public T getKey(int index) {
             return keys[index];
         }
 
@@ -588,7 +605,7 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
             return value;
         }
 
-        private int numberOfKeys() {
+        public int numberOfKeys() {
             return keysSize;
         }
 
@@ -683,6 +700,14 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
 
             return builder.toString();
         }
+
+        public Dragon getDragon() {
+            return dragon;
+        }
+
+        public void setDragon(Dragon dragon) {
+            this.dragon = dragon;
+        }
     }
 
     // B Tree printer class.
@@ -725,6 +750,8 @@ public class BTree<T extends Comparable<T>> implements bTreeInterface<T> {
             return builder.toString();
         }
     }
+
+
 
     public static class JavaCompatibleBTree<T extends Comparable<T>> extends java.util.AbstractCollection<T> {
 
