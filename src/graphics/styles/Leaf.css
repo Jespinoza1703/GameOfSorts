@@ -3,6 +3,8 @@
     -fx-secundary : #88c399;
     -fx-primary-text : #383838;
     -fx-secundary-text : #ecfffd;
+    -fx-third-text : #50ff50;
+    -fx-fourth-text : #ff0000;
     -fx-shadow-text : #475859;
 }
 .glyph-icon {
@@ -12,6 +14,14 @@
 /** Labels **/
 .label{
     -fx-text-fill: -fx-primary-text;
+    -fx-font-size: 50;
+}
+.green-label{
+    -fx-text-fill: -fx-third-text;
+    -fx-font-size: 50;
+}
+.red-label{
+    -fx-text-fill: -fx-fourth-text;
     -fx-font-size: 50;
 }
 .alpha-label{

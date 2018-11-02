@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
@@ -51,16 +52,16 @@
             <Label onMouseClicked="#pressed_exit" styleClass="alpha-label" text="Exit Game" />
          </children>
       </VBox>
-      <VBox fx:id="winVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+      <VBox fx:id="winVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
          <children>
-             <Label fx:id="winLabel" text="YOU WIN!" />
+             <Label fx:id="winLabel" styleClass="green-label" text="YOU WIN!" />
              <Label onMousePressed="#pressed_return" styleClass="alpha-label" text="Return to menu" />
          </children>
       </VBox>
-      <VBox fx:id="loseVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+      <VBox fx:id="loseVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
          <children>
-          <Label text="YOU LOSE!" />
-          <Label onMousePressed="#pressed_return" text="Return to menu" />
+          <Label styleClass="red-label" text="YOU LOSE!" />
+          <Label onMousePressed="#pressed_return" styleClass="alpha-label" text="Return to menu" />
          </children>
       </VBox>
 

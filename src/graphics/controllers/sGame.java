@@ -24,6 +24,8 @@ public class sGame extends sScene{
     @FXML
     public VBox winVBox;
     @FXML
+    public Label winLabel;
+    @FXML
     public VBox loseVBox;
 
     @Override

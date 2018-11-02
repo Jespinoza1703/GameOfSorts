@@ -3,6 +3,7 @@ package game;
 import client.Wave;
 import client.WaveGenerator;
 import game.draw.Drawer;
+import game.draw.Sprite;
 import game.entities.Background;
 import game.entities.Dragon;
 import game.entities.Entity;
