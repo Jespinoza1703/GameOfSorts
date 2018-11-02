@@ -54,7 +54,9 @@ public class PlayerDeath extends Entity {
         yPoss += ySpeed;
 
         var drawerHeight = Drawer.height;
-        if (yPoss < 0) destroy();
+        if (yPoss < 0){
+            destroy();
+        }
         if (yPoss > drawerHeight - height) destroy();
     }
     @Override
@@ -64,6 +66,7 @@ public class PlayerDeath extends Entity {
 
     @Override
     public void destroy() {
+        GameController.getInstance().setGameEnd(true);
         Drawer.getInstance().deleteEntity(this);
         GameController.getInstance().deleteEntity(this);
     }

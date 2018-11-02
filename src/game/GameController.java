@@ -144,6 +144,7 @@ public class GameController extends Thread {
     }
 
     private void gameEnd() {
+        logger.info(SYS, "Game has ended");
         game_pane.game_end.setVisible(true);
         game_pane.gamePane.setOpacity(0.4);
         while (is_game_finished()) {
@@ -223,6 +224,10 @@ public class GameController extends Thread {
     }
     public boolean is_game_finished() {
         return is_game_finished();
+    }
+    public void setGameEnd(Boolean gameEnd) {
+        logger.info(SYS, "setGameEnd");
+        is_game_finished = gameEnd;
     }
 
     public boolean isGameRunning() {
