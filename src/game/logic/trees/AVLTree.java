@@ -159,7 +159,6 @@ public class AVLTree {
         }
     }
 */
-
     /**
      * Insert only one Element
      * @param element Value of the element to be added
@@ -242,7 +241,7 @@ public class AVLTree {
         return deleteNode(root, key);
     }
 
-    private TreeNode deleteNode(TreeNode root, int key) {
+    public TreeNode deleteNode(TreeNode root, int key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
             return root;
@@ -340,5 +339,9 @@ public class AVLTree {
     public void setRoot(TreeNode root) {
         logger.debug("Set " + root + " as " +this + " root");
         this.root = root;
+    }
+
+    public void clearOut(){
+        this.root = null;
     }
 }

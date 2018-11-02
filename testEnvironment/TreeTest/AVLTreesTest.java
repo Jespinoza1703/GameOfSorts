@@ -1,7 +1,14 @@
 package TreeTest;
 
+import game.entities.Dragon;
+import game.logic.trees.AVLTree;
+import game.logic.trees.TreeNode;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class AVLTreesTest {
-    /*
+
     @Test
     void AVLA_add_Balance_7_Elements() {
         AVLTree tree = new AVLTree();
@@ -66,17 +73,6 @@ public class AVLTreesTest {
         assertEquals(5, tmp.getElement());
     }
 
-    @Test
-    void PreOrderMethod(){
-        AVLTree tree = new AVLTree();
-        int i = 1;
-        while (i <= 7){
-            tree.insert(i);
-            i++;
-        }
-        TreeNode node = tree.getRoot();
-        tree.preOrder(node);
-    }
 
     @Test
     void TestDragonToTree(){
@@ -103,7 +99,8 @@ public class AVLTreesTest {
     void insertDragonWithAnAgeTestAge(){
         Dragon dragon = new Dragon();
         AVLTree tree = new AVLTree();
-        tree.insertDragon(100, dragon);
+        dragon.setAge(100);
+        tree.insert(dragon);
         int result = tree.getRoot().getDragon().getAge();
         assertEquals(100, result);
     }
@@ -177,7 +174,22 @@ public class AVLTreesTest {
             i++;
         }
         tree.deleteNode(tree.getRoot(), 2);
-    }*/
+    }
+
+    @Test
+    void deleteTest(){
+        AVLTree tree = new AVLTree();
+        tree.deleteNode(2);
+        assertNull(tree.getRoot());
+    }
+
+    @Test
+    void setRootTest(){
+        AVLTree tree = new AVLTree();
+        TreeNode node = new TreeNode(1);
+        tree.setRoot(node);
+        assertSame(node, tree.getRoot());
+    }
 
 
 
