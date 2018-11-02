@@ -27,6 +27,13 @@ public class TreeNode {
         this.right = null;
     }
 
+    public TreeNode(double element, Dragon dragon, TreeNode left, TreeNode right){
+        this.element = element;
+        this.dragon = dragon;
+        this.left = left;
+        this.right = right;
+    }
+
 
     public int getElement() {
         return (int) element;

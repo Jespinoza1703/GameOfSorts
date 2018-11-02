@@ -92,6 +92,15 @@ public class Dragon extends Entity {
         Collisions.getInstance().addDragon(this);
     }
 
+    public Dragon(int parentAge, int age, String rank, String name, int lives, int fire_rate) {
+        this.parentAge = parentAge;
+        this.age = age;
+        this.rank = rank;
+        this.name = name;
+        this.lives = lives;
+        this.fire_rate = fire_rate;
+    }
+
     /**
      * Update the dragon position
      */

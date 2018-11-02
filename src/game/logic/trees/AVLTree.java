@@ -14,6 +14,10 @@ public class AVLTree {
         logger.debug("Created New AVL Tree");
     }
 
+    public AVLTree(TreeNode root) {
+        this.root = root;
+    }
+
     /**
      * A utility function to get the height of the tree
      * @param N Node to analise

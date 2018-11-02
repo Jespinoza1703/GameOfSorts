@@ -11,6 +11,10 @@ public class BinaryTree {
 
     }
 
+    public BinaryTree(TreeNode root) {
+        this.root = root;
+    }
+
     public boolean contains (double element){
         return this.contains(element, this.root);
     }
