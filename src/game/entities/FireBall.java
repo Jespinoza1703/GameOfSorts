@@ -22,7 +22,6 @@ public class FireBall extends Entity {
     private int xSpeed = 15, ySpeed = 8;
     private double fireWidth, fireHeight;
     private ArrayList<Sprite> animations = new ArrayList<>();
-    private ArrayList<Sprite> deathAnimations = new ArrayList<>();
     private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;

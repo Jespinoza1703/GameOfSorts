@@ -3,6 +3,7 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
+import javafx.scene.image.ImageView;
 import util.Clock;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class PlayerDeath extends Entity {
     private double animationTimer = 50;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private int ySpeed = 3;
+    private double rotate = 0;
 
     public PlayerDeath(double xPoss, double yPoss, double width, double height) {
         this.xPoss = xPoss;
@@ -38,15 +41,25 @@ public class PlayerDeath extends Entity {
             lastAnimationTime = time;
             currentSprite = (currentSprite + 1) % movementAnimation.size();
         }
-        if (currentSprite == movementAnimation.size()){
-            destroy();
-        }
+        sprite.getSprite().setRotate(rotate);
+        rotate -= 10;
+        sprite.move(xPoss, yPoss);
         return sprite;
     }
 
+    /**
+     * Update the position of the player
+     */
+    public void move(){
+        yPoss += ySpeed;
+
+        var drawerHeight = Drawer.height;
+        if (yPoss < 0) destroy();
+        if (yPoss > drawerHeight - height) destroy();
+    }
     @Override
     public void update() {
-
+        move();
     }
 
     @Override
@@ -76,23 +89,6 @@ public class PlayerDeath extends Entity {
     private Sprite loadImages(){
         String root = "file:res/img/entities/griffin/deadGriffin/";
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
         return movementAnimation.get(0);
     }
 }

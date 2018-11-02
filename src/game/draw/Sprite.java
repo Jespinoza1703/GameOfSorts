@@ -35,6 +35,11 @@ public class Sprite {
         sprite = imgView;
     }
 
+    /**
+     * Places the image on the screen and updates its position
+     * @param xPoss
+     * @param yPoss
+     */
     public void move(double xPoss, double yPoss){
         sprite.setX(xPoss - width / 2);
         sprite.setY(yPoss - height / 2);
@@ -42,6 +47,10 @@ public class Sprite {
         this.yPoss = sprite.getY();
     }
 
+    /**
+     * Getters and setters
+     * @return
+     */
     public double getWidth() {
         return width;
     }
