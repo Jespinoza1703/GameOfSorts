@@ -89,7 +89,7 @@ public class Dragon extends Entity{
         return sprite;
     }
     /**
-     * Loads images for dragon
+     * Loads images for entity dragon
      *
      * @return Sprite
      */

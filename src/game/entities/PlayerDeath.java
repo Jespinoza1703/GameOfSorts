@@ -70,7 +70,7 @@ public class PlayerDeath extends Entity {
     }
 
     /**
-     * Loads images for entity
+     * Loads images for entity PlayerDeath
      * @return Sprite
  0    */
     private Sprite loadImages(){

@@ -70,6 +70,10 @@ public class Player extends Entity {
         return sprite;
     }
 
+    /**
+     * loads images for entity Player
+     * @return
+     */
     private Sprite loadImages(){
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, playerWidth, playerHeight,
                 "file:res/img/entities/griffin/griffin1"));

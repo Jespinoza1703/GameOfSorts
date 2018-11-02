@@ -59,7 +59,7 @@ public class FireBall extends Entity {
     }
 
     /**
-     * loads images for entity
+     * loads images for entity FireBall
      * @return
      */
     private Sprite loadImages(){
