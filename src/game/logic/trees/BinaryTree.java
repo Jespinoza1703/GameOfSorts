@@ -5,7 +5,7 @@ import game.entities.Dragon;
 
 public class BinaryTree {
 
-    private TreeNode root;
+    public TreeNode root;
 
     public BinaryTree(){
 

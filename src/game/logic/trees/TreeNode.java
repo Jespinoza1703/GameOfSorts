@@ -4,10 +4,10 @@ import game.entities.Dragon;
 
 public class TreeNode {
 
-    double element, height;
-    Dragon dragon;
-    TreeNode left;
-    TreeNode right;
+    public double element, height;
+    public Dragon dragon;
+    public TreeNode left;
+    public TreeNode right;
 
 
     public TreeNode(double element) {
