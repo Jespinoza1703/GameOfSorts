@@ -1,15 +1,7 @@
 package EntitiesTest;
 
-import game.entities.Dragon;
-import game.logic.lists.SimpleList;
-import game.logic.sorts.SortMethods;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 public class DragonTest {
-
+/*
     @Test
     void AddDragonToDragonList_Test(){
         new Dragon();
@@ -30,7 +22,7 @@ public class DragonTest {
        boolean result = dragons.getByIndex(0).getDragon().getFire_rate() <= dragons.getByIndex(0).getDragon().getFire_rate();
        assertEquals(true, result);
     }
-
+*/
 
 
 }

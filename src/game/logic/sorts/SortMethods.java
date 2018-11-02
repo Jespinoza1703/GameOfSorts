@@ -1,11 +1,15 @@
 package game.logic.sorts;
 
 import game.entities.Dragon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.Math;
 
 import java.util.List;
 
 public class SortMethods {
+
+    private static Logger logger = LoggerFactory.getLogger("IntList");
 
     /**
      * Sorts by age
@@ -16,7 +20,7 @@ public class SortMethods {
     }
 
     private static void quickSort(List<Dragon> list, int low, int high){
-
+        logger.info(list + "Sorted by Age with QuickSort");
         // Check for empty or null array
         if (list == null || list.size() == 0){
             return;
@@ -64,6 +68,7 @@ public class SortMethods {
      * @param list a Dragons ArrayList
      */
     public static void bubbleSort(List<Dragon> list){
+        logger.info(list + "Sorted with Bubble Sort");
         int n = list.size();
         for(int i=0; i < n; i++){
             for(int j=1; j < (n-i); j++){
@@ -81,6 +86,7 @@ public class SortMethods {
      * @param list a Dragons ArrayList
      */
     public static void selectionSort (List<Dragon> list) {
+        logger.info(list + "Sorted by age with Selection Sort");
         int n = list.size();
 
         // One by one move boundary of unsorted sub-array
@@ -102,6 +108,7 @@ public class SortMethods {
      * @param list a Dragons ArrayList
      */
     public static void insertionSort(List<Dragon> list) {
+        logger.info(list + "Sorted by age with Insertion Sort");
         for (int i = 1; i < list.size() - 1; i++) {
             int j = i;
             while ((j > 0) && (list.get(j).getFire_rate() < list.get(j - 1).getFire_rate())) {
@@ -121,6 +128,13 @@ public class SortMethods {
             swap(list, i, rand);
         }
     }
+
+    /**
+     *Swap the positions of two nodes
+     * @param list List to modify
+     * @param i Position of Node 1
+     * @param j Position of Node 2
+     */
 
     private static void swap(List<Dragon> list, int i, int j){
         Dragon tmp = list.get(i);

@@ -13,10 +13,12 @@ public class Collisions {
 
     private static Logger logger = LoggerFactory.getLogger(Collisions.class);
     private static final Marker COLLISION = MarkerFactory.getMarker("COLLISION");
+    private static final Marker SYS = MarkerFactory.getMarker("SYS");
     private static Collisions instance;
     private SimpleList<Entity> dragons = new SimpleList<>();
     private SimpleList<Entity> playerBullets = new SimpleList<>();
     private SimpleList<Entity> dragonBullets = new SimpleList<>();
+    private SimpleList<Entity> hearts = new SimpleList<>();
 
     public static Collisions getInstance() {
         if (instance == null){
@@ -84,6 +86,7 @@ public class Collisions {
     }
 
     public void abort(){
+        logger.info(SYS, "Collisions aborted");
         instance = null;
     }
 
@@ -99,8 +102,16 @@ public class Collisions {
         dragonBullets.addAtEnd(bullet);
     }
 
+    public void addHeart(Entity heart){
+        hearts.addAtEnd(heart);
+    }
+
     public void deleteDragon(Entity draw){
         dragons.delete(dragons.searchIndex(draw));
+    }
+
+    public void deleteHeart(Entity heart){
+        hearts.delete(hearts.searchIndex(heart));
     }
 
     public void deleteBullets(Entity draw){
@@ -122,5 +133,9 @@ public class Collisions {
 
     public SimpleList getDragonBullets() {
         return dragonBullets;
+    }
+
+    public SimpleList<Entity> getHearts() {
+        return hearts;
     }
 }

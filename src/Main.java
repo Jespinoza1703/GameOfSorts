@@ -1,6 +1,7 @@
 import game.event.handler.inputs.KeyReader;
 import graphics.controllers.Interface;
 import graphics.controllers.sScene;
+import graphics.sound.Sound;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -22,11 +23,20 @@ public class Main extends Application {
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
     private static final Marker GUI = MarkerFactory.getMarker("GUI");
 
+    /**
+     * Launch the app
+     * @param args
+     */
     public static void main(String[] args) {
         logger.info(SYS, "Running JavaFx Application");
         launch(args);
     }
 
+    /**
+     * Start the stages
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
@@ -39,6 +49,8 @@ public class Main extends Application {
         window.getIcons().add(new Image("file:res/img/icon.png"));
         Interface.init(this);
         switchScene();
+        //Sound.play("res/sounds/ocarina.wav", 1);
+        Sound.startSong();
         window.show();
         window.setOnCloseRequest(e-> close());
     }

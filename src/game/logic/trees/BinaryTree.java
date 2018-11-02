@@ -70,7 +70,7 @@ public class BinaryTree {
 
     private TreeNode addRecursive(TreeNode current, double value) {
         if (current == null) {
-            return new TreeNode(value);
+            return new TreeNode((int) value);
         }
         if (value < current.element) {
             current.left = addRecursive(current.left, value);
@@ -85,7 +85,7 @@ public class BinaryTree {
 
     private TreeNode addRecursiveDragon(TreeNode current, double value, Dragon dragon) {
         if (current == null) {
-            return new TreeNode(value, dragon);
+            return new TreeNode((int) value, dragon);
         }
         if (value < current.element) {
             current.left = addRecursiveDragon(current.left, value, dragon);

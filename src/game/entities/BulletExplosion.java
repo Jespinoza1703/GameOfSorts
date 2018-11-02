@@ -3,6 +3,8 @@ package game.entities;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.Clock;
 
 import java.util.ArrayList;
@@ -20,8 +22,11 @@ public class BulletExplosion extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
     public int lives = 0;
+    private static Logger logger = LoggerFactory.getLogger("BulletExplosion");
+
 
     public BulletExplosion(double xPoss, double yPoss, double width, double height) {
+        logger.debug("New bullet Explosion");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.width = width;
@@ -52,6 +57,7 @@ public class BulletExplosion extends Entity {
 
     @Override
     public void destroy() {
+        logger.debug(this + "has been destroy");
         Drawer.getInstance().deleteEntity(this);
         GameController.getInstance().deleteEntity(this);
     }
@@ -75,20 +81,14 @@ public class BulletExplosion extends Entity {
      * @return Sprite
      */
     private Sprite loadImages(){
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion1"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion2"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion3"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion4"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion5"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion6"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion7"));
+        String root = "file:res/img/entities/explosion/";
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion1"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion2"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion3"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion4"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion5"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion6"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "explosion7"));
         return movementAnimation.get(0);
     }
 }

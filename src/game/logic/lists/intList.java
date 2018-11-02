@@ -1,8 +1,12 @@
 package game.logic.lists;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class intList {
     private intNode first;
     private int large;
+    private static Logger logger = LoggerFactory.getLogger("IntList");
 
     public intList(){
         this.first = null;
@@ -15,6 +19,7 @@ public class intList {
      */
     public void addAtEnd(int value){
         if(this.isEmpty()){
+            logger.debug("add " + value + "as first element");
             this.first = new intNode(value);
             this.large += 1;
         }
@@ -24,6 +29,7 @@ public class intList {
                 temporal =  temporal.getNext();
             }
             temporal.setNext(new intNode(value));
+            logger.debug("Added " + temporal.getNext().getValue() + " to list");
             this.large += 1;
         }
     }
@@ -34,6 +40,7 @@ public class intList {
      */
     public void addAtBeginning (int value){
         if(this.isEmpty()){
+            logger.debug("add " + value + "as first element");
             this.first = new intNode(value);
             this.large += 1;
         }
@@ -109,6 +116,7 @@ public class intList {
                 while (temporal.getNext() != null) {
 
                     if (i == index) {
+                        logger.debug(temporal.getNext() + "has been deleted");
                         temporal.setNext(temporal.getNext().getNext());
                         this.large -= 1;
                         break;

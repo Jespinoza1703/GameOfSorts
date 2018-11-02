@@ -1,5 +1,6 @@
 package game.draw;
 
+import game.GameController;
 import game.entities.Background;
 import game.entities.Entity;
 import game.logic.lists.SimpleList;
@@ -8,12 +9,10 @@ import graphics.controllers.sScene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import util.Clock;
 
 /**
  * Singleton class that manages the objects to be drawn in the gamePane
@@ -64,6 +63,11 @@ public class Drawer {
     private synchronized void draw(){
         drawPane.getChildren().clear();
         drawBG();
+        drawEntities();
+        drawLife();
+    }
+
+    private void drawEntities(){
         for (int i = 0; i < draws.getLarge(); i++){
             ImageView sprite = draws.getByIndex(i).getValue().draw().getSprite();
             boolean contains = drawPane.getChildren().contains(sprite);
@@ -86,6 +90,17 @@ public class Drawer {
         }
     }
 
+    private void drawLife(){
+        int hearts = gamePane.lifeBox.getChildren().size();
+        int life = GameController.player.getLives();
+        if (hearts < life) {
+            Sprite heart = new Sprite(0, 0, 20, 20, "file:res/img/entities/life/heart.png");
+            gamePane.lifeBox.getChildren().addAll(heart.getSprite());
+        }
+        if (hearts > life) gamePane.lifeBox.getChildren().remove(hearts-1);
+        gamePane.waveCount.setText(String.valueOf(GameController.getInstance().getWaveCount()));
+    }
+
     public void addDrawAtEnd(Entity draw){
         draws.addAtEnd(draw);
     }
@@ -105,7 +120,7 @@ public class Drawer {
     }
 
     public void abort(){
-        logger.info(SYS, "Drawer thread stop: " + drawer.toString());
+        logger.info(SYS, "Drawer aborted");
         drawer.stop();
         instance = null;
     }
