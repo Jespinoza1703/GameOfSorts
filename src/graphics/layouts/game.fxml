@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.String?>
 
 <AnchorPane id="sGame" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/Leaf.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.sGame">
    <children>
@@ -50,6 +49,11 @@
             <Label onMouseClicked="#pressed_resume" styleClass="alpha-label" text="Resume" />
             <Label onMouseClicked="#pressed_return" styleClass="alpha-label" text="Return Menu" />
             <Label onMouseClicked="#pressed_exit" styleClass="alpha-label" text="Exit Game" />
+         </children>
+      </VBox>
+      <VBox fx:id="game_end" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <Label onMousePressed="#pressed_return" text="Return to menu" />
          </children>
       </VBox>
    </children>

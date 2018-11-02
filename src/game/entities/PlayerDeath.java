@@ -36,7 +36,7 @@ public class PlayerDeath extends Entity {
         if (time - lastAnimationTime > animationTimer){
             sprite = movementAnimation.get(currentSprite);
             lastAnimationTime = time;
-            currentSprite++;
+            currentSprite = (currentSprite + 1) % movementAnimation.size();
         }
         if (currentSprite == movementAnimation.size()){
             destroy();
@@ -74,12 +74,25 @@ public class PlayerDeath extends Entity {
      * @return Sprite
  0    */
     private Sprite loadImages(){
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/griffin/deadGriffin/deadGriffin1.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/griffin/deadGriffin/deadGriffin2.png"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/griffin/deadGriffin/deadGriffin3.png"));
+        String root = "file:res/img/entities/griffin/deadGriffin/";
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin1.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin2.png"));
+        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height, root + "deadGriffin3.png"));
         return movementAnimation.get(0);
     }
 }

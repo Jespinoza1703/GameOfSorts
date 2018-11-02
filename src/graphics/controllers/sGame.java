@@ -21,6 +21,8 @@ public class sGame extends sScene{
     public HBox lifeBox;
     @FXML
     public Label waveCount;
+    @FXML
+    public VBox game_end;
 
     @Override
     protected void initialize() throws IOException {

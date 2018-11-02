@@ -126,7 +126,7 @@ public class Player extends Entity {
     }
 
     private void dies() {
-        new BulletExplosion(xPoss, yPoss, playerWidth, playerHeight);
+        new PlayerDeath(xPoss, yPoss, 130, 120);
         destroy();
     }
 

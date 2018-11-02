@@ -4,12 +4,7 @@ import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
-import game.event.handler.inputs.KeyReader;
 import graphics.sound.Sound;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -29,7 +24,7 @@ public class Dragon extends Entity {
     private String name = NameGenerator.generateName();
     private int parentAge;
     private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
-    private int fire_rate = Math.getRandomNumberInRange(400, 2000);  // [200, 1000]
+    private int fire_rate = Math.getRandomNumberInRange(200, 1000);  // [200, 1000]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;
@@ -45,7 +40,7 @@ public class Dragon extends Entity {
     private boolean animating = false;
     private double xNew;
     private double yNew;
-    private double dropChance = 10;
+    private double dropChance = 90;
 
     /**
      * Basic constructor

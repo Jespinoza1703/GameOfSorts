@@ -13,24 +13,19 @@ public class Sprite {
     private ImageView sprite;
     public Effect effect = new ColorAdjust(1, 0, 1, 0);
 
-
+    /**
+     * Class constructor
+     * @param xPoss horizontal position
+     * @param yPoss vertical position
+     * @param width image width
+     * @param height image height
+     * @param url corresponds to the images path
+     */
     public Sprite(double xPoss, double yPoss, double width, double height, String url) {
         Image img = new Image(url);
         ImageView imgView = new ImageView(img);
         imgView.setFitWidth(width);
         imgView.setFitHeight(height);
-        imgView.setX(xPoss - width / 2);
-        imgView.setY(yPoss - height / 2);
-        this.xPoss = imgView.getX();
-        this.yPoss = imgView.getY();
-        this.width = imgView.getFitWidth();
-        this.height = imgView.getFitHeight();
-        sprite = imgView;
-    }
-
-    public Sprite(double xPoss, double yPoss, String url) {
-        Image img = new Image(url);
-        ImageView imgView = new ImageView(img);
         imgView.setX(xPoss - width / 2);
         imgView.setY(yPoss - height / 2);
         this.xPoss = imgView.getX();
