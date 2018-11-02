@@ -5,6 +5,9 @@ import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
 import game.event.handler.inputs.KeyReader;
+import graphics.sound.Sound;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.Clock;
 
 import java.util.ArrayList;
@@ -23,17 +26,18 @@ public class FireBall extends Entity {
     private int animationTimer = 100;
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
+    private static Logger logger = LoggerFactory.getLogger("FireBall");
 
     /**
-     * class constructor
+     * Constructor
      * @param xPoss
      * @param yPoss
      * @param fireWidth
      * @param xDir
      * @param yDir
-     * calls loadImage()
      */
     public FireBall(double xPoss, double yPoss, double fireWidth, int xDir, int yDir){
+        logger.debug("Created New FireBall");
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.fireWidth = fireWidth;
@@ -43,10 +47,16 @@ public class FireBall extends Entity {
         sprite = loadImages();
         Drawer.getInstance().addDrawAtBeginning(this);
         GameController.getInstance().addEntity(this);
+        Sound.play("res/sounds/shot.wav", 0);
     }
 
+    /**
+     * Draws the fireball
+     * @return
+     */
     @Override
     public Sprite draw() {
+        logger.debug("Draw" + this);
         long time = clock.getTime();
         if (time - lastAnimationTime > animationTimer){
             sprite = animations.get(currentSprite);
@@ -59,29 +69,31 @@ public class FireBall extends Entity {
     }
 
     /**
-     * loads images for entity FireBall
+     * Simulate the movement of the fireball
      * @return
      */
     private Sprite loadImages(){
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball1.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball2.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball3.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball4.png"));
-        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/fireball/Fireball5.png"));
-        deathAnimations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
-                "file:res/img/entities/dragon/fDeath1"));
+        String[] colors = {"blue", "green", "purple", "red", "yellow"};
+        // int i = Math.getRandomNumberInRange(0, colors.length - 1);
+        String color = colors[3];
+        if(xDir > 0) color = colors[4];
+
+        String root = "file:res/img/entities/fireballs/" + color;
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/1.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/2.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/3.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/4.png"));
+        animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight, root + "/5.png"));
         return animations.get(0);
 
     }
 
     @Override
+    /**
+     *Detects coalitions
+     */
     public void hit(){
-
+        logger.debug(this + " has been hit");
         dies();
     }
 
@@ -90,18 +102,28 @@ public class FireBall extends Entity {
 
     }
 
+    /**
+     * Kill the fireball
+     */
     private void dies(){
         new BulletExplosion(xPoss, yPoss, fireHeight*2, fireHeight*2);
         destroy();
     }
 
+    /**
+     * Update the state of the fireball Image
+     */
     @Override
     public void update() {
         moveFire();
     }
 
+    /**
+     * Destroys the fireball
+     */
     @Override
     public void destroy() {
+        logger.debug(this+ " has been Destroyed");
         Drawer.getInstance().deleteEntity(this);
         GameController.getInstance().deleteEntity(this);
         Collisions.getInstance().deleteBullets(this);
@@ -112,6 +134,9 @@ public class FireBall extends Entity {
         return sprite;
     }
 
+    /**
+     * Update the position of the fireball
+     */
     public void moveFire(){
         xPoss += xSpeed * xDir;
         yPoss += ySpeed * yDir;
@@ -123,6 +148,8 @@ public class FireBall extends Entity {
         if (xPoss < 0) destroy();
         if (xPoss > width) destroy();
     }
+
+    /**Getters and Setters**/
 
     public double getxPoss() {
         return xPoss;

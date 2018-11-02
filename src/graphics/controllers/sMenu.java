@@ -1,5 +1,8 @@
 package graphics.controllers;
 
+import client.Wave;
+import client.WaveGenerator;
+import game.GameController;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -32,6 +35,6 @@ public class sMenu extends sScene{
 
     @FXML
     void pressed_dev_test(){
-        Interface.switchScene("graphics/layouts/dev_test.fxml");
+        Interface.switchScene("graphics/layouts/game.fxml");
     }
 }

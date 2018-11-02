@@ -46,7 +46,7 @@ public class Math {
     }
 
     /**
-     * Approach "a" towards "b" by "amount" and returns the result
+     * Approach "num" towards "result" by "amount" and returns the result
      * @param num integer to approach
      * @param result integer expected
      * @param amount how much to approach
