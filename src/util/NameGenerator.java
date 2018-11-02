@@ -31,7 +31,7 @@ public class NameGenerator {
     "Skywalker", "Balboa", "Rodriguez", "Vidal", "Kirby", "Levy", "Walker", "Cuervo", "Cacique", "DragonSlayer", "Jhonson", "McDonalds",
     "Kentucky", "Junior", "Joker", "Baby", "Hazard", "Pogba", "Grey", "McQueen", "Bambino", "Delevinge", "Dadario", "Maradona", "Disney",
     "Pig", "Vader", "Moda", "Increible", "Balvin", "Colindres", "Campbell", "Navas", "Guardiola", "Jordan", "Cordero", "Prime", "Bora bora",
-    "Rodriguez", "Lonnis", "Vega", "Esponja", "Estrella", "Khalifa", "Balotelli", "Guevara", "De los Angeles"};
+    "Rodriguez", "Lonnis", "Vega", "Esponja", "Estrella", "Khalifa", "Balotelli", "Guevara", "De los Angeles", "Alfaro"};
 
 
     /**
