@@ -22,7 +22,9 @@ public class sGame extends sScene{
     @FXML
     public Label waveCount;
     @FXML
-    public VBox game_end;
+    public VBox winVBox;
+    @FXML
+    public VBox loseVBox;
 
     @Override
     protected void initialize() throws IOException {

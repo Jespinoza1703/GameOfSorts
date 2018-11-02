@@ -51,10 +51,18 @@
             <Label onMouseClicked="#pressed_exit" styleClass="alpha-label" text="Exit Game" />
          </children>
       </VBox>
-      <VBox fx:id="game_end" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+      <VBox fx:id="winVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
          <children>
-            <Label onMousePressed="#pressed_return" text="Return to menu" />
+             <Label fx:id="winLabel" text="YOU WIN!" />
+             <Label onMousePressed="#pressed_return" styleClass="alpha-label" text="Return to menu" />
          </children>
       </VBox>
+      <VBox fx:id="loseVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+         <children>
+          <Label text="YOU LOSE!" />
+          <Label onMousePressed="#pressed_return" text="Return to menu" />
+         </children>
+      </VBox>
+
    </children>
 </AnchorPane>
