@@ -11,12 +11,12 @@ public class TreeNodeTest {
 
     @Test
     void testConstructor(){
-        TreeNode treeNode = new TreeNode(5);
+        TreeNode treeNode = new TreeNode(5, 0);
         assertNotNull(treeNode);
     }
     @Test
     void setAndGetDragonTest(){
-        TreeNode treeNode =  new TreeNode(1);
+        TreeNode treeNode =  new TreeNode(1, 0);
         Dragon dragon = new Dragon();
         treeNode.setDragon(dragon);
         Dragon result = treeNode.getDragon();

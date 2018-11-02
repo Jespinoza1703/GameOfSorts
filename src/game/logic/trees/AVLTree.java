@@ -101,9 +101,9 @@ public class AVLTree {
         /* 1.  Perform the normal BST insertion */
         if (node == null)
             if (dragon != null) {
-                return (new TreeNode(key, dragon));
+                return (new TreeNode(key, dragon, 0));
             }else{
-                return (new TreeNode(key));
+                return (new TreeNode(key, 0));
             }
 
 
@@ -235,7 +235,6 @@ public class AVLTree {
 
     /**
      * Deletes the TreeNode with the element selected
-     * @param root Tree Root
      * @param key Element that will be eliminated
      * @return TreeNode to be eliminated
      */
