@@ -2,6 +2,7 @@ package TreeTest;
 
 import game.entities.Dragon;
 import game.logic.trees.BinaryTree;
+import game.logic.trees.TreeNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,15 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BinaryTreeTest {
 
-
+    @Test
     void testAddDragon(){
         Dragon d1 = new Dragon();
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.addDragon(d1);
 
         Assertions.assertEquals(d1.getName(), binaryTree.getRoot().getDragon().getName());
-
-
     }
 
     @Test
@@ -78,6 +77,29 @@ public class BinaryTreeTest {
         Assertions.assertEquals(4, binaryTree.getRoot().getRight().getRight().getRight().getRight().getLevel());
     }
 
+    @Test
+    void findMinWhenIsEmpty(){
+        BinaryTree binaryTree = new BinaryTree();
+        binaryTree.findMin();
+        assertNull(binaryTree.getRoot());
+    }
 
+    @Test
+    void GetterAndSetterRootTest(){
+        BinaryTree binaryTree = new BinaryTree();
+        TreeNode node = new TreeNode(5);
+        binaryTree.setRoot(node);
+        assertSame(node, binaryTree.getRoot());
+    }
+
+    @Test
+    void addRandomDragonTest(){
+        BinaryTree binaryTree = new BinaryTree();
+        int i = 0;
+        while (i < 25){
+            binaryTree.addDragon(new Dragon());
+            i++;
+        }
+    }
 
 }

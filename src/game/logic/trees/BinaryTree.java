@@ -40,9 +40,7 @@ public class BinaryTree {
     }
 
     private TreeNode findMin (TreeNode node){
-        if (node == null){
-            return null;
-        }else if(node.left == null){
+        if(node.left == null){
             return node;
         }else{
             return findMin(node.left);
@@ -59,9 +57,7 @@ public class BinaryTree {
     }
 
     private TreeNode findMax(TreeNode node){
-        if (node == null){
-            return null;
-        }else if(node.right == null){
+        if(node.right == null){
             return node;
         }else{
             return findMax(node.right);

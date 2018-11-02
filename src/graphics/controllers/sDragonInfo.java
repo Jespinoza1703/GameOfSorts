@@ -2,7 +2,6 @@ package graphics.controllers;
 
 import game.GameController;
 import game.entities.Dragon;
-import game.logic.trees.BTree;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +18,6 @@ import java.io.IOException;
 
 public class sDragonInfo extends sScene {
     private Dragon actualDragon;
-    private BTree bTree = BTree.getBtree();
     private AnimationTimer drawer;
 
     private static Logger logger = LoggerFactory.getLogger(sDragonInfo.class);
@@ -76,60 +74,4 @@ public class sDragonInfo extends sScene {
     }
 
 
-    public void getGraphicTree(){
-        if (getTree().root == null) return;
-        getGraphicTree(getTree().root,true);
-    }
-
-    private void getGraphicTree(BTree.Node node, Boolean isTail) {
-
-      /*  logger.debug("Entry2");
-        ImageView image = GameController.getInstance().wave.getDragonsList().get(0).getSprite().getSprite();
-        AnchorPane pane = dragonPane;
-        drawer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                logger.debug("Entry");
-            }
-        };
-        drawer.start();
-
-
-
-
-        for (int i = 0; i < node.numberOfKeys(); i++) {
-            Comparable value = node.getKey(i);
-            builder.append(value);
-            if (i < node.numberOfKeys() - 1)
-                builder.append(", ");
-        }
-        builder.append("\n");
-
-        if (node.children != null) {
-            for (int i = 0; i < node.numberOfChildren() - 1; i++) {
-                BTree.Node<T> obj = node.getChild(i);
-                builder.append(getString(obj, prefix + (isTail ? "    " : "|   "), false));
-            }
-            if (node.numberOfChildren() >= 1) {
-                BTree.Node<T> obj = node.getChild(node.numberOfChildren() - 1);
-                builder.append(getString(obj, prefix + (isTail ? "    " : "│   "), true));
-            }
-        }
-
-        return builder.toString();
-        */
-        }
-
-
-
-
-
-
-    public BTree getTree() {
-        return bTree;
-    }
-
-    public void setbTree(BTree bTree) {
-        this.bTree = bTree;
-    }
 }
