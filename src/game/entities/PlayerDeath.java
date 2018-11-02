@@ -7,7 +7,7 @@ import util.Clock;
 
 import java.util.ArrayList;
 
-public class BulletExplosion extends Entity {
+public class PlayerDeath extends Entity {
 
     private Clock clock = Clock.getInstance();
     private double xPoss;
@@ -20,7 +20,7 @@ public class BulletExplosion extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
-    public BulletExplosion(double xPoss, double yPoss, double width, double height) {
+    public PlayerDeath(double xPoss, double yPoss, double width, double height) {
         this.xPoss = xPoss;
         this.yPoss = yPoss;
         this.width = width;
@@ -70,24 +70,16 @@ public class BulletExplosion extends Entity {
     }
 
     /**
-     * Loads images for dragon
+     * Loads images for entity
      * @return Sprite
-     */
+ 0    */
     private Sprite loadImages(){
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion1"));
+                "file:res/img/entities/griffin/deadGriffin/deadGriffin1.png"));
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion2"));
+                "file:res/img/entities/griffin/deadGriffin/deadGriffin2.png"));
         movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion3"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion4"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion5"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion6"));
-        movementAnimation.add(sprite = new Sprite(xPoss, yPoss, width, height,
-                "file:res/img/entities/fireball/explosion7"));
+                "file:res/img/entities/griffin/deadGriffin/deadGriffin3.png"));
         return movementAnimation.get(0);
     }
 }

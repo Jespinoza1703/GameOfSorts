@@ -24,6 +24,15 @@ public class FireBall extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
 
+    /**
+     * class constructor
+     * @param xPoss
+     * @param yPoss
+     * @param fireWidth
+     * @param xDir
+     * @param yDir
+     * calls loadImage()
+     */
     public FireBall(double xPoss, double yPoss, double fireWidth, int xDir, int yDir){
         this.xPoss = xPoss;
         this.yPoss = yPoss;
@@ -49,6 +58,10 @@ public class FireBall extends Entity {
         return sprite;
     }
 
+    /**
+     * loads images for entity
+     * @return
+     */
     private Sprite loadImages(){
         animations.add(sprite = new Sprite(xPoss, yPoss, fireWidth, fireHeight,
                 "file:res/img/entities/fireball/Fireball1.png"));

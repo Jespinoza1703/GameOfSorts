@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Dragon extends Entity{
 
+    private Dragon parent;
     private String name = NameGenerator.generateName();
     private int parentAge;
     private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
@@ -34,15 +35,6 @@ public class Dragon extends Entity{
 
     public Dragon() {
 
-    }
-
-    public Dragon(double xPoss, double yPoss) {
-        this.xPoss = xPoss;
-        this.yPoss = yPoss;
-        sprite = loadImages();
-        Drawer.getInstance().addDrawAtEnd(this);
-        GameController.getInstance().addEntity(this);
-        Collisions.getInstance().addDragon(this);
     }
 
     public Dragon(int parentAge, int age, String rank) {
@@ -78,8 +70,6 @@ public class Dragon extends Entity{
     @Override
     public void destroy() {
         Drawer.getInstance().deleteEntity(this);
-        GameController.getInstance().deleteEntity(this);
-        Collisions.getInstance().deleteDragon(this);
     }
 
     @Override
@@ -98,7 +88,6 @@ public class Dragon extends Entity{
         sprite.move(xPoss, yPoss);
         return sprite;
     }
-
     /**
      * Loads images for dragon
      *
@@ -161,7 +150,7 @@ public class Dragon extends Entity{
 
     /** Getters and Setters **/
 
-    public String getName () {
+    public String getName() {
         return name;
     }
 

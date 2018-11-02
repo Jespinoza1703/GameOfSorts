@@ -42,7 +42,6 @@ public class Sprite {
         sprite.setY(yPoss - height / 2);
         this.xPoss = sprite.getX();
         this.yPoss = sprite.getY();
-
     }
 
     public double getWidth() {

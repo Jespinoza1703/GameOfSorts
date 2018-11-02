@@ -21,7 +21,6 @@ public class KeyReader {
     public int up;
     public int down;
     public int arrow_right;
-    public int arrow_left;
     public int arrow_up;
     public int arrow_down;
     public int shoot;
