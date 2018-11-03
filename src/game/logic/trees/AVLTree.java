@@ -348,4 +348,18 @@ public class AVLTree {
     public void clearOut(){
         this.root = null;
     }
+
+    public void setDragon (Dragon dragon){
+        this.setDragon(dragon, this.root);
+    }
+
+    private void setDragon (Dragon dragon, TreeNode node){
+        if (dragon.getAge() < node.element){
+            setDragon(dragon, node.left);
+        } else if (dragon.getAge() > node.element){
+            setDragon(dragon, node.right);
+        } else if (dragon.getAge() == node.element){
+            node.setDragon(dragon);
+        }
+    }
 }

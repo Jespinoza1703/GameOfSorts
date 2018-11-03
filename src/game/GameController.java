@@ -41,7 +41,7 @@ public class GameController extends Thread {
     public Wave wave = new Wave();
     private int waveCount = -1;
     private int waveSort = 0;
-    private int waveSize = 16;
+    private int waveSize = 64;
     private boolean paused;
     private boolean running;
 

@@ -2,6 +2,7 @@ package client;
 
 import game.draw.Drawer;
 import game.entities.Dragon;
+import game.logic.trees.AVLTree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -44,6 +45,7 @@ public class WaveGenerator {
      * @return the wave sorted and added to the GUI
      */
     public static Wave getWaveSorted(Wave wave, int type) {
+        treeList = new SimpleList<>();
         int i = type % waveSortMethod.length;
         String sort = waveSortMethod[i];
         wave.setFormation(sort);
@@ -60,11 +62,16 @@ public class WaveGenerator {
         if (sort.equals("list")) {
             switchListWave(wave.dragonsList, newWave.dragonsList);
             listWave(wave);
-        }
-        else if (sort.equals("binary-tree")){
+        } else if (sort.equals("binary-tree")){
             wave.setDragonsBinaryTree(newWave.getDragonsBinaryTree());
             switchBinaryWave(wave);
-            treeWave(newWave);
+            readTree(wave.getDragonsBinaryTree().getRoot());
+            treeWave();
+        } else if (sort.equals("avl-tree")){
+            wave.setDragonsAVLTree(newWave.getDragonsAVLTree());
+            switchAVLWave(wave);
+            readTree(wave.getDragonsBinaryTree().getRoot());
+            treeWave();
         }
         return wave;
     }
@@ -86,6 +93,14 @@ public class WaveGenerator {
     private static void switchBinaryWave(Wave wave) {
         List<Dragon> dragonList = wave.getDragonsList();
         BinaryTree tree = wave.getDragonsBinaryTree();
+        for (Dragon dragon : dragonList) {
+            tree.setDragon(dragon);
+        }
+    }
+
+    private static void switchAVLWave(Wave wave) {
+        List<Dragon> dragonList = wave.getDragonsList();
+        AVLTree tree = wave.getDragonsAVLTree();
         for (Dragon dragon : dragonList) {
             tree.setDragon(dragon);
         }
@@ -198,21 +213,18 @@ public class WaveGenerator {
 
     /**
      *
-     * @param wave
      */
-    private static void treeWave(Wave wave) {
-        readTree(wave.getDragonsBinaryTree().getRoot());
-
+    private static void treeWave() {
         double width = Drawer.width / 2;
         double height = Drawer.height;
         int columns = treeList.getLarge();
 
-        int n = 0;
         for (int i = 0; i < columns; i++){
             SimpleList<Dragon> list = treeList.getByIndex(i).getValue();
             int rows = list.getLarge();
             double xOffset = width / columns;
             double yOffset = height / (rows + 1);
+
             for (int j = 0; j < rows; j++){
                 double x = (i + 1) * xOffset;
                 double y = (j + 1) * yOffset;
