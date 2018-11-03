@@ -14,10 +14,10 @@ import game.logic.trees.TreeNode;
 import java.util.List;
 
 public class WaveGenerator {
-    SimpleList<SimpleList> treeList = new SimpleList<>();
 
     private static Logger logger = LoggerFactory.getLogger(WaveGenerator.class);
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
+    private static SimpleList<SimpleList<Dragon>> treeList = new SimpleList<>();
     private static String[] waveSortMethod = {"selection", "insertion", "quick", "binary-tree", "avl-tree"};
     private static RestClient client = new RestClient();
 
@@ -57,8 +57,15 @@ public class WaveGenerator {
         if (i == 4) sort = "avl-tree";
 
         // Determines based in "sort" the formation of the wave
-        switchListWave(wave.dragonsList, newWave.dragonsList);
-        listWave(wave);
+        if (sort.equals("list")) {
+            switchListWave(wave.dragonsList, newWave.dragonsList);
+            listWave(wave);
+        }
+        else if (sort.equals("binary-tree")){
+            wave.setDragonsBinaryTree(newWave.getDragonsBinaryTree());
+            switchBinaryWave(wave);
+            treeWave(newWave);
+        }
         return wave;
     }
 
@@ -73,6 +80,14 @@ public class WaveGenerator {
                     break;
                 }
             }
+        }
+    }
+
+    private static void switchBinaryWave(Wave wave) {
+        List<Dragon> dragonList = wave.getDragonsList();
+        BinaryTree tree = wave.getDragonsBinaryTree();
+        for (Dragon dragon : dragonList) {
+            tree.setDragon(dragon);
         }
     }
 
@@ -181,31 +196,50 @@ public class WaveGenerator {
         return result;
     }
 
-    public static void treeWave(Wave wave) {
-        double width = Drawer.width - 10;
-        double height = (Drawer.height/2)-150;
+    /**
+     *
+     * @param wave
+     */
+    private static void treeWave(Wave wave) {
+        readTree(wave.getDragonsBinaryTree().getRoot());
+
+        double width = Drawer.width / 2;
+        double height = Drawer.height;
+        int columns = treeList.getLarge();
+
+        int n = 0;
+        for (int i = 0; i < columns; i++){
+            SimpleList<Dragon> list = treeList.getByIndex(i).getValue();
+            int rows = list.getLarge();
+            double xOffset = width / columns;
+            double yOffset = height / (rows + 1);
+            for (int j = 0; j < rows; j++){
+                double x = (i + 1) * xOffset;
+                double y = (j + 1) * yOffset;
+                Dragon dragon = list.getByIndex(j).getValue();
+                dragon.setPoss(x, y);
+            }
+        }
     }
 
-    public void readTree(BinaryTree bt){
-        TreeNode root = bt.getRoot();
-        readTreeAux(root);
-    }
-
-    private void readTreeAux(TreeNode current){
+    private static void readTree(TreeNode current){
         insertOnTreeList(current);
         if(current.left != null){
-            readTreeAux(current.left);
+            readTree(current.left);
         }
         if (current.right != null){
-            readTreeAux(current.right);
+            readTree(current.right);
         }
     }
 
-    private void insertOnTreeList(TreeNode node){
+    private static void insertOnTreeList(TreeNode node){
         int i = node.getLevel();
         if (treeList.getByIndex(i) == null){
-            treeList.addAtEnd(new SimpleList());
-            treeList.getByIndex(i).getValue().addAtEnd(node);
+            treeList.addAtEnd(new SimpleList<>());
+            treeList.getByIndex(i).getValue().addAtEnd(node.dragon);
         }
     }
+
+
+
 }

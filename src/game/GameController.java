@@ -73,7 +73,7 @@ public class GameController extends Thread {
         loadBackGround();
         getWave();
         while (running) {
-            clock.ticks(30);
+            clock.ticks(60);
 
             if (isWaveClear()) {
                 getWave();

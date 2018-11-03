@@ -148,6 +148,7 @@ public class RestClient {
     private TreeNode mapTreeNode(JsonNode node) {
         if (node == null) return null;
         double element = node.get("element").asDouble();
+        int level = node.get("level").asInt();
         Dragon dragon = mapDragon(node.get("dragon"));
         TreeNode left = mapTreeNode(node.get("left"));
         TreeNode right = mapTreeNode(node.get("right"));

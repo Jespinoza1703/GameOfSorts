@@ -34,6 +34,20 @@ public class BinaryTree {
         }
     }
 
+    public void setDragon (Dragon dragon){
+        this.setDragon(dragon, this.root);
+    }
+
+    private void setDragon (Dragon dragon, TreeNode node){
+        if (dragon.getAge() < node.element){
+            setDragon(dragon, node.left);
+        } else if (dragon.getAge() > node.element){
+            setDragon(dragon, node.right);
+        } else if (dragon.getAge() == node.element){
+            node.setDragon(dragon);
+        }
+    }
+
     public TreeNode findMin(){
         if (root == null){
             return null;
@@ -73,9 +87,9 @@ public class BinaryTree {
             return new TreeNode((int) value, level);
         }
         if (value < current.element) {
-            current.left = addRecursive(current.left, value, level +1);
+            current.left = addRecursive(current.left, value, level + 1);
         } else if (value > current.element) {
-            current.right = addRecursive(current.right, value, level+1);
+            current.right = addRecursive(current.right, value, level + 1);
         } else {
             // value already exists
             return current;
