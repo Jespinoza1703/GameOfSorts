@@ -7,10 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import util.Math;
+import game.logic.lists.SimpleList;
+import game.logic.trees.BinaryTree;
+import game.logic.trees.TreeNode;
 
 import java.util.List;
 
 public class WaveGenerator {
+    SimpleList<SimpleList> treeList = new SimpleList<>();
 
     private static Logger logger = LoggerFactory.getLogger(WaveGenerator.class);
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
@@ -145,14 +149,6 @@ public class WaveGenerator {
     }
 
     /**
-     * Makes an tree like formation
-     * @param wave the wave to order
-     */
-    public static void treeWave(Wave wave){
-
-    }
-
-    /**
      * Translates the Dragons received from the Server
      * @param x xPoss
      * @param y yPoss
@@ -183,5 +179,33 @@ public class WaveGenerator {
             }
         }
         return result;
+    }
+
+    public static void treeWave(Wave wave) {
+        double width = Drawer.width - 10;
+        double height = (Drawer.height/2)-150;
+    }
+
+    public void readTree(BinaryTree bt){
+        TreeNode root = bt.getRoot();
+        readTreeAux(root);
+    }
+
+    private void readTreeAux(TreeNode current){
+        insertOnTreeList(current);
+        if(current.left != null){
+            readTreeAux(current.left);
+        }
+        if (current.right != null){
+            readTreeAux(current.right);
+        }
+    }
+
+    private void insertOnTreeList(TreeNode node){
+        int i = node.getLevel();
+        if (treeList.getByIndex(i) == null){
+            treeList.addAtEnd(new SimpleList());
+            treeList.getByIndex(i).getValue().addAtEnd(node);
+        }
     }
 }
