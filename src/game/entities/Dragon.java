@@ -1,15 +1,12 @@
 package game.entities;
 
+import client.DragonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
 import game.event.handler.Collisions;
-import game.event.handler.inputs.KeyReader;
 import graphics.sound.Sound;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -20,6 +17,7 @@ import util.NameGenerator;
 
 import java.util.ArrayList;
 
+@JsonSerialize(using = DragonSerializer.class)
 public class Dragon extends Entity {
 
     private static Logger logger = LoggerFactory.getLogger(Dragon.class);

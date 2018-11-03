@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,10 +46,43 @@ public class RestClient {
 
         // Process the message
         String message = waveResource.get(String.class);
-        logger.info(CLIENT, "Client received the wave with status: " + head.getStatus());
-        logger.info(CLIENT, "Message: " + message);
+        logger.info(CLIENT, "Client received wave with id: " + id + " status: " + head.getStatus());
         return mapWave(message);
     }
+
+    public Wave getNewWave(int size) {
+        WebResource waveResource = wavesResource.path("size=" + size);
+        waveResource.type(MediaType.APPLICATION_JSON);
+
+        // Process the message
+        String message = waveResource.post(String.class);
+        logger.info(CLIENT, "Client received new wave: " + message);
+        return mapWave(message);
+    }
+
+    public Wave getWaveSorted(Wave wave, String sortMethod){
+        long id = wave.id;
+        WebResource waveResource = wavesResource.path(id + ".sort=" + sortMethod);
+
+        // Process the message
+        String message = null;
+        try {
+            message = mapper.writeValueAsString(wave);
+            logger.info(CLIENT, "Mapped Wave to Json: " + message);
+        } catch (JsonProcessingException e) {
+            logger.error(CLIENT, "Couldn't map Wave to Json: " + e);
+        }
+
+        // Send message to the server
+        waveResource
+                .accept(MediaType.APPLICATION_JSON)
+                .type(MediaType.APPLICATION_JSON)
+                .put(String.class, message);
+
+        logger.info(CLIENT, "Client ask for Wave sorted: " +sortMethod + "   " + message);
+        return getWave(id);
+    }
+
 
     /** Mappers **/
 

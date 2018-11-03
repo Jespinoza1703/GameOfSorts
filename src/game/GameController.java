@@ -41,6 +41,7 @@ public class GameController extends Thread {
     private SimpleList<Entity> entities = new SimpleList<>();
     private Wave wave = new Wave();
     private int waveCount = -1;
+    private int waveSort = 0;
     private int waveSize = 16;
     private boolean paused;
     private boolean running;
@@ -106,7 +107,8 @@ public class GameController extends Thread {
 
     private void getWaveSorted() {
         logger.info(WS, "Game ask for sorted wave: " + waveCount);
-        WaveGenerator.getWaveSorted(wave, waveCount);
+        WaveGenerator.getWaveSorted(wave, waveSort);
+        waveSort++;
     }
 
     private void event() {
