@@ -45,6 +45,10 @@ public class BinaryTree {
             setDragon(dragon, node.right);
         } else if (dragon.getAge() == node.element){
             node.setDragon(dragon);
+            String rank = "Captain";
+            if (node == root) rank = "Commander";
+            if (node.left == null && node.right == null) rank = "Infantry";
+            node.getDragon().setRank(rank);
         }
     }
 

@@ -70,7 +70,7 @@ public class WaveGenerator {
         } else if (sort.equals("avl-tree")){
             wave.setDragonsAVLTree(newWave.getDragonsAVLTree());
             switchAVLWave(wave);
-            readTree(wave.getDragonsBinaryTree().getRoot());
+            readTree(wave.getDragonsAVLTree().getRoot());
             treeWave(wave.dragonsList);
         }
         return wave;
@@ -218,12 +218,12 @@ public class WaveGenerator {
         double width = Drawer.width;
         double height = Drawer.height;
         int columns = treeList.getLarge();
+        double xOffset = width / columns;
         double xPoss = getMinXPoss(dragons);
 
         for (int i = 0; i < columns; i++){
             SimpleList<Dragon> list = treeList.getByIndex(i).getValue();
             int rows = list.getLarge();
-            double xOffset = width / columns;
             double yOffset = height / (rows + 1);
 
             for (int j = 0; j < rows; j++){
@@ -248,7 +248,7 @@ public class WaveGenerator {
 
     private static void insertOnTreeList(TreeNode node){
         int i = node.getLevel();
-        if (treeList.getByIndex(i) == null){
+        while (treeList.getByIndex(i) == null){
             treeList.addAtEnd(new SimpleList<>());
         }
         treeList.getByIndex(i).getValue().addAtEnd(node.dragon);

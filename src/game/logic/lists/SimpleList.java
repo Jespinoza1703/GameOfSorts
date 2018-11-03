@@ -150,6 +150,7 @@ public class SimpleList<T> {
      * @return un elemento de la lista
      */
     public Node<T> getByIndex(int i){
+        if(i > large) return null;
         int j = 0;
         Node temp = this.getFirst();
         while (j != i){
