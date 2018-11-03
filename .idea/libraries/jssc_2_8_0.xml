@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jSerialComm-2.3.0">
+  <library name="jssc-2.8.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/arduino/jSerialComm-2.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/arduino/jar_files (1)/jssc-2.8.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

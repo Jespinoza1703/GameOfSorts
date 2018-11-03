@@ -19,7 +19,7 @@ public abstract class sScene {
      * 1920x1080
      */
     private static int width = 1280;
-    private static int height = 700;
+    private static int height = 960;
 
     @FXML
     protected abstract void initialize() throws IOException;

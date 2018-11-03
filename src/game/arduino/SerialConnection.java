@@ -20,7 +20,7 @@ public class SerialConnection{
     SerialPort arduinoPort = null;
     ObservableList<String> portList;
     private static org.slf4j.Logger logger = LoggerFactory.getLogger(SerialConnection.class);
-    private static final Marker Readings = MarkerFactory.getMarker("SYS");
+    private static final Marker Readings = MarkerFactory.getMarker("Readings");
     private static int buttonC;
     private static int buttonZ;
     private static int joyStickX;
@@ -32,7 +32,7 @@ public class SerialConnection{
 
         String[] serialPortNames = SerialPortList.getPortNames();
         for(String name: serialPortNames){
-            System.out.println(name);
+            logger.info(Readings, "Looking for port: " + name);
             portList.add(name);
         }
     }
@@ -41,13 +41,11 @@ public class SerialConnection{
 
         detectPort();
         disconnectArduino();
-        connectArduino("/dev/ttyUSB0");
+        connectArduino("COM3");
 
     }
 
     public boolean connectArduino(String port){
-
-        System.out.println("connectArduino");
 
         boolean success = false;
         SerialPort serialPort = new SerialPort(port);
@@ -81,7 +79,7 @@ public class SerialConnection{
         } catch (SerialPortException ex) {
             Logger.getLogger(SerialConnection.class.getName())
                     .log(Level.SEVERE, null, ex);
-            System.out.println("SerialPortException: " + ex.toString());
+            logger.error(Readings, "SerialPortException: " + ex.toString());
         }
 
         return success;

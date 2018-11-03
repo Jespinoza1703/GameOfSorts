@@ -33,7 +33,7 @@ public class KeyReader {
 
 
     private KeyReader(){
-        serialConnection.arduinoConnections();
+        //serialConnection.arduinoConnections();
     }
 
     public static KeyReader getInstance(){
@@ -91,12 +91,12 @@ public class KeyReader {
     }
 
     public void nunchukReadings(){
-        left = serialConnection.getJoyStickLeft();
-        right = serialConnection.getJoyStickRight();
-        up = serialConnection.getJoyStickUp();
-        down = serialConnection.getJoyStickDown();
-        shift = serialConnection.getButtonC();
-        shoot = serialConnection.getButtonZ();
+        //left = serialConnection.getJoyStickLeft();
+        //right = serialConnection.getJoyStickRight();
+        //up = serialConnection.getJoyStickUp();
+        //down = serialConnection.getJoyStickDown();
+        //shift = serialConnection.getButtonC();
+        //shoot = serialConnection.getButtonZ();
     }
     /**
      * Sets a Scene as focused so the key inputs can be readed
