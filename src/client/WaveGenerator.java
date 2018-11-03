@@ -66,12 +66,12 @@ public class WaveGenerator {
             wave.setDragonsBinaryTree(newWave.getDragonsBinaryTree());
             switchBinaryWave(wave);
             readTree(wave.getDragonsBinaryTree().getRoot());
-            treeWave();
+            treeWave(wave.dragonsList);
         } else if (sort.equals("avl-tree")){
             wave.setDragonsAVLTree(newWave.getDragonsAVLTree());
             switchAVLWave(wave);
             readTree(wave.getDragonsBinaryTree().getRoot());
-            treeWave();
+            treeWave(wave.dragonsList);
         }
         return wave;
     }
@@ -148,8 +148,8 @@ public class WaveGenerator {
         double xOffset = width / columns;
         double yOffset = height / (rows + 1);
         double xPoss = getMinXPoss(dragons) - xOffset;
-        int xi = 0;
 
+        int xi = 0;
         int n = 0;
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
@@ -214,10 +214,11 @@ public class WaveGenerator {
     /**
      *
      */
-    private static void treeWave() {
-        double width = Drawer.width / 2;
+    private static void treeWave(List<Dragon> dragons) {
+        double width = Drawer.width;
         double height = Drawer.height;
         int columns = treeList.getLarge();
+        double xPoss = getMinXPoss(dragons);
 
         for (int i = 0; i < columns; i++){
             SimpleList<Dragon> list = treeList.getByIndex(i).getValue();
@@ -228,6 +229,7 @@ public class WaveGenerator {
             for (int j = 0; j < rows; j++){
                 double x = (i + 1) * xOffset;
                 double y = (j + 1) * yOffset;
+                x += xPoss;
                 Dragon dragon = list.getByIndex(j).getValue();
                 dragon.setPoss(x, y);
             }
@@ -248,8 +250,8 @@ public class WaveGenerator {
         int i = node.getLevel();
         if (treeList.getByIndex(i) == null){
             treeList.addAtEnd(new SimpleList<>());
-            treeList.getByIndex(i).getValue().addAtEnd(node.dragon);
         }
+        treeList.getByIndex(i).getValue().addAtEnd(node.dragon);
     }
 
 

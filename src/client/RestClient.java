@@ -153,7 +153,7 @@ public class RestClient {
         TreeNode left = mapTreeNode(node.get("left"));
         TreeNode right = mapTreeNode(node.get("right"));
         logger.info(CLIENT, "Mapped the Wave.TreeNode from json");
-        return new TreeNode(element, dragon, left, right);
+        return new TreeNode(element, level, dragon, left, right);
     }
 
     private Dragon mapDragon(JsonNode dragon) {
