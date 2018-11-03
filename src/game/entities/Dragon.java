@@ -74,13 +74,7 @@ public class Dragon extends Entity {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
-        sprite.getSprite().setOnMousePressed(event -> {
-            try {
-                pressed();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        sprite.getSprite().setOnMousePressed(event -> pressed());
     }
 
     public Dragon(int parentAge, int age, String rank) {
@@ -103,13 +97,7 @@ public class Dragon extends Entity {
         Drawer.getInstance().addDrawAtEnd(this);
         GameController.getInstance().addEntity(this);
         Collisions.getInstance().addDragon(this);
-        sprite.getSprite().setOnMousePressed(event -> {
-            try {
-                pressed();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        sprite.getSprite().setOnMousePressed(event -> pressed());
     }
 
     public Dragon(int parentAge, int age, String rank, String name, int lives, int fire_rate) {
@@ -256,11 +244,16 @@ public class Dragon extends Entity {
     /**
      * Show the information of the dragon
      */
-    private void pressed() throws IOException {
+    private void pressed() {
         logger.info(EVENT, "Dragon pressed: " + this.toString());
         GameController.getInstance().setPaused(true);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("graphics/layouts/dragonInfo.fxml"));
-        Parent content = (Parent)fxmlLoader.load();
+        Parent content = null;
+        try {
+            content = (Parent)fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         sDragonInfo controller = fxmlLoader.<sDragonInfo>getController();
 
         controller.nameLb.setText(this.getName());

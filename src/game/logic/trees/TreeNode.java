@@ -8,9 +8,6 @@ public class TreeNode {
     public Dragon dragon;
     public TreeNode left;
     public TreeNode right;
-    Dragon dragon;
-    TreeNode left;
-    TreeNode right;
 
     public TreeNode(double element){
         this.setElement(element);
