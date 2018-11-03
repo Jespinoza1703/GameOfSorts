@@ -129,6 +129,7 @@ public class GameController extends Thread {
                 paused = false;
             }
         }
+        key.nunchukReadings();
     }
 
     private void pause() {

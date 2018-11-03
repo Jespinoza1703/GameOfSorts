@@ -1,5 +1,6 @@
 package game.event.handler.inputs;
 
+import game.arduino.SerialConnection;
 import javafx.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ public class KeyReader {
 
     private static Logger logger = LoggerFactory.getLogger(KeyReader.class);
     private static final Marker KEY = MarkerFactory.getMarker("KEY");
+    private static SerialConnection serialConnection = new SerialConnection();
     private Scene scene;  // Scene where the keyboard is activated
     private static KeyReader instance;
     public int right;
@@ -31,7 +33,7 @@ public class KeyReader {
 
 
     private KeyReader(){
-
+        serialConnection.arduinoConnections();
     }
 
     public static KeyReader getInstance(){
@@ -88,6 +90,14 @@ public class KeyReader {
         });
     }
 
+    public void nunchukReadings(){
+        left = serialConnection.getJoyStickLeft();
+        right = serialConnection.getJoyStickRight();
+        up = serialConnection.getJoyStickUp();
+        down = serialConnection.getJoyStickDown();
+        shift = serialConnection.getButtonC();
+        shoot = serialConnection.getButtonZ();
+    }
     /**
      * Sets a Scene as focused so the key inputs can be readed
      * @param scene is the Scene to focus

@@ -1,118 +1,158 @@
 package game.arduino;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
-import java.util.Enumeration;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import jssc.SerialPort;
+import jssc.SerialPortEvent;
+import jssc.SerialPortException;
+import jssc.SerialPortList;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class SerialConnection implements SerialPortEventListener {
-    SerialPort serialPort;
-    /** The port we're normally going to use. */
-    private static final String PORT_NAMES[] = {
-            "/dev/ttyUSB0", // Linux
-    };
-    /**
-     * A BufferedReader which will be fed by a InputStreamReader
-     * converting the bytes into characters
-     * making the displayed results codepage independent
-     */
-    private BufferedReader input;
-    /** The output stream to the port */
-    private OutputStream output;
-    /** Milliseconds to block while waiting for port open */
-    private static final int TIME_OUT = 2000;
-    /** Default bits per second for COM port. */
-    private static final int DATA_RATE = 9600;
+import static jssc.SerialPort.MASK_RXCHAR;
 
-    public void initialize() {
-        // the next line is for Raspberry Pi and
-        // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-        //System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+public class SerialConnection{
 
-        CommPortIdentifier portId = null;
-        Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
+    SerialPort arduinoPort = null;
+    ObservableList<String> portList;
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(SerialConnection.class);
+    private static final Marker Readings = MarkerFactory.getMarker("SYS");
+    private static int buttonC;
+    private static int buttonZ;
+    private static int joyStickX;
+    private static int joyStickY;
 
-        //First, Find an instance of serial port as set in PORT_NAMES.
-        while (portEnum.hasMoreElements()) {
-            System.out.println("hey");
-            CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
-            for (String portName : PORT_NAMES) {
-                if (currPortId.getName().equals(portName)) {
-                    portId = currPortId;
-                    break;
-                }
-            }
+    private void detectPort(){
+
+        portList = FXCollections.observableArrayList();
+
+        String[] serialPortNames = SerialPortList.getPortNames();
+        for(String name: serialPortNames){
+            System.out.println(name);
+            portList.add(name);
         }
-        if (portId == null) {
-            System.out.println("Could not find COM port.");
-            return;
-        }
+    }
 
+    public void arduinoConnections() {
+
+        detectPort();
+        disconnectArduino();
+        connectArduino("/dev/ttyUSB0");
+
+    }
+
+    public boolean connectArduino(String port){
+
+        System.out.println("connectArduino");
+
+        boolean success = false;
+        SerialPort serialPort = new SerialPort(port);
         try {
-            // open serial port, and use class name for the appName.
-            serialPort = (SerialPort) portId.open(this.getClass().getName(),
-                    TIME_OUT);
-
-            // set port parameters
-            serialPort.setSerialPortParams(DATA_RATE,
+            serialPort.openPort();
+            serialPort.setParams(
+                    SerialPort.BAUDRATE_9600,
                     SerialPort.DATABITS_8,
                     SerialPort.STOPBITS_1,
                     SerialPort.PARITY_NONE);
+            serialPort.setEventsMask(MASK_RXCHAR);
+            serialPort.addEventListener((SerialPortEvent serialPortEvent) -> {
+                if(serialPortEvent.isRXCHAR()){
+                    try {
+                        byte[] b = serialPort.readBytes();
+                        //System.out.println(b[0]);
+                        //System.out.println(b[1]);
+                        //System.out.println("X: " + b[2]);
+                        //System.out.println("Y: " + b[3]);
+                        buttonC = b[0];
+                        buttonZ = b[1];
+                        joyStickX = b[2];
+                        joyStickY = b[3];
+                        System.out.println(joyStickX);
 
-            // open the streams
-            input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-            output = serialPort.getOutputStream();
+                    } catch (SerialPortException ex) {
+                        Logger.getLogger(SerialConnection.class.getName())
+                                .log(Level.SEVERE, null, ex);
+                    }
 
-            // add event listeners
-            serialPort.addEventListener(this);
-            serialPort.notifyOnDataAvailable(true);
-        } catch (Exception e) {
-            System.err.println(e.toString());
+                }
+            });
+
+            arduinoPort = serialPort;
+            success = true;
+        } catch (SerialPortException ex) {
+            Logger.getLogger(SerialConnection.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            System.out.println("SerialPortException: " + ex.toString());
         }
+
+        return success;
     }
 
-    /**
-     * This should be called when you stop using the port.
-     * This will prevent port locking on platforms like Linux.
-     */
-    public synchronized void close() {
-        if (serialPort != null) {
-            serialPort.removeEventListener();
-            serialPort.close();
-        }
-    }
-
-    /**
-     * Handle an event on the serial port. Read the data and print it.
-     */
-    public synchronized void serialEvent(SerialPortEvent oEvent) {
-        if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+    public void disconnectArduino(){
+        System.out.println("disconnectArduino()");
+        if(arduinoPort != null){
             try {
-                String inputLine=input.readLine();
-                System.out.println(inputLine);
-            } catch (Exception e) {
-                System.err.println(e.toString());
+                arduinoPort.removeEventListener();
+
+                if(arduinoPort.isOpened()){
+                    arduinoPort.closePort();
+                }
+
+            } catch (SerialPortException ex) {
+                Logger.getLogger(SerialConnection.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
         }
-        // Ignore all the other eventTypes, but you should consider the other ones.
     }
 
-    public static void main(String[] args) throws Exception {
-        SerialConnection main = new SerialConnection();
-        main.initialize();
-        Thread t=new Thread() {
-            public void run() {
-                //the following line will keep this app alive for 1000 seconds,
-                //waiting for events to occur and responding to them (printing incoming messages to console).
-                try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
-            }
-        };
-        t.start();
-        System.out.println("Started");
+    public int getJoyStickLeft(){
+        int result = 0;
+        if(joyStickX > 30 && joyStickX < 118){
+            result = -1;
+        }
+        logger.info(Readings, "Left: " + result);
+        return result;
     }
+
+    public int getJoyStickRight(){
+        int result = 0;
+        if (joyStickX < -30 && joyStickX > -120){
+            result = 1;
+        }
+        logger.info(Readings, "Right: " + result);
+        return result;
+    }
+
+    public int getJoyStickUp(){
+        int result = 0;
+        if (joyStickY > -120 && joyStickY < -30){
+            result = 1;
+        }
+
+        logger.info(Readings, "Up: " + result);
+        return result;
+    }
+
+    public int getJoyStickDown(){
+        int result = 0;
+        if(joyStickY < 118 && joyStickY > 30){
+            result = -1;
+        }
+        logger.info(Readings, "Down: " + result);
+        return result;
+    }
+
+    public int getButtonC(){
+        return buttonC;
+    }
+
+    public int getButtonZ(){
+        return buttonZ;
+    }
+
+
 }
