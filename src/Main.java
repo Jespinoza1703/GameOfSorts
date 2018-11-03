@@ -1,3 +1,4 @@
+import game.arduino.SerialConnection;
 import game.event.handler.inputs.KeyReader;
 import graphics.controllers.Interface;
 import graphics.controllers.sScene;

@@ -13,7 +13,14 @@ public class Sprite {
     private ImageView sprite;
     public Effect effect = new ColorAdjust(1, 0, 1, 0);
 
-
+    /**
+     * Class constructor
+     * @param xPoss horizontal position
+     * @param yPoss vertical position
+     * @param width image width
+     * @param height image height
+     * @param url corresponds to the images path
+     */
     public Sprite(double xPoss, double yPoss, double width, double height, String url) {
         Image img = new Image(url);
         ImageView imgView = new ImageView(img);
@@ -28,26 +35,22 @@ public class Sprite {
         sprite = imgView;
     }
 
-    public Sprite(double xPoss, double yPoss, String url) {
-        Image img = new Image(url);
-        ImageView imgView = new ImageView(img);
-        imgView.setX(xPoss - width / 2);
-        imgView.setY(yPoss - height / 2);
-        this.xPoss = imgView.getX();
-        this.yPoss = imgView.getY();
-        this.width = imgView.getFitWidth();
-        this.height = imgView.getFitHeight();
-        sprite = imgView;
-    }
-
+    /**
+     * Places the image on the screen and updates its position
+     * @param xPoss
+     * @param yPoss
+     */
     public void move(double xPoss, double yPoss){
         sprite.setX(xPoss - width / 2);
         sprite.setY(yPoss - height / 2);
         this.xPoss = sprite.getX();
         this.yPoss = sprite.getY();
-
     }
 
+    /**
+     * Getters and setters
+     * @return
+     */
     public double getWidth() {
         return width;
     }

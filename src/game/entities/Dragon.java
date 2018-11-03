@@ -34,7 +34,7 @@ public class Dragon extends Entity {
     private String name = NameGenerator.generateName();
     private int parentAge;
     private int lives = Math.getRandomNumberInRange(1, 3); // [1, 3]
-    private int fire_rate = Math.getRandomNumberInRange(400, 2000);  // [200, 1000]
+    private int fire_rate = Math.getRandomNumberInRange(200, 1000);  // [200, 1000]
     private int age;  // [1, 1000]
     private String rank;  // Commander / Captain / Infantry
     private double xPoss, yPoss;

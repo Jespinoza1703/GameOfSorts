@@ -44,11 +44,13 @@ public class GameController extends Thread {
     private int waveSize = 64;
     private boolean paused;
     private boolean running;
+    private boolean is_game_finished;
 
     private GameController(String msg) {
         super(msg);
         paused = false;
         running = true;
+        is_game_finished = false;
     }
 
     public static GameController getInstance() {
@@ -83,6 +85,10 @@ public class GameController extends Thread {
 
             if (isPaused()) {
                 pause();
+            }
+
+            if (is_game_finished){
+                gameEnd();
             }
 
             update();
@@ -125,6 +131,7 @@ public class GameController extends Thread {
                 paused = false;
             }
         }
+        key.nunchukReadings();
     }
 
     public void pause() {
@@ -138,6 +145,21 @@ public class GameController extends Thread {
         game_pane.pause_menu.setVisible(false);
         game_pane.gamePane.setOpacity(1);
         logger.info(SYS, "Game Resumed");
+    }
+
+    private void gameEnd() {
+        logger.info(SYS, "Game has ended");
+        game_pane.gamePane.setOpacity(0.4);
+        if(player.isAlive()) {
+            game_pane.winVBox.setVisible(true);
+        }
+        else {
+            game_pane.loseVBox.setVisible(true);
+        }
+        while (is_game_finished()) {
+            event();
+            draw();
+        }
     }
 
     private void update() {
@@ -208,6 +230,13 @@ public class GameController extends Thread {
 
     public boolean isPaused() {
         return paused;
+    }
+    public boolean is_game_finished() {
+        return is_game_finished;
+    }
+    public void setGameEnd(Boolean gameEnd) {
+        logger.info(SYS, "setGameEnd");
+        is_game_finished = gameEnd;
     }
 
     public boolean isGameRunning() {
