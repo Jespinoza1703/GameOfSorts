@@ -63,15 +63,11 @@ public class SerialConnection{
                 if(serialPortEvent.isRXCHAR()){
                     try {
                         byte[] b = serialPort.readBytes();
-                        //System.out.println(b[0]);
-                        //System.out.println(b[1]);
-                        //System.out.println("X: " + b[2]);
-                        //System.out.println("Y: " + b[3]);
+                        System.out.println("X: " + b[2]);
                         buttonC = b[0];
                         buttonZ = b[1];
                         joyStickX = b[2];
                         joyStickY = b[3];
-                        System.out.println(joyStickX);
 
                     } catch (SerialPortException ex) {
                         Logger.getLogger(SerialConnection.class.getName())
@@ -111,8 +107,8 @@ public class SerialConnection{
 
     public int getJoyStickLeft(){
         int result = 0;
-        if(joyStickX > 30 && joyStickX < 118){
-            result = -1;
+        if(joyStickX > 25 && joyStickX < 100){
+            result = 1;
         }
         logger.info(Readings, "Left: " + result);
         return result;
@@ -120,7 +116,7 @@ public class SerialConnection{
 
     public int getJoyStickRight(){
         int result = 0;
-        if (joyStickX < -30 && joyStickX > -120){
+        if (joyStickX < -25 && joyStickX > -100){
             result = 1;
         }
         logger.info(Readings, "Right: " + result);
@@ -129,7 +125,7 @@ public class SerialConnection{
 
     public int getJoyStickUp(){
         int result = 0;
-        if (joyStickY > -120 && joyStickY < -30){
+        if (joyStickY > -100 && joyStickY < -25){
             result = 1;
         }
 
@@ -139,8 +135,8 @@ public class SerialConnection{
 
     public int getJoyStickDown(){
         int result = 0;
-        if(joyStickY < 118 && joyStickY > 30){
-            result = -1;
+        if(joyStickY < 100 && joyStickY > 25){
+            result = 1;
         }
         logger.info(Readings, "Down: " + result);
         return result;
