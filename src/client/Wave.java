@@ -43,20 +43,8 @@ public class Wave {
     }
 
     public void dragonDies(Dragon dragon) {
-        switch (formation) {
-            case "avl-tree":
-                dragonsAVLTree.deleteNode(dragon.getAge());
-                size = dragonsList.size();
-                break;
-            case "binary-tree":
-                //dragonsBinaryTree.delete(dragon.getAge());
-                size = dragonsList.size();
-                break;
-            default:
-                dragonsList.remove(dragon);
-                size = dragonsList.size();
-                break;
-        }
+        dragonsList.remove(dragon);
+        size = dragonsList.size();
     }
 
     private void generateDragonList() {

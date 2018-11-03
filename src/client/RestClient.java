@@ -60,6 +60,11 @@ public class RestClient {
         return mapWave(message);
     }
 
+    public void deleteWave(long id) {
+        WebResource waveResource = wavesResource.path(String.valueOf(id));
+        waveResource.delete();
+    }
+
     public Wave getWaveSorted(Wave wave, String sortMethod){
         long id = wave.id;
         WebResource waveResource = wavesResource.path(id + ".sort=" + sortMethod);

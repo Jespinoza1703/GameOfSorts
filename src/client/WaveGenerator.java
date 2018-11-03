@@ -18,7 +18,7 @@ public class WaveGenerator {
     private static RestClient client = new RestClient();
 
     /**
-     * Method that ask to the client for a new Wave
+     * Get Method that ask to the client for a new Wave
      * @param size of the wave required
      * @return the new Wave
      */
@@ -28,9 +28,13 @@ public class WaveGenerator {
         return wave;
     }
 
+    public static void deleteWave(long id) {
+        client.deleteWave(id);
+    }
+
 
     /**
-     * Sends a Wave to the client to received sorted
+     * Put method that sends a Wave to the client to received sorted
      * @param wave the wave to sort
      * @param type last formation
      * @return the wave sorted and added to the GUI

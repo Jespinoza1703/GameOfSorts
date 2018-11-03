@@ -99,7 +99,8 @@ public class GameController extends Thread {
     }
 
     private void getWave() {
-        logger.info(WS, "Game ask for first wave: " + waveCount);
+        logger.info(WS, "Game ask for new wave: " + waveCount);
+        if (waveCount != -1) WaveGenerator.deleteWave(wave.id);
         wave = WaveGenerator.getNewWave(waveSize);
         waveCount++;
         waveSize += 8;
