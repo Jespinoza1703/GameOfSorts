@@ -67,6 +67,7 @@ public class SerialConnection{
                         buttonZ = b[1];
                         joyStickX = b[2];
                         joyStickY = b[3];
+                        System.out.println("LLLLLLLL" +joyStickX);
 
                     } catch (SerialPortException ex) {
                         Logger.getLogger(SerialConnection.class.getName())
@@ -115,7 +116,7 @@ public class SerialConnection{
 
     public int getJoyStickRight(){
         int result = 0;
-        if (joyStickX < -25 && joyStickX > -100){
+        if (joyStickX < -25 && joyStickX > -80){
             result = 1;
         }
         logger.info(Readings, "Right: " + result);
