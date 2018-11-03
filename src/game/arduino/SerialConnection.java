@@ -63,7 +63,6 @@ public class SerialConnection{
                 if(serialPortEvent.isRXCHAR()){
                     try {
                         byte[] b = serialPort.readBytes();
-                        System.out.println("X: " + b[2]);
                         buttonC = b[0];
                         buttonZ = b[1];
                         joyStickX = b[2];
