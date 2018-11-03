@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jersey-bundle-1.19.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey/jersey-bundle-1.19.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey/javax.ws.rs.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey/javax.ws.rs.jar!/" />
+    </SOURCES>
+  </library>
+</component>

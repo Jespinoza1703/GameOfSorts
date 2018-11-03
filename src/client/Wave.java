@@ -1,6 +1,5 @@
 package client;
 
-
 import game.entities.Dragon;
 import game.logic.sorts.SortMethods;
 import game.logic.trees.AVLTree;
@@ -11,12 +10,12 @@ import java.util.List;
 
 public class Wave {
 
-    private long id;
-    private int size;
-    private List<Dragon> dragonsList = new ArrayList<>();
-    private BinaryTree dragonsBinaryTree = new BinaryTree();
-    private AVLTree dragonsAVLTree = new AVLTree();
+    public long id;
+    public int size;
     public String formation = "unsorted";
+    public List<Dragon> dragonsList = new ArrayList<>();
+    public BinaryTree dragonsBinaryTree = new BinaryTree();
+    public AVLTree dragonsAVLTree = new AVLTree();
 
     public Wave() {
 
@@ -34,21 +33,18 @@ public class Wave {
         this.dragonsList = dragonsList;
     }
 
+    public Wave(long id, int size, String formation, List<Dragon> dragonsList, BinaryTree dragonsBinaryTree, AVLTree dragonsAVLTree) {
+        this.id = id;
+        this.size = size;
+        this.formation = formation;
+        this.dragonsList = dragonsList;
+        this.dragonsBinaryTree = dragonsBinaryTree;
+        this.dragonsAVLTree = dragonsAVLTree;
+    }
+
     public void dragonDies(Dragon dragon) {
-        switch (formation) {
-            case "avl-tree":
-                dragonsAVLTree.deleteNode(dragon.getAge());
-                size = dragonsList.size();
-                break;
-            case "binary-tree":
-                //dragonsBinaryTree.delete(dragon.getAge());
-                size = dragonsList.size();
-                break;
-            default:
-                dragonsList.remove(dragon);
-                size = dragonsList.size();
-                break;
-        }
+        dragonsList.remove(dragon);
+        size = dragonsList.size();
     }
 
     private void generateDragonList() {
@@ -83,6 +79,14 @@ public class Wave {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public String getFormation() {
+        return formation;
+    }
+
+    public void setFormation(String formation) {
+        this.formation = formation;
     }
 
     public List<Dragon> getDragonsList() {

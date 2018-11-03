@@ -40,6 +40,7 @@ public class GameController extends Thread {
     private SimpleList<Entity> entities = new SimpleList<>();
     public Wave wave = new Wave();
     private int waveCount = -1;
+    private int waveSort = 0;
     private int waveSize = 16;
     private boolean paused;
     private boolean running;
@@ -97,7 +98,8 @@ public class GameController extends Thread {
     }
 
     private void getWave() {
-        logger.info(WS, "Game ask for first wave: " + waveCount);
+        logger.info(WS, "Game ask for new wave: " + waveCount);
+        if (waveCount != -1) WaveGenerator.deleteWave(wave.id);
         wave = WaveGenerator.getNewWave(waveSize);
         waveCount++;
         waveSize += 8;
@@ -105,7 +107,8 @@ public class GameController extends Thread {
 
     private void getWaveSorted() {
         logger.info(WS, "Game ask for sorted wave: " + waveCount);
-        WaveGenerator.getWaveSorted(wave, waveCount);
+        WaveGenerator.getWaveSorted(wave, waveSort);
+        waveSort++;
     }
 
     private void event() {
@@ -177,9 +180,11 @@ public class GameController extends Thread {
         if (player.isAlive()) {
             Boolean collision_player_with_dragon = collision.collide(player, collision.getDragons(), true);
             Boolean collision_player_with_dragonBullet = collision.collide(player, collision.getDragonBullets(), true);
+            Boolean collision_player_with_hearts = collision.collide(player, collision.getHearts(), true);
             if (collision_player_with_dragon || collision_player_with_dragonBullet) {
                 player.hit();
             }
+            if (collision_player_with_hearts) player.setLives(player.getLives() + 1);
         }
         collision.collide(collision.getDragons(), collision.getPlayerBullets(), true, true);
         collision.collide(collision.getPlayerBullets(), collision.getDragonBullets(), true, true);

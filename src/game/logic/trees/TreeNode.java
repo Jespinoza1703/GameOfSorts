@@ -4,7 +4,10 @@ import game.entities.Dragon;
 
 public class TreeNode {
 
-    double element, height, level;
+    public double element, height, level;
+    public Dragon dragon;
+    public TreeNode left;
+    public TreeNode right;
     Dragon dragon;
     TreeNode left;
     TreeNode right;
@@ -30,6 +33,13 @@ public class TreeNode {
         this.setLevel(level);
         this.left = null;
         this.right = null;
+    }
+
+    public TreeNode(double element, Dragon dragon, TreeNode left, TreeNode right){
+        this.element = element;
+        this.dragon = dragon;
+        this.left = left;
+        this.right = right;
     }
 
 

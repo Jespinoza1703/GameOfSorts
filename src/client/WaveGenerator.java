@@ -15,21 +15,26 @@ public class WaveGenerator {
     private static Logger logger = LoggerFactory.getLogger(WaveGenerator.class);
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
     private static String[] waveSortMethod = {"selection", "insertion", "quick", "binary-tree", "avl-tree"};
+    private static RestClient client = new RestClient();
 
     /**
-     * Method that ask to the client for a new Wave
+     * Get Method that ask to the client for a new Wave
      * @param size of the wave required
      * @return the new Wave
      */
     public static Wave getNewWave(int size) {
-        Wave wave = new Wave(0, size);
-        unSortedWave(wave);
+        Wave wave = client.getNewWave(size);
+        unSortWave(wave);
         return wave;
+    }
+
+    public static void deleteWave(long id) {
+        client.deleteWave(id);
     }
 
 
     /**
-     * Sends a Wave to the client to received sorted
+     * Put method that sends a Wave to the client to received sorted
      * @param wave the wave to sort
      * @param type last formation
      * @return the wave sorted and added to the GUI
@@ -37,25 +42,41 @@ public class WaveGenerator {
     public static Wave getWaveSorted(Wave wave, int type) {
         int i = type % waveSortMethod.length;
         String sort = waveSortMethod[i];
-        wave.formation = sort;
+        wave.setFormation(sort);
 
         // Here the client ask for a sorted wave
+        Wave newWave = client.getWaveSorted(wave, sort);
 
         // Reposition the Dragons in formation
         if (i < 3) sort = "list";
-        if (i == 3) sort = "avl-tree";
-        if (i == 4) sort = "binary-tree";
+        if (i == 3) sort = "binary-tree";
+        if (i == 4) sort = "avl-tree";
 
         // Determines based in "sort" the formation of the wave
+        switchListWave(wave.dragonsList, newWave.dragonsList);
         listWave(wave);
         return wave;
+    }
+
+    private static void switchListWave(List<Dragon> list, List<Dragon> newList) {
+        for (int i = 0; i < list.size(); i++){
+            Dragon dragon = list.get(i);
+            for (int j = 0; j < newList.size(); j++ ){
+                if (newList.get(j).getAge() == dragon.getAge()){
+                    Dragon tmp = list.get(j);
+                    list.set(j, dragon);
+                    list.set(i, tmp);
+                    break;
+                }
+            }
+        }
     }
 
     /**
      * Gets a new Wave in disorder pattern
      * @param wave the wave to disorder
      */
-    private static void unSortedWave(Wave wave){
+    private static void unSortWave(Wave wave){
         List<Dragon> dragons = wave.getDragonsList();
         int waveSize = wave.getSize();
         int columns = 8;

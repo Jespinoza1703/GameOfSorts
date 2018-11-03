@@ -5,10 +5,14 @@ import game.entities.Dragon;
 
 public class BinaryTree {
 
-    private TreeNode root;
+    public TreeNode root;
 
     public BinaryTree(){
 
+    }
+
+    public BinaryTree(TreeNode root) {
+        this.root = root;
     }
 
     public boolean contains (double element){

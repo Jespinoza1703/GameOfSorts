@@ -1,5 +1,7 @@
 package game.entities;
 
+import client.DragonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import game.GameController;
 import game.draw.Drawer;
 import game.draw.Sprite;
@@ -22,10 +24,12 @@ import util.NameGenerator;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@JsonSerialize(using = DragonSerializer.class)
 public class Dragon extends Entity {
 
     private static Logger logger = LoggerFactory.getLogger(Dragon.class);
     private static final Marker SYS = MarkerFactory.getMarker("SYS");
+    private static final Marker EVENT = MarkerFactory.getMarker("EVENT");
     private Clock clock = Clock.getInstance();
     private String name = NameGenerator.generateName();
     private int parentAge;
@@ -46,6 +50,7 @@ public class Dragon extends Entity {
     private boolean animating = false;
     private double xNew;
     private double yNew;
+    private double dropChance = 20;
 
     /**
      * Basic constructor
@@ -107,6 +112,15 @@ public class Dragon extends Entity {
         });
     }
 
+    public Dragon(int parentAge, int age, String rank, String name, int lives, int fire_rate) {
+        this.parentAge = parentAge;
+        this.age = age;
+        this.rank = rank;
+        this.name = name;
+        this.lives = lives;
+        this.fire_rate = fire_rate;
+    }
+
     /**
      * Update the dragon position
      */
@@ -120,6 +134,7 @@ public class Dragon extends Entity {
             }
         }
         else {
+            // Animates the formation
             xPoss = (double) Math.approach((int)xPoss, (int)xNew, 10);
             yPoss = (double) Math.approach((int)yPoss, (int)yNew, 10);
             if (xPoss == (int)xNew && yPoss == (int)yNew) animating = false;
@@ -191,8 +206,11 @@ public class Dragon extends Entity {
 
         String root = "file:res/img/entities/dragons/" + color;
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly2.png"));
+        sprite.getSprite().setOnMousePressed(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly1.png"));
+        sprite.getSprite().setOnMousePressed(e -> pressed());
         movementAnimations.add(sprite = new Sprite(xPoss, yPoss, dragonWidth, dragonHeight, root + "/fly3.png"));
+        sprite.getSprite().setOnMousePressed(e -> pressed());
         return movementAnimations.get(0);
     }
 
@@ -226,10 +244,12 @@ public class Dragon extends Entity {
     }
 
     /**
-     * Kills the Dragonsas
+     * Kills the Dragons
      */
     private void dies() {
         new BulletExplosion(xPoss, yPoss, dragonWidth, dragonHeight);
+        double drop = java.lang.Math.random() * 100;
+        if (drop < dropChance) new Heart(xPoss, yPoss);
         destroy();
     }
 
@@ -237,11 +257,11 @@ public class Dragon extends Entity {
      * Show the information of the dragon
      */
     private void pressed() throws IOException {
+        logger.info(EVENT, "Dragon pressed: " + this.toString());
         GameController.getInstance().setPaused(true);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("graphics/layouts/dragonInfo.fxml"));
         Parent content = (Parent)fxmlLoader.load();
         sDragonInfo controller = fxmlLoader.<sDragonInfo>getController();
-
 
         controller.nameLb.setText(this.getName());
         controller.ageLB.setText(String.valueOf(this.getAge()));
@@ -251,14 +271,11 @@ public class Dragon extends Entity {
 
         controller.actualSortLb.setText(GameController.getInstance().wave.formation);
 
-
         Stage secondStage = new Stage();
         secondStage.setScene(new Scene(content));
         secondStage.setTitle("Dragon's information");
         secondStage.setResizable(false);
         secondStage.initStyle(StageStyle.TRANSPARENT);
-
-
 
         secondStage.show();
         }

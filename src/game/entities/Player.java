@@ -18,6 +18,7 @@ public class Player extends Entity {
     private int xSpeed = 0, ySpeed = 0;
     private int xMaxSpeed = 7, yMaxSpeed = 7;
     private int xAcc = 1, yAcc = 2;
+    private int yMove = 0, xMove = 0;
     private double xPoss = 200, yPoss = 200;
     private int playerWidth = 150, playerHeight = 200;
     private int fire_rate = 300;
@@ -33,6 +34,9 @@ public class Player extends Entity {
     private double lastAnimationTime = 0;
     private int currentSprite = 0;
     private int hitTimer = 0;
+    private boolean dashing = false;
+    private int dashDuration = 10;
+    private int dashTime = dashDuration;
 
     public Player() {
         Drawer.getInstance().addDrawAtEnd(this);
@@ -41,10 +45,14 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        move();
-        hitAnimation();
-        if (key.shoot == 1 && canShoot()) {
-            shoot();
+        if (key.shift == 1 && !dashing) dashing = true;
+        if (dashing) dash();
+        else {
+            move();
+            hitAnimation();
+            if (key.shoot == 1 && canShoot()) {
+                shoot();
+            }
         }
     }
 
@@ -120,6 +128,38 @@ public class Player extends Entity {
     private void dies() {
         new BulletExplosion(xPoss, yPoss, playerWidth, playerHeight);
         destroy();
+    }
+
+    private void dash(){
+        var yMove = key.up - key.down;
+        dashTime--;
+        ySpeed = -60 * yMove;
+        yMaxSpeed = 60;
+        new PlayerDash(xPoss, yPoss, sprite);
+
+        // Calculates current position
+        xSpeed = Math.clamp(xSpeed += xAcc * xMove, -xMaxSpeed, xMaxSpeed);
+        ySpeed = Math.clamp(ySpeed, -yMaxSpeed, yMaxSpeed);
+        xPoss += xSpeed;
+        yPoss += ySpeed;
+
+        // Calculates boundaries
+        var height = Drawer.height;
+        var width = Drawer.width;
+        var spriteHH = sprite.getHeight() / 2;
+        var spriteHW = sprite.getWidth() / 2;
+        if (yPoss - spriteHH < 0) yPoss = 0 + spriteHH;
+        if (yPoss + spriteHH > height) yPoss = height - spriteHH;
+        if (xPoss - spriteHW < 0) xPoss = 0 + spriteHW;
+        if (xPoss + spriteHW > width) xPoss = width - spriteHW;
+
+        // Ends the dash
+        if (dashTime <= 0){
+            dashing = false;
+            dashTime = dashDuration;
+            ySpeed = 0;
+            yMaxSpeed = 7;
+        }
     }
 
     private void move() {
