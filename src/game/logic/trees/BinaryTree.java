@@ -5,10 +5,14 @@ import game.entities.Dragon;
 
 public class BinaryTree {
 
-    private TreeNode root;
+    public TreeNode root;
 
     public BinaryTree(){
 
+    }
+
+    public BinaryTree(TreeNode root) {
+        this.root = root;
     }
 
     public boolean contains (double element){
@@ -40,9 +44,7 @@ public class BinaryTree {
     }
 
     private TreeNode findMin (TreeNode node){
-        if (node == null){
-            return null;
-        }else if(node.left == null){
+        if(node.left == null){
             return node;
         }else{
             return findMin(node.left);
@@ -59,23 +61,21 @@ public class BinaryTree {
     }
 
     private TreeNode findMax(TreeNode node){
-        if (node == null){
-            return null;
-        }else if(node.right == null){
+        if(node.right == null){
             return node;
         }else{
-            return findMin(node.right);
+            return findMax(node.right);
         }
     }
 
-    private TreeNode addRecursive(TreeNode current, double value) {
+    private TreeNode addRecursive(TreeNode current, double value, int level) {
         if (current == null) {
-            return new TreeNode(value);
+            return new TreeNode((int) value, level);
         }
         if (value < current.element) {
-            current.left = addRecursive(current.left, value);
+            current.left = addRecursive(current.left, value, level +1);
         } else if (value > current.element) {
-            current.right = addRecursive(current.right, value);
+            current.right = addRecursive(current.right, value, level+1);
         } else {
             // value already exists
             return current;
@@ -83,14 +83,14 @@ public class BinaryTree {
         return current;
     }
 
-    private TreeNode addRecursiveDragon(TreeNode current, double value, Dragon dragon) {
+    private TreeNode addRecursiveDragon(TreeNode current, double value, Dragon dragon, int level) {
         if (current == null) {
-            return new TreeNode(value, dragon);
+            return new TreeNode((int) value, dragon, level);
         }
         if (value < current.element) {
-            current.left = addRecursiveDragon(current.left, value, dragon);
+            current.left = addRecursiveDragon(current.left, value, dragon, level+1);
         } else if (value > current.element) {
-            current.right = addRecursiveDragon(current.right, value, dragon);
+            current.right = addRecursiveDragon(current.right, value, dragon, level+1);
         } else {
             // value already exists
             return current;
@@ -99,11 +99,11 @@ public class BinaryTree {
     }
 
     public void add (double value){
-        root = addRecursive(root, value);
+        root = addRecursive(root, value, 0);
     }
 
     private void addDragon (double value, Dragon dragon){
-        root = addRecursiveDragon(root, value, dragon);
+        root = addRecursiveDragon(root, value, dragon, 0);
     }
 
     public void addDragon (Dragon dragon){
@@ -118,4 +118,3 @@ public class BinaryTree {
         this.root = root;
     }
 }
-

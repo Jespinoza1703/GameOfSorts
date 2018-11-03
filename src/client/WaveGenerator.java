@@ -2,10 +2,14 @@ package client;
 
 import game.draw.Drawer;
 import game.entities.Dragon;
+import game.logic.lists.SimpleList;
+import game.logic.trees.BinaryTree;
+import game.logic.trees.TreeNode;
 
 import java.util.List;
 
 public class WaveGenerator {
+    SimpleList<SimpleList> treeList = new SimpleList<>();
 
     public static void listWave(Wave wave){
         List<Dragon> dragons = wave.getDragonsList();
@@ -39,7 +43,7 @@ public class WaveGenerator {
         int fire_rate = dragon.getFire_rate();
         new Dragon(x, y, parentAge, age, rank, name, lives, fire_rate);
     }
-
+/*
     public static void treeWave(Wave wave) {
         List<Dragon> dragons = wave.getDragonsList();
         double width = Drawer.width - 10;
@@ -66,5 +70,35 @@ public class WaveGenerator {
             treeWaveAux(wave, 0, x + moveX, j, exp + 1, total + collocated, moveY, j);
         }
     }
+*/
 
+
+    public static void treeWave(Wave wave) {
+        List<Dragon> dragons = wave.getDragonsList();
+        double width = Drawer.width - 10;
+        double height = (Drawer.height/2)-150;
+    }
+
+    public void readTree(BinaryTree bt){
+        TreeNode root = bt.getRoot();
+        readTreeAux(root);
+    }
+
+    private void readTreeAux(TreeNode current){
+        insertOnTreeList(current);
+        if(current.left != null){
+            readTreeAux(current.left);
+        }
+        if (current.right != null){
+            readTreeAux(current.right);
+        }
+    }
+
+    private void insertOnTreeList(TreeNode node){
+        int i = node.getLevel();
+        if (treeList.getByIndex(i) == null){
+            treeList.addAtEnd(new SimpleList());
+            treeList.getByIndex(i).getValue().addAtEnd(node);
+        }
+    }
 }
