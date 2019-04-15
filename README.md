@@ -4,6 +4,10 @@ The dragons are intelligent and make new formations when one of them dies.
 The client makes http requests to a web service that makes a new wave when the last one is destroyed.
 
 
-Game Menu                  |  Playes
-:-------------------------:|:-------------------------:
-![](res/img/gui/main.PNG)  |  ![](res/img/gui/game.gif)
+Game                       |
+:-------------------------:|
+![](res/img/gui/game.gif)  |
+
+Main Menu                  |
+:-------------------------:|
+![](res/img/gui/main.PNG)  |
