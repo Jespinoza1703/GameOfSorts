@@ -13,20 +13,7 @@ void setup(){
 
 void loop(){
   if(chuck.poll()){
-    /*
-    Serial.print("x: ");
-    Serial.print(chuck.accelX());
-    Serial.print(" y: ");
-    Serial.print(chuck.accelY());
-    Serial.print(" z: ");
-    Serial.println(chuck.accelZ());
-    */
-    /*
-    Serial.print("x: ");
-    Serial.print(chuck.joyX());
-    Serial.print(" y: ");
-    Serial.println(chuck.joyY());
-    */
+
     Serial.write(chuck.buttonC());
     Serial.write(chuck.buttonZ());
     Serial.write(chuck.joyX());

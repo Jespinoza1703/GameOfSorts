@@ -20,7 +20,7 @@ public class SerialConnection{
     SerialPort arduinoPort = null;
     ObservableList<String> portList;
     private static org.slf4j.Logger logger = LoggerFactory.getLogger(SerialConnection.class);
-    private static final Marker Readings = MarkerFactory.getMarker("Readings");
+    private static final Marker Readings = MarkerFactory.getMarker("SYS");
     private static int buttonC;
     private static int buttonZ;
     private static int joyStickX;
@@ -32,20 +32,19 @@ public class SerialConnection{
 
         String[] serialPortNames = SerialPortList.getPortNames();
         for(String name: serialPortNames){
-            logger.info(Readings, "Looking for port: " + name);
+            System.out.println(name);
             portList.add(name);
         }
     }
 
     public void arduinoConnections() {
-
-        detectPort();
-        disconnectArduino();
-        connectArduino("COM3");
+        return;
 
     }
 
     public boolean connectArduino(String port){
+
+        System.out.println("Connect Arduino");
 
         boolean success = false;
         SerialPort serialPort = new SerialPort(port);
@@ -65,6 +64,7 @@ public class SerialConnection{
                         buttonZ = b[1];
                         joyStickX = b[2];
                         joyStickY = b[3];
+                        System.out.println("LLLLLLLL" +joyStickX);
 
                     } catch (SerialPortException ex) {
                         Logger.getLogger(SerialConnection.class.getName())
@@ -79,7 +79,7 @@ public class SerialConnection{
         } catch (SerialPortException ex) {
             Logger.getLogger(SerialConnection.class.getName())
                     .log(Level.SEVERE, null, ex);
-            logger.error(Readings, "SerialPortException: " + ex.toString());
+            System.out.println("SerialPortException: " + ex.toString());
         }
 
         return success;
@@ -113,7 +113,7 @@ public class SerialConnection{
 
     public int getJoyStickRight(){
         int result = 0;
-        if (joyStickX < -25 && joyStickX > -100){
+        if (joyStickX < -25 && joyStickX > -80){
             result = 1;
         }
         logger.info(Readings, "Right: " + result);

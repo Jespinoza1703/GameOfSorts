@@ -33,7 +33,7 @@ public class KeyReader {
 
 
     private KeyReader(){
-        //serialConnection.arduinoConnections();
+        serialConnection.arduinoConnections();
     }
 
     public static KeyReader getInstance(){
@@ -62,7 +62,7 @@ public class KeyReader {
                 case ESCAPE: esc = 1; break;
                 case P: pause = 1; break;
             }
-            //logger.info(KEY, "Pressed: " + event.getCode().toString());
+            logger.info(KEY, "Pressed: " + event.getCode().toString());
         });
     }
 

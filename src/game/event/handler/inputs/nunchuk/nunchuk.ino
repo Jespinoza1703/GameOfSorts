@@ -1,20 +1,22 @@
+#include <Wiichuck.h>
 #include <Wire.h>
-#include "Nunchuk.h"
 
-void setup() {
+Wiichuck chuck;
 
-    Serial.begin(9600);
-    Wire.begin();
-    // nunchuk_init_power(); // A1 and A2 is power supply
-    nunchuk_init();
+void setup(){
+  chuck.init(0,0);
+  chuck.calibrate();
+
+  Serial.begin(9600);
 }
 
-void loop() {
+void loop(){
+  if(chuck.poll()){
 
-    if (nunchuk_read()) {
-        // Work with nunchuk_data
-        Serial.println(nunchuk_buttonZ());
-        nunchuk_print();
-    }
-    delay(10);
+    Serial.write(chuck.buttonC());
+    Serial.write(chuck.buttonZ());
+    Serial.write(chuck.joyX());
+    Serial.write(chuck.joyY());
+  }
+  delay(1000);
 }
